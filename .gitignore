@@ -5,7 +5,17 @@
 *~
 *qar
 *bak
-
+*qws
+*kpt
+*done
+*rpt
+*summary
+*smsg
+*jdi
+*qarlog
+*qws
+*qsf
+*qdf
 
 # Ordner 
 lab2_proj
@@ -15,12 +25,10 @@ DTP_2_Synthesizer
 
 # SYNTHESE.........................................................
 
-# Ordner
-FPGA/synthese/db
- 
-FPGA/synthese/output_files
-FPGA/synthese/simulation
-FPGA/synthese/incremental_db                  
+# SYNTHESE.
+**/**/incremental_db/*
+**/**/db/*
+**/**/output_files/*         
 
 # SIMULATION ......................................................
 
@@ -28,71 +36,6 @@ FPGA/simulation/**/*
 
 # !FPGA/simulation/script/*.do
 
-
-
-# VHDL.............................................................
-
-
-
-
-# DOKUMENTATTION (noch nicht in git)...............................
-
-# Ordner
-docu
-
-# tex auxiliary files.........
-*.aux
-*.lof
-*.log
-*.lot
-*.fls
-*.out
-*.toc
-
-# tex pdf ......................
-*.pdf
-
-# bibtex ........................
-*.bbl
-*.bcf
-*.blg
-*-blx.aux
-*-blx.bib
-*.brf
-*.run.xml
-
-
-# C-Code.............................................................
-
-# Object files 
-*.o
-*.ko
-*.obj
-*.elf
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
 
 # Debug files
 *.dSYM/
