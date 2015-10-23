@@ -39,7 +39,7 @@
 
 set_global_assignment -name FAMILY "Cyclone IV E"
 set_global_assignment -name DEVICE EP4CE115F29C7
-set_global_assignment -name TOP_LEVEL_ENTITY top_syntehsizer
+set_global_assignment -name TOP_LEVEL_ENTITY top_level
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 14.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "13:28:29  OKTOBER 21, 2015"
 set_global_assignment -name LAST_QUARTUS_VERSION 14.0
@@ -998,7 +998,31 @@ set_location_assignment PIN_G3 -to OTG_DATA[12]
 set_location_assignment PIN_F1 -to OTG_DATA[13]
 set_location_assignment PIN_F3 -to OTG_DATA[14]
 set_location_assignment PIN_G4 -to OTG_DATA[15]
-set_global_assignment -name VHDL_FILE ../vhdl/top_syntehsizer.vhd
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
+set_global_assignment -name VHDL_SHOW_LMF_MAPPING_MESSAGES OFF
+set_global_assignment -name VHDL_FILE ../vhdl/top_level.vhd
+set_global_assignment -name VHDL_FILE ../vhdl/tone_gen_pkg.vhd
+set_global_assignment -name VHDL_FILE ../vhdl/tone_decoder.vhd
+set_global_assignment -name VHDL_FILE ../vhdl/sync_block.vhd
+set_global_assignment -name VHDL_FILE ../vhdl/S2P.vhd
+set_global_assignment -name VHDL_FILE ../vhdl/reg_table_pkg.vhd
+set_global_assignment -name VHDL_FILE ../vhdl/P2S.vhd
+set_global_assignment -name VHDL_FILE ../vhdl/music_list.vhd
+set_global_assignment -name VHDL_FILE ../vhdl/modulo_divider.vhd
+set_global_assignment -name VHDL_FILE ../vhdl/lied_fsm.vhd
+set_global_assignment -name VHDL_FILE ../vhdl/infrastructure_block.vhd
+set_global_assignment -name VHDL_FILE ../vhdl/i2s_master.vhd
+set_global_assignment -name VHDL_FILE ../vhdl/i2c_master.vhd
+set_global_assignment -name VHDL_FILE ../vhdl/FSM_BCLK_COUNT.vhd
+set_global_assignment -name VHDL_FILE ../vhdl/fm_synth.vhd
+set_global_assignment -name VHDL_FILE ../vhdl/fm_sel.vhd
+set_global_assignment -name VHDL_FILE ../vhdl/fm_coder_7segment.vhd
+set_global_assignment -name VHDL_FILE ../vhdl/dds.vhd
+set_global_assignment -name VHDL_FILE ../vhdl/codeccontroller.vhd
+set_global_assignment -name VHDL_FILE ../vhdl/audio_control.vhd
+set_global_assignment -name VHDL_FILE ../vhdl/bluetooth_adapter.vhd
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
@@ -1949,9 +1973,4 @@ set_instance_assignment -name IO_STANDARD LVDS -to HSMC_RX_D_N[3]
 set_instance_assignment -name IO_STANDARD LVDS -to HSMC_RX_D_N[4]
 set_instance_assignment -name IO_STANDARD LVDS -to HSMC_RX_D_N[5]
 set_instance_assignment -name IO_STANDARD LVDS -to HSMC_RX_D_N[6]
-set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
-set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
-set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
-set_global_assignment -name VHDL_SHOW_LMF_MAPPING_MESSAGES OFF
-set_global_assignment -name VHDL_FILE ../vhdl/bluetooth_adapter.vhd
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
