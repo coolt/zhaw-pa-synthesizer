@@ -52,13 +52,13 @@ end component;
 
 begin
 
-inst_lied_fsm: lied_fsm
-port map( 	clk					=>  clk,
-			reset_n				=> 	reset_n,	
-			start				=>	musik_start,
-			stueck				=> 	s_stueck,
-			phi_incr_lied		=> 	N_CUM_fsm			
-		);
+--inst_lied_fsm: lied_fsm
+--port map( 	clk					=>  clk,
+--			reset_n				=> 	reset_n,	
+--			start				=>	musik_start,
+--			stueck				=> 	s_stueck,
+--			phi_incr_lied		=> 	N_CUM_fsm			
+--		);
 
 
 decoder: process (tone_cmd) 

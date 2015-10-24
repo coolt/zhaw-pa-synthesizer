@@ -1,16 +1,20 @@
---i2s_master
+--------------------------------------------------
+--
+-- I2S master
+-- Transmit 16 bit audio data to audio codec
+--
+--------------------------------------------------
 
---Funktion: I2S Baustein
 
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 library work;
+--use work.reg_table_pkg.all;
 use work.audio_codec_register_table_pkg.all;
 
--- entity Declaration 
--------------------------------------------
+
 entity i2s_master is
 	port (		clk_12M			:in			std_logic;
 				i2s_reset_n		:in			std_logic;
@@ -27,11 +31,9 @@ entity i2s_master is
 		 );												--ist nach mir nicht logisch!!!
 end i2s_master;
 
--- architecture Declaration
--------------------------------------------
+
 architecture rtl of i2s_master is
--- Signals & Constants Declaration
--------------------------------------------
+
 signal		WS_o:			std_logic;
 signal		s_WS_dly:		std_logic;
 signal		s_BCLK:			std_logic;
@@ -43,9 +45,10 @@ signal		s_DACDAT_s_o:		std_logic;		-- auf diagramm nur DACDAT_s, geht nicht da p
 signal		s_real_strobe:	std_logic;
 
 
+--------------------------------------------------
+-- Components declaration
+--------------------------------------------------
 
---Components Declaration
-------------------------------------------
 component FSM_BCLK_COUNT
 	port(   clk,reset_n						:in      std_logic;
 			--init_n     						:in      std_logic;
@@ -81,13 +84,13 @@ component S2P is
 		  );
 end component;
 
--- begin architecture
--------------------------------------------
-begin
 
--- port Maps
--------------------------------------------
-FSM_BCLK_COUNT_INST: FSM_BCLK_COUNT
+begin
+--------------------------------------------------
+-- instanciation of components
+--------------------------------------------------
+
+inst_0: FSM_BCLK_COUNT
 	port map (	clk			=>		clk_12M,
 				reset_n		=>		i2s_reset_n,
 				WS			=>		WS_o,
@@ -100,7 +103,7 @@ FSM_BCLK_COUNT_INST: FSM_BCLK_COUNT
 				real_strobe =>		s_real_strobe
 			 );
 
-P2S_INST : P2S
+inst_1: P2S
 	port map (  clk			=>		clk_12M,
 				reset_n		=>		i2s_reset_n,
 				BCLK		=>		s_BCLK,
@@ -111,7 +114,7 @@ P2S_INST : P2S
 				DACDAT_s_o		=>		s_DACDAT_s_o
 			  );
 
-S2P_INST : S2P
+inst_3 : S2P
 	port map (	clk			=>		clk_12M,
 				reset_n		=>		i2s_reset_n,
 				BCLK		=>		s_BCLK,
@@ -122,13 +125,15 @@ S2P_INST : S2P
 				ADCDAT_pr_o	=>		ADCDAT_pr
 			 );
 			 
---Verbindungen Signale-Ausgangssignale
+--------------------------------------------------
+-- Assign signals
+--------------------------------------------------
+
 DACDAT_s <= s_DACDAT_s_o;
 WS			<= WS_o;
 BCLK 		<= s_BCLK;	
 STROBE_O	<= s_real_strobe;
- -- end architecture 
-------------------------------------------- 
+
 end rtl;
 
 				
