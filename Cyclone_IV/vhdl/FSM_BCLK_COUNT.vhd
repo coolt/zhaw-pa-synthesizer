@@ -9,188 +9,188 @@
 
 
 
-LIBRARY ieee;
-USE ieee.std_logic_1164.all;
-USE ieee.numeric_std.all;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 
 
--- Entity Declaration 
+-- entity Declaration 
 -------------------------------------------
-ENTITY FSM_BCLK_COUNT IS
-  PORT(   clk,reset_n						:	IN      std_logic;
-		  init_n     						:	IN      std_logic;
-		  WS, WS_dly			    		:	OUT     std_logic;
-		  BCLK, DAC_load 	 				:	OUT     std_logic;
-		  ADCL_shift, ADCR_shift			:	OUT 	std_logic;
-		  real_strobe						:	OUT		std_logic
+entity FSM_BCLK_COUNT is
+  port(   clk,reset_n						:	in      std_logic;
+		  init_n     						:	in      std_logic;
+		  WS, WS_dly			    		:	out     std_logic;
+		  BCLK, DAC_load 	 				:	out     std_logic;
+		  ADCL_shift, ADCR_shift			:	out 	std_logic;
+		  real_strobe						:	out		std_logic
 		);
-END FSM_BCLK_COUNT;										
+end FSM_BCLK_COUNT;										
 
 
--- Architecture Declaration
+-- architecture Declaration
 -------------------------------------------
-ARCHITECTURE rtl OF FSM_BCLK_COUNT IS
+architecture rtl of FSM_BCLK_COUNT is
 -- Signals & Constants Declaration
 -------------------------------------------
 
-TYPE state IS (hold_R, load_dac, shift_adc_L, hold_L, shift_adc_R);
+type state is (hold_R, load_dac, shift_adc_L, hold_L, shift_adc_R);
 
-SIGNAL s_WS, next_s_WS				:	std_logic;
-SIGNAL folge_zustand				:	state;
-SIGNAL zustand						:	state;
-SIGNAL reg_idx, next_reg_idx	   	:	natural;
-SIGNAL s_bclk						:	std_logic;
+signal s_WS, next_s_WS				:	std_logic;
+signal folge_zustand				:	state;
+signal zustand						:	state;
+signal reg_idx, next_reg_idx	   	:	natural;
+signal s_bclk						:	std_logic;
 
--- Begin Architecture
+-- begin architecture
 -------------------------------------------
-BEGIN
+begin
 
 --Erzeugung eines Clockhalbierers
---das Signal s_bclk soll mit der Hälfte der 12 MHz Frequenz laufen
-halffreq: PROCESS (clk, reset_n, init_n)
-BEGIN
+--das signal s_bclk soll mit der Hälfte der 12 MHz Frequenz laufen
+halffreq: process (clk, reset_n, init_n)
+begin
 	
-	IF reset_n = '0'THEN
+	if reset_n = '0'then
 			s_bclk <= '0';
-	ELSIF clk'EVENT AND clk = '1' THEN
+	elsif clk'event AND clk = '1' then
 			s_bclk <= NOT s_bclk;
-	END IF;
+	end if;
 	
-END PROCESS;
+end process;
 
 
 
 --Zähler-----------------------------------------------------------------
---der Zähler soll von 0 bis 383 Zählen( mit jedem fallenden Signal s_bclk)
+--der Zähler soll von 0 bis 383 Zählen( mit jedem fallenden signal s_bclk)
 --bei 383 beginnt der Zähler wieder bei 0
 
---FLIP FLOP PROCESS Zähler
-flipflop: PROCESS (clk, reset_n)
-BEGIN 
-	IF reset_n='0' THEN 
+--FLIP FLOP process Zähler
+flipflop: process (clk, reset_n)
+begin 
+	if reset_n='0' then 
 		reg_idx <= 0;
-	ELSIF clk'EVENT AND clk='1' THEN
+	elsif clk'event AND clk='1' then
 		reg_idx<=next_reg_idx;
-	END IF;
-END PROCESS;
+	end if;
+end process;
 
 --Zähler Einangslogik
 
-log: PROCESS (reg_idx, s_bclk, init_n)
+log: process (reg_idx, s_bclk, init_n)
 
-BEGIN
-	IF init_n= '0' THEN
+begin
+	if init_n= '0' then
 		next_reg_idx <= 382;
-	ELSIF s_bclk = '1' THEN
-		IF reg_idx =383 THEN
+	elsif s_bclk = '1' then
+		if reg_idx =383 then
 			next_reg_idx <= 0;
-		ELSE next_reg_idx <= reg_idx+1;
-		END IF;
-	ELSE 
+		else next_reg_idx <= reg_idx+1;
+		end if;
+	else 
 		next_reg_idx <= reg_idx;
-	END IF;
-END PROCESS;
+	end if;
+end process;
 
 --Erzeugung des WS- Signals:
--- Das s_WS Signal ist entscheidend, ob man sich auf dem linken oder
+-- Das s_WS signal ist entscheidend, ob man sich auf dem linken oder
 -- rechten Lautsprecherkanal befindet. 
 
-make_s_WS: PROCESS (next_s_WS, clk, reset_n)
-BEGIN
-	IF reset_n='0' THEN 
+make_s_WS: process (next_s_WS, clk, reset_n)
+begin
+	if reset_n='0' then 
 		s_WS <= '0';
-	ELSIF clk'EVENT AND clk='1' THEN
+	elsif clk'event AND clk='1' then
 		s_WS<= next_s_WS;
-	END IF;
-END PROCESS; 
+	end if;
+end process; 
 
-ws_logik: PROCESS (init_n, s_bclk, s_WS, reg_idx)
-BEGIN
-	IF reg_idx = 382 AND s_bclk ='1' AND init_n= '1' THEN
+ws_logik: process (init_n, s_bclk, s_WS, reg_idx)
+begin
+	if reg_idx = 382 AND s_bclk ='1' AND init_n= '1' then
 			next_s_WS <= NOT s_WS;
-	ELSIF init_n= '0' THEN
+	elsif init_n= '0' then
 			next_s_WS <= '1';
-	ELSE next_s_WS <= s_WS;
-	END IF;
-END PROCESS;
+	else next_s_WS <= s_WS;
+	end if;
+end process;
 
 --state machine
 -- Diese statemachine koordiniert den ganzen Vorgang. Sie wechselt ihre Zustände
 -- in erster Linie an Hand des Zählerstandes. 
 --Zustände: hold_R, load_dac, shift_adc_L, hold_L, shift_adc_R
  
-  flip_flops : PROCESS(clk, reset_n, folge_zustand)
-  BEGIN	
-	IF reset_n = '0' THEN
+  flip_flops : process(clk, reset_n, folge_zustand)
+  begin	
+	if reset_n = '0' then
 		zustand <=  hold_R;
-	 ELSIF clk'EVENT AND clk = '1' THEN
+	 elsif clk'event AND clk = '1' then
 		 zustand <=folge_zustand;
-		END IF;
+		end if;
 	
-  END PROCESS;		
+  end process;		
   
   
   --------------------------------------------------
   --Input logic state_machine
-  logic: PROCESS ( zustand, reg_idx, s_WS, s_bclk, init_n)
-  BEGIN
+  logic: process ( zustand, reg_idx, s_WS, s_bclk, init_n)
+  begin
  folge_zustand <= zustand; 
  
  
-  CASE zustand IS
+  case zustand is
   
   --hold_R Zustand
-	WHEN hold_R =>
-		IF reg_idx = 382 AND s_bclk = '1' THEN
+	when hold_R =>
+		if reg_idx = 382 AND s_bclk = '1' then
 			folge_zustand <= load_dac;
-		ELSE folge_zustand <= zustand;
-		END IF;
+		else folge_zustand <= zustand;
+		end if;
 	
 	--load_dac Zustand
-	WHEN load_dac =>
-		IF init_n = '0' THEN
+	when load_dac =>
+		if init_n = '0' then
 			folge_zustand <= hold_R;
-		ELSIF s_bclk = '1' THEN
+		elsif s_bclk = '1' then
 			folge_zustand <= shift_adc_L;
-		ELSE 
+		else 
 			folge_zustand <= load_dac;
-		END IF;
+		end if;
 			
 	-- shift_adc_L Zustand
-	WHEN shift_adc_L =>
-		IF init_n = '0' THEN
+	when shift_adc_L =>
+		if init_n = '0' then
 			folge_zustand <= hold_R;
-		ELSIF reg_idx = 15 AND s_bclk = '1' THEN
+		elsif reg_idx = 15 AND s_bclk = '1' then
 			folge_zustand <= hold_L;
-		ELSE folge_zustand <= shift_adc_L;
-		END IF;
+		else folge_zustand <= shift_adc_L;
+		end if;
 	
 	--hold_L Zustand
-	WHEN hold_L =>
-		IF init_n = '0' THEN
+	when hold_L =>
+		if init_n = '0' then
 			folge_zustand <= hold_R;
-		ELSIF reg_idx = 383 AND s_bclk = '1' AND s_WS='1' THEN
+		elsif reg_idx = 383 AND s_bclk = '1' AND s_WS='1' then
 			folge_zustand <= shift_adc_R;
-		ELSE folge_zustand <= hold_L;
-		END IF ;
+		else folge_zustand <= hold_L;
+		end if ;
 	
 	--shift_adc_R Zustand
-	WHEN shift_adc_R =>
-		IF init_n = '0' THEN
+	when shift_adc_R =>
+		if init_n = '0' then
 			folge_zustand <= hold_R;
-		ELSIF reg_idx = 15 AND s_bclk = '1' THEN
+		elsif reg_idx = 15 AND s_bclk = '1' then
 			folge_zustand <= hold_R;
-		ELSE folge_zustand <= shift_adc_R;
-		END IF;
-	WHEN OTHERS =>
+		else folge_zustand <= shift_adc_R;
+		end if;
+	when others =>
 		folge_zustand <= hold_R;
-	END CASE; 
-	END PROCESS logic;
+	end case; 
+	end process logic;
 	
 	-- Ausgangslogik state_machine
-	ausg: PROCESS (zustand)
-	BEGIN
+	ausg: process (zustand)
+	begin
 	--Alle Signale auf 0 setzen
 	DAC_load 		<= '0';
 	ADCL_shift 		<= '0';
@@ -198,23 +198,23 @@ END PROCESS;
 	real_strobe		<= '0';    	
 	WS_dly			<= '1';
 	
-	CASE zustand IS
-	WHEN shift_adc_L =>
+	case zustand is
+	when shift_adc_L =>
 		ADCL_shift 	<= '1';
 		WS_dly	   	<= '0';
-	WHEN hold_L =>
+	when hold_L =>
 		WS_dly 		<='0';
-	WHEN shift_adc_R =>
+	when shift_adc_R =>
 		ADCR_shift 	<='1';
-	WHEN load_dac =>
+	when load_dac =>
 		DAC_load 	<='1';
 		real_strobe <='1';				
-	WHEN OTHERS =>
+	when others =>
 		WS_dly 		<='1';
-	END CASE;
+	end case;
 	
 	
-END PROCESS;
+end process;
 	
 -- ständige Verbindungen
 BCLK 	<= s_bclk;
@@ -223,6 +223,6 @@ WS 		<= s_WS;
 	
   
   
- -- End Architecture 
+ -- end architecture 
 ------------------------------------------- 
-END rtl;
+end rtl;

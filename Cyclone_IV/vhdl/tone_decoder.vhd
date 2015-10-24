@@ -12,48 +12,48 @@
 --			- er dekodiert die manuelle Tonerzeugung. Das heisst, er wandelt die jeweiligen
 --			  Eingangssignale der Schalter in Tonhöhen um. 
 
-LIBRARY ieee;
-USE ieee.std_logic_1164.all;
-USE ieee.numeric_std.all;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
-LIBRARY work;
-USE work.tone_gen_pkg.all;
+library work;
+use work.tone_gen_pkg.all;
 
 
--- Entity Declaration 
+-- entity Declaration 
 -------------------------------------------
-ENTITY tone_decoder IS
-	PORT (	clk						:IN			std_logic;	--clk_12M
-			reset_n					:IN			std_logic;
-			tone_cmd				:IN			std_logic_vector(13 DOWNTO 0);
-			tone_on_o				:OUT		std_logic;
-			musik_start				:IN			std_logic;
-			N_CUM					:OUT 		natural range 0 to 65000
+entity tone_decoder is
+	port (	clk						:in			std_logic;	--clk_12M
+			reset_n					:in			std_logic;
+			tone_cmd				:in			std_logic_vector(13 downto 0);
+			tone_on_o				:out		std_logic;
+			musik_start				:in			std_logic;
+			N_CUM					:out 		natural range 0 to 65000
 		  );
-END tone_decoder;
+end tone_decoder;
 
--- Architecture Declaration
+-- architecture Declaration
 -------------------------------------------
-ARCHITECTURE rtl OF tone_decoder IS
+architecture rtl of tone_decoder is
 
-SIGNAL N_CUM_fsm					: 			natural range 0 to 65000;			--Tonhöhe von der Melodybox
-SIGNAL N_CUM_taster					:			natural range 0 to 65000;			--Tonhöhe von den Schalter 
-SIGNAL s_stueck						:			std_logic_vector (2 downto 0);		--Stückwahl
+signal N_CUM_fsm					: 			natural range 0 to 65000;			--Tonhöhe von der Melodybox
+signal N_CUM_taster					:			natural range 0 to 65000;			--Tonhöhe von den Schalter 
+signal s_stueck						:			std_logic_vector (2 downto 0);		--Stückwahl
 
-COMPONENT lied_fsm
-PORT ( 	clk, reset_n				:IN			std_logic;
-		start						:IN			std_logic;
-		stueck						:IN			std_logic_vector(2 downto 0);
-		phi_incr_lied				:OUT		natural
+component lied_fsm
+port ( 	clk, reset_n				:in			std_logic;
+		start						:in			std_logic;
+		stueck						:in			std_logic_vector(2 downto 0);
+		phi_incr_lied				:out		natural
 		);
-END COMPONENT;							
+end component;							
 -------------------------------------------
 
 
-BEGIN
+begin
 
 inst_lied_fsm: lied_fsm
-PORT MAP( 	clk					=>  clk,
+port map( 	clk					=>  clk,
 			reset_n				=> 	reset_n,	
 			start				=>	musik_start,
 			stueck				=> 	s_stueck,
@@ -61,56 +61,56 @@ PORT MAP( 	clk					=>  clk,
 		);
 
 
-decoder: PROCESS (tone_cmd) 
-BEGIN
+decoder: process (tone_cmd) 
+begin
 tone_on_o 		<= 	'1';
 N_CUM_taster 	<= 	0;
 s_stueck 		<= 	"000";
 
 --Tondekodierung der Schalter:
-IF tone_cmd(13)='0' THEN 
-		CASE tone_cmd IS
-		WHEN "00000000000001" => N_CUM_taster <=to_integer(unsigned(M_DO_C4));
-		WHEN "00000000000010" => N_CUM_taster <=to_integer(unsigned(M_DOS_C4S));
-		WHEN "00000000000100" => N_CUM_taster <=to_integer(unsigned(M_RE_D4));
-		WHEN "00000000001000" => N_CUM_taster <=to_integer(unsigned(M_RES_D4S));
-		WHEN "00000000010000" => N_CUM_taster <=to_integer(unsigned(M_MI_E4));
-		WHEN "00000000100000" => N_CUM_taster <=to_integer(unsigned(M_FA_F4));
-		WHEN "00000001000000" => N_CUM_taster <=to_integer(unsigned(M_FAS_F4S));
-		WHEN "00000010000000" => N_CUM_taster <=to_integer(unsigned(M_SOL_G4));
-		WHEN "00000100000000" => N_CUM_taster <=to_integer(unsigned(M_SOLS_G4S));
-		WHEN "00001000000000" => N_CUM_taster <=to_integer(unsigned(M_LA_A4));
-		WHEN "00010000000000" => N_CUM_taster <=to_integer(unsigned(M_LAS_A4S));
-		WHEN "00100000000000" => N_CUM_taster <=to_integer(unsigned(M_SI_B4));
-		WHEN "01000000000000" => N_CUM_taster <=to_integer(unsigned(M_DO_C5));
+if tone_cmd(13)='0' then 
+		case tone_cmd is
+		when "00000000000001" => N_CUM_taster <=to_integer(unsigned(M_DO_C4));
+		when "00000000000010" => N_CUM_taster <=to_integer(unsigned(M_DOS_C4S));
+		when "00000000000100" => N_CUM_taster <=to_integer(unsigned(M_RE_D4));
+		when "00000000001000" => N_CUM_taster <=to_integer(unsigned(M_RES_D4S));
+		when "00000000010000" => N_CUM_taster <=to_integer(unsigned(M_MI_E4));
+		when "00000000100000" => N_CUM_taster <=to_integer(unsigned(M_FA_F4));
+		when "00000001000000" => N_CUM_taster <=to_integer(unsigned(M_FAS_F4S));
+		when "00000010000000" => N_CUM_taster <=to_integer(unsigned(M_SOL_G4));
+		when "00000100000000" => N_CUM_taster <=to_integer(unsigned(M_SOLS_G4S));
+		when "00001000000000" => N_CUM_taster <=to_integer(unsigned(M_LA_A4));
+		when "00010000000000" => N_CUM_taster <=to_integer(unsigned(M_LAS_A4S));
+		when "00100000000000" => N_CUM_taster <=to_integer(unsigned(M_SI_B4));
+		when "01000000000000" => N_CUM_taster <=to_integer(unsigned(M_DO_C5));
 
-		WHEN OTHERS => 		tone_on_o 		<=	'0';
+		when others => 		tone_on_o 		<=	'0';
 							N_CUM_taster 	<= 	0;
 							s_stueck 		<=	"000";
-	END CASE;
+	end case;
 --Dekodierung für die Stückwahl bei der automatischen Liederabspielung
-ELSE CASE tone_cmd IS
-		WHEN "11000000000000" => s_stueck 	<=  "100";
-		WHEN "10100000000000" => s_stueck 	<= 	"010";
-		WHEN "10010000000000" => s_stueck 	<= 	"001";
+else case tone_cmd is
+		when "11000000000000" => s_stueck 	<=  "100";
+		when "10100000000000" => s_stueck 	<= 	"010";
+		when "10010000000000" => s_stueck 	<= 	"001";
 		
-		WHEN OTHERS => 		s_stueck 		<= 	"000";
+		when others => 		s_stueck 		<= 	"000";
 							tone_on_o 		<=	'0';
 							N_CUM_taster 	<=	0;
-	END CASE;
-END IF;
+	end case;
+end if;
 
-END PROCESS;
+end process;
 
 --Multiplexer, der den Tonhöhenausgang zwischen Melodybox und Schalter umschaltet
-mux: PROCESS ( N_CUM_taster, N_CUM_fsm, tone_cmd(13))
-	BEGIN
-		IF 		tone_cmd(13)='1' THEN
+mux: process ( N_CUM_taster, N_CUM_fsm, tone_cmd(13))
+	begin
+		if 		tone_cmd(13)='1' then
 				N_CUM <= N_CUM_fsm;
-		ELSE	N_CUM <= N_CUM_taster;
-		END IF;
-END PROCESS;
+		else	N_CUM <= N_CUM_taster;
+		end if;
+end process;
 
 
 
-END ARCHITECTURE rtl;
+end architecture rtl;

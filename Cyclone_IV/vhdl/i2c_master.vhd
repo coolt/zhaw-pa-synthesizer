@@ -36,11 +36,11 @@ entity i2c_master is
 end entity;
 
 
--- begin of Architecture
+-- begin of architecture
 architecture rtl of i2c_master is
 
 -------------------------------------------------------------------------------
--- Constant Declaration
+-- constant Declaration
 -------------------------------------------------------------------------------
 constant C_BYTE_COUNT_SIZE  : natural                       := 2;   -- must be big enough to contain C_TRANSMITTED_BYTES
 constant C_BIT_COUNT_SIZE   : natural                       := 3;
@@ -60,7 +60,7 @@ constant C_DIVIDER_VALUE    : natural                       := 5;   -- fifth pow
                                                                     -- (50MHz ÷ 32 = 384kHz)
                                                                     -- according to WM8731 spec also possible faster
 -------------------------------------------------------------------------------
--- Type Declaration
+-- type Declaration
 -------------------------------------------------------------------------------
 type t_fsm_states is (
     S_IDLE,
@@ -74,7 +74,7 @@ type t_fsm_states is (
 );
 
 -------------------------------------------------------------------------------
--- Signal Declaration
+-- signal Declaration
 -------------------------------------------------------------------------------
 -- Current and Next Register State
 signal fsm_state, next_fsm_state       		: t_fsm_states;
@@ -92,13 +92,13 @@ signal write_done, next_write_done     		: std_logic;
 
 
 -------------------------------------------------------------------------------
--- Begin Architecture
+-- begin architecture
 -------------------------------------------------------------------------------
 begin
 
 
 	-------------------------------------------------------------------------------
-	-- Process for combinational logic
+	-- process for combinational logic
 	-------------------------------------------------------------------------------
     logic_proc: process(fsm_state,clk_divider,clk_mask,clk_edge_mask,scl,sda,data,
 						bit_count,byte_count,ack,ack_error,write_i,write_data_i,sda_io)
@@ -293,7 +293,7 @@ begin
     end process; -- comb logic
 
 	-------------------------------------------------------------------------------
-	-- Process for clocked logic (FFs)
+	-- process for clocked logic (FFs)
 	-------------------------------------------------------------------------------
     clk_proc: process(clk, reset_n)
     begin

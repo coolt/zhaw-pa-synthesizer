@@ -13,40 +13,40 @@
 -------------------------------------------------------------------------------
 
 -------------------------------------------------------------------------------
--- Package  Declaration
+-- package  Declaration
 -------------------------------------------------------------------------------
 -- 
 --   use music_list.all;
 -------------------------------------------------------------------------------
-LIBRARY ieee;
-  USE ieee.std_logic_1164.all;
-  USE ieee.numeric_std.all;
+library ieee;
+  use ieee.std_logic_1164.all;
+  use ieee.numeric_std.all;
  
-LIBRARY work;
-USE work.tone_gen_pkg.all;
+library work;
+use work.tone_gen_pkg.all;
 
-PACKAGE music_list is
+package music_list is
 
 	-------------------------------------------------------------------------------
-	-- Constant Declaration
+	-- constant Declaration
 	-------------------------------------------------------------------------------
-    CONSTANT x			:				natural :=1;
-	CONSTANT v			:				natural :=2;
-	CONSTANT e			:				natural	:=2;
-    CONSTANT paus		:				std_logic_vector(N_CUM-1 downto 0) := (OTHERS =>'0');
+    constant x			:				natural :=1;
+	constant v			:				natural :=2;
+	constant e			:				natural	:=2;
+    constant paus		:				std_logic_vector(N_CUM-1 downto 0) := (others =>'0');
 	-------------------------------------------------------------------------------
-	-- Type Declaration
+	-- type Declaration
 	-------------------------------------------------------------------------------
   
 
-	TYPE stuck				IS ARRAY (0 to 100) of std_logic_vector(N_CUM-1 downto 0);
-	TYPE lange				IS ARRAY (0 to 95) of integer;
-	TYPE stuck_overture		IS ARRAY (0 to 268) of std_logic_vector(N_CUM-1 downto 0);
-	TYPE laenge_overture	IS ARRAY (0 to 266) of integer;
-	TYPE stuck_tom_dooley	IS ARRAY (0 TO 104) OF std_logic_vector(N_CUM-1 downto 0);
-	TYPE lange_tom_dooley	IS ARRAY (0 TO 104) OF integer;
-	TYPE stuck_fuer_elise	IS ARRAY (0 TO 348) OF std_logic_vector(N_CUM-1 downto 0);
-	TYPE lange_fuer_elise	IS ARRAY (0 TO 348) OF integer;
+	type stuck				is array (0 to 100) of std_logic_vector(N_CUM-1 downto 0);
+	type lange				is array (0 to 95) of integer;
+	type stuck_overture		is array (0 to 268) of std_logic_vector(N_CUM-1 downto 0);
+	type laenge_overture	is array (0 to 266) of integer;
+	type stuck_tom_dooley	is array (0 to 104) of std_logic_vector(N_CUM-1 downto 0);
+	type lange_tom_dooley	is array (0 to 104) of integer;
+	type stuck_fuer_elise	is array (0 to 348) of std_logic_vector(N_CUM-1 downto 0);
+	type lange_fuer_elise	is array (0 to 348) of integer;
 	
 	--datentyp std_logic_vector!!!
 	constant Nachtmusik_hoehe : stuck :=(
@@ -180,7 +180,7 @@ PACKAGE music_list is
 	 15*e, e, 0);
 
 
-	-- More Constant Declarations (Phase increment values for tones in 3 octaves of piano)
+	-- More constant Declarations (Phase increment values for tones in 3 octaves of piano)
 	-------------------------------------------------------------------------------
     -- PLAIN TONES MID-OCTAVE (C4 until C5)
     -- constant M_DO_C4: 		std_logic_vector(N_CUM-1 downto 0):= std_logic_vector(to_unsigned(2143,N_CUM)); -- DO-C4  tone ~261.63Hz

@@ -11,90 +11,90 @@
 
 
 
-LIBRARY ieee;
-USE ieee.std_logic_1164.all;
-USE ieee.numeric_std.all;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 
 
--- Entity Declaration 
+-- entity Declaration 
 -------------------------------------------
-ENTITY fm_coder_7segment IS
-  PORT(   clk,reset_n								:	IN 	     std_logic;
-		  count_i     									:	IN 	     std_logic_vector(1 DOWNTO 0);
-		  fm_ratio										:	OUT	     natural range 0 to 1000;
-		  fm_depth		 	 							:	OUT	     natural range 0 to 10;
-		  hex_0, hex_1, hex_2, hex_3, hex_4		:	OUT 	 std_logic_vector(6 DOWNTO 0);
-		  hex_m											:  OUT			std_logic_vector(6 DOWNTO 0)
+entity fm_coder_7segment is
+  port(   clk,reset_n								:	in 	     std_logic;
+		  count_i     									:	in 	     std_logic_vector(1 downto 0);
+		  fm_ratio										:	out	     natural range 0 to 1000;
+		  fm_depth		 	 							:	out	     natural range 0 to 10;
+		  hex_0, hex_1, hex_2, hex_3, hex_4		:	out 	 std_logic_vector(6 downto 0);
+		  hex_m											:  out			std_logic_vector(6 downto 0)
 		);
-END fm_coder_7segment;										
+end fm_coder_7segment;										
 
 
--- Architecture Declaration
+-- architecture Declaration
 -------------------------------------------
-ARCHITECTURE rtl OF fm_coder_7segment IS
+architecture rtl of fm_coder_7segment is
 -- Signals & Constants Declaration
 -------------------------------------------
 
-SIGNAL reg_idx_ratio, next_reg_idx_ratio	   	:	unsigned(2 DOWNTO 0);
-SIGNAL reg_idx_depth, next_reg_idx_depth	   	:	unsigned(2 DOWNTO 0);
-SIGNAL delay_count										:  std_logic_vector (1 DOWNTO 0);
-SIGNAL counter_on											:  std_logic_vector (1 DOWNTO 0);
+signal reg_idx_ratio, next_reg_idx_ratio	   	:	unsigned(2 downto 0);
+signal reg_idx_depth, next_reg_idx_depth	   	:	unsigned(2 downto 0);
+signal delay_count										:  std_logic_vector (1 downto 0);
+signal counter_on											:  std_logic_vector (1 downto 0);
 
--- Begin Architecture
+-- begin architecture
 -------------------------------------------
-BEGIN
+begin
 
 
 --ZÃƒÂ¤hler-----------------------------------------------------------------
 --der ZÃƒÂ¤hler soll von 0 bis 7 ZÃƒÂ¤hlen, mit cont_i="10" aufwÃƒÂ¤rts gezÃƒÂ¤hlt werden, mit count_i="01" 
 --soll abwÃƒÂ¤rts gezÃƒÂ¤hlt werden. Ist der ZÃƒÂ¤hler bei null, kann nur aufwÃƒÂ¤rts gezÃƒÂ¤hlt werden. 
 
---FLIP FLOP PROCESS ZÃƒÂ¤hler
-flipflop: PROCESS (clk, reset_n)
-BEGIN 
-	IF reset_n='0' THEN 
+--FLIP FLOP process ZÃƒÂ¤hler
+flipflop: process (clk, reset_n)
+begin 
+	if reset_n='0' then 
 		reg_idx_ratio <= "001";
 		reg_idx_depth <= "000";
 		delay_count <= "00";
 		
-	ELSIF clk'EVENT AND clk='1' THEN
+	elsif clk'event AND clk='1' then
 		reg_idx_ratio <= next_reg_idx_ratio;
 		reg_idx_depth <= next_reg_idx_depth;
 		delay_count <= count_i;
-	END IF;
-	END PROCESS;
+	end if;
+	end process;
 
 
 	
 --ZÃƒÂ¤hler Einangslogik
 
-log: PROCESS (reg_idx_ratio, counter_on, reg_idx_depth)
+log: process (reg_idx_ratio, counter_on, reg_idx_depth)
 
-BEGIN
+begin
 	next_reg_idx_depth <= reg_idx_depth;
 	next_reg_idx_ratio <= reg_idx_ratio;
-	IF counter_on(1)='1' THEN 
-		IF reg_idx_depth=7 THEN
+	if counter_on(1)='1' then 
+		if reg_idx_depth=7 then
 		next_reg_idx_depth <="000";
-		ELSE
+		else
 		next_reg_idx_depth <= reg_idx_depth+1;
-		END IF;
-    ELSIF counter_on(0)='1' THEN 
-		IF reg_idx_ratio=5 THEN
+		end if;
+    elsif counter_on(0)='1' then 
+		if reg_idx_ratio=5 then
 			next_reg_idx_ratio <= "001";
-		ELSE next_reg_idx_ratio <= reg_idx_ratio+1;
-		END IF;
-	ELSE 	next_reg_idx_depth <= reg_idx_depth;
+		else next_reg_idx_ratio <= reg_idx_ratio+1;
+		end if;
+	else 	next_reg_idx_depth <= reg_idx_depth;
 			next_reg_idx_ratio <= reg_idx_ratio;
-	END IF;
+	end if;
 	
-END PROCESS;
+end process;
 
 -- Zaehler Ausgangslogik
 
-ausgang_log: PROCESS ( reg_idx_ratio, reg_idx_depth)
-BEGIN 
+ausgang_log: process ( reg_idx_ratio, reg_idx_depth)
+begin 
 	
 
 --7-Segmentanzeigen-Ansteuerung
@@ -105,32 +105,32 @@ BEGIN
 	--
 	hex_m	<= "0111111";
 	
-	CASE reg_idx_ratio IS
-		WHEN "001" =>  			hex_2 <= "1111001";
+	case reg_idx_ratio is
+		when "001" =>  			hex_2 <= "1111001";
 										hex_0 <= "1111001";
-		WHEN "010" =>  			hex_2 <= "0100100";
+		when "010" =>  			hex_2 <= "0100100";
 										hex_0 <=	"1111001";
-		WHEN "011" =>  			hex_2 <= "0011001";
+		when "011" =>  			hex_2 <= "0011001";
 										hex_0 <= "1111001";
-		WHEN "100" =>  			hex_2 <= "1111001";
+		when "100" =>  			hex_2 <= "1111001";
 										hex_0 <= "0100100";
-		WHEN OTHERS =>  			hex_2 <= "1111001";
+		when others =>  			hex_2 <= "1111001";
 										hex_0 <= "0011001";
-	END CASE;
+	end case;
 	
-	CASE reg_idx_depth IS
-		WHEN "000" =>  			hex_4 <= "1000000";
-		WHEN "001" =>  			hex_4 <= "1111001";
-		WHEN "010" =>  			hex_4 <="0100100";
-		WHEN "011" =>  			hex_4 <= "0110000";
-		WHEN "100" =>  			hex_4 <= "0011001";
-		WHEN "101" =>  			hex_4 <= "0010010";
-		WHEN "110" =>  			hex_4 <= "0000011";
-		WHEN OTHERS =>  	hex_4 <= "1111000";
-	END CASE;
+	case reg_idx_depth is
+		when "000" =>  			hex_4 <= "1000000";
+		when "001" =>  			hex_4 <= "1111001";
+		when "010" =>  			hex_4 <="0100100";
+		when "011" =>  			hex_4 <= "0110000";
+		when "100" =>  			hex_4 <= "0011001";
+		when "101" =>  			hex_4 <= "0010010";
+		when "110" =>  			hex_4 <= "0000011";
+		when others =>  	hex_4 <= "1111000";
+	end case;
 	
 	
-END PROCESS;
+end process;
 
 		
 		
@@ -142,6 +142,6 @@ fm_depth <= to_integer( reg_idx_depth);
 	
   
   
- -- End Architecture 
+ -- end architecture 
 ------------------------------------------- 
-END rtl;
+end rtl;

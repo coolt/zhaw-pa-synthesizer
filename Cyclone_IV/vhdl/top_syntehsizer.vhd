@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
-ENTITY top_synthesizer is
+entity top_synthesizer is
 port (
 		CLOCK_50 : 	in std_logic;
 		KEY_0 : 		in std_logic; 	   -- reset      
@@ -15,7 +15,7 @@ end top_synthesizer;
 
 
 ----------------------------------------------------------------------------------
--- Architecture 
+-- architecture 
 ----------------------------------------------------------------------------------
 architecture behavioral of top_synthesizer is
 
@@ -27,7 +27,7 @@ architecture behavioral of top_synthesizer is
 begin
 
 --------------------------------------------
--- Clocked Process
+-- Clocked process
 --------------------------------------------
 	clk: process (all)
 	begin
@@ -97,7 +97,7 @@ end process;
 	
 
 --------------------------------------------
--- Output Process
+-- Output process
 --------------------------------------------
 
 	decode_cnt_max: process (all)

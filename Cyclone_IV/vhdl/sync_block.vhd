@@ -4,47 +4,47 @@
 --08.03.2013 17.31
 
 --Funktion: Der sync_block soll jedes eingehende
---Signal synchronisieren, damit undefinierte Zustände
+--signal synchronisieren, damit undefinierte Zustände
 --vermieden werden. Dies wird durch das Nacheinanderschalten von 
 --zwei Filipflops realisiert. 
 
-LIBRARY ieee;
-USE ieee.std_logic_1164.all;
-USE ieee.numeric_std.all;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 
--- Entity Declaration 
+-- entity Declaration 
 -------------------------------------------
-ENTITY sync_block IS
-  PORT( clk				: IN      	std_logic;
-		reset_n			: IN      	std_logic;
-		async_i       	: IN      	std_logic;
-    	syncd_o     	: OUT   	std_logic
+entity sync_block is
+  port( clk				: in      	std_logic;
+		reset_n			: in      	std_logic;
+		async_i       	: in      	std_logic;
+    	syncd_o     	: out   	std_logic
     	);
-END sync_block;
+end sync_block;
 
 
--- Architecture Declaration
+-- architecture Declaration
 -------------------------------------------
-ARCHITECTURE rtl OF sync_block IS
+architecture rtl of sync_block is
 -- Signals & Constants Declaration
 -------------------------------------------
-SIGNAL 	qreg, next_qreg: 		std_logic_vector(1 DOWNTO 0);
+signal 	qreg, next_qreg: 		std_logic_vector(1 downto 0);
 
 
--- Begin Architecture
+-- begin architecture
 -------------------------------------------
-BEGIN
+begin
 
  
-  flip_flops : PROCESS(clk, reset_n)
-  BEGIN	
-  	IF reset_n = '0' THEN
-		qreg 	<=  (OTHERS => '0');
-    ELSIF clk'EVENT AND clk = '1' THEN	
+  flip_flops : process(clk, reset_n)
+  begin	
+  	if reset_n = '0' then
+		qreg 	<=  (others => '0');
+    elsif clk'event AND clk = '1' then	
 		qreg   <= next_qreg;
-    END IF;
-  END PROCESS flip_flops;		
+    end if;
+  end process flip_flops;		
   
   
   --------------------------------------------------
@@ -58,6 +58,6 @@ BEGIN
   syncd_o <= qreg(0);
   
   
- -- End Architecture 
+ -- end architecture 
 ------------------------------------------- 
-END rtl;
+end rtl;

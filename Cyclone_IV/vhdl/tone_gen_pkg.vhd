@@ -12,7 +12,7 @@
 -------------------------------------------------------------------------------
 
 -------------------------------------------------------------------------------
--- Package  Declaration
+-- package  Declaration
 -------------------------------------------------------------------------------
 -- Include in Design of Block dds.vhd and tone_decoder.vhd :
 --   use work.tone_gen_pkg.all;
@@ -24,14 +24,14 @@ library ieee;
 package tone_gen_pkg is
 
     -------------------------------------------------------------------------------
-	-- Constant Declaration
+	-- constant Declaration
 	-------------------------------------------------------------------------------
     constant N_CUM:					natural :=16; 			-- number of bits in phase cumulator phicum_reg
     constant N_LUT:					natural :=6;  			-- number of bits in LUT address
     constant L: 					natural := 2**N_LUT; 	-- length of LUT
     constant N_RESOL:				natural := 11;			-- Attention: 1 bit reserved for sign
 	-------------------------------------------------------------------------------
-	-- Type Declaration
+	-- type Declaration
 	-------------------------------------------------------------------------------
     subtype t_audio_range is integer range -(2**(N_RESOL-1)) to (2**(N_RESOL-1))-1;  -- range : [-2^10; +(2^10)-1]
 
@@ -44,7 +44,7 @@ package tone_gen_pkg is
 	-1024, -1019, -1004, -980, -946, -903, -851, -792, -724, -650, -569, -483, -392, -297, -200, -100 );
 
     -------------------------------------------------------------------------------
-	-- More Constant Declarations (Phase increment values for tones in 3 octaves of piano)
+	-- More constant Declarations (Phase increment values for tones in 3 octaves of piano)
 	-------------------------------------------------------------------------------
     -- PLAIN TONES MID-OCTAVE (C4 until C5)
     constant M_DO_C4: 		std_logic_vector(N_CUM-1 downto 0):= std_logic_vector(to_unsigned(2143,N_CUM)); -- DO-C4  tone ~261.63Hz

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for syntehsizer
-Fri Oct 23 09:09:00 2015
+Sat Oct 24 10:49:29 2015
 Quartus II 64-Bit Version 14.0.0 Build 200 06/17/2014 SJ Full Version
 
 
@@ -13,20 +13,20 @@ Quartus II 64-Bit Version 14.0.0 Build 200 06/17/2014 SJ Full Version
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. State Machine - |top_level|tone_decoder:TONE_DECODER_INST|lied_fsm:inst_lied_fsm|zustand
-  9. State Machine - |top_level|i2s_master:I2S_MASTER_INST|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST|zustand
- 10. State Machine - |top_level|i2c_master:I2C_MASTER_INST|fsm_state
- 11. State Machine - |top_level|codeccontroller:CODECCONTROLLER_INST|zustand
+  8. State Machine - |top_level|tone_decoder:inst_6|lied_fsm:inst_lied_fsm|zustand
+  9. State Machine - |top_level|i2s_master:inst_4|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST|zustand
+ 10. State Machine - |top_level|i2c_master:inst_2|fsm_state
+ 11. State Machine - |top_level|set_audio_register:inst_1|zustand
  12. Registers Removed During Synthesis
- 13. General Register Statistics
- 14. Inverted Register Statistics
- 15. Multiplexer Restructuring Statistics (Restructuring Performed)
- 16. Parameter Settings for User Entity Instance: infrastructure_block:INFRASTRUCTURE_BLOCK_INST|modulo_divider:divider_inst
- 17. Parameter Settings for Inferred Entity Instance: fm_synth:FM_SYNTH_INST|fm_sel:FM_SEL_INST|lpm_mult:Mult0
- 18. lpm_mult Parameter Settings by Entity Instance
- 19. Port Connectivity Checks: "fm_synth:FM_SYNTH_INST"
- 20. Port Connectivity Checks: "fm_coder_7segment:FM_CODER_7SEGMENT_INST"
- 21. Port Connectivity Checks: "tone_decoder:TONE_DECODER_INST|lied_fsm:inst_lied_fsm"
+ 13. Removed Registers Triggering Further Register Optimizations
+ 14. General Register Statistics
+ 15. Inverted Register Statistics
+ 16. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 17. Parameter Settings for User Entity Instance: infrastructure_block:inst_3|modulo_divider:divider_inst
+ 18. Port Connectivity Checks: "fm_synth:inst_7"
+ 19. Port Connectivity Checks: "tone_decoder:inst_6|lied_fsm:inst_lied_fsm"
+ 20. Port Connectivity Checks: "i2s_master:inst_4|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST"
+ 21. Port Connectivity Checks: "infrastructure_block:inst_3"
  22. Post-Synthesis Netlist Statistics for Top Partition
  23. Elapsed Time Per Partition
  24. Analysis & Synthesis Messages
@@ -56,16 +56,16 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Oct 23 09:09:00 2015       ;
+; Analysis & Synthesis Status        ; Successful - Sat Oct 24 10:49:29 2015       ;
 ; Quartus II 64-Bit Version          ; 14.0.0 Build 200 06/17/2014 SJ Full Version ;
 ; Revision Name                      ; syntehsizer                                 ;
 ; Top-level Entity Name              ; top_level                                   ;
 ; Family                             ; Cyclone IV E                                ;
-; Total logic elements               ; 1,586                                       ;
-;     Total combinational functions  ; 1,504                                       ;
-;     Dedicated logic registers      ; 337                                         ;
-; Total registers                    ; 337                                         ;
-; Total pins                         ; 81                                          ;
+; Total logic elements               ; 138                                         ;
+;     Total combinational functions  ; 130                                         ;
+;     Dedicated logic registers      ; 91                                          ;
+; Total registers                    ; 91                                          ;
+; Total pins                         ; 31                                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 0                                           ;
 ; Embedded Multiplier 9-bit elements ; 0                                           ;
@@ -179,134 +179,94 @@ agreement for further details.
 +----------------------------+-------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                         ;
-+----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                     ; Library ;
-+----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------------+---------+
-; ../vhdl/top_level.vhd            ; yes             ; User VHDL File               ; /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/top_level.vhd            ;         ;
-; ../vhdl/tone_gen_pkg.vhd         ; yes             ; User VHDL File               ; /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/tone_gen_pkg.vhd         ;         ;
-; ../vhdl/tone_decoder.vhd         ; yes             ; User VHDL File               ; /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/tone_decoder.vhd         ;         ;
-; ../vhdl/sync_block.vhd           ; yes             ; User VHDL File               ; /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/sync_block.vhd           ;         ;
-; ../vhdl/S2P.vhd                  ; yes             ; User VHDL File               ; /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/S2P.vhd                  ;         ;
-; ../vhdl/reg_table_pkg.vhd        ; yes             ; User VHDL File               ; /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/reg_table_pkg.vhd        ;         ;
-; ../vhdl/P2S.vhd                  ; yes             ; User VHDL File               ; /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/P2S.vhd                  ;         ;
-; ../vhdl/music_list.vhd           ; yes             ; User VHDL File               ; /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/music_list.vhd           ;         ;
-; ../vhdl/modulo_divider.vhd       ; yes             ; User VHDL File               ; /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/modulo_divider.vhd       ;         ;
-; ../vhdl/lied_fsm.vhd             ; yes             ; User VHDL File               ; /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/lied_fsm.vhd             ;         ;
-; ../vhdl/infrastructure_block.vhd ; yes             ; User VHDL File               ; /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/infrastructure_block.vhd ;         ;
-; ../vhdl/i2s_master.vhd           ; yes             ; User VHDL File               ; /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/i2s_master.vhd           ;         ;
-; ../vhdl/i2c_master.vhd           ; yes             ; User VHDL File               ; /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/i2c_master.vhd           ;         ;
-; ../vhdl/FSM_BCLK_COUNT.vhd       ; yes             ; User VHDL File               ; /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/FSM_BCLK_COUNT.vhd       ;         ;
-; ../vhdl/fm_synth.vhd             ; yes             ; User VHDL File               ; /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/fm_synth.vhd             ;         ;
-; ../vhdl/fm_sel.vhd               ; yes             ; User VHDL File               ; /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/fm_sel.vhd               ;         ;
-; ../vhdl/fm_coder_7segment.vhd    ; yes             ; User VHDL File               ; /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/fm_coder_7segment.vhd    ;         ;
-; ../vhdl/dds.vhd                  ; yes             ; User VHDL File               ; /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/dds.vhd                  ;         ;
-; ../vhdl/codeccontroller.vhd      ; yes             ; User VHDL File               ; /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/codeccontroller.vhd      ;         ;
-; ../vhdl/audio_control.vhd        ; yes             ; User VHDL File               ; /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/audio_control.vhd        ;         ;
-; lpm_mult.tdf                     ; yes             ; Megafunction                 ; /opt/altera/14.0/quartus/libraries/megafunctions/lpm_mult.tdf                    ;         ;
-; aglobal140.inc                   ; yes             ; Megafunction                 ; /opt/altera/14.0/quartus/libraries/megafunctions/aglobal140.inc                  ;         ;
-; lpm_add_sub.inc                  ; yes             ; Megafunction                 ; /opt/altera/14.0/quartus/libraries/megafunctions/lpm_add_sub.inc                 ;         ;
-; multcore.inc                     ; yes             ; Megafunction                 ; /opt/altera/14.0/quartus/libraries/megafunctions/multcore.inc                    ;         ;
-; bypassff.inc                     ; yes             ; Megafunction                 ; /opt/altera/14.0/quartus/libraries/megafunctions/bypassff.inc                    ;         ;
-; altshift.inc                     ; yes             ; Megafunction                 ; /opt/altera/14.0/quartus/libraries/megafunctions/altshift.inc                    ;         ;
-; db/mult_d4t.tdf                  ; yes             ; Auto-Generated Megafunction  ; /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/synthese/db/mult_d4t.tdf      ;         ;
-+----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------------+---------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                      ;
++--------------------------------------------+-----------------+-----------------+------------------------------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path           ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                                                     ; Library ;
++--------------------------------------------+-----------------+-----------------+------------------------------------------------------------------------------------------------------------------+---------+
+; ../vhdl/top_level.vhd                      ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/top_level.vhd                      ;         ;
+; ../vhdl/tone_gen_pkg.vhd                   ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/tone_gen_pkg.vhd                   ;         ;
+; ../vhdl/tone_decoder.vhd                   ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/tone_decoder.vhd                   ;         ;
+; ../vhdl/sync_block.vhd                     ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/sync_block.vhd                     ;         ;
+; ../vhdl/S2P.vhd                            ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/S2P.vhd                            ;         ;
+; ../vhdl/P2S.vhd                            ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/P2S.vhd                            ;         ;
+; ../vhdl/music_list.vhd                     ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/music_list.vhd                     ;         ;
+; ../vhdl/modulo_divider.vhd                 ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/modulo_divider.vhd                 ;         ;
+; ../vhdl/lied_fsm.vhd                       ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/lied_fsm.vhd                       ;         ;
+; ../vhdl/infrastructure_block.vhd           ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/infrastructure_block.vhd           ;         ;
+; ../vhdl/i2s_master.vhd                     ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/i2s_master.vhd                     ;         ;
+; ../vhdl/i2c_master.vhd                     ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/i2c_master.vhd                     ;         ;
+; ../vhdl/FSM_BCLK_COUNT.vhd                 ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/FSM_BCLK_COUNT.vhd                 ;         ;
+; ../vhdl/fm_synth.vhd                       ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/fm_synth.vhd                       ;         ;
+; ../vhdl/fm_sel.vhd                         ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/fm_sel.vhd                         ;         ;
+; ../vhdl/dds.vhd                            ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/dds.vhd                            ;         ;
+; ../vhdl/audio_control.vhd                  ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/audio_control.vhd                  ;         ;
+; ../vhdl/set_audio_register.vhd             ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/set_audio_register.vhd             ;         ;
+; ../vhdl/audio_codec_register_table_pkg.vhd ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/audio_codec_register_table_pkg.vhd ;         ;
++--------------------------------------------+-----------------+-----------------+------------------------------------------------------------------------------------------------------------------+---------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary                                                                                       ;
-+---------------------------------------------+-------------------------------------------------------------------------------------+
-; Resource                                    ; Usage                                                                               ;
-+---------------------------------------------+-------------------------------------------------------------------------------------+
-; Estimated Total logic elements              ; 1,586                                                                               ;
-;                                             ;                                                                                     ;
-; Total combinational functions               ; 1504                                                                                ;
-; Logic element usage by number of LUT inputs ;                                                                                     ;
-;     -- 4 input functions                    ; 1024                                                                                ;
-;     -- 3 input functions                    ; 246                                                                                 ;
-;     -- <=2 input functions                  ; 234                                                                                 ;
-;                                             ;                                                                                     ;
-; Logic elements by mode                      ;                                                                                     ;
-;     -- normal mode                          ; 1338                                                                                ;
-;     -- arithmetic mode                      ; 166                                                                                 ;
-;                                             ;                                                                                     ;
-; Total registers                             ; 337                                                                                 ;
-;     -- Dedicated logic registers            ; 337                                                                                 ;
-;     -- I/O registers                        ; 0                                                                                   ;
-;                                             ;                                                                                     ;
-; I/O pins                                    ; 81                                                                                  ;
-; Embedded Multiplier 9-bit elements          ; 0                                                                                   ;
-; Maximum fan-out node                        ; infrastructure_block:INFRASTRUCTURE_BLOCK_INST|modulo_divider:divider_inst|count[3] ;
-; Maximum fan-out                             ; 335                                                                                 ;
-; Total fan-out                               ; 6849                                                                                ;
-; Average fan-out                             ; 3.42                                                                                ;
-+---------------------------------------------+-------------------------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                                                                    ;
++---------------------------------------------+------------------------------------------------------------------+
+; Resource                                    ; Usage                                                            ;
++---------------------------------------------+------------------------------------------------------------------+
+; Estimated Total logic elements              ; 138                                                              ;
+;                                             ;                                                                  ;
+; Total combinational functions               ; 130                                                              ;
+; Logic element usage by number of LUT inputs ;                                                                  ;
+;     -- 4 input functions                    ; 54                                                               ;
+;     -- 3 input functions                    ; 22                                                               ;
+;     -- <=2 input functions                  ; 54                                                               ;
+;                                             ;                                                                  ;
+; Logic elements by mode                      ;                                                                  ;
+;     -- normal mode                          ; 97                                                               ;
+;     -- arithmetic mode                      ; 33                                                               ;
+;                                             ;                                                                  ;
+; Total registers                             ; 91                                                               ;
+;     -- Dedicated logic registers            ; 91                                                               ;
+;     -- I/O registers                        ; 0                                                                ;
+;                                             ;                                                                  ;
+; I/O pins                                    ; 31                                                               ;
+; Embedded Multiplier 9-bit elements          ; 0                                                                ;
+; Maximum fan-out node                        ; infrastructure_block:inst_3|modulo_divider:divider_inst|count[3] ;
+; Maximum fan-out                             ; 89                                                               ;
+; Total fan-out                               ; 757                                                              ;
+; Average fan-out                             ; 2.67                                                             ;
++---------------------------------------------+------------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                          ;
-+-----------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------+--------------+
-; Compilation Hierarchy Node                          ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                         ; Library Name ;
-+-----------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------+--------------+
-; |top_level                                          ; 1504 (1)          ; 337 (0)      ; 0           ; 0            ; 0       ; 0         ; 81   ; 0            ; |top_level                                                                                  ; work         ;
-;    |codeccontroller:CODECCONTROLLER_INST|           ; 50 (50)           ; 35 (35)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|codeccontroller:CODECCONTROLLER_INST                                             ; work         ;
-;    |fm_coder_7segment:FM_CODER_7SEGMENT_INST|       ; 21 (21)           ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|fm_coder_7segment:FM_CODER_7SEGMENT_INST                                         ; work         ;
-;    |fm_synth:FM_SYNTH_INST|                         ; 261 (0)           ; 47 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|fm_synth:FM_SYNTH_INST                                                           ; work         ;
-;       |dds:DDS_Carrier_INST|                        ; 63 (63)           ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|fm_synth:FM_SYNTH_INST|dds:DDS_Carrier_INST                                      ; work         ;
-;       |dds:DDS_Modulator|                           ; 64 (64)           ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|fm_synth:FM_SYNTH_INST|dds:DDS_Modulator                                         ; work         ;
-;       |fm_sel:FM_SEL_INST|                          ; 134 (80)          ; 15 (15)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|fm_synth:FM_SYNTH_INST|fm_sel:FM_SEL_INST                                        ; work         ;
-;          |lpm_mult:Mult0|                           ; 54 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|fm_synth:FM_SYNTH_INST|fm_sel:FM_SEL_INST|lpm_mult:Mult0                         ; work         ;
-;             |mult_d4t:auto_generated|               ; 54 (54)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|fm_synth:FM_SYNTH_INST|fm_sel:FM_SEL_INST|lpm_mult:Mult0|mult_d4t:auto_generated ; work         ;
-;    |i2c_master:I2C_MASTER_INST|                     ; 83 (83)           ; 51 (51)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|i2c_master:I2C_MASTER_INST                                                       ; work         ;
-;    |i2s_master:I2S_MASTER_INST|                     ; 99 (0)            ; 102 (0)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|i2s_master:I2S_MASTER_INST                                                       ; work         ;
-;       |FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST|          ; 60 (60)           ; 38 (38)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|i2s_master:I2S_MASTER_INST|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST                    ; work         ;
-;       |P2S:P2S_INST|                                ; 37 (37)           ; 32 (32)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|i2s_master:I2S_MASTER_INST|P2S:P2S_INST                                          ; work         ;
-;       |S2P:S2P_INST|                                ; 2 (2)             ; 32 (32)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|i2s_master:I2S_MASTER_INST|S2P:S2P_INST                                          ; work         ;
-;    |infrastructure_block:INFRASTRUCTURE_BLOCK_INST| ; 5 (0)             ; 46 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:INFRASTRUCTURE_BLOCK_INST                                   ; work         ;
-;       |modulo_divider:divider_inst|                 ; 4 (4)             ; 4 (4)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:INFRASTRUCTURE_BLOCK_INST|modulo_divider:divider_inst       ; work         ;
-;       |sync_block:sync_inst0|                       ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:INFRASTRUCTURE_BLOCK_INST|sync_block:sync_inst0             ; work         ;
-;       |sync_block:sync_inst10|                      ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:INFRASTRUCTURE_BLOCK_INST|sync_block:sync_inst10            ; work         ;
-;       |sync_block:sync_inst11|                      ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:INFRASTRUCTURE_BLOCK_INST|sync_block:sync_inst11            ; work         ;
-;       |sync_block:sync_inst12|                      ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:INFRASTRUCTURE_BLOCK_INST|sync_block:sync_inst12            ; work         ;
-;       |sync_block:sync_inst13|                      ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:INFRASTRUCTURE_BLOCK_INST|sync_block:sync_inst13            ; work         ;
-;       |sync_block:sync_inst14|                      ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:INFRASTRUCTURE_BLOCK_INST|sync_block:sync_inst14            ; work         ;
-;       |sync_block:sync_inst15|                      ; 1 (1)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:INFRASTRUCTURE_BLOCK_INST|sync_block:sync_inst15            ; work         ;
-;       |sync_block:sync_inst16|                      ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:INFRASTRUCTURE_BLOCK_INST|sync_block:sync_inst16            ; work         ;
-;       |sync_block:sync_inst17|                      ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:INFRASTRUCTURE_BLOCK_INST|sync_block:sync_inst17            ; work         ;
-;       |sync_block:sync_inst18|                      ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:INFRASTRUCTURE_BLOCK_INST|sync_block:sync_inst18            ; work         ;
-;       |sync_block:sync_inst19|                      ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:INFRASTRUCTURE_BLOCK_INST|sync_block:sync_inst19            ; work         ;
-;       |sync_block:sync_inst1|                       ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:INFRASTRUCTURE_BLOCK_INST|sync_block:sync_inst1             ; work         ;
-;       |sync_block:sync_inst20|                      ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:INFRASTRUCTURE_BLOCK_INST|sync_block:sync_inst20            ; work         ;
-;       |sync_block:sync_inst2|                       ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:INFRASTRUCTURE_BLOCK_INST|sync_block:sync_inst2             ; work         ;
-;       |sync_block:sync_inst3|                       ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:INFRASTRUCTURE_BLOCK_INST|sync_block:sync_inst3             ; work         ;
-;       |sync_block:sync_inst4|                       ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:INFRASTRUCTURE_BLOCK_INST|sync_block:sync_inst4             ; work         ;
-;       |sync_block:sync_inst5|                       ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:INFRASTRUCTURE_BLOCK_INST|sync_block:sync_inst5             ; work         ;
-;       |sync_block:sync_inst6|                       ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:INFRASTRUCTURE_BLOCK_INST|sync_block:sync_inst6             ; work         ;
-;       |sync_block:sync_inst7|                       ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:INFRASTRUCTURE_BLOCK_INST|sync_block:sync_inst7             ; work         ;
-;       |sync_block:sync_inst8|                       ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:INFRASTRUCTURE_BLOCK_INST|sync_block:sync_inst8             ; work         ;
-;       |sync_block:sync_inst9|                       ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:INFRASTRUCTURE_BLOCK_INST|sync_block:sync_inst9             ; work         ;
-;    |tone_decoder:TONE_DECODER_INST|                 ; 984 (714)         ; 48 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|tone_decoder:TONE_DECODER_INST                                                   ; work         ;
-;       |lied_fsm:inst_lied_fsm|                      ; 270 (270)         ; 48 (48)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|tone_decoder:TONE_DECODER_INST|lied_fsm:inst_lied_fsm                            ; work         ;
-+-----------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------+--------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                        ;
++--------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node                 ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                ; Library Name ;
++--------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------+--------------+
+; |top_level                                 ; 130 (0)           ; 91 (0)       ; 0           ; 0            ; 0       ; 0         ; 31   ; 0            ; |top_level                                                         ; work         ;
+;    |i2c_master:inst_2|                     ; 78 (78)           ; 51 (51)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|i2c_master:inst_2                                       ; work         ;
+;    |i2s_master:inst_4|                     ; 1 (0)             ; 2 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|i2s_master:inst_4                                       ; work         ;
+;       |FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST| ; 1 (1)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|i2s_master:inst_4|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST    ; work         ;
+;    |infrastructure_block:inst_3|           ; 4 (0)             ; 4 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:inst_3                             ; work         ;
+;       |modulo_divider:divider_inst|        ; 4 (4)             ; 4 (4)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:inst_3|modulo_divider:divider_inst ; work         ;
+;    |set_audio_register:inst_1|             ; 47 (47)           ; 34 (34)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|set_audio_register:inst_1                               ; work         ;
++--------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
 Encoding Type:  One-Hot
-+------------------------------------------------------------------------------------------+
-; State Machine - |top_level|tone_decoder:TONE_DECODER_INST|lied_fsm:inst_lied_fsm|zustand ;
-+----------------------+-------------------+----------------------+------------------------+
-; Name                 ; zustand.tone_send ; zustand.load_counter ; zustand.idle           ;
-+----------------------+-------------------+----------------------+------------------------+
-; zustand.idle         ; 0                 ; 0                    ; 0                      ;
-; zustand.load_counter ; 0                 ; 1                    ; 1                      ;
-; zustand.tone_send    ; 1                 ; 0                    ; 1                      ;
-+----------------------+-------------------+----------------------+------------------------+
++--------------------------------------------------------------------------------+
+; State Machine - |top_level|tone_decoder:inst_6|lied_fsm:inst_lied_fsm|zustand  ;
++----------------------+-------------------+----------------------+--------------+
+; Name                 ; zustand.tone_send ; zustand.load_counter ; zustand.idle ;
++----------------------+-------------------+----------------------+--------------+
+; zustand.idle         ; 0                 ; 0                    ; 0            ;
+; zustand.load_counter ; 0                 ; 1                    ; 1            ;
+; zustand.tone_send    ; 1                 ; 0                    ; 1            ;
++----------------------+-------------------+----------------------+--------------+
 
 
 Encoding Type:  One-Hot
 +----------------------------------------------------------------------------------------------------------------------+
-; State Machine - |top_level|i2s_master:I2S_MASTER_INST|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST|zustand                     ;
+; State Machine - |top_level|i2s_master:inst_4|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST|zustand                              ;
 +---------------------+---------------------+----------------+---------------------+------------------+----------------+
 ; Name                ; zustand.shift_adc_R ; zustand.hold_L ; zustand.shift_adc_L ; zustand.load_dac ; zustand.hold_R ;
 +---------------------+---------------------+----------------+---------------------+------------------+----------------+
@@ -320,7 +280,7 @@ Encoding Type:  One-Hot
 
 Encoding Type:  One-Hot
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |top_level|i2c_master:I2C_MASTER_INST|fsm_state                                                                                                                                                                   ;
+; State Machine - |top_level|i2c_master:inst_2|fsm_state                                                                                                                                                                            ;
 +--------------------------------+------------------+---------------------------+----------------------+-----------------------+--------------------------------+-------------------+----------------------------+------------------+
 ; Name                           ; fsm_state.S_STOP ; fsm_state.S_WAIT_FOR_STOP ; fsm_state.S_ACK_BYTE ; fsm_state.S_SEND_BYTE ; fsm_state.S_WAIT_FOR_NEXT_BYTE ; fsm_state.S_START ; fsm_state.S_WAIT_FOR_START ; fsm_state.S_IDLE ;
 +--------------------------------+------------------+---------------------------+----------------------+-----------------------+--------------------------------+-------------------+----------------------------+------------------+
@@ -337,7 +297,7 @@ Encoding Type:  One-Hot
 
 Encoding Type:  One-Hot
 +-------------------------------------------------------------------------+
-; State Machine - |top_level|codeccontroller:CODECCONTROLLER_INST|zustand ;
+; State Machine - |top_level|set_audio_register:inst_1|zustand            ;
 +---------------------+--------------+---------------------+--------------+
 ; Name                ; zustand.send ; zustand.start_write ; zustand.idle ;
 +---------------------+--------------+---------------------+--------------+
@@ -347,16 +307,165 @@ Encoding Type:  One-Hot
 +---------------------+--------------+---------------------+--------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                                                                                  ;
-+------------------------------------------------------------------+----------------------------------------------------------------------------------+
-; Register name                                                    ; Reason for Removal                                                               ;
-+------------------------------------------------------------------+----------------------------------------------------------------------------------+
-; fm_synth:FM_SYNTH_INST|fm_sel:FM_SEL_INST|reg_mod_M[15]          ; Stuck at GND due to stuck port data_in                                           ;
-; i2c_master:I2C_MASTER_INST|clk_divider[0]                        ; Merged with i2s_master:I2S_MASTER_INST|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST|s_bclk ;
-; tone_decoder:TONE_DECODER_INST|lied_fsm:inst_lied_fsm|laufvar[9] ; Lost fanout                                                                      ;
-; Total Number of Removed Registers = 3                            ;                                                                                  ;
-+------------------------------------------------------------------+----------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                                                     ;
++--------------------------------------------------------------------------+-----------------------------------------------------------------------------+
+; Register name                                                            ; Reason for Removal                                                          ;
++--------------------------------------------------------------------------+-----------------------------------------------------------------------------+
+; i2s_master:inst_4|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST|reg_idx[0,7,9..30]  ; Stuck at GND due to stuck port data_in                                      ;
+; i2s_master:inst_4|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST|reg_idx[2..6,8]     ; Merged with i2s_master:inst_4|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST|reg_idx[1] ;
+; i2s_master:inst_4|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST|s_WS                ; Merged with i2s_master:inst_4|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST|reg_idx[1] ;
+; i2s_master:inst_4|S2P:S2P_INST|l_zustand[0]                              ; Stuck at GND due to stuck port clock_enable                                 ;
+; i2s_master:inst_4|S2P:S2P_INST|r_zustand[0]                              ; Stuck at GND due to stuck port clock_enable                                 ;
+; i2s_master:inst_4|S2P:S2P_INST|l_zustand[1..15]                          ; Stuck at GND due to stuck port clock_enable                                 ;
+; i2s_master:inst_4|S2P:S2P_INST|r_zustand[1..15]                          ; Stuck at GND due to stuck port clock_enable                                 ;
+; i2s_master:inst_4|P2S:P2S_INST|l_zustand[0..15]                          ; Stuck at GND due to stuck port data_in                                      ;
+; i2s_master:inst_4|P2S:P2S_INST|r_zustand[0..15]                          ; Stuck at GND due to stuck port data_in                                      ;
+; i2c_master:inst_2|clk_divider[0]                                         ; Merged with i2s_master:inst_4|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST|s_bclk     ;
+; i2s_master:inst_4|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST|zustand.load_dac    ; Lost fanout                                                                 ;
+; i2s_master:inst_4|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST|zustand.shift_adc_L ; Lost fanout                                                                 ;
+; i2s_master:inst_4|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST|zustand.hold_L      ; Lost fanout                                                                 ;
+; i2s_master:inst_4|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST|zustand.shift_adc_R ; Lost fanout                                                                 ;
+; tone_decoder:inst_6|lied_fsm:inst_lied_fsm|laufvar[0..8]                 ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst0|qreg[0]                ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst1|qreg[0]                ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst2|qreg[0]                ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst3|qreg[0]                ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst4|qreg[0]                ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst5|qreg[0]                ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst6|qreg[0]                ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst7|qreg[0]                ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst8|qreg[0]                ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst9|qreg[0]                ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst10|qreg[0]               ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst11|qreg[0]               ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst12|qreg[0]               ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst13|qreg[0]               ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst20|qreg[0]               ; Lost fanout                                                                 ;
+; tone_decoder:inst_6|lied_fsm:inst_lied_fsm|takt_ist[0..15]               ; Lost fanout                                                                 ;
+; tone_decoder:inst_6|lied_fsm:inst_lied_fsm|laufvar[9]                    ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst0|qreg[1]                ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst1|qreg[1]                ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst2|qreg[1]                ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst3|qreg[1]                ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst4|qreg[1]                ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst5|qreg[1]                ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst6|qreg[1]                ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst7|qreg[1]                ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst8|qreg[1]                ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst9|qreg[1]                ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst10|qreg[1]               ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst11|qreg[1]               ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst12|qreg[1]               ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst13|qreg[1]               ; Lost fanout                                                                 ;
+; infrastructure_block:inst_3|sync_block:sync_inst20|qreg[1]               ; Lost fanout                                                                 ;
+; tone_decoder:inst_6|lied_fsm:inst_lied_fsm|count[0..19]                  ; Lost fanout                                                                 ;
+; tone_decoder:inst_6|lied_fsm:inst_lied_fsm|zustand.idle                  ; Lost fanout                                                                 ;
+; tone_decoder:inst_6|lied_fsm:inst_lied_fsm|zustand.load_counter          ; Lost fanout                                                                 ;
+; tone_decoder:inst_6|lied_fsm:inst_lied_fsm|zustand.tone_send             ; Lost fanout                                                                 ;
+; i2s_master:inst_4|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST|zustand.hold_R      ; Lost fanout                                                                 ;
+; Total Number of Removed Registers = 180                                  ;                                                                             ;
++--------------------------------------------------------------------------+-----------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                                                  ;
++-----------------------------------------------------------------------+--------------------------------+---------------------------------------------------------------------+
+; Register name                                                         ; Reason for Removal             ; Registers Removed due to This Register                              ;
++-----------------------------------------------------------------------+--------------------------------+---------------------------------------------------------------------+
+; i2s_master:inst_4|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST|reg_idx[0]       ; Stuck at GND                   ; i2s_master:inst_4|S2P:S2P_INST|r_zustand[0],                        ;
+;                                                                       ; due to stuck port data_in      ; i2s_master:inst_4|S2P:S2P_INST|r_zustand[15],                       ;
+;                                                                       ;                                ; i2s_master:inst_4|S2P:S2P_INST|r_zustand[14],                       ;
+;                                                                       ;                                ; i2s_master:inst_4|S2P:S2P_INST|r_zustand[13],                       ;
+;                                                                       ;                                ; i2s_master:inst_4|S2P:S2P_INST|r_zustand[12],                       ;
+;                                                                       ;                                ; i2s_master:inst_4|S2P:S2P_INST|r_zustand[11],                       ;
+;                                                                       ;                                ; i2s_master:inst_4|S2P:S2P_INST|r_zustand[10],                       ;
+;                                                                       ;                                ; i2s_master:inst_4|S2P:S2P_INST|r_zustand[9],                        ;
+;                                                                       ;                                ; i2s_master:inst_4|S2P:S2P_INST|r_zustand[8],                        ;
+;                                                                       ;                                ; i2s_master:inst_4|S2P:S2P_INST|r_zustand[7],                        ;
+;                                                                       ;                                ; i2s_master:inst_4|S2P:S2P_INST|r_zustand[6],                        ;
+;                                                                       ;                                ; i2s_master:inst_4|S2P:S2P_INST|r_zustand[5],                        ;
+;                                                                       ;                                ; i2s_master:inst_4|S2P:S2P_INST|r_zustand[4],                        ;
+;                                                                       ;                                ; i2s_master:inst_4|S2P:S2P_INST|r_zustand[3],                        ;
+;                                                                       ;                                ; i2s_master:inst_4|S2P:S2P_INST|r_zustand[2],                        ;
+;                                                                       ;                                ; i2s_master:inst_4|S2P:S2P_INST|r_zustand[1],                        ;
+;                                                                       ;                                ; i2s_master:inst_4|P2S:P2S_INST|r_zustand[0],                        ;
+;                                                                       ;                                ; i2s_master:inst_4|P2S:P2S_INST|r_zustand[1],                        ;
+;                                                                       ;                                ; i2s_master:inst_4|P2S:P2S_INST|r_zustand[2],                        ;
+;                                                                       ;                                ; i2s_master:inst_4|P2S:P2S_INST|r_zustand[3],                        ;
+;                                                                       ;                                ; i2s_master:inst_4|P2S:P2S_INST|r_zustand[4],                        ;
+;                                                                       ;                                ; i2s_master:inst_4|P2S:P2S_INST|r_zustand[5],                        ;
+;                                                                       ;                                ; i2s_master:inst_4|P2S:P2S_INST|r_zustand[6],                        ;
+;                                                                       ;                                ; i2s_master:inst_4|P2S:P2S_INST|r_zustand[7],                        ;
+;                                                                       ;                                ; i2s_master:inst_4|P2S:P2S_INST|r_zustand[8],                        ;
+;                                                                       ;                                ; i2s_master:inst_4|P2S:P2S_INST|r_zustand[9],                        ;
+;                                                                       ;                                ; i2s_master:inst_4|P2S:P2S_INST|r_zustand[10],                       ;
+;                                                                       ;                                ; i2s_master:inst_4|P2S:P2S_INST|r_zustand[11],                       ;
+;                                                                       ;                                ; i2s_master:inst_4|P2S:P2S_INST|r_zustand[12],                       ;
+;                                                                       ;                                ; i2s_master:inst_4|P2S:P2S_INST|r_zustand[13],                       ;
+;                                                                       ;                                ; i2s_master:inst_4|P2S:P2S_INST|r_zustand[14],                       ;
+;                                                                       ;                                ; i2s_master:inst_4|P2S:P2S_INST|r_zustand[15]                        ;
+; tone_decoder:inst_6|lied_fsm:inst_lied_fsm|takt_ist[0]                ; Lost Fanouts                   ; tone_decoder:inst_6|lied_fsm:inst_lied_fsm|takt_ist[3],             ;
+;                                                                       ;                                ; tone_decoder:inst_6|lied_fsm:inst_lied_fsm|takt_ist[2],             ;
+;                                                                       ;                                ; tone_decoder:inst_6|lied_fsm:inst_lied_fsm|takt_ist[1],             ;
+;                                                                       ;                                ; tone_decoder:inst_6|lied_fsm:inst_lied_fsm|count[19],               ;
+;                                                                       ;                                ; tone_decoder:inst_6|lied_fsm:inst_lied_fsm|count[18],               ;
+;                                                                       ;                                ; tone_decoder:inst_6|lied_fsm:inst_lied_fsm|count[17],               ;
+;                                                                       ;                                ; tone_decoder:inst_6|lied_fsm:inst_lied_fsm|count[16],               ;
+;                                                                       ;                                ; tone_decoder:inst_6|lied_fsm:inst_lied_fsm|count[15],               ;
+;                                                                       ;                                ; tone_decoder:inst_6|lied_fsm:inst_lied_fsm|count[14],               ;
+;                                                                       ;                                ; tone_decoder:inst_6|lied_fsm:inst_lied_fsm|count[13],               ;
+;                                                                       ;                                ; tone_decoder:inst_6|lied_fsm:inst_lied_fsm|zustand.load_counter     ;
+; i2s_master:inst_4|S2P:S2P_INST|l_zustand[0]                           ; Stuck at GND                   ; i2s_master:inst_4|S2P:S2P_INST|l_zustand[1],                        ;
+;                                                                       ; due to stuck port clock_enable ; i2s_master:inst_4|P2S:P2S_INST|l_zustand[1],                        ;
+;                                                                       ;                                ; i2s_master:inst_4|P2S:P2S_INST|l_zustand[0]                         ;
+; tone_decoder:inst_6|lied_fsm:inst_lied_fsm|laufvar[8]                 ; Lost Fanouts                   ; tone_decoder:inst_6|lied_fsm:inst_lied_fsm|zustand.idle,            ;
+;                                                                       ;                                ; tone_decoder:inst_6|lied_fsm:inst_lied_fsm|zustand.tone_send        ;
+; i2s_master:inst_4|S2P:S2P_INST|l_zustand[15]                          ; Stuck at GND                   ; i2s_master:inst_4|P2S:P2S_INST|l_zustand[15]                        ;
+;                                                                       ; due to stuck port clock_enable ;                                                                     ;
+; i2s_master:inst_4|S2P:S2P_INST|l_zustand[14]                          ; Stuck at GND                   ; i2s_master:inst_4|P2S:P2S_INST|l_zustand[14]                        ;
+;                                                                       ; due to stuck port clock_enable ;                                                                     ;
+; i2s_master:inst_4|S2P:S2P_INST|l_zustand[13]                          ; Stuck at GND                   ; i2s_master:inst_4|P2S:P2S_INST|l_zustand[13]                        ;
+;                                                                       ; due to stuck port clock_enable ;                                                                     ;
+; i2s_master:inst_4|S2P:S2P_INST|l_zustand[12]                          ; Stuck at GND                   ; i2s_master:inst_4|P2S:P2S_INST|l_zustand[12]                        ;
+;                                                                       ; due to stuck port clock_enable ;                                                                     ;
+; i2s_master:inst_4|S2P:S2P_INST|l_zustand[11]                          ; Stuck at GND                   ; i2s_master:inst_4|P2S:P2S_INST|l_zustand[11]                        ;
+;                                                                       ; due to stuck port clock_enable ;                                                                     ;
+; i2s_master:inst_4|S2P:S2P_INST|l_zustand[10]                          ; Stuck at GND                   ; i2s_master:inst_4|P2S:P2S_INST|l_zustand[10]                        ;
+;                                                                       ; due to stuck port clock_enable ;                                                                     ;
+; i2s_master:inst_4|S2P:S2P_INST|l_zustand[9]                           ; Stuck at GND                   ; i2s_master:inst_4|P2S:P2S_INST|l_zustand[9]                         ;
+;                                                                       ; due to stuck port clock_enable ;                                                                     ;
+; i2s_master:inst_4|S2P:S2P_INST|l_zustand[8]                           ; Stuck at GND                   ; i2s_master:inst_4|P2S:P2S_INST|l_zustand[8]                         ;
+;                                                                       ; due to stuck port clock_enable ;                                                                     ;
+; i2s_master:inst_4|S2P:S2P_INST|l_zustand[7]                           ; Stuck at GND                   ; i2s_master:inst_4|P2S:P2S_INST|l_zustand[7]                         ;
+;                                                                       ; due to stuck port clock_enable ;                                                                     ;
+; i2s_master:inst_4|S2P:S2P_INST|l_zustand[6]                           ; Stuck at GND                   ; i2s_master:inst_4|P2S:P2S_INST|l_zustand[6]                         ;
+;                                                                       ; due to stuck port clock_enable ;                                                                     ;
+; i2s_master:inst_4|S2P:S2P_INST|l_zustand[5]                           ; Stuck at GND                   ; i2s_master:inst_4|P2S:P2S_INST|l_zustand[5]                         ;
+;                                                                       ; due to stuck port clock_enable ;                                                                     ;
+; i2s_master:inst_4|S2P:S2P_INST|l_zustand[4]                           ; Stuck at GND                   ; i2s_master:inst_4|P2S:P2S_INST|l_zustand[4]                         ;
+;                                                                       ; due to stuck port clock_enable ;                                                                     ;
+; i2s_master:inst_4|S2P:S2P_INST|l_zustand[3]                           ; Stuck at GND                   ; i2s_master:inst_4|P2S:P2S_INST|l_zustand[3]                         ;
+;                                                                       ; due to stuck port clock_enable ;                                                                     ;
+; i2s_master:inst_4|S2P:S2P_INST|l_zustand[2]                           ; Stuck at GND                   ; i2s_master:inst_4|P2S:P2S_INST|l_zustand[2]                         ;
+;                                                                       ; due to stuck port clock_enable ;                                                                     ;
+; i2s_master:inst_4|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST|zustand.load_dac ; Lost Fanouts                   ; i2s_master:inst_4|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST|zustand.hold_R ;
+; infrastructure_block:inst_3|sync_block:sync_inst0|qreg[0]             ; Lost Fanouts                   ; infrastructure_block:inst_3|sync_block:sync_inst0|qreg[1]           ;
+; infrastructure_block:inst_3|sync_block:sync_inst1|qreg[0]             ; Lost Fanouts                   ; infrastructure_block:inst_3|sync_block:sync_inst1|qreg[1]           ;
+; infrastructure_block:inst_3|sync_block:sync_inst2|qreg[0]             ; Lost Fanouts                   ; infrastructure_block:inst_3|sync_block:sync_inst2|qreg[1]           ;
+; infrastructure_block:inst_3|sync_block:sync_inst3|qreg[0]             ; Lost Fanouts                   ; infrastructure_block:inst_3|sync_block:sync_inst3|qreg[1]           ;
+; infrastructure_block:inst_3|sync_block:sync_inst4|qreg[0]             ; Lost Fanouts                   ; infrastructure_block:inst_3|sync_block:sync_inst4|qreg[1]           ;
+; infrastructure_block:inst_3|sync_block:sync_inst5|qreg[0]             ; Lost Fanouts                   ; infrastructure_block:inst_3|sync_block:sync_inst5|qreg[1]           ;
+; infrastructure_block:inst_3|sync_block:sync_inst6|qreg[0]             ; Lost Fanouts                   ; infrastructure_block:inst_3|sync_block:sync_inst6|qreg[1]           ;
+; infrastructure_block:inst_3|sync_block:sync_inst7|qreg[0]             ; Lost Fanouts                   ; infrastructure_block:inst_3|sync_block:sync_inst7|qreg[1]           ;
+; infrastructure_block:inst_3|sync_block:sync_inst8|qreg[0]             ; Lost Fanouts                   ; infrastructure_block:inst_3|sync_block:sync_inst8|qreg[1]           ;
+; infrastructure_block:inst_3|sync_block:sync_inst9|qreg[0]             ; Lost Fanouts                   ; infrastructure_block:inst_3|sync_block:sync_inst9|qreg[1]           ;
+; infrastructure_block:inst_3|sync_block:sync_inst10|qreg[0]            ; Lost Fanouts                   ; infrastructure_block:inst_3|sync_block:sync_inst10|qreg[1]          ;
+; infrastructure_block:inst_3|sync_block:sync_inst11|qreg[0]            ; Lost Fanouts                   ; infrastructure_block:inst_3|sync_block:sync_inst11|qreg[1]          ;
+; infrastructure_block:inst_3|sync_block:sync_inst12|qreg[0]            ; Lost Fanouts                   ; infrastructure_block:inst_3|sync_block:sync_inst12|qreg[1]          ;
+; infrastructure_block:inst_3|sync_block:sync_inst13|qreg[0]            ; Lost Fanouts                   ; infrastructure_block:inst_3|sync_block:sync_inst13|qreg[1]          ;
+; infrastructure_block:inst_3|sync_block:sync_inst20|qreg[0]            ; Lost Fanouts                   ; infrastructure_block:inst_3|sync_block:sync_inst20|qreg[1]          ;
++-----------------------------------------------------------------------+--------------------------------+---------------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -364,138 +473,68 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 337   ;
-; Number of registers using Synchronous Clear  ; 64    ;
-; Number of registers using Synchronous Load   ; 88    ;
-; Number of registers using Asynchronous Clear ; 333   ;
+; Total registers                              ; 91    ;
+; Number of registers using Synchronous Clear  ; 3     ;
+; Number of registers using Synchronous Load   ; 2     ;
+; Number of registers using Asynchronous Clear ; 87    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 212   ;
+; Number of registers using Clock Enable       ; 58    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+---------------------------------------------------------------------+
-; Inverted Register Statistics                                        ;
-+-----------------------------------------------------------+---------+
-; Inverted Register                                         ; Fan out ;
-+-----------------------------------------------------------+---------+
-; i2c_master:I2C_MASTER_INST|scl                            ; 2       ;
-; fm_coder_7segment:FM_CODER_7SEGMENT_INST|reg_idx_ratio[0] ; 20      ;
-; i2c_master:I2C_MASTER_INST|sda                            ; 3       ;
-; Total number of inverted registers = 3                    ;         ;
-+-----------------------------------------------------------+---------+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; i2c_master:inst_2|scl                  ; 2       ;
+; i2c_master:inst_2|sda                  ; 3       ;
+; Total number of inverted registers = 2 ;         ;
++----------------------------------------+---------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                    ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                          ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------------------+
-; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |top_level|tone_decoder:TONE_DECODER_INST|lied_fsm:inst_lied_fsm|laufvar[6]         ;
-; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |top_level|tone_decoder:TONE_DECODER_INST|lied_fsm:inst_lied_fsm|takt_ist[13]       ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |top_level|tone_decoder:TONE_DECODER_INST|lied_fsm:inst_lied_fsm|takt_ist[3]        ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |top_level|fm_synth:FM_SYNTH_INST|dds:DDS_Modulator|count[6]                        ;
-; 3:1                ; 20 bits   ; 40 LEs        ; 20 LEs               ; 20 LEs                 ; Yes        ; |top_level|tone_decoder:TONE_DECODER_INST|lied_fsm:inst_lied_fsm|count[2]           ;
-; 4:1                ; 31 bits   ; 62 LEs        ; 62 LEs               ; 0 LEs                  ; Yes        ; |top_level|i2s_master:I2S_MASTER_INST|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST|reg_idx[1] ;
-; 5:1                ; 15 bits   ; 45 LEs        ; 30 LEs               ; 15 LEs                 ; Yes        ; |top_level|i2s_master:I2S_MASTER_INST|P2S:P2S_INST|r_zustand[14]                    ;
-; 5:1                ; 15 bits   ; 45 LEs        ; 30 LEs               ; 15 LEs                 ; Yes        ; |top_level|i2s_master:I2S_MASTER_INST|P2S:P2S_INST|l_zustand[2]                     ;
-; 7:1                ; 9 bits    ; 36 LEs        ; 27 LEs               ; 9 LEs                  ; Yes        ; |top_level|fm_synth:FM_SYNTH_INST|fm_sel:FM_SEL_INST|reg_mod_M[10]                  ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 2 LEs                ; 6 LEs                  ; Yes        ; |top_level|i2c_master:I2C_MASTER_INST|byte_count[1]                                 ;
-; 6:1                ; 3 bits    ; 12 LEs        ; 3 LEs                ; 9 LEs                  ; Yes        ; |top_level|i2c_master:I2C_MASTER_INST|bit_count[0]                                  ;
-; 8:1                ; 10 bits   ; 50 LEs        ; 10 LEs               ; 40 LEs                 ; Yes        ; |top_level|i2c_master:I2C_MASTER_INST|data[16]                                      ;
-; 8:1                ; 10 bits   ; 50 LEs        ; 10 LEs               ; 40 LEs                 ; Yes        ; |top_level|i2c_master:I2C_MASTER_INST|data[10]                                      ;
-; 5:1                ; 2 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |top_level|codeccontroller:CODECCONTROLLER_INST|folge_zustand                       ;
-; 9:1                ; 2 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; No         ; |top_level|i2c_master:I2C_MASTER_INST|Selector30                                    ;
-; 10:1               ; 2 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; No         ; |top_level|i2c_master:I2C_MASTER_INST|Selector31                                    ;
-; 726:1              ; 12 bits   ; 5808 LEs      ; 2676 LEs             ; 3132 LEs               ; No         ; |top_level|tone_decoder:TONE_DECODER_INST|N_CUM[12]                                 ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                  ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                        ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------+
+; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |top_level|tone_decoder:inst_6|lied_fsm:inst_lied_fsm|laufvar[3]  ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |top_level|tone_decoder:inst_6|lied_fsm:inst_lied_fsm|takt_ist[9] ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |top_level|tone_decoder:inst_6|lied_fsm:inst_lied_fsm|takt_ist[2] ;
+; 3:1                ; 20 bits   ; 40 LEs        ; 20 LEs               ; 20 LEs                 ; Yes        ; |top_level|tone_decoder:inst_6|lied_fsm:inst_lied_fsm|count[19]   ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 2 LEs                ; 6 LEs                  ; Yes        ; |top_level|i2c_master:inst_2|byte_count[0]                        ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 3 LEs                ; 9 LEs                  ; Yes        ; |top_level|i2c_master:inst_2|bit_count[0]                         ;
+; 8:1                ; 10 bits   ; 50 LEs        ; 10 LEs               ; 40 LEs                 ; Yes        ; |top_level|i2c_master:inst_2|data[16]                             ;
+; 8:1                ; 9 bits    ; 45 LEs        ; 9 LEs                ; 36 LEs                 ; Yes        ; |top_level|i2c_master:inst_2|data[15]                             ;
+; 13:1               ; 2 bits    ; 16 LEs        ; 6 LEs                ; 10 LEs                 ; Yes        ; |top_level|i2c_master:inst_2|data[3]                              ;
+; 9:1                ; 2 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; No         ; |top_level|i2c_master:inst_2|Selector30                           ;
+; 10:1               ; 2 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; No         ; |top_level|i2c_master:inst_2|Selector31                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: infrastructure_block:INFRASTRUCTURE_BLOCK_INST|modulo_divider:divider_inst ;
-+----------------+-------+------------------------------------------------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                                                           ;
-+----------------+-------+------------------------------------------------------------------------------------------------+
-; width          ; 4     ; Signed Integer                                                                                 ;
-+----------------+-------+------------------------------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: infrastructure_block:inst_3|modulo_divider:divider_inst ;
++----------------+-------+-----------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                        ;
++----------------+-------+-----------------------------------------------------------------------------+
+; width          ; 4     ; Signed Integer                                                              ;
++----------------+-------+-----------------------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+-----------------------------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: fm_synth:FM_SYNTH_INST|fm_sel:FM_SEL_INST|lpm_mult:Mult0 ;
-+------------------------------------------------+--------------+-------------------------------------------+
-; Parameter Name                                 ; Value        ; Type                                      ;
-+------------------------------------------------+--------------+-------------------------------------------+
-; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY                                ;
-; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY                              ;
-; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE                              ;
-; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE                            ;
-; LPM_WIDTHA                                     ; 11           ; Untyped                                   ;
-; LPM_WIDTHB                                     ; 4            ; Untyped                                   ;
-; LPM_WIDTHP                                     ; 15           ; Untyped                                   ;
-; LPM_WIDTHR                                     ; 15           ; Untyped                                   ;
-; LPM_WIDTHS                                     ; 1            ; Untyped                                   ;
-; LPM_REPRESENTATION                             ; SIGNED       ; Untyped                                   ;
-; LPM_PIPELINE                                   ; 0            ; Untyped                                   ;
-; LATENCY                                        ; 0            ; Untyped                                   ;
-; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped                                   ;
-; INPUT_B_IS_CONSTANT                            ; NO           ; Untyped                                   ;
-; USE_EAB                                        ; OFF          ; Untyped                                   ;
-; MAXIMIZE_SPEED                                 ; 6            ; Untyped                                   ;
-; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped                                   ;
-; CARRY_CHAIN                                    ; MANUAL       ; Untyped                                   ;
-; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K                       ;
-; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped                                   ;
-; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped                                   ;
-; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped                                   ;
-; CBXI_PARAMETER                                 ; mult_d4t     ; Untyped                                   ;
-; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped                                   ;
-; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped                                   ;
-; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped                                   ;
-+------------------------------------------------+--------------+-------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+--------------------------------------------------------------------------------------------------+
-; lpm_mult Parameter Settings by Entity Instance                                                   ;
-+---------------------------------------+----------------------------------------------------------+
-; Name                                  ; Value                                                    ;
-+---------------------------------------+----------------------------------------------------------+
-; Number of entity instances            ; 1                                                        ;
-; Entity Instance                       ; fm_synth:FM_SYNTH_INST|fm_sel:FM_SEL_INST|lpm_mult:Mult0 ;
-;     -- LPM_WIDTHA                     ; 11                                                       ;
-;     -- LPM_WIDTHB                     ; 4                                                        ;
-;     -- LPM_WIDTHP                     ; 15                                                       ;
-;     -- LPM_REPRESENTATION             ; SIGNED                                                   ;
-;     -- INPUT_A_IS_CONSTANT            ; NO                                                       ;
-;     -- INPUT_B_IS_CONSTANT            ; NO                                                       ;
-;     -- USE_EAB                        ; OFF                                                      ;
-;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                                     ;
-;     -- INPUT_A_FIXED_VALUE            ; Bx                                                       ;
-;     -- INPUT_B_FIXED_VALUE            ; Bx                                                       ;
-+---------------------------------------+----------------------------------------------------------+
-
-
-+-----------------------------------------------------+
-; Port Connectivity Checks: "fm_synth:FM_SYNTH_INST"  ;
-+-------------------+-------+----------+--------------+
-; Port              ; Type  ; Severity ; Details      ;
-+-------------------+-------+----------+--------------+
-; synth_ratio[9..4] ; Input ; Info     ; Stuck at GND ;
-+-------------------+-------+----------+--------------+
-
-
-+--------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "fm_coder_7segment:FM_CODER_7SEGMENT_INST"                                                     ;
-+----------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port           ; Type   ; Severity ; Details                                                                             ;
-+----------------+--------+----------+-------------------------------------------------------------------------------------+
-; fm_ratio[9..4] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+----------------+--------+----------+-------------------------------------------------------------------------------------+
++-----------------------------------------------+
+; Port Connectivity Checks: "fm_synth:inst_7"   ;
++-------------+-------+----------+--------------+
+; Port        ; Type  ; Severity ; Details      ;
++-------------+-------+----------+--------------+
+; synth_ratio ; Input ; Info     ; Stuck at GND ;
+; synth_depth ; Input ; Info     ; Stuck at GND ;
++-------------+-------+----------+--------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "tone_decoder:TONE_DECODER_INST|lied_fsm:inst_lied_fsm"                                               ;
+; Port Connectivity Checks: "tone_decoder:inst_6|lied_fsm:inst_lied_fsm"                                                          ;
 +-----------------------+--------+----------+-------------------------------------------------------------------------------------+
 ; Port                  ; Type   ; Severity ; Details                                                                             ;
 +-----------------------+--------+----------+-------------------------------------------------------------------------------------+
@@ -503,35 +542,52 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+--------+----------+-------------------------------------------------------------------------------------+
 
 
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "i2s_master:inst_4|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST"                                                                                         ;
++--------+-------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+; Port   ; Type  ; Severity ; Details                                                                                                                                      ;
++--------+-------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+; init_n ; Input ; Warning  ; Declared by entity but not connected by instance. If a default value exists, it will be used.  Otherwise, the port will be connected to GND. ;
++--------+-------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "infrastructure_block:inst_3"                                                                       ;
++---------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port                ; Type   ; Severity ; Details                                                                             ;
++---------------------+--------+----------+-------------------------------------------------------------------------------------+
+; button_sync[17..14] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; key_sync[1..0]      ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
 +-----------------------------------------------------+
 ; Post-Synthesis Netlist Statistics for Top Partition ;
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; boundary_port         ; 81                          ;
-; cycloneiii_ff         ; 337                         ;
-;     CLR               ; 89                          ;
-;     CLR SCLR          ; 21                          ;
-;     CLR SLD           ; 11                          ;
-;     ENA CLR           ; 92                          ;
-;     ENA CLR SCLR      ; 43                          ;
-;     ENA CLR SLD       ; 77                          ;
+; boundary_port         ; 31                          ;
+; cycloneiii_ff         ; 91                          ;
+;     CLR               ; 28                          ;
+;     CLR SCLR          ; 1                           ;
+;     ENA CLR           ; 54                          ;
+;     ENA CLR SCLR      ; 2                           ;
+;     ENA CLR SLD       ; 2                           ;
 ;     plain             ; 4                           ;
 ; cycloneiii_io_obuf    ; 1                           ;
-; cycloneiii_lcell_comb ; 1511                        ;
-;     arith             ; 166                         ;
-;         1 data inputs ; 1                           ;
-;         2 data inputs ; 108                         ;
-;         3 data inputs ; 57                          ;
-;     normal            ; 1345                        ;
-;         0 data inputs ; 5                           ;
-;         1 data inputs ; 18                          ;
-;         2 data inputs ; 109                         ;
-;         3 data inputs ; 189                         ;
-;         4 data inputs ; 1024                        ;
+; cycloneiii_lcell_comb ; 132                         ;
+;     arith             ; 33                          ;
+;         2 data inputs ; 32                          ;
+;         3 data inputs ; 1                           ;
+;     normal            ; 99                          ;
+;         0 data inputs ; 1                           ;
+;         1 data inputs ; 5                           ;
+;         2 data inputs ; 18                          ;
+;         3 data inputs ; 21                          ;
+;         4 data inputs ; 54                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 14.50                       ;
-; Average LUT depth     ; 7.60                        ;
+; Max LUT depth         ; 5.00                        ;
+; Average LUT depth     ; 2.71                        ;
 +-----------------------+-----------------------------+
 
 
@@ -540,7 +596,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:18     ;
+; Top            ; 00:00:01     ;
 +----------------+--------------+
 
 
@@ -550,152 +606,129 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 14.0.0 Build 200 06/17/2014 SJ Full Version
-    Info: Processing started: Fri Oct 23 09:08:37 2015
+    Info: Processing started: Sat Oct 24 10:49:25 2015
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off syntehsizer -c syntehsizer
 Info (11104): Parallel Compilation has detected 4 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 2 of the 2 physical processors detected instead.
-Info (12021): Found 2 design units, including 1 entities, in source file /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/top_level.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/top_level.vhd
     Info (12022): Found design unit 1: top_level-rtl
     Info (12023): Found entity 1: top_level
-Info (12021): Found 1 design units, including 0 entities, in source file /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/tone_gen_pkg.vhd
+Info (12021): Found 1 design units, including 0 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/tone_gen_pkg.vhd
     Info (12022): Found design unit 1: tone_gen_pkg
-Info (12021): Found 2 design units, including 1 entities, in source file /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/tone_decoder.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/tone_decoder.vhd
     Info (12022): Found design unit 1: tone_decoder-rtl
     Info (12023): Found entity 1: tone_decoder
-Info (12021): Found 2 design units, including 1 entities, in source file /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/sync_block.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/sync_block.vhd
     Info (12022): Found design unit 1: sync_block-rtl
     Info (12023): Found entity 1: sync_block
-Info (12021): Found 2 design units, including 1 entities, in source file /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/S2P.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/s2p.vhd
     Info (12022): Found design unit 1: S2P-rtl
     Info (12023): Found entity 1: S2P
-Info (12021): Found 1 design units, including 0 entities, in source file /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/reg_table_pkg.vhd
-    Info (12022): Found design unit 1: reg_table_pkg
-Info (12021): Found 2 design units, including 1 entities, in source file /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/P2S.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/p2s.vhd
     Info (12022): Found design unit 1: P2S-rtl
     Info (12023): Found entity 1: P2S
-Info (12021): Found 1 design units, including 0 entities, in source file /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/music_list.vhd
+Info (12021): Found 1 design units, including 0 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/music_list.vhd
     Info (12022): Found design unit 1: music_list
-Info (12021): Found 2 design units, including 1 entities, in source file /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/modulo_divider.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/modulo_divider.vhd
     Info (12022): Found design unit 1: modulo_divider-rtl
     Info (12023): Found entity 1: modulo_divider
-Info (12021): Found 2 design units, including 1 entities, in source file /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/lied_fsm.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/lied_fsm.vhd
     Info (12022): Found design unit 1: lied_fsm-rtl
     Info (12023): Found entity 1: lied_fsm
-Info (12021): Found 2 design units, including 1 entities, in source file /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/infrastructure_block.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/infrastructure_block.vhd
     Info (12022): Found design unit 1: infrastructure_block-rtl
     Info (12023): Found entity 1: infrastructure_block
-Info (12021): Found 2 design units, including 1 entities, in source file /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/i2s_master.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/i2s_master.vhd
     Info (12022): Found design unit 1: i2s_master-rtl
     Info (12023): Found entity 1: i2s_master
-Info (12021): Found 2 design units, including 1 entities, in source file /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/i2c_master.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/i2c_master.vhd
     Info (12022): Found design unit 1: i2c_master-rtl
     Info (12023): Found entity 1: i2c_master
-Info (12021): Found 2 design units, including 1 entities, in source file /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/FSM_BCLK_COUNT.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/fsm_bclk_count.vhd
     Info (12022): Found design unit 1: FSM_BCLK_COUNT-rtl
     Info (12023): Found entity 1: FSM_BCLK_COUNT
-Info (12021): Found 2 design units, including 1 entities, in source file /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/fm_synth.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/fm_synth.vhd
     Info (12022): Found design unit 1: fm_synth-rtl
     Info (12023): Found entity 1: fm_synth
-Info (12021): Found 2 design units, including 1 entities, in source file /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/fm_sel.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/fm_sel.vhd
     Info (12022): Found design unit 1: fm_sel-rtl
     Info (12023): Found entity 1: fm_sel
-Info (12021): Found 2 design units, including 1 entities, in source file /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/fm_coder_7segment.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/fm_coder_7segment.vhd
     Info (12022): Found design unit 1: fm_coder_7segment-rtl
     Info (12023): Found entity 1: fm_coder_7segment
-Info (12021): Found 2 design units, including 1 entities, in source file /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/dds.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/dds.vhd
     Info (12022): Found design unit 1: dds-rtl
     Info (12023): Found entity 1: dds
-Info (12021): Found 2 design units, including 1 entities, in source file /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/codeccontroller.vhd
-    Info (12022): Found design unit 1: codeccontroller-rtl
-    Info (12023): Found entity 1: codeccontroller
-Info (12021): Found 2 design units, including 1 entities, in source file /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/audio_control.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/audio_control.vhd
     Info (12022): Found design unit 1: audio_control-rtl
     Info (12023): Found entity 1: audio_control
-Info (12021): Found 2 design units, including 1 entities, in source file /home/katrin/Documents/a_PA_synthesizer/Cyclone_IV/vhdl/bluetooth_adapter.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/bluetooth_adapter.vhd
     Info (12022): Found design unit 1: bluetooth_adapter-rtl
     Info (12023): Found entity 1: bluetooth_adapter
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/set_audio_register.vhd
+    Info (12022): Found design unit 1: set_audio_register-rtl
+    Info (12023): Found entity 1: set_audio_register
+Info (12021): Found 1 design units, including 0 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/audio_codec_register_table_pkg.vhd
+    Info (12022): Found design unit 1: audio_codec_register_table_pkg
 Info (12127): Elaborating entity "top_level" for the top level hierarchy
-Warning (10873): Using initial value X (don't care) for net "LEDG[7..1]" at top_level.vhd(50)
-Info (12128): Elaborating entity "codeccontroller" for hierarchy "codeccontroller:CODECCONTROLLER_INST"
-Info (12128): Elaborating entity "i2c_master" for hierarchy "i2c_master:I2C_MASTER_INST"
-Info (12128): Elaborating entity "infrastructure_block" for hierarchy "infrastructure_block:INFRASTRUCTURE_BLOCK_INST"
-Warning (10036): Verilog HDL or VHDL warning at infrastructure_block.vhd(35): object "s_reset" assigned a value but never read
-Info (12128): Elaborating entity "modulo_divider" for hierarchy "infrastructure_block:INFRASTRUCTURE_BLOCK_INST|modulo_divider:divider_inst"
-Info (12128): Elaborating entity "sync_block" for hierarchy "infrastructure_block:INFRASTRUCTURE_BLOCK_INST|sync_block:sync_inst0"
-Info (12128): Elaborating entity "i2s_master" for hierarchy "i2s_master:I2S_MASTER_INST"
-Info (12128): Elaborating entity "FSM_BCLK_COUNT" for hierarchy "i2s_master:I2S_MASTER_INST|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST"
-Info (12128): Elaborating entity "P2S" for hierarchy "i2s_master:I2S_MASTER_INST|P2S:P2S_INST"
-Info (12128): Elaborating entity "S2P" for hierarchy "i2s_master:I2S_MASTER_INST|S2P:S2P_INST"
-Info (12128): Elaborating entity "audio_control" for hierarchy "audio_control:AUDIO_CONTROL_INST"
-Info (12128): Elaborating entity "tone_decoder" for hierarchy "tone_decoder:TONE_DECODER_INST"
-Info (12128): Elaborating entity "lied_fsm" for hierarchy "tone_decoder:TONE_DECODER_INST|lied_fsm:inst_lied_fsm"
-Info (12128): Elaborating entity "fm_coder_7segment" for hierarchy "fm_coder_7segment:FM_CODER_7SEGMENT_INST"
-Info (12128): Elaborating entity "fm_synth" for hierarchy "fm_synth:FM_SYNTH_INST"
-Info (12128): Elaborating entity "dds" for hierarchy "fm_synth:FM_SYNTH_INST|dds:DDS_Modulator"
-Info (12128): Elaborating entity "fm_sel" for hierarchy "fm_synth:FM_SYNTH_INST|fm_sel:FM_SEL_INST"
-Info (278001): Inferred 1 megafunctions from design logic
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "fm_synth:FM_SYNTH_INST|fm_sel:FM_SEL_INST|Mult0"
-Info (12130): Elaborated megafunction instantiation "fm_synth:FM_SYNTH_INST|fm_sel:FM_SEL_INST|lpm_mult:Mult0"
-Info (12133): Instantiated megafunction "fm_synth:FM_SYNTH_INST|fm_sel:FM_SEL_INST|lpm_mult:Mult0" with the following parameter:
-    Info (12134): Parameter "LPM_WIDTHA" = "11"
-    Info (12134): Parameter "LPM_WIDTHB" = "4"
-    Info (12134): Parameter "LPM_WIDTHP" = "15"
-    Info (12134): Parameter "LPM_WIDTHR" = "15"
-    Info (12134): Parameter "LPM_WIDTHS" = "1"
-    Info (12134): Parameter "LPM_REPRESENTATION" = "SIGNED"
-    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "NO"
-    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
-    Info (12134): Parameter "MAXIMIZE_SPEED" = "6"
-Info (12021): Found 1 design units, including 1 entities, in source file db/mult_d4t.tdf
-    Info (12023): Found entity 1: mult_d4t
-Info (13014): Ignored 66 buffer(s)
-    Info (13016): Ignored 2 CARRY_SUM buffer(s)
-    Info (13019): Ignored 64 SOFT buffer(s)
+Warning (10541): VHDL Signal Declaration warning at top_level.vhd(73): used implicit default value for signal "tl_fm_ratio" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at top_level.vhd(74): used implicit default value for signal "tl_fm_depth" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Info (12128): Elaborating entity "set_audio_register" for hierarchy "set_audio_register:inst_1"
+Info (12128): Elaborating entity "i2c_master" for hierarchy "i2c_master:inst_2"
+Info (12128): Elaborating entity "infrastructure_block" for hierarchy "infrastructure_block:inst_3"
+Warning (10036): Verilog HDL or VHDL warning at infrastructure_block.vhd(31): object "s_reset" assigned a value but never read
+Info (12128): Elaborating entity "modulo_divider" for hierarchy "infrastructure_block:inst_3|modulo_divider:divider_inst"
+Info (12128): Elaborating entity "sync_block" for hierarchy "infrastructure_block:inst_3|sync_block:sync_inst0"
+Info (12128): Elaborating entity "i2s_master" for hierarchy "i2s_master:inst_4"
+Info (12128): Elaborating entity "FSM_BCLK_COUNT" for hierarchy "i2s_master:inst_4|FSM_BCLK_COUNT:FSM_BCLK_COUNT_INST"
+Info (12128): Elaborating entity "P2S" for hierarchy "i2s_master:inst_4|P2S:P2S_INST"
+Info (12128): Elaborating entity "S2P" for hierarchy "i2s_master:inst_4|S2P:S2P_INST"
+Info (12128): Elaborating entity "audio_control" for hierarchy "audio_control:inst_5"
+Info (12128): Elaborating entity "tone_decoder" for hierarchy "tone_decoder:inst_6"
+Info (12128): Elaborating entity "lied_fsm" for hierarchy "tone_decoder:inst_6|lied_fsm:inst_lied_fsm"
+Info (12128): Elaborating entity "fm_synth" for hierarchy "fm_synth:inst_7"
+Info (12128): Elaborating entity "dds" for hierarchy "fm_synth:inst_7|dds:DDS_Modulator"
+Info (12128): Elaborating entity "fm_sel" for hierarchy "fm_synth:inst_7|fm_sel:FM_SEL_INST"
+Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Info (13000): Registers with preset signals will power-up high
 Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "LEDG[1]" is stuck at GND
-    Warning (13410): Pin "LEDG[2]" is stuck at GND
-    Warning (13410): Pin "LEDG[3]" is stuck at GND
-    Warning (13410): Pin "LEDG[4]" is stuck at GND
-    Warning (13410): Pin "LEDG[5]" is stuck at GND
-    Warning (13410): Pin "LEDG[6]" is stuck at GND
-    Warning (13410): Pin "LEDG[7]" is stuck at GND
-    Warning (13410): Pin "HEX0[1]" is stuck at GND
-    Warning (13410): Pin "HEX3[0]" is stuck at GND
-    Warning (13410): Pin "HEX3[1]" is stuck at GND
-    Warning (13410): Pin "HEX3[2]" is stuck at GND
-    Warning (13410): Pin "HEX3[3]" is stuck at VCC
-    Warning (13410): Pin "HEX3[4]" is stuck at GND
-    Warning (13410): Pin "HEX3[5]" is stuck at GND
-    Warning (13410): Pin "HEX3[6]" is stuck at GND
-    Warning (13410): Pin "HEX2[1]" is stuck at GND
-    Warning (13410): Pin "HEX5[0]" is stuck at GND
-    Warning (13410): Pin "HEX5[1]" is stuck at GND
-    Warning (13410): Pin "HEX5[2]" is stuck at GND
-    Warning (13410): Pin "HEX5[3]" is stuck at GND
-    Warning (13410): Pin "HEX5[4]" is stuck at GND
-    Warning (13410): Pin "HEX5[5]" is stuck at GND
-    Warning (13410): Pin "HEX5[6]" is stuck at VCC
-    Warning (13410): Pin "HEX1[0]" is stuck at VCC
-    Warning (13410): Pin "HEX1[1]" is stuck at VCC
-    Warning (13410): Pin "HEX1[2]" is stuck at VCC
-    Warning (13410): Pin "HEX1[3]" is stuck at VCC
-    Warning (13410): Pin "HEX1[4]" is stuck at VCC
-    Warning (13410): Pin "HEX1[5]" is stuck at VCC
-    Warning (13410): Pin "HEX1[6]" is stuck at GND
+    Warning (13410): Pin "AUD_DACDAT" is stuck at GND
 Info (286030): Timing-Driven Synthesis is running
-Info (17049): 1 registers lost all their fanouts during netlist optimizations.
+Info (17049): 84 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 1676 device resources after synthesis - the final resource count might be different
+Warning (21074): Design contains 22 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "KEY[1]"
+    Warning (15610): No output dependent on input pin "KEY[2]"
+    Warning (15610): No output dependent on input pin "SW[14]"
+    Warning (15610): No output dependent on input pin "SW[15]"
+    Warning (15610): No output dependent on input pin "SW[16]"
+    Warning (15610): No output dependent on input pin "SW[17]"
+    Warning (15610): No output dependent on input pin "AUD_ADCDAT"
+    Warning (15610): No output dependent on input pin "SW[0]"
+    Warning (15610): No output dependent on input pin "SW[1]"
+    Warning (15610): No output dependent on input pin "SW[2]"
+    Warning (15610): No output dependent on input pin "SW[3]"
+    Warning (15610): No output dependent on input pin "SW[4]"
+    Warning (15610): No output dependent on input pin "SW[5]"
+    Warning (15610): No output dependent on input pin "SW[6]"
+    Warning (15610): No output dependent on input pin "SW[7]"
+    Warning (15610): No output dependent on input pin "SW[8]"
+    Warning (15610): No output dependent on input pin "SW[9]"
+    Warning (15610): No output dependent on input pin "SW[10]"
+    Warning (15610): No output dependent on input pin "SW[11]"
+    Warning (15610): No output dependent on input pin "SW[12]"
+    Warning (15610): No output dependent on input pin "SW[13]"
+    Warning (15610): No output dependent on input pin "KEY[3]"
+Info (21057): Implemented 170 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 24 input pins
-    Info (21059): Implemented 56 output pins
+    Info (21059): Implemented 6 output pins
     Info (21060): Implemented 1 bidirectional pins
-    Info (21061): Implemented 1595 logic cells
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 33 warnings
-    Info: Peak virtual memory: 888 megabytes
-    Info: Processing ended: Fri Oct 23 09:09:00 2015
-    Info: Elapsed time: 00:00:23
-    Info: Total CPU time (on all processors): 00:00:23
+    Info (21061): Implemented 139 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 29 warnings
+    Info: Peak virtual memory: 602 megabytes
+    Info: Processing ended: Sat Oct 24 10:49:29 2015
+    Info: Elapsed time: 00:00:04
+    Info: Total CPU time (on all processors): 00:00:03
 
 

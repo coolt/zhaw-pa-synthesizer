@@ -1,101 +1,94 @@
 --i2s_master
---copyright by bruelcor
-
---version 0.1
---02.04.2013 17.09
-
---version 0.2
---05.04.2013 12.54
 
 --Funktion: I2S Baustein
 
-LIBRARY ieee;
-USE ieee.std_logic_1164.all;
-USE ieee.numeric_std.all;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
-LIBRARY work;
-USE work.reg_table_pkg.all;
+library work;
+use work.audio_codec_register_table_pkg.all;
 
--- Entity Declaration 
+-- entity Declaration 
 -------------------------------------------
-ENTITY i2s_master IS
-	PORT (		clk_12M			:IN			std_logic;
-				i2s_reset_n		:IN			std_logic;
-				INIT_N_i		:IN			std_logic;	
-				ADCDAT_s		:IN			std_logic;
-				DACDAT_pl		:IN			std_logic_vector(15 downto 0);
-				DACDAT_pr		:IN			std_logic_vector(15 downto 0);
-				STROBE_O			:OUT		std_logic;	--Port wurde von STROBE-o auf STROBE geändert!
-				BCLK			:OUT		std_logic;
-				DACDAT_s		:OUT		std_logic;
-				ADCDAT_pl		:OUT		std_logic_vector(15 downto 0);
-				ADCDAT_pr		:OUT		std_logic_vector(15 downto 0);
-				WS				:OUT		std_logic	--??? Habe diesen Port so beschrieben wie auf Diagramm, bei uns: DACLRC_s und ADCLRC_s
+entity i2s_master is
+	port (		clk_12M			:in			std_logic;
+				i2s_reset_n		:in			std_logic;
+				--INIT_N_i		:in			std_logic;	
+				ADCDAT_s		:in			std_logic;
+				DACDAT_pl		:in			std_logic_vector(15 downto 0);
+				DACDAT_pr		:in			std_logic_vector(15 downto 0);
+				STROBE_O			:out		std_logic;	--port wurde von STROBE-o auf STROBE geändert!
+				BCLK			:out		std_logic;
+				DACDAT_s		:out		std_logic;
+				ADCDAT_pl		:out		std_logic_vector(15 downto 0);
+				ADCDAT_pr		:out		std_logic_vector(15 downto 0);
+				WS				:out		std_logic	--??? Habe diesen port so beschrieben wie auf Diagramm, bei uns: DACLRC_s und ADCLRC_s
 		 );												--ist nach mir nicht logisch!!!
-END i2s_master;
+end i2s_master;
 
--- Architecture Declaration
+-- architecture Declaration
 -------------------------------------------
-ARCHITECTURE rtl OF i2s_master IS
+architecture rtl of i2s_master is
 -- Signals & Constants Declaration
 -------------------------------------------
-SIGNAL		WS_o:			std_logic;
-SIGNAL		s_WS_dly:		std_logic;
-SIGNAL		s_BCLK:			std_logic;
-SIGNAL		s_DAC_load:		std_logic;		-- Wegen Port jetzt s_Strobe
-SIGNAL		s_ADCL_shift:	std_logic;
-SIGNAL		s_ADCR_shift:	std_logic;
-SIGNAL		ADCDAT_s_i:		std_logic;
-SIGNAL		s_DACDAT_s_o:		std_logic;		-- auf diagramm nur DACDAT_s, geht nicht da port schon so heisst
-SIGNAL		s_real_strobe:	std_logic;
+signal		WS_o:			std_logic;
+signal		s_WS_dly:		std_logic;
+signal		s_BCLK:			std_logic;
+signal		s_DAC_load:		std_logic;		-- Wegen port jetzt s_Strobe
+signal		s_ADCL_shift:	std_logic;
+signal		s_ADCR_shift:	std_logic;
+signal		ADCDAT_s_i:		std_logic;
+signal		s_DACDAT_s_o:		std_logic;		-- auf diagramm nur DACDAT_s, geht nicht da port schon so heisst
+signal		s_real_strobe:	std_logic;
 
 
 
 --Components Declaration
 ------------------------------------------
-COMPONENT FSM_BCLK_COUNT
-	PORT(   clk,reset_n						:IN      std_logic;
-			init_n     						:IN      std_logic;
-			WS, WS_dly			    		:OUT     std_logic;
-			BCLK, DAC_load	 				:OUT     std_logic;
-			ADCL_shift, ADCR_shift			:OUT 	 std_logic;
-			real_strobe						:OUT		std_logic
+component FSM_BCLK_COUNT
+	port(   clk,reset_n						:in      std_logic;
+			--init_n     						:in      std_logic;
+			WS, WS_dly			    		:out     std_logic;
+			BCLK, DAC_load	 				:out     std_logic;
+			ADCL_shift, ADCR_shift			:out 	 std_logic;
+			real_strobe						:out		std_logic
 		);
-END COMPONENT;
+end component;
 
-COMPONENT P2S IS
-	PORT( 	clk					:IN			std_logic;	--clk_12M
-			reset_n				:IN			std_logic;
-			BCLK				:IN			std_logic;
-			DAC_load			:IN			std_logic;
-			WS_dly				:IN			std_logic;
-			DACDAT_pl_i			:IN			std_logic_vector(15 downto 0);
-			DACDAT_pr_i			:IN			std_logic_vector(15 downto 0);
-			DACDAT_s_o				:OUT		std_logic
+component P2S is
+	port( 	clk					:in			std_logic;	--clk_12M
+			reset_n				:in			std_logic;
+			BCLK				:in			std_logic;
+			DAC_load			:in			std_logic;
+			WS_dly				:in			std_logic;
+			DACDAT_pl_i			:in			std_logic_vector(15 downto 0);
+			DACDAT_pr_i			:in			std_logic_vector(15 downto 0);
+			DACDAT_s_o				:out		std_logic
 		 );
-END COMPONENT;
+end component;
 
-COMPONENT S2P IS
-	PORT (	clk					:IN			std_logic;	--clk_12M
-			reset_n				:IN			std_logic;
-			BCLK				:IN			std_logic;
-			ADCL_shift			:IN			std_logic;
-			ADCR_shift			:IN			std_logic;
-			ADCDAT_s_i			:IN			std_logic;
-			ADCDAT_pl_o			:OUT		std_logic_vector(15 downto 0);
-			ADCDAT_pr_o			:OUT		std_logic_vector(15 downto 0)
+component S2P is
+	port (	clk					:in			std_logic;	--clk_12M
+			reset_n				:in			std_logic;
+			BCLK				:in			std_logic;
+			ADCL_shift			:in			std_logic;
+			ADCR_shift			:in			std_logic;
+			ADCDAT_s_i			:in			std_logic;
+			ADCDAT_pl_o			:out		std_logic_vector(15 downto 0);
+			ADCDAT_pr_o			:out		std_logic_vector(15 downto 0)
 				
 		  );
-END COMPONENT;
+end component;
 
--- Begin Architecture
+-- begin architecture
 -------------------------------------------
-BEGIN
+begin
 
--- Port Maps
+-- port Maps
 -------------------------------------------
 FSM_BCLK_COUNT_INST: FSM_BCLK_COUNT
-	PORT MAP (	clk			=>		clk_12M,
+	port map (	clk			=>		clk_12M,
 				reset_n		=>		i2s_reset_n,
 				WS			=>		WS_o,
 				WS_dly		=>		s_WS_dly,
@@ -103,12 +96,12 @@ FSM_BCLK_COUNT_INST: FSM_BCLK_COUNT
 				DAC_load	=>		s_DAC_load,
 				ADCL_shift	=>		s_ADCL_shift,
 				ADCR_shift	=>		s_ADCR_shift,
-				init_n		=> 	INIT_N_i,
+				--init_n		=> 	INIT_N_i,
 				real_strobe =>		s_real_strobe
 			 );
 
 P2S_INST : P2S
-	PORT MAP (  clk			=>		clk_12M,
+	port map (  clk			=>		clk_12M,
 				reset_n		=>		i2s_reset_n,
 				BCLK		=>		s_BCLK,
 				DAC_load	=>		s_DAC_load,
@@ -119,7 +112,7 @@ P2S_INST : P2S
 			  );
 
 S2P_INST : S2P
-	PORT MAP (	clk			=>		clk_12M,
+	port map (	clk			=>		clk_12M,
 				reset_n		=>		i2s_reset_n,
 				BCLK		=>		s_BCLK,
 				ADCL_shift	=>		s_ADCL_shift,
@@ -134,8 +127,8 @@ DACDAT_s <= s_DACDAT_s_o;
 WS			<= WS_o;
 BCLK 		<= s_BCLK;	
 STROBE_O	<= s_real_strobe;
- -- End Architecture 
+ -- end architecture 
 ------------------------------------------- 
-END rtl;
+end rtl;
 
 				

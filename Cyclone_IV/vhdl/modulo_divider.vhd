@@ -7,54 +7,54 @@
 --		Can be used for clock-divider when no exact ratio required.
 -------------------------------------------
 
--- Library & Use Statements
+-- library & use Statements
 -------------------------------------------
-LIBRARY ieee;
-USE ieee.std_logic_1164.all;
-USE ieee.numeric_std.all;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 
--- Entity Declaration 
+-- entity Declaration 
 -------------------------------------------
-ENTITY modulo_divider IS
-GENERIC (width		: positive  := 5 );
-  PORT( clk	: IN    std_logic;
-    	   clk_div     : OUT   std_logic
+entity modulo_divider is
+generic (width		: positive  := 5 );
+  port( clk	: in    std_logic;
+    	   clk_div     : out   std_logic
     	);
-END modulo_divider;
+end modulo_divider;
 
 
--- Architecture Declaration?
+-- architecture Declaration?
 -------------------------------------------
-ARCHITECTURE rtl OF modulo_divider IS
+architecture rtl of modulo_divider is
 -- Signals & Constants Declaration?
 -------------------------------------------
 signal count, next_count: unsigned(width-1 downto 0);	 
 
 
--- Begin Architecture
+-- begin architecture
 -------------------------------------------
-BEGIN
+begin
 
   --------------------------------------------------
-  -- PROCESS FOR COMBINATORIAL LOGIC
+  -- process FOR COMBINATORIAL LOGIC
   --------------------------------------------------
-  comb_logic: PROCESS(count)
-  BEGIN	
+  comb_logic: process(count)
+  begin	
 	-- increment	
 	next_count <= count + 1 ;
-  END PROCESS comb_logic;   
+  end process comb_logic;   
   
   --------------------------------------------------
-  -- PROCESS FOR REGISTERS
+  -- process FOR REGISTERS
   --------------------------------------------------
-  flip_flops : PROCESS(clk)
-  BEGIN	
+  flip_flops : process(clk)
+  begin	
   	
-    IF rising_edge(clk) THEN
+    if rising_edge(clk) then
 		count <= next_count ;
-    END IF;
-  END PROCESS flip_flops;		
+    end if;
+  end process flip_flops;		
   
   
   --------------------------------------------------
@@ -64,7 +64,7 @@ BEGIN
   clk_div <= std_logic(count(width-1));
   
   
- -- End Architecture 
+ -- end architecture 
 ------------------------------------------- 
-END rtl;
+end rtl;
 

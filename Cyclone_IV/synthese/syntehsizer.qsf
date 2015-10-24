@@ -1007,7 +1007,6 @@ set_global_assignment -name VHDL_FILE ../vhdl/tone_gen_pkg.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/tone_decoder.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/sync_block.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/S2P.vhd
-set_global_assignment -name VHDL_FILE ../vhdl/reg_table_pkg.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/P2S.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/music_list.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/modulo_divider.vhd
@@ -1020,7 +1019,6 @@ set_global_assignment -name VHDL_FILE ../vhdl/fm_synth.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/fm_sel.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/fm_coder_7segment.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/dds.vhd
-set_global_assignment -name VHDL_FILE ../vhdl/codeccontroller.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/audio_control.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/bluetooth_adapter.vhd
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
@@ -1973,4 +1971,6 @@ set_instance_assignment -name IO_STANDARD LVDS -to HSMC_RX_D_N[3]
 set_instance_assignment -name IO_STANDARD LVDS -to HSMC_RX_D_N[4]
 set_instance_assignment -name IO_STANDARD LVDS -to HSMC_RX_D_N[5]
 set_instance_assignment -name IO_STANDARD LVDS -to HSMC_RX_D_N[6]
+set_global_assignment -name VHDL_FILE ../vhdl/set_audio_register.vhd
+set_global_assignment -name VHDL_FILE ../vhdl/audio_codec_register_table_pkg.vhd
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
