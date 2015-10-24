@@ -1,5 +1,5 @@
 Analysis & Synthesis report for syntehsizer
-Sat Oct 24 17:25:02 2015
+Sat Oct 24 17:57:34 2015
 Quartus II 64-Bit Version 14.0.0 Build 200 06/17/2014 SJ Full Version
 
 
@@ -23,10 +23,11 @@ Quartus II 64-Bit Version 14.0.0 Build 200 06/17/2014 SJ Full Version
  15. Multiplexer Restructuring Statistics (Restructuring Performed)
  16. Parameter Settings for User Entity Instance: infrastructure_block:inst_3|modulo_divider:divider_inst
  17. Port Connectivity Checks: "fm_synth:inst_7"
- 18. Port Connectivity Checks: "infrastructure_block:inst_3"
- 19. Post-Synthesis Netlist Statistics for Top Partition
- 20. Elapsed Time Per Partition
- 21. Analysis & Synthesis Messages
+ 18. Port Connectivity Checks: "i2s_master:inst_4|FSM_BCLK_COUNT:inst_0"
+ 19. Port Connectivity Checks: "infrastructure_block:inst_3"
+ 20. Post-Synthesis Netlist Statistics for Top Partition
+ 21. Elapsed Time Per Partition
+ 22. Analysis & Synthesis Messages
 
 
 
@@ -53,7 +54,7 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Oct 24 17:25:02 2015       ;
+; Analysis & Synthesis Status        ; Successful - Sat Oct 24 17:57:34 2015       ;
 ; Quartus II 64-Bit Version          ; 14.0.0 Build 200 06/17/2014 SJ Full Version ;
 ; Revision Name                      ; syntehsizer                                 ;
 ; Top-level Entity Name              ; top_level                                   ;
@@ -180,13 +181,13 @@ agreement for further details.
 +--------------------------------------------+-----------------+-----------------+------------------------------------------------------------------------------------------------------------------+---------+
 ; File Name with User-Entered Path           ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                                                     ; Library ;
 +--------------------------------------------+-----------------+-----------------+------------------------------------------------------------------------------------------------------------------+---------+
+; ../vhdl/fm_synth.vhd                       ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/fm_synth.vhd                       ;         ;
 ; ../vhdl/infrastructure_block.vhd           ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/infrastructure_block.vhd           ;         ;
 ; ../vhdl/set_audio_register.vhd             ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/set_audio_register.vhd             ;         ;
 ; ../vhdl/audio_codec_register_table_pkg.vhd ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/audio_codec_register_table_pkg.vhd ;         ;
 ; ../vhdl/tone_decoder.vhd                   ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/tone_decoder.vhd                   ;         ;
 ; ../vhdl/sync_block.vhd                     ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/sync_block.vhd                     ;         ;
 ; ../vhdl/modulo_divider.vhd                 ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/modulo_divider.vhd                 ;         ;
-; ../vhdl/audio_control.vhd                  ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/audio_control.vhd                  ;         ;
 ; ../vhdl/P2S.vhd                            ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/P2S.vhd                            ;         ;
 ; ../vhdl/S2P.vhd                            ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/S2P.vhd                            ;         ;
 ; ../vhdl/top_level.vhd                      ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/top_level.vhd                      ;         ;
@@ -194,9 +195,9 @@ agreement for further details.
 ; ../vhdl/i2s_master.vhd                     ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/i2s_master.vhd                     ;         ;
 ; ../vhdl/i2c_master.vhd                     ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/i2c_master.vhd                     ;         ;
 ; ../vhdl/FSM_BCLK_COUNT.vhd                 ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/FSM_BCLK_COUNT.vhd                 ;         ;
-; ../vhdl/fm_synth.vhd                       ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/fm_synth.vhd                       ;         ;
 ; ../vhdl/fm_sel.vhd                         ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/fm_sel.vhd                         ;         ;
 ; ../vhdl/dds.vhd                            ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/dds.vhd                            ;         ;
+; ../vhdl/link_audio_data.vhd                ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/link_audio_data.vhd                ;         ;
 +--------------------------------------------+-----------------+-----------------+------------------------------------------------------------------------------------------------------------------+---------+
 
 
@@ -225,7 +226,7 @@ agreement for further details.
 ; Embedded Multiplier 9-bit elements          ; 0                                                                ;
 ; Maximum fan-out node                        ; infrastructure_block:inst_3|modulo_divider:divider_inst|count[3] ;
 ; Maximum fan-out                             ; 201                                                              ;
-; Total fan-out                               ; 1908                                                             ;
+; Total fan-out                               ; 1907                                                             ;
 ; Average fan-out                             ; 3.12                                                             ;
 +---------------------------------------------+------------------------------------------------------------------+
 
@@ -404,6 +405,16 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------------+-------+----------+--------------+
 
 
++----------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "i2s_master:inst_4|FSM_BCLK_COUNT:inst_0"                                                  ;
++------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port       ; Type   ; Severity ; Details                                                                             ;
++------------+--------+----------+-------------------------------------------------------------------------------------+
+; adcl_shift ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; adcr_shift ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
 +-------------------------------------------------------------------------------------------------------------------------------+
 ; Port Connectivity Checks: "infrastructure_block:inst_3"                                                                       ;
 +---------------------+--------+----------+-------------------------------------------------------------------------------------+
@@ -428,11 +439,12 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     ENA CLR SLD       ; 2                           ;
 ;     plain             ; 4                           ;
 ; cycloneiii_io_obuf    ; 1                           ;
-; cycloneiii_lcell_comb ; 346                         ;
+; cycloneiii_lcell_comb ; 347                         ;
 ;     arith             ; 78                          ;
 ;         2 data inputs ; 64                          ;
 ;         3 data inputs ; 14                          ;
-;     normal            ; 268                         ;
+;     normal            ; 269                         ;
+;         0 data inputs ; 1                           ;
 ;         1 data inputs ; 7                           ;
 ;         2 data inputs ; 24                          ;
 ;         3 data inputs ; 66                          ;
@@ -458,9 +470,12 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 14.0.0 Build 200 06/17/2014 SJ Full Version
-    Info: Processing started: Sat Oct 24 17:24:57 2015
+    Info: Processing started: Sat Oct 24 17:57:30 2015
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off syntehsizer -c syntehsizer
 Info (11104): Parallel Compilation has detected 4 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 2 of the 2 physical processors detected instead.
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/fm_synth.vhd
+    Info (12022): Found design unit 1: fm_synth-rtl
+    Info (12023): Found entity 1: fm_synth
 Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/infrastructure_block.vhd
     Info (12022): Found design unit 1: infrastructure_block-rtl
     Info (12023): Found entity 1: infrastructure_block
@@ -478,9 +493,6 @@ Info (12021): Found 2 design units, including 1 entities, in source file /users/
 Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/modulo_divider.vhd
     Info (12022): Found design unit 1: modulo_divider-rtl
     Info (12023): Found entity 1: modulo_divider
-Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/audio_control.vhd
-    Info (12022): Found design unit 1: audio_control-rtl
-    Info (12023): Found entity 1: audio_control
 Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/p2s.vhd
     Info (12022): Found design unit 1: P2S-rtl
     Info (12023): Found entity 1: P2S
@@ -501,16 +513,17 @@ Info (12021): Found 2 design units, including 1 entities, in source file /users/
 Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/fsm_bclk_count.vhd
     Info (12022): Found design unit 1: FSM_BCLK_COUNT-rtl
     Info (12023): Found entity 1: FSM_BCLK_COUNT
-Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/fm_synth.vhd
-    Info (12022): Found design unit 1: fm_synth-rtl
-    Info (12023): Found entity 1: fm_synth
 Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/fm_sel.vhd
     Info (12022): Found design unit 1: fm_sel-rtl
     Info (12023): Found entity 1: fm_sel
 Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/dds.vhd
     Info (12022): Found design unit 1: dds-rtl
     Info (12023): Found entity 1: dds
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/link_audio_data.vhd
+    Info (12022): Found design unit 1: link_audio_data-rtl
+    Info (12023): Found entity 1: link_audio_data
 Info (12127): Elaborating entity "top_level" for the top level hierarchy
+Warning (10541): VHDL Signal Declaration warning at top_level.vhd(43): used implicit default value for signal "AUD_ADCLRCK" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
 Warning (10541): VHDL Signal Declaration warning at top_level.vhd(73): used implicit default value for signal "tl_fm_ratio" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
 Warning (10541): VHDL Signal Declaration warning at top_level.vhd(74): used implicit default value for signal "tl_fm_depth" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
 Info (12128): Elaborating entity "set_audio_register" for hierarchy "set_audio_register:inst_1"
@@ -520,10 +533,16 @@ Warning (10036): Verilog HDL or VHDL warning at infrastructure_block.vhd(31): ob
 Info (12128): Elaborating entity "modulo_divider" for hierarchy "infrastructure_block:inst_3|modulo_divider:divider_inst"
 Info (12128): Elaborating entity "sync_block" for hierarchy "infrastructure_block:inst_3|sync_block:sync_inst0"
 Info (12128): Elaborating entity "i2s_master" for hierarchy "i2s_master:inst_4"
+Warning (10036): Verilog HDL or VHDL warning at i2s_master.vhd(39): object "s_ADCL_shift" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at i2s_master.vhd(40): object "s_ADCR_shift" assigned a value but never read
 Info (12128): Elaborating entity "FSM_BCLK_COUNT" for hierarchy "i2s_master:inst_4|FSM_BCLK_COUNT:inst_0"
 Info (12128): Elaborating entity "P2S" for hierarchy "i2s_master:inst_4|P2S:inst_1"
 Info (12128): Elaborating entity "S2P" for hierarchy "i2s_master:inst_4|S2P:inst_3"
-Info (12128): Elaborating entity "audio_control" for hierarchy "audio_control:inst_5"
+Warning (10036): Verilog HDL or VHDL warning at S2P.vhd(36): object "l_zustand" assigned a value but never read
+Warning (10541): VHDL Signal Declaration warning at S2P.vhd(37): used implicit default value for signal "l_folgezustand" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10036): Verilog HDL or VHDL warning at S2P.vhd(38): object "r_zustand" assigned a value but never read
+Warning (10541): VHDL Signal Declaration warning at S2P.vhd(39): used implicit default value for signal "r_folgezustand" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Info (12128): Elaborating entity "link_audio_data" for hierarchy "link_audio_data:inst_5"
 Info (12128): Elaborating entity "tone_decoder" for hierarchy "tone_decoder:inst_6"
 Warning (10541): VHDL Signal Declaration warning at tone_decoder.vhd(39): used implicit default value for signal "N_CUM_fsm" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
 Warning (10036): Verilog HDL or VHDL warning at tone_decoder.vhd(41): object "s_stueck" assigned a value but never read
@@ -532,6 +551,8 @@ Info (12128): Elaborating entity "dds" for hierarchy "fm_synth:inst_7|dds:DDS_Mo
 Info (12128): Elaborating entity "fm_sel" for hierarchy "fm_synth:inst_7|fm_sel:FM_SEL_INST"
 Info (13000): Registers with preset signals will power-up high
 Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "AUD_ADCLRCK" is stuck at GND
 Info (286030): Timing-Driven Synthesis is running
 Info (17049): 27 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
@@ -550,10 +571,10 @@ Info (21057): Implemented 412 device resources after synthesis - the final resou
     Info (21059): Implemented 6 output pins
     Info (21060): Implemented 1 bidirectional pins
     Info (21061): Implemented 381 logic cells
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 14 warnings
-    Info: Peak virtual memory: 584 megabytes
-    Info: Processing ended: Sat Oct 24 17:25:02 2015
-    Info: Elapsed time: 00:00:05
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 23 warnings
+    Info: Peak virtual memory: 579 megabytes
+    Info: Processing ended: Sat Oct 24 17:57:34 2015
+    Info: Elapsed time: 00:00:04
     Info: Total CPU time (on all processors): 00:00:03
 
 

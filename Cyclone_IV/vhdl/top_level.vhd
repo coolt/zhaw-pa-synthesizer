@@ -114,23 +114,23 @@ end component;
 component i2s_master
 	port (	clk_12M							:in				std_logic;
 			i2s_reset_n						:in				std_logic;
-			ADCDAT_s						:in				std_logic;
+			--ADCDAT_s						:in				std_logic;
 			DACDAT_pl						:in				std_logic_vector(15 downto 0);
 			DACDAT_pr						:in				std_logic_vector(15 downto 0);
 			STROBE_O						:out			std_logic;	
 			BCLK							:out			std_logic;
 			DACDAT_s						:out			std_logic;
-			ADCDAT_pl						:out			std_logic_vector(15 downto 0);
-			ADCDAT_pr						:out			std_logic_vector(15 downto 0);
+			--ADCDAT_pl						:out			std_logic_vector(15 downto 0);
+			--ADCDAT_pr						:out			std_logic_vector(15 downto 0);
 			WS								:out			std_logic
 			
 		 );					
 end component;
 
 
-component audio_control
-	port (	ADCDAT_pl_i						:in 			std_logic_vector (15 downto 0);
-			ADCDAT_pr_i						:in 			std_logic_vector (15 downto 0);
+component link_audio_data
+	port (	--ADCDAT_pl_i						:in 			std_logic_vector (15 downto 0);
+			--ADCDAT_pr_i						:in 			std_logic_vector (15 downto 0);
 			DACDAT_pl_o						:out			std_logic_vector (15 downto 0);
 			DACDAT_pr_o						:out			std_logic_vector (15 downto 0);
 			dds_DATA_I						:in				std_logic_vector (15 downto 0)
@@ -203,20 +203,20 @@ inst_3 : infrastructure_block
 inst_4: i2s_master
 	port map (	clk_12M				=>		tl_clk_12M,
 				i2s_reset_n			=>		KEY(0),
-				ADCDAT_s			=>		AUD_ADCDAT,
+				--ADCDAT_s			=>		AUD_ADCDAT,
 				DACDAT_pl			=>		tl_DACDAT_pl,
 				DACDAT_pr			=>		tl_DACDAT_pr,
 				STROBE_O			=> 		tl_strobe,
 				BCLK				=>		tl_bclk,
 				DACDAT_s			=>		AUD_DACDAT,
-				ADCDAT_pl			=>		tl_ADCDAT_pl,
-				ADCDAT_pr			=>		tl_ADCDAT_pr,
+				--ADCDAT_pl			=>		tl_ADCDAT_pl,
+				--ADCDAT_pr			=>		tl_ADCDAT_pr,
 				WS					=>		tl_WS
 				);
 				
-inst_5 : audio_control
-	port map (	ADCDAT_pl_i			=>		tl_ADCDAT_pl,
-				ADCDAT_pr_i			=>		tl_ADCDAT_pr,
+inst_5 : link_audio_data
+	port map (	--ADCDAT_pl_i			=>		tl_ADCDAT_pl,
+				--ADCDAT_pr_i			=>		tl_ADCDAT_pr,
 				DACDAT_pl_o			=>		tl_DACDAT_pl,
 				DACDAT_pr_o			=>		tl_DACDAT_pr,
 				dds_DATA_I			=>		tl_dacdat_g_o
@@ -248,7 +248,7 @@ inst_7: fm_synth
 --------------------------------------------------
 -- Assign signals
 --------------------------------------------------	
-AUD_ADCLRCK <= 	tl_WS;
+--AUD_ADCLRCK <= 	tl_WS;
 AUD_DACLRCK	<= 	tl_WS;
 AUD_XCK		<=	tl_clk_12M;
 AUD_BCLK	<=	tl_bclk;

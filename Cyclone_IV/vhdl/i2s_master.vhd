@@ -11,22 +11,20 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 library work;
---use work.reg_table_pkg.all;
 use work.audio_codec_register_table_pkg.all;
 
 
 entity i2s_master is
 	port (		clk_12M			:in			std_logic;
-				i2s_reset_n		:in			std_logic;
-				--INIT_N_i		:in			std_logic;	
-				ADCDAT_s		:in			std_logic;
+				i2s_reset_n		:in			std_logic;	
+				--ADCDAT_s		:in			std_logic;
 				DACDAT_pl		:in			std_logic_vector(15 downto 0);
 				DACDAT_pr		:in			std_logic_vector(15 downto 0);
 				STROBE_O			:out		std_logic;	--port wurde von STROBE-o auf STROBE geändert!
 				BCLK			:out		std_logic;
 				DACDAT_s		:out		std_logic;
-				ADCDAT_pl		:out		std_logic_vector(15 downto 0);
-				ADCDAT_pr		:out		std_logic_vector(15 downto 0);
+				--ADCDAT_pl		:out		std_logic_vector(15 downto 0);
+				--ADCDAT_pr		:out		std_logic_vector(15 downto 0);
 				WS				:out		std_logic	--??? Habe diesen port so beschrieben wie auf Diagramm, bei uns: DACLRC_s und ADCLRC_s
 		 );												--ist nach mir nicht logisch!!!
 end i2s_master;
@@ -74,12 +72,12 @@ end component;
 component S2P is
 	port (	clk					:in			std_logic;	--clk_12M
 			reset_n				:in			std_logic;
-			BCLK				:in			std_logic;
-			ADCL_shift			:in			std_logic;
-			ADCR_shift			:in			std_logic;
-			ADCDAT_s_i			:in			std_logic;
-			ADCDAT_pl_o			:out		std_logic_vector(15 downto 0);
-			ADCDAT_pr_o			:out		std_logic_vector(15 downto 0)
+			BCLK				:in			std_logic
+			--ADCL_shift			:in			std_logic;
+			--ADCR_shift			:in			std_logic;
+			--ADCDAT_s_i			:in			std_logic;
+			--ADCDAT_pl_o			:out		std_logic_vector(15 downto 0);
+			--ADCDAT_pr_o			:out		std_logic_vector(15 downto 0)
 				
 		  );
 end component;
@@ -117,12 +115,12 @@ inst_1: P2S
 inst_3 : S2P
 	port map (	clk			=>		clk_12M,
 				reset_n		=>		i2s_reset_n,
-				BCLK		=>		s_BCLK,
-				ADCL_shift	=>		s_ADCL_shift,
-				ADCR_shift	=>		s_ADCR_shift,
-				ADCDAT_s_i	=>		ADCDAT_s,
-				ADCDAT_pl_o	=>		ADCDAT_pl,
-				ADCDAT_pr_o	=>		ADCDAT_pr
+				BCLK		=>		s_BCLK
+				--ADCL_shift	=>		s_ADCL_shift,
+				--ADCR_shift	=>		s_ADCR_shift,
+				--ADCDAT_s_i	=>		ADCDAT_s,
+				--ADCDAT_pl_o	=>		ADCDAT_pl,
+				--ADCDAT_pr_o	=>		ADCDAT_pr
 			 );
 			 
 --------------------------------------------------
