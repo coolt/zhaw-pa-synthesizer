@@ -1952,6 +1952,8 @@ set_instance_assignment -name IO_STANDARD LVDS -to HSMC_RX_D_N[3]
 set_instance_assignment -name IO_STANDARD LVDS -to HSMC_RX_D_N[4]
 set_instance_assignment -name IO_STANDARD LVDS -to HSMC_RX_D_N[5]
 set_instance_assignment -name IO_STANDARD LVDS -to HSMC_RX_D_N[6]
+set_global_assignment -name VHDL_FILE ../vhdl/parallel_to_seriell.vhd
+set_global_assignment -name VHDL_FILE ../vhdl/fsm_I2S.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/fm_synth.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/infrastructure_block.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/set_audio_register.vhd
@@ -1959,13 +1961,10 @@ set_global_assignment -name VHDL_FILE ../vhdl/audio_codec_register_table_pkg.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/tone_decoder.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/sync_block.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/modulo_divider.vhd
-set_global_assignment -name VHDL_FILE ../vhdl/P2S.vhd
-set_global_assignment -name VHDL_FILE ../vhdl/S2P.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/top_level.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/tone_gen_pkg.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/i2s_master.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/i2c_master.vhd
-set_global_assignment -name VHDL_FILE ../vhdl/FSM_BCLK_COUNT.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/fm_sel.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/dds.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/link_audio_data.vhd

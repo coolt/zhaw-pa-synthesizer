@@ -1,0 +1,29 @@
+Clean up code
+-------------
+- I2S Master
+  - Alle analog-Auskommentierungen weg
+  - Alle analog-Signale löschen
+
+- FSM_BCLK_COUNT 
+  ERSETZEN durch:
+  fsm_I2S
+  
+  
+- P2S
+  ERSETZEN durch
+  parallel_to_seriell
+  
+  Geändert wurde: 
+  WS_dly  -> change_channel
+
+
+- infrastrucutre block 
+  ERSETZEN DURCHi
+  - 
+  - in 2 blocks
+  
+
+  
+  
+- Component S2P LÖSCHEN
+

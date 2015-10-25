@@ -7,23 +7,8 @@
 -- extern audio codec recives tones trough i2s and gives tone out
 -- audio codec is controlled by setting registers trough i2c
 --
---------------------------------------------------
-
--- Synthesizer Control by Keys
 -- Key 0: Reset
--- Key 1: Volume up
--- Key 2: Volume down
--- Key 3: ?
-
-
-
-
--- Bedienung: 
---			  SW(0-12)	= Töne per Tastatur (eine Oktave) wenn SW(13)='0'
---			  KEY(0) 	= Reset
---			  KEY(1) 	= FM-Ratio aendern
---			  KEY(2) 	= FM-Depth aendern
-
+--------------------------------------------------
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -129,7 +114,7 @@ end component;
 
 
 component link_audio_data
-	port (	--ADCDAT_pl_i						:in 			std_logic_vector (15 downto 0);
+	port (	--DCDAT_pl_i						:in 			std_logic_vector (15 downto 0);
 			--ADCDAT_pr_i						:in 			std_logic_vector (15 downto 0);
 			DACDAT_pl_o						:out			std_logic_vector (15 downto 0);
 			DACDAT_pr_o						:out			std_logic_vector (15 downto 0);

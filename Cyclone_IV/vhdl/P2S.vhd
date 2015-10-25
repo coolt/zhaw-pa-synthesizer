@@ -20,7 +20,7 @@ entity P2S is
 				reset_n					:in			std_logic;
 				BCLK					:in			std_logic;
 				DAC_load				:in			std_logic;
-				WS_dly					:in			std_logic;
+				change_channel			:in			std_logic;
 				DACDAT_pl_i				:in			std_logic_vector(15 downto 0);
 				DACDAT_pr_i				:in			std_logic_vector(15 downto 0);
 				DACDAT_s_o				:out		std_logic
@@ -53,12 +53,12 @@ end process flip_flops_l;
 
 
 --Eingangslogik Kanal links
-einganglog_l: process (WS_dly, DAC_load, BCLK, l_zustand, DACDAT_pl_i)
+einganglog_l: process (all)
 begin
 	if DAC_load= '1' then
 		l_folgezustand <= DACDAT_pl_i;
 	--Sicherstellung das mit dem fallenden BCLK geschoben wird
-	elsif WS_dly ='0' AND BCLK='1' then
+	elsif change_channel ='0' AND BCLK='1' then
 	--Bits schieben
 		l_folgezustand <= l_zustand(14 downto 0) &'0';
 	else l_folgezustand <= l_zustand;
@@ -79,12 +79,12 @@ end if;
 end process flip_flops_r;
 
 --Eingangslogik Kanal rechts
-einganglogik_r: process (WS_dly, DAC_load, BCLK, r_zustand, DACDAT_pr_i)
+einganglogik_r: process (all)
 begin
 	if DAC_load = '1' then	
 		r_folgezustand <= DACDAT_pr_i;
 	--Sicherstellung das mit dem fallenden BCLK geschoben wird
-	elsif WS_dly = '1' AND BCLK='1' then
+	elsif change_channel = '1' AND BCLK='1' then
 	--Bits schieben
 		r_folgezustand <= r_zustand(14 downto 0) &'0';
 	else r_folgezustand <= r_zustand;
@@ -95,9 +95,9 @@ end process einganglogik_r;
 
 
 --Ausgangslogik Kanal rechts&links (funktioniert als Multiplexer)
-ausgangslog_lr: process (l_zustand, r_zustand, WS_dly)
+ausgangslog_lr: process (all)
 begin
-	if WS_dly ='0' then
+	if change_channel ='0' then
 		DACDAT_s_o  <= l_zustand(15);
 	else DACDAT_s_o <= r_zustand(15);
 	end if;

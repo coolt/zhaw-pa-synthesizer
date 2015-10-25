@@ -1,5 +1,5 @@
 Analysis & Synthesis report for syntehsizer
-Sat Oct 24 17:57:34 2015
+Sun Oct 25 07:55:46 2015
 Quartus II 64-Bit Version 14.0.0 Build 200 06/17/2014 SJ Full Version
 
 
@@ -13,7 +13,7 @@ Quartus II 64-Bit Version 14.0.0 Build 200 06/17/2014 SJ Full Version
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. State Machine - |top_level|i2s_master:inst_4|FSM_BCLK_COUNT:inst_0|zustand
+  8. State Machine - |top_level|i2s_master:inst_4|fsm_I2S:inst_0|zustand
   9. State Machine - |top_level|i2c_master:inst_2|fsm_state
  10. State Machine - |top_level|set_audio_register:inst_1|zustand
  11. Registers Removed During Synthesis
@@ -23,7 +23,7 @@ Quartus II 64-Bit Version 14.0.0 Build 200 06/17/2014 SJ Full Version
  15. Multiplexer Restructuring Statistics (Restructuring Performed)
  16. Parameter Settings for User Entity Instance: infrastructure_block:inst_3|modulo_divider:divider_inst
  17. Port Connectivity Checks: "fm_synth:inst_7"
- 18. Port Connectivity Checks: "i2s_master:inst_4|FSM_BCLK_COUNT:inst_0"
+ 18. Port Connectivity Checks: "i2s_master:inst_4|fsm_I2S:inst_0"
  19. Port Connectivity Checks: "infrastructure_block:inst_3"
  20. Post-Synthesis Netlist Statistics for Top Partition
  21. Elapsed Time Per Partition
@@ -54,7 +54,7 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Oct 24 17:57:34 2015       ;
+; Analysis & Synthesis Status        ; Successful - Sun Oct 25 07:55:46 2015       ;
 ; Quartus II 64-Bit Version          ; 14.0.0 Build 200 06/17/2014 SJ Full Version ;
 ; Revision Name                      ; syntehsizer                                 ;
 ; Top-level Entity Name              ; top_level                                   ;
@@ -181,6 +181,8 @@ agreement for further details.
 +--------------------------------------------+-----------------+-----------------+------------------------------------------------------------------------------------------------------------------+---------+
 ; File Name with User-Entered Path           ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                                                     ; Library ;
 +--------------------------------------------+-----------------+-----------------+------------------------------------------------------------------------------------------------------------------+---------+
+; ../vhdl/parallel_to_seriell.vhd            ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/parallel_to_seriell.vhd            ;         ;
+; ../vhdl/fsm_I2S.vhd                        ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/fsm_I2S.vhd                        ;         ;
 ; ../vhdl/fm_synth.vhd                       ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/fm_synth.vhd                       ;         ;
 ; ../vhdl/infrastructure_block.vhd           ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/infrastructure_block.vhd           ;         ;
 ; ../vhdl/set_audio_register.vhd             ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/set_audio_register.vhd             ;         ;
@@ -188,13 +190,10 @@ agreement for further details.
 ; ../vhdl/tone_decoder.vhd                   ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/tone_decoder.vhd                   ;         ;
 ; ../vhdl/sync_block.vhd                     ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/sync_block.vhd                     ;         ;
 ; ../vhdl/modulo_divider.vhd                 ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/modulo_divider.vhd                 ;         ;
-; ../vhdl/P2S.vhd                            ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/P2S.vhd                            ;         ;
-; ../vhdl/S2P.vhd                            ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/S2P.vhd                            ;         ;
 ; ../vhdl/top_level.vhd                      ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/top_level.vhd                      ;         ;
 ; ../vhdl/tone_gen_pkg.vhd                   ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/tone_gen_pkg.vhd                   ;         ;
 ; ../vhdl/i2s_master.vhd                     ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/i2s_master.vhd                     ;         ;
 ; ../vhdl/i2c_master.vhd                     ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/i2c_master.vhd                     ;         ;
-; ../vhdl/FSM_BCLK_COUNT.vhd                 ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/FSM_BCLK_COUNT.vhd                 ;         ;
 ; ../vhdl/fm_sel.vhd                         ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/fm_sel.vhd                         ;         ;
 ; ../vhdl/dds.vhd                            ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/dds.vhd                            ;         ;
 ; ../vhdl/link_audio_data.vhd                ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/link_audio_data.vhd                ;         ;
@@ -241,8 +240,8 @@ agreement for further details.
 ;       |dds:DDS_Carrier_INST|        ; 51 (51)           ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|fm_synth:inst_7|dds:DDS_Carrier_INST                    ; work         ;
 ;    |i2c_master:inst_2|              ; 77 (77)           ; 51 (51)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|i2c_master:inst_2                                       ; work         ;
 ;    |i2s_master:inst_4|              ; 108 (0)           ; 70 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|i2s_master:inst_4                                       ; work         ;
-;       |FSM_BCLK_COUNT:inst_0|       ; 55 (55)           ; 38 (38)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|i2s_master:inst_4|FSM_BCLK_COUNT:inst_0                 ; work         ;
-;       |P2S:inst_1|                  ; 53 (53)           ; 32 (32)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|i2s_master:inst_4|P2S:inst_1                            ; work         ;
+;       |fsm_I2S:inst_0|              ; 55 (55)           ; 38 (38)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|i2s_master:inst_4|fsm_I2S:inst_0                        ; work         ;
+;       |parallel_to_seriell:inst_1|  ; 53 (53)           ; 32 (32)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|i2s_master:inst_4|parallel_to_seriell:inst_1            ; work         ;
 ;    |infrastructure_block:inst_3|    ; 4 (0)             ; 32 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:inst_3                             ; work         ;
 ;       |modulo_divider:divider_inst| ; 4 (4)             ; 4 (4)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:inst_3|modulo_divider:divider_inst ; work         ;
 ;       |sync_block:sync_inst0|       ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |top_level|infrastructure_block:inst_3|sync_block:sync_inst0       ; work         ;
@@ -267,16 +266,16 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 Encoding Type:  One-Hot
 +----------------------------------------------------------------------------------------------------------------------+
-; State Machine - |top_level|i2s_master:inst_4|FSM_BCLK_COUNT:inst_0|zustand                                           ;
-+---------------------+---------------------+----------------+---------------------+------------------+----------------+
-; Name                ; zustand.shift_adc_R ; zustand.hold_L ; zustand.shift_adc_L ; zustand.load_dac ; zustand.hold_R ;
-+---------------------+---------------------+----------------+---------------------+------------------+----------------+
-; zustand.hold_R      ; 0                   ; 0              ; 0                   ; 0                ; 0              ;
-; zustand.load_dac    ; 0                   ; 0              ; 0                   ; 1                ; 1              ;
-; zustand.shift_adc_L ; 0                   ; 0              ; 1                   ; 0                ; 1              ;
-; zustand.hold_L      ; 0                   ; 1              ; 0                   ; 0                ; 1              ;
-; zustand.shift_adc_R ; 1                   ; 0              ; 0                   ; 0                ; 1              ;
-+---------------------+---------------------+----------------+---------------------+------------------+----------------+
+; State Machine - |top_level|i2s_master:inst_4|fsm_I2S:inst_0|zustand                                                  ;
++---------------------+---------------------+---------------------+----------------+------------------+----------------+
+; Name                ; zustand.shift_adc_R ; zustand.shift_adc_L ; zustand.hold_L ; zustand.load_dac ; zustand.hold_R ;
++---------------------+---------------------+---------------------+----------------+------------------+----------------+
+; zustand.hold_R      ; 0                   ; 0                   ; 0              ; 0                ; 0              ;
+; zustand.load_dac    ; 0                   ; 0                   ; 0              ; 1                ; 1              ;
+; zustand.hold_L      ; 0                   ; 0                   ; 1              ; 0                ; 1              ;
+; zustand.shift_adc_L ; 0                   ; 1                   ; 0              ; 0                ; 1              ;
+; zustand.shift_adc_R ; 1                   ; 0                   ; 0              ; 0                ; 1              ;
++---------------------+---------------------+---------------------+----------------+------------------+----------------+
 
 
 Encoding Type:  One-Hot
@@ -308,19 +307,19 @@ Encoding Type:  One-Hot
 +---------------------+--------------+---------------------+--------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                                                ;
-+------------------------------------------------------+------------------------------------------------------------+
-; Register name                                        ; Reason for Removal                                         ;
-+------------------------------------------------------+------------------------------------------------------------+
-; fm_synth:inst_7|fm_sel:FM_SEL_INST|reg_mod_M[0,1,15] ; Stuck at GND due to stuck port data_in                     ;
-; fm_synth:inst_7|dds:DDS_Modulator|count[0]           ; Merged with fm_synth:inst_7|dds:DDS_Modulator|count[1]     ;
-; fm_synth:inst_7|dds:DDS_Modulator|count[1]           ; Stuck at GND due to stuck port data_in                     ;
-; i2c_master:inst_2|clk_divider[0]                     ; Merged with i2s_master:inst_4|FSM_BCLK_COUNT:inst_0|s_bclk ;
-; fm_synth:inst_7|fm_sel:FM_SEL_INST|reg_mod_M[2..14]  ; Lost fanout                                                ;
-; fm_synth:inst_7|dds:DDS_Modulator|count[2..15]       ; Lost fanout                                                ;
-; Total Number of Removed Registers = 33               ;                                                            ;
-+------------------------------------------------------+------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                            ;
++------------------------------------------------------+--------------------------------------------------------+
+; Register name                                        ; Reason for Removal                                     ;
++------------------------------------------------------+--------------------------------------------------------+
+; fm_synth:inst_7|fm_sel:FM_SEL_INST|reg_mod_M[0,1,15] ; Stuck at GND due to stuck port data_in                 ;
+; fm_synth:inst_7|dds:DDS_Modulator|count[0]           ; Merged with fm_synth:inst_7|dds:DDS_Modulator|count[1] ;
+; fm_synth:inst_7|dds:DDS_Modulator|count[1]           ; Stuck at GND due to stuck port data_in                 ;
+; i2c_master:inst_2|clk_divider[0]                     ; Merged with i2s_master:inst_4|fsm_I2S:inst_0|s_bclk    ;
+; fm_synth:inst_7|fm_sel:FM_SEL_INST|reg_mod_M[2..14]  ; Lost fanout                                            ;
+; fm_synth:inst_7|dds:DDS_Modulator|count[2..15]       ; Lost fanout                                            ;
+; Total Number of Removed Registers = 33               ;                                                        ;
++------------------------------------------------------+--------------------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------------+
@@ -367,22 +366,22 @@ Encoding Type:  One-Hot
 +----------------------------------------+---------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                          ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------+
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |top_level|fm_synth:inst_7|dds:DDS_Carrier_INST|count[13] ;
-; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |top_level|i2s_master:inst_4|P2S:inst_1|r_zustand[11]     ;
-; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |top_level|i2s_master:inst_4|P2S:inst_1|l_zustand[1]      ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 2 LEs                ; 6 LEs                  ; Yes        ; |top_level|i2c_master:inst_2|byte_count[0]                ;
-; 6:1                ; 3 bits    ; 12 LEs        ; 3 LEs                ; 9 LEs                  ; Yes        ; |top_level|i2c_master:inst_2|bit_count[2]                 ;
-; 8:1                ; 10 bits   ; 50 LEs        ; 10 LEs               ; 40 LEs                 ; Yes        ; |top_level|i2c_master:inst_2|data[16]                     ;
-; 8:1                ; 9 bits    ; 45 LEs        ; 9 LEs                ; 36 LEs                 ; Yes        ; |top_level|i2c_master:inst_2|data[15]                     ;
-; 13:1               ; 2 bits    ; 16 LEs        ; 6 LEs                ; 10 LEs                 ; Yes        ; |top_level|i2c_master:inst_2|data[3]                      ;
-; 9:1                ; 2 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; No         ; |top_level|i2c_master:inst_2|Selector30                   ;
-; 10:1               ; 2 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; No         ; |top_level|i2c_master:inst_2|Selector31                   ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                      ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------+
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |top_level|fm_synth:inst_7|dds:DDS_Carrier_INST|count[13]             ;
+; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |top_level|i2s_master:inst_4|parallel_to_seriell:inst_1|r_zustand[11] ;
+; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |top_level|i2s_master:inst_4|parallel_to_seriell:inst_1|l_zustand[1]  ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 2 LEs                ; 6 LEs                  ; Yes        ; |top_level|i2c_master:inst_2|byte_count[0]                            ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 3 LEs                ; 9 LEs                  ; Yes        ; |top_level|i2c_master:inst_2|bit_count[2]                             ;
+; 8:1                ; 10 bits   ; 50 LEs        ; 10 LEs               ; 40 LEs                 ; Yes        ; |top_level|i2c_master:inst_2|data[16]                                 ;
+; 8:1                ; 9 bits    ; 45 LEs        ; 9 LEs                ; 36 LEs                 ; Yes        ; |top_level|i2c_master:inst_2|data[15]                                 ;
+; 13:1               ; 2 bits    ; 16 LEs        ; 6 LEs                ; 10 LEs                 ; Yes        ; |top_level|i2c_master:inst_2|data[3]                                  ;
+; 9:1                ; 2 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; No         ; |top_level|i2c_master:inst_2|Selector30                               ;
+; 10:1               ; 2 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; No         ; |top_level|i2c_master:inst_2|Selector31                               ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------+
 
 
 +------------------------------------------------------------------------------------------------------+
@@ -406,7 +405,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +----------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "i2s_master:inst_4|FSM_BCLK_COUNT:inst_0"                                                  ;
+; Port Connectivity Checks: "i2s_master:inst_4|fsm_I2S:inst_0"                                                         ;
 +------------+--------+----------+-------------------------------------------------------------------------------------+
 ; Port       ; Type   ; Severity ; Details                                                                             ;
 +------------+--------+----------+-------------------------------------------------------------------------------------+
@@ -470,9 +469,15 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 14.0.0 Build 200 06/17/2014 SJ Full Version
-    Info: Processing started: Sat Oct 24 17:57:30 2015
+    Info: Processing started: Sun Oct 25 07:55:41 2015
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off syntehsizer -c syntehsizer
 Info (11104): Parallel Compilation has detected 4 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 2 of the 2 physical processors detected instead.
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/parallel_to_seriell.vhd
+    Info (12022): Found design unit 1: parallel_to_seriell-rtl
+    Info (12023): Found entity 1: parallel_to_seriell
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/fsm_i2s.vhd
+    Info (12022): Found design unit 1: fsm_I2S-rtl
+    Info (12023): Found entity 1: fsm_I2S
 Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/fm_synth.vhd
     Info (12022): Found design unit 1: fm_synth-rtl
     Info (12023): Found entity 1: fm_synth
@@ -493,12 +498,6 @@ Info (12021): Found 2 design units, including 1 entities, in source file /users/
 Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/modulo_divider.vhd
     Info (12022): Found design unit 1: modulo_divider-rtl
     Info (12023): Found entity 1: modulo_divider
-Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/p2s.vhd
-    Info (12022): Found design unit 1: P2S-rtl
-    Info (12023): Found entity 1: P2S
-Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/s2p.vhd
-    Info (12022): Found design unit 1: S2P-rtl
-    Info (12023): Found entity 1: S2P
 Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/top_level.vhd
     Info (12022): Found design unit 1: top_level-rtl
     Info (12023): Found entity 1: top_level
@@ -510,9 +509,6 @@ Info (12021): Found 2 design units, including 1 entities, in source file /users/
 Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/i2c_master.vhd
     Info (12022): Found design unit 1: i2c_master-rtl
     Info (12023): Found entity 1: i2c_master
-Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/fsm_bclk_count.vhd
-    Info (12022): Found design unit 1: FSM_BCLK_COUNT-rtl
-    Info (12023): Found entity 1: FSM_BCLK_COUNT
 Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/fm_sel.vhd
     Info (12022): Found design unit 1: fm_sel-rtl
     Info (12023): Found entity 1: fm_sel
@@ -523,9 +519,9 @@ Info (12021): Found 2 design units, including 1 entities, in source file /users/
     Info (12022): Found design unit 1: link_audio_data-rtl
     Info (12023): Found entity 1: link_audio_data
 Info (12127): Elaborating entity "top_level" for the top level hierarchy
-Warning (10541): VHDL Signal Declaration warning at top_level.vhd(43): used implicit default value for signal "AUD_ADCLRCK" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at top_level.vhd(73): used implicit default value for signal "tl_fm_ratio" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at top_level.vhd(74): used implicit default value for signal "tl_fm_depth" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at top_level.vhd(28): used implicit default value for signal "AUD_ADCLRCK" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at top_level.vhd(58): used implicit default value for signal "tl_fm_ratio" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10541): VHDL Signal Declaration warning at top_level.vhd(59): used implicit default value for signal "tl_fm_depth" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
 Info (12128): Elaborating entity "set_audio_register" for hierarchy "set_audio_register:inst_1"
 Info (12128): Elaborating entity "i2c_master" for hierarchy "i2c_master:inst_2"
 Info (12128): Elaborating entity "infrastructure_block" for hierarchy "infrastructure_block:inst_3"
@@ -535,13 +531,8 @@ Info (12128): Elaborating entity "sync_block" for hierarchy "infrastructure_bloc
 Info (12128): Elaborating entity "i2s_master" for hierarchy "i2s_master:inst_4"
 Warning (10036): Verilog HDL or VHDL warning at i2s_master.vhd(39): object "s_ADCL_shift" assigned a value but never read
 Warning (10036): Verilog HDL or VHDL warning at i2s_master.vhd(40): object "s_ADCR_shift" assigned a value but never read
-Info (12128): Elaborating entity "FSM_BCLK_COUNT" for hierarchy "i2s_master:inst_4|FSM_BCLK_COUNT:inst_0"
-Info (12128): Elaborating entity "P2S" for hierarchy "i2s_master:inst_4|P2S:inst_1"
-Info (12128): Elaborating entity "S2P" for hierarchy "i2s_master:inst_4|S2P:inst_3"
-Warning (10036): Verilog HDL or VHDL warning at S2P.vhd(36): object "l_zustand" assigned a value but never read
-Warning (10541): VHDL Signal Declaration warning at S2P.vhd(37): used implicit default value for signal "l_folgezustand" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10036): Verilog HDL or VHDL warning at S2P.vhd(38): object "r_zustand" assigned a value but never read
-Warning (10541): VHDL Signal Declaration warning at S2P.vhd(39): used implicit default value for signal "r_folgezustand" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Info (12128): Elaborating entity "fsm_I2S" for hierarchy "i2s_master:inst_4|fsm_I2S:inst_0"
+Info (12128): Elaborating entity "parallel_to_seriell" for hierarchy "i2s_master:inst_4|parallel_to_seriell:inst_1"
 Info (12128): Elaborating entity "link_audio_data" for hierarchy "link_audio_data:inst_5"
 Info (12128): Elaborating entity "tone_decoder" for hierarchy "tone_decoder:inst_6"
 Warning (10541): VHDL Signal Declaration warning at tone_decoder.vhd(39): used implicit default value for signal "N_CUM_fsm" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
@@ -571,10 +562,10 @@ Info (21057): Implemented 412 device resources after synthesis - the final resou
     Info (21059): Implemented 6 output pins
     Info (21060): Implemented 1 bidirectional pins
     Info (21061): Implemented 381 logic cells
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 23 warnings
-    Info: Peak virtual memory: 579 megabytes
-    Info: Processing ended: Sat Oct 24 17:57:34 2015
-    Info: Elapsed time: 00:00:04
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 19 warnings
+    Info: Peak virtual memory: 590 megabytes
+    Info: Processing ended: Sun Oct 25 07:55:46 2015
+    Info: Elapsed time: 00:00:05
     Info: Total CPU time (on all processors): 00:00:03
 
 

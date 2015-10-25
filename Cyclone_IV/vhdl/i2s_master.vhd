@@ -47,40 +47,28 @@ signal		s_real_strobe:	std_logic;
 -- Components declaration
 --------------------------------------------------
 
-component FSM_BCLK_COUNT
+component fsm_I2S
 	port(   clk,reset_n						:in      std_logic;
-			--init_n     						:in      std_logic;
-			WS, WS_dly			    		:out     std_logic;
+			WS, change_channel			    		:out     std_logic;
 			BCLK, DAC_load	 				:out     std_logic;
 			ADCL_shift, ADCR_shift			:out 	 std_logic;
 			real_strobe						:out		std_logic
 		);
 end component;
 
-component P2S is
+component parallel_to_seriell is
 	port( 	clk					:in			std_logic;	--clk_12M
 			reset_n				:in			std_logic;
 			BCLK				:in			std_logic;
 			DAC_load			:in			std_logic;
-			WS_dly				:in			std_logic;
+			change_channel	    :in			std_logic;
 			DACDAT_pl_i			:in			std_logic_vector(15 downto 0);
 			DACDAT_pr_i			:in			std_logic_vector(15 downto 0);
-			DACDAT_s_o				:out		std_logic
+			DACDAT_s_o			:out		std_logic
 		 );
 end component;
 
-component S2P is
-	port (	clk					:in			std_logic;	--clk_12M
-			reset_n				:in			std_logic;
-			BCLK				:in			std_logic
-			--ADCL_shift			:in			std_logic;
-			--ADCR_shift			:in			std_logic;
-			--ADCDAT_s_i			:in			std_logic;
-			--ADCDAT_pl_o			:out		std_logic_vector(15 downto 0);
-			--ADCDAT_pr_o			:out		std_logic_vector(15 downto 0)
-				
-		  );
-end component;
+
 
 
 begin
@@ -88,40 +76,30 @@ begin
 -- instanciation of components
 --------------------------------------------------
 
-inst_0: FSM_BCLK_COUNT
+inst_0: fsm_I2S
 	port map (	clk			=>		clk_12M,
 				reset_n		=>		i2s_reset_n,
 				WS			=>		WS_o,
-				WS_dly		=>		s_WS_dly,
+				change_channel		=>		s_WS_dly,
 				BCLK		=>		s_BCLK,
 				DAC_load	=>		s_DAC_load,
 				ADCL_shift	=>		s_ADCL_shift,
 				ADCR_shift	=>		s_ADCR_shift,
-				--init_n		=> 	INIT_N_i,
 				real_strobe =>		s_real_strobe
 			 );
 
-inst_1: P2S
+inst_1: parallel_to_seriell
 	port map (  clk			=>		clk_12M,
 				reset_n		=>		i2s_reset_n,
 				BCLK		=>		s_BCLK,
 				DAC_load	=>		s_DAC_load,
-				WS_dly		=>		s_WS_dly,
+				change_channel	=>		s_WS_dly,
 				DACDAT_pl_i =>		DACDAT_pl,
 				DACDAT_pr_i =>		DACDAT_pr,
 				DACDAT_s_o		=>		s_DACDAT_s_o
 			  );
 
-inst_3 : S2P
-	port map (	clk			=>		clk_12M,
-				reset_n		=>		i2s_reset_n,
-				BCLK		=>		s_BCLK
-				--ADCL_shift	=>		s_ADCL_shift,
-				--ADCR_shift	=>		s_ADCR_shift,
-				--ADCDAT_s_i	=>		ADCDAT_s,
-				--ADCDAT_pl_o	=>		ADCDAT_pl,
-				--ADCDAT_pr_o	=>		ADCDAT_pr
-			 );
+
 			 
 --------------------------------------------------
 -- Assign signals
