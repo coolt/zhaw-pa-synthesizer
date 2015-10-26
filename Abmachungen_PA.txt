@@ -1,0 +1,27 @@
+-          Midi Interface for Keyboard für Polyphonie nach Konzept von gelk
+o   10 Frequenz Control Ausgänge zur Steuerung der Tonhöhe des Generators
+o   10 On/Off Ausgänge Ton on/off
+o   UART wird geliefert von gelk
+o   VHDL wird von Grund auf neu erstellt.
+-          10 DDS implementieren und mit Mischer Mischen
+-          Script basierte Testbench. Testbench erzeugt serielle Midi Dtaen, so wie sie auf dem DIN Stecker vorkommen (logisch)
+-          Testbench liest eine Testscript Datei ein, in welcher die Tastendrücke eines Keyboards abgebildet werden können. Midi Poliphony Spec muss durch die Testbench unterstützt werden können. Velocity muss nicht unterstützt werden.
+-          FM Modulation – Tetstbench im Matlab
+-          Kein VHDL code ohne Testbench.
+-          Block level testbench. Unit Tests.
+ 
+Abgrenzung:
+-          Keine Hüllkurve
+-          Keine Ausgabe der Velocity aud Midi controller
+-          Kein Bluetotth
+ 
+Zeitplan:
+- 2.5 Wochen Midi Controller incl. 10 DDS
+                - 2.5 Wochen FM Synthese
+ 
+Unterstützung:
+-          Midi Controller/gelk
+-          FM-Synthese/rosn
+ 
+Falls Midi nicht zum geplanten Zeitpunkt fertig wird, wird FM-zurückgestellt. Alle oben genannten Punkte sind Pflicht.
+Nicht Fertigstellung hat Einfluss auf die Benotung.

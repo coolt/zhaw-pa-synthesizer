@@ -1,0 +1,19 @@
+To Do
+-----
+
+- Midi-Empfänger
+- Midi-Controller
+- Midi-Buffer
+
+- Midi-Polyphonie Protokoll verstehen
+- FSM Polyphonie
+
+
+
+- Tondekoder für Midi-Tonnummer
+- Bautstein zum Berechnen f_sb
+- DDS für Sidebands
+- VCO implementieren
+- Controller: Amplituden-Regelung (für jede Frequenz)
+- Controller: Signal zusammensetzen
+- Parallel zu seriell-Wandler
