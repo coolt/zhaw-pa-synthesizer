@@ -1,0 +1,15 @@
+Synthesizer Original (Hans)
+
+-- Bedienung: SW(17) 	= Codeccontroll ein/aus
+--			  SW(16) 	= Analog Loop / Digital Loop : Settings fuer den Codeccontroller -> '1' = Digital 
+--			  SW(15) 	= I2S ein/aus  -'1' = An
+--			  SW(14) 	= Mode audio_controll ( '0': Signale von Synthesizer,  '1': Digitalloop) -> '1' = von SW
+--			  SW(13) 	= '0': Töne per Tastatur, '1': Melodie
+--			  SW(12) 	= Melodie: Mozart, kleine Nachtmusik
+--			  SW(11) 	= Melodie: Tschaikovsky, Overture 1812
+--			  SW(10) 	= Melodie: Beethoven, Für Elise
+--			  SW(0-12)	= Töne per Tastatur (eine Oktave) wenn SW(13)='0'
+--			  KEY(0) 	= Reset
+--			  KEY(1) 	= FM-Ratio aendern
+--			  KEY(2) 	= FM-Depth aendern
+--			  KEY(3) 	= Melodie abspielen

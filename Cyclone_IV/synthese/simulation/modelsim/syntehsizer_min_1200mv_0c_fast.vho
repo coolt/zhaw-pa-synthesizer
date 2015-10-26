@@ -17,7 +17,7 @@
 -- PROGRAM "Quartus II 64-Bit"
 -- VERSION "Version 14.0.0 Build 200 06/17/2014 SJ Full Version"
 
--- DATE "10/25/2015 07:56:24"
+-- DATE "10/25/2015 08:47:51"
 
 -- 
 -- Device: Altera EP4CE115F29C7 Package FBGA780
@@ -40,13 +40,13 @@ ENTITY 	top_level IS
 	KEY : IN std_logic_vector(3 DOWNTO 0);
 	SW : IN std_logic_vector(17 DOWNTO 0);
 	AUD_ADCDAT : IN std_logic;
-	AUD_DACDAT : OUT std_logic;
-	AUD_BCLK : OUT std_logic;
-	AUD_XCK : OUT std_logic;
-	AUD_DACLRCK : OUT std_logic;
-	AUD_ADCLRCK : OUT std_logic;
-	I2C_SCLK : OUT std_logic;
-	I2C_SDAT : INOUT std_logic
+	AUD_DACDAT : BUFFER std_logic;
+	AUD_BCLK : BUFFER std_logic;
+	AUD_XCK : BUFFER std_logic;
+	AUD_DACLRCK : BUFFER std_logic;
+	AUD_ADCLRCK : BUFFER std_logic;
+	I2C_SCLK : BUFFER std_logic;
+	I2C_SDAT : BUFFER std_logic
 	);
 END top_level;
 
@@ -104,6 +104,7 @@ SIGNAL ww_AUD_XCK : std_logic;
 SIGNAL ww_AUD_DACLRCK : std_logic;
 SIGNAL ww_AUD_ADCLRCK : std_logic;
 SIGNAL ww_I2C_SCLK : std_logic;
+SIGNAL ww_I2C_SDAT : std_logic;
 SIGNAL \CLOCK_50~inputclkctrl_INCLK_bus\ : std_logic_vector(3 DOWNTO 0);
 SIGNAL \inst_3|divider_inst|count[3]~clkctrl_INCLK_bus\ : std_logic_vector(3 DOWNTO 0);
 SIGNAL \KEY[1]~input_o\ : std_logic;
@@ -641,6 +642,7 @@ AUD_XCK <= ww_AUD_XCK;
 AUD_DACLRCK <= ww_AUD_DACLRCK;
 AUD_ADCLRCK <= ww_AUD_ADCLRCK;
 I2C_SCLK <= ww_I2C_SCLK;
+I2C_SDAT <= ww_I2C_SDAT;
 ww_devoe <= devoe;
 ww_devclrn <= devclrn;
 ww_devpor <= devpor;
@@ -1444,7 +1446,7 @@ GENERIC MAP (
 	simulate_z_as => "z")
 -- pragma translate_on
 PORT MAP (
-	i => I2C_SDAT,
+	i => ww_I2C_SDAT,
 	o => \I2C_SDAT~input_o\);
 
 -- Location: LCCOMB_X87_Y43_N12
@@ -10350,7 +10352,7 @@ ww_AUD_ADCLRCK <= \AUD_ADCLRCK~output_o\;
 
 ww_I2C_SCLK <= \I2C_SCLK~output_o\;
 
-I2C_SDAT <= \I2C_SDAT~output_o\;
+ww_I2C_SDAT <= \I2C_SDAT~output_o\;
 END structure;
 
 

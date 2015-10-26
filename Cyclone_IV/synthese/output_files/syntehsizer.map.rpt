@@ -1,5 +1,5 @@
 Analysis & Synthesis report for syntehsizer
-Sun Oct 25 07:55:46 2015
+Sun Oct 25 08:47:10 2015
 Quartus II 64-Bit Version 14.0.0 Build 200 06/17/2014 SJ Full Version
 
 
@@ -54,7 +54,7 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Oct 25 07:55:46 2015       ;
+; Analysis & Synthesis Status        ; Successful - Sun Oct 25 08:47:10 2015       ;
 ; Quartus II 64-Bit Version          ; 14.0.0 Build 200 06/17/2014 SJ Full Version ;
 ; Revision Name                      ; syntehsizer                                 ;
 ; Top-level Entity Name              ; top_level                                   ;
@@ -176,28 +176,28 @@ agreement for further details.
 +----------------------------+-------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                                      ;
-+--------------------------------------------+-----------------+-----------------+------------------------------------------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path           ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                                                     ; Library ;
-+--------------------------------------------+-----------------+-----------------+------------------------------------------------------------------------------------------------------------------+---------+
-; ../vhdl/parallel_to_seriell.vhd            ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/parallel_to_seriell.vhd            ;         ;
-; ../vhdl/fsm_I2S.vhd                        ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/fsm_I2S.vhd                        ;         ;
-; ../vhdl/fm_synth.vhd                       ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/fm_synth.vhd                       ;         ;
-; ../vhdl/infrastructure_block.vhd           ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/infrastructure_block.vhd           ;         ;
-; ../vhdl/set_audio_register.vhd             ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/set_audio_register.vhd             ;         ;
-; ../vhdl/audio_codec_register_table_pkg.vhd ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/audio_codec_register_table_pkg.vhd ;         ;
-; ../vhdl/tone_decoder.vhd                   ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/tone_decoder.vhd                   ;         ;
-; ../vhdl/sync_block.vhd                     ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/sync_block.vhd                     ;         ;
-; ../vhdl/modulo_divider.vhd                 ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/modulo_divider.vhd                 ;         ;
-; ../vhdl/top_level.vhd                      ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/top_level.vhd                      ;         ;
-; ../vhdl/tone_gen_pkg.vhd                   ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/tone_gen_pkg.vhd                   ;         ;
-; ../vhdl/i2s_master.vhd                     ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/i2s_master.vhd                     ;         ;
-; ../vhdl/i2c_master.vhd                     ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/i2c_master.vhd                     ;         ;
-; ../vhdl/fm_sel.vhd                         ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/fm_sel.vhd                         ;         ;
-; ../vhdl/dds.vhd                            ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/dds.vhd                            ;         ;
-; ../vhdl/link_audio_data.vhd                ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/PA_synthesizer/Cyclone_IV/vhdl/link_audio_data.vhd                ;         ;
-+--------------------------------------------+-----------------+-----------------+------------------------------------------------------------------------------------------------------------------+---------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                           ;
++--------------------------------------------+-----------------+-----------------+-----------------------------------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path           ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                                                          ; Library ;
++--------------------------------------------+-----------------+-----------------+-----------------------------------------------------------------------------------------------------------------------+---------+
+; ../vhdl/parallel_to_seriell.vhd            ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/zhaw-pa-synthesizer/Cyclone_IV/vhdl/parallel_to_seriell.vhd            ;         ;
+; ../vhdl/fsm_I2S.vhd                        ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/zhaw-pa-synthesizer/Cyclone_IV/vhdl/fsm_I2S.vhd                        ;         ;
+; ../vhdl/fm_synth.vhd                       ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/zhaw-pa-synthesizer/Cyclone_IV/vhdl/fm_synth.vhd                       ;         ;
+; ../vhdl/infrastructure_block.vhd           ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/zhaw-pa-synthesizer/Cyclone_IV/vhdl/infrastructure_block.vhd           ;         ;
+; ../vhdl/set_audio_register.vhd             ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/zhaw-pa-synthesizer/Cyclone_IV/vhdl/set_audio_register.vhd             ;         ;
+; ../vhdl/audio_codec_register_table_pkg.vhd ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/zhaw-pa-synthesizer/Cyclone_IV/vhdl/audio_codec_register_table_pkg.vhd ;         ;
+; ../vhdl/tone_decoder.vhd                   ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/zhaw-pa-synthesizer/Cyclone_IV/vhdl/tone_decoder.vhd                   ;         ;
+; ../vhdl/sync_block.vhd                     ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/zhaw-pa-synthesizer/Cyclone_IV/vhdl/sync_block.vhd                     ;         ;
+; ../vhdl/modulo_divider.vhd                 ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/zhaw-pa-synthesizer/Cyclone_IV/vhdl/modulo_divider.vhd                 ;         ;
+; ../vhdl/top_level.vhd                      ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/zhaw-pa-synthesizer/Cyclone_IV/vhdl/top_level.vhd                      ;         ;
+; ../vhdl/tone_gen_pkg.vhd                   ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/zhaw-pa-synthesizer/Cyclone_IV/vhdl/tone_gen_pkg.vhd                   ;         ;
+; ../vhdl/i2s_master.vhd                     ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/zhaw-pa-synthesizer/Cyclone_IV/vhdl/i2s_master.vhd                     ;         ;
+; ../vhdl/i2c_master.vhd                     ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/zhaw-pa-synthesizer/Cyclone_IV/vhdl/i2c_master.vhd                     ;         ;
+; ../vhdl/fm_sel.vhd                         ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/zhaw-pa-synthesizer/Cyclone_IV/vhdl/fm_sel.vhd                         ;         ;
+; ../vhdl/dds.vhd                            ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/zhaw-pa-synthesizer/Cyclone_IV/vhdl/dds.vhd                            ;         ;
+; ../vhdl/link_audio_data.vhd                ; yes             ; User VHDL File  ; C:/Users/katrin/Documents/Dokumente/ZHAW/5Jahr/zhaw-pa-synthesizer/Cyclone_IV/vhdl/link_audio_data.vhd                ;         ;
++--------------------------------------------+-----------------+-----------------+-----------------------------------------------------------------------------------------------------------------------+---------+
 
 
 +----------------------------------------------------------------------------------------------------------------+
@@ -459,7 +459,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:01     ;
+; Top            ; 00:00:02     ;
 +----------------+--------------+
 
 
@@ -469,53 +469,53 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 14.0.0 Build 200 06/17/2014 SJ Full Version
-    Info: Processing started: Sun Oct 25 07:55:41 2015
+    Info: Processing started: Sun Oct 25 08:47:05 2015
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off syntehsizer -c syntehsizer
 Info (11104): Parallel Compilation has detected 4 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 2 of the 2 physical processors detected instead.
-Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/parallel_to_seriell.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/zhaw-pa-synthesizer/cyclone_iv/vhdl/parallel_to_seriell.vhd
     Info (12022): Found design unit 1: parallel_to_seriell-rtl
     Info (12023): Found entity 1: parallel_to_seriell
-Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/fsm_i2s.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/zhaw-pa-synthesizer/cyclone_iv/vhdl/fsm_i2s.vhd
     Info (12022): Found design unit 1: fsm_I2S-rtl
     Info (12023): Found entity 1: fsm_I2S
-Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/fm_synth.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/zhaw-pa-synthesizer/cyclone_iv/vhdl/fm_synth.vhd
     Info (12022): Found design unit 1: fm_synth-rtl
     Info (12023): Found entity 1: fm_synth
-Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/infrastructure_block.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/zhaw-pa-synthesizer/cyclone_iv/vhdl/infrastructure_block.vhd
     Info (12022): Found design unit 1: infrastructure_block-rtl
     Info (12023): Found entity 1: infrastructure_block
-Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/set_audio_register.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/zhaw-pa-synthesizer/cyclone_iv/vhdl/set_audio_register.vhd
     Info (12022): Found design unit 1: set_audio_register-rtl
     Info (12023): Found entity 1: set_audio_register
-Info (12021): Found 1 design units, including 0 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/audio_codec_register_table_pkg.vhd
+Info (12021): Found 1 design units, including 0 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/zhaw-pa-synthesizer/cyclone_iv/vhdl/audio_codec_register_table_pkg.vhd
     Info (12022): Found design unit 1: audio_codec_register_table_pkg
-Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/tone_decoder.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/zhaw-pa-synthesizer/cyclone_iv/vhdl/tone_decoder.vhd
     Info (12022): Found design unit 1: tone_decoder-rtl
     Info (12023): Found entity 1: tone_decoder
-Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/sync_block.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/zhaw-pa-synthesizer/cyclone_iv/vhdl/sync_block.vhd
     Info (12022): Found design unit 1: sync_block-rtl
     Info (12023): Found entity 1: sync_block
-Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/modulo_divider.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/zhaw-pa-synthesizer/cyclone_iv/vhdl/modulo_divider.vhd
     Info (12022): Found design unit 1: modulo_divider-rtl
     Info (12023): Found entity 1: modulo_divider
-Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/top_level.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/zhaw-pa-synthesizer/cyclone_iv/vhdl/top_level.vhd
     Info (12022): Found design unit 1: top_level-rtl
     Info (12023): Found entity 1: top_level
-Info (12021): Found 1 design units, including 0 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/tone_gen_pkg.vhd
+Info (12021): Found 1 design units, including 0 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/zhaw-pa-synthesizer/cyclone_iv/vhdl/tone_gen_pkg.vhd
     Info (12022): Found design unit 1: tone_gen_pkg
-Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/i2s_master.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/zhaw-pa-synthesizer/cyclone_iv/vhdl/i2s_master.vhd
     Info (12022): Found design unit 1: i2s_master-rtl
     Info (12023): Found entity 1: i2s_master
-Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/i2c_master.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/zhaw-pa-synthesizer/cyclone_iv/vhdl/i2c_master.vhd
     Info (12022): Found design unit 1: i2c_master-rtl
     Info (12023): Found entity 1: i2c_master
-Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/fm_sel.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/zhaw-pa-synthesizer/cyclone_iv/vhdl/fm_sel.vhd
     Info (12022): Found design unit 1: fm_sel-rtl
     Info (12023): Found entity 1: fm_sel
-Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/dds.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/zhaw-pa-synthesizer/cyclone_iv/vhdl/dds.vhd
     Info (12022): Found design unit 1: dds-rtl
     Info (12023): Found entity 1: dds
-Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/pa_synthesizer/cyclone_iv/vhdl/link_audio_data.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file /users/katrin/documents/dokumente/zhaw/5jahr/zhaw-pa-synthesizer/cyclone_iv/vhdl/link_audio_data.vhd
     Info (12022): Found design unit 1: link_audio_data-rtl
     Info (12023): Found entity 1: link_audio_data
 Info (12127): Elaborating entity "top_level" for the top level hierarchy
@@ -563,9 +563,9 @@ Info (21057): Implemented 412 device resources after synthesis - the final resou
     Info (21060): Implemented 1 bidirectional pins
     Info (21061): Implemented 381 logic cells
 Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 19 warnings
-    Info: Peak virtual memory: 590 megabytes
-    Info: Processing ended: Sun Oct 25 07:55:46 2015
+    Info: Peak virtual memory: 584 megabytes
+    Info: Processing ended: Sun Oct 25 08:47:10 2015
     Info: Elapsed time: 00:00:05
-    Info: Total CPU time (on all processors): 00:00:03
+    Info: Total CPU time (on all processors): 00:00:04
 
 
