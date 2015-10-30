@@ -1,0 +1,23 @@
+Im Zustand idle wartet die FSM bis gültige Daten (Data) vom UART kommen (rx_valid=1).
+
+If rx_valid=1 AND data=100xxxxx Bei einem gültigen Daten Signal und wenn diese Daten eine Note sind, geht die FSM in den Zustand Status über. Im Zustand Status wartet die FSM bis die MIDI Daten_1 (Note) kommen (rx_valid=1) und geht dann in den Zustand Note.
+Im Zustand Note wartet die FSM bis die Daten_2 (Velocity) kommen und geht dann wieder in den Zustand Idle.
+Falls mehrere Tasten gleichzeitig gedrückt werden (Polyphonie) kann es vorkommen, dass Status Daten übersprungen werden und anstelle von Status gleich wieder Daten_1 (Note) gefolgt von Daten_2 (Velocity) übertragen werden. In diesem Fall geht die FSM von Idle gleich in den Zustand Note. Die Steuerlogik der FSM erkennt dass Sie diesen Übergang machen muss daran, dass data (7)=0 ist wenn rx_valid=1. Sonst wäre data(7)=1.
+Zusätzlich zur FSM gibt es ein Register für die übertragene Note (Note-Register) und ein Register für das Bit, welches anzeigt, ob die Note gesetzt ist oder gelöscht (O-Register).
+Das O-Register wird direkt von data(4) aktualisiert falls die FSM im Zustand idle ist und  rx_valid=1 und data=100xxxxx (Noten werden übertragen). Die Midi Spec sieht noch vor, bei Polyphonie eine Note zu löschen, indem Velocity Daten=00000000 übertragen werden. Dies wird erreicht durch aktualisieren des O- Registers wenn state=note und Data= 000000000
+Die Logik braucht noch einen note_valid Ausgang, der für einen Puls lang aktiv wird, wenn eine Note im Note-Register oder O-Register aktualisiert werden. Die Gleichung der Logik dazu ist: rx_valid=1 AND ( state=note)
+Notiz: Dies ist mein Konzept, programmiert habe ich es noch nicht. Also keine Gewähr, dass nicht noch Fehler darin sind. Der nächste Schritt ist die Implementierung und die Prüfung des Konzepts
+
+
+
+
+Vom Keyboard Dekoder wird eine Notennummer gesendet und ein Flag, ob die Note Gesetzt oder Gelöscht werden soll
+In 10 DDS Noten Registern werden die Noten zugeordnet an 10 DDS gespeichert, mit der Information, ob in dem Register eine gesetzte Note steht und damit, ob die DDS ein- oder ausgeschaltet sein soll.
+Ein Index Zähler steuert die Mux und Demux an und arbeitet sich durch die 10 DDS Noten Register durch. Der Indexzähler läuft einmal um, jedes Mal wenn vom Keyboard Dekoder eine neue Note gemeldet wird. 
+Wenn vom Keyboard eine gesetzte Note gemeldet wird, wird die Note im ersten DDS Noten Register mit gelöschtem Flag gespeichert und das Flag gesetzt
+Wenn die Bestehende Note aus dem Register und der Neue Note übereinstimmen und vom Kexboard gemeldet wird, dass die Note gelöscht wird, wird das Flag gelöscht
+Problematisch wird es, falls das Keyboard die gleiche Note mehrere Male hintereinander als gesetzt meldet. Dann würden meherer DDS mit der gleichen Note eingeschaltet. Dies könnte man verhindern, in dem man den Index Zähler zwei mal durchlaufen lässt. Im ersten durchlauf wird nur verglichen, ob eine gesetzte Note schon im Register steht. Falls ja, wird der zweit Durchlauf ncht durchgeführt. Falls nein, setzt der zweite Durchlauf dann die erst beste freie Stelle.
+Die DDS Noten Register kann man als Array organisieren
+Zwischen zwei gemeldeten Noten braucht es also bis zu 20 12.5 MHz Taktzyklen. Kommen die Keyboardmeldungen in kürzeren Abständen hat man ein Problem, ist aber unwahrscheinlich, da die Datenübertragungsrate des Keyboards gering ist.
+Elegant wäre auch die kombinatorischen Blöcke: MUX, DEMUX, UPDATE MUX und Vergleicher in einen kombinatorischen Prozess zu packen. Der jetzt getaktet Indexzähler würde durch eine ungetaktete For-Loop ersetzt. Zwischenwerte speichert man in Variablen im Prozess. Der Synthesizer sollte dann eine kombinatorische Logik bilden, die aus dem Keyboard Dekoder input und den aktuellen 10 Werten im Noten Register, 10 Ausgänge erzeugt, die direkt an die D Eingänge der DDS Noten Register gelegt werden können. 
+Notiz: Dies ist mein Konzept, programmiert habe ich es noch nicht. Also keine Gewähr, dass nicht noch Fehler darin sind. Der nächste Schritt ist die implementierung und die Prüfung des Konzepts
