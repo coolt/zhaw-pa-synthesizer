@@ -18,10 +18,9 @@ vcom -2002 -explicit -work work ../source/modulo_divider.vhd
 vcom -2002 -explicit -work work ../source/sync_block.vhd
 
 # Midi-Interface
-vcom -2002 -explicit -work work ../source/Tick_Generator.vhd
-vcom -2002 -explicit -work work ../source/Abtaster.vhd
+vcom -2002 -explicit -work work ../source/bit_sampling_generator.vhd
+vcom -2002 -explicit -work work ../source/read_midi.vhd
 vcom -2002 -explicit -work work ../source/Flanken_Det.vhd
-vcom -2002 -explicit -work work ../source/Abtaster.vhd
 vcom -2002 -explicit -work work ../source/UART_Top.vhd
 vcom -2002 -explicit -work work ../source/midi_control.vhd
 
@@ -51,5 +50,4 @@ vcom -2002 -explicit -work work ../source/tb_uart.vhd
 # run simulation
 vsim -t 1ps -lib work work.tb_uart
 do wave_uart.do
-run 1.2 ms 
-
+run 2 ms

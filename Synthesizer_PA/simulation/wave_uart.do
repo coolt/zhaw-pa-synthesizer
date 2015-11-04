@@ -1,16 +1,14 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
-add wave -noupdate /tb_midi/s_serial_in
-add wave -noupdate /tb_midi/s_clk
-add wave -noupdate /tb_midi/s_reset_n
-add wave -noupdate /tb_midi/s_rx_data
-add wave -noupdate /tb_midi/s_rx_data_valid
-add wave -noupdate /tb_midi/SYS_CLK_PERIOD
-add wave -noupdate /tb_midi/SYS_CLK_HALFPERIOD
-add wave -noupdate /tb_midi/MIDI_CLK_PERIOD
+add wave -noupdate /tb_uart/s_clk_12M5
+add wave -noupdate /tb_uart/s_reset_n
+add wave -noupdate /tb_uart/s_serial_in
+add wave -noupdate /tb_uart/s_rx_data
+add wave -noupdate /tb_uart/s_rx_data_valid
+add wave -noupdate /tb_uart/inst_1/baude_tick
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {0 ps} 0}
-quietly wave cursor active 0
+WaveRestoreCursors {{Cursor 1} {1999999770 ps} 0}
+quietly wave cursor active 1
 configure wave -namecolwidth 150
 configure wave -valuecolwidth 100
 configure wave -justifyvalue left
@@ -25,4 +23,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {582383 ps} {583383 ps}
+WaveRestoreZoom {0 ps} {2100 us}

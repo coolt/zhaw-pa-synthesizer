@@ -1,33 +1,46 @@
 ----------------------------------------------------------------------
--- Filename: Flanken_Det.vhd
--- Projektgruppe Weiss
--- Letzte Aenderung: 12.03.11
--- Funktionsbeschrieb:
--- - Diese Schaltung gibt einen Tick nach jeder NEGATIVEN Flanke aus!
+-- Detektor for falling edge
+-- 111110      
+-- Idle = '1'
+-- Startbit = '0'
+-- Endbit = '1'
+-- Note: Alle Changes in Mididata from 1 t0 0 are detected as  falling edge
 ----------------------------------------------------------------------
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 
+
 ENTITY Flanken_Det IS
   PORT(
-    	clk,serial_in,reset_n		: IN    std_logic;
-    	edge        			: OUT   std_logic);
+    	clk_12M5  : IN    std_logic;
+        serial_in : IN    std_logic;
+        reset_n   : IN    std_logic;
+    	edge      : OUT   std_logic
+    	);
 END Flanken_Det;
 
+
+
 ARCHITECTURE rtl OF Flanken_Det IS
-	SIGNAL q1,q2 : std_logic;
+
+	SIGNAL q1 : std_logic  := '0';
+	SIGNAL q2 : std_logic  := '0';
+	
 BEGIN
-  dff : PROCESS(clk, reset_n)
+
+detect_falling_edge : PROCESS(clk_12M5, reset_n)
   BEGIN
   	IF (reset_n = '0') THEN
 		edge  <= '0';
 		q1	  <= '0';
 		q2    <= '0';
-    ELSIF (clk'EVENT AND clk = '1') THEN
+    ELSIF (clk_12M5'EVENT AND clk_12M5 = '1') THEN
 		q1 <= serial_in;
       	q2 <= q1;
-		edge <= NOT q1 AND q2; -- schaut auf die negativen Flanken
+      	-- falling edge: q1 = 0, q2 = 1
+		edge <= (NOT q1) AND q2;  
     END IF;
-  END PROCESS dff;
+END PROCESS;
+
 END rtl;
