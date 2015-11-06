@@ -21,7 +21,7 @@ USE work.reg_table_pkg.all;
 ENTITY i2s_master IS
 	PORT (		clk_12M			:IN			std_logic;
 				i2s_reset_n		:IN			std_logic;
-				INIT_N_i		:IN			std_logic;	
+				--INIT_N_i		:IN			std_logic;	
 				ADCDAT_s		:IN			std_logic;
 				DACDAT_pl		:IN			std_logic_vector(15 downto 0);
 				DACDAT_pr		:IN			std_logic_vector(15 downto 0);
@@ -48,14 +48,14 @@ SIGNAL		s_ADCR_shift:	std_logic;
 SIGNAL		ADCDAT_s_i:		std_logic;
 SIGNAL		s_DACDAT_s_o:		std_logic;		-- auf diagramm nur DACDAT_s, geht nicht da port schon so heisst
 SIGNAL		s_real_strobe:	std_logic;
-
+--SIGNAL     s_init:           std_logic: = '1';
 
 
 --Components Declaration
 ------------------------------------------
 COMPONENT FSM_BCLK_COUNT
 	PORT(   clk,reset_n						:IN      std_logic;
-			init_n     						:IN      std_logic;
+			--init_n     						:IN      std_logic;
 			WS, WS_dly			    		:OUT     std_logic;
 			BCLK, DAC_load	 				:OUT     std_logic;
 			ADCL_shift, ADCR_shift			:OUT 	 std_logic;
@@ -64,7 +64,7 @@ COMPONENT FSM_BCLK_COUNT
 END COMPONENT;
 
 COMPONENT P2S IS
-	PORT( 	clk					:IN			std_logic;	--clk_12M
+	PORT( 	clk					:IN			std_logic;	--clk_12M5
 			reset_n				:IN			std_logic;
 			BCLK				:IN			std_logic;
 			DAC_load			:IN			std_logic;
@@ -103,7 +103,7 @@ FSM_BCLK_COUNT_INST: FSM_BCLK_COUNT
 				DAC_load	=>		s_DAC_load,
 				ADCL_shift	=>		s_ADCL_shift,
 				ADCR_shift	=>		s_ADCR_shift,
-				init_n		=> 	INIT_N_i,
+				--init_n		=> 	    s_init,
 				real_strobe =>		s_real_strobe
 			 );
 

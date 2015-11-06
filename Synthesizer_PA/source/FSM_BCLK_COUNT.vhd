@@ -19,7 +19,7 @@ USE ieee.numeric_std.all;
 -------------------------------------------
 ENTITY FSM_BCLK_COUNT IS
   PORT(   clk,reset_n						:	IN      std_logic;
-		  init_n     						:	IN      std_logic;
+		  --init_n     						:	IN      std_logic;
 		  WS, WS_dly			    		:	OUT     std_logic;
 		  BCLK, DAC_load 	 				:	OUT     std_logic;
 		  ADCL_shift, ADCR_shift			:	OUT 	std_logic;
@@ -41,6 +41,7 @@ SIGNAL folge_zustand				:	state;
 SIGNAL zustand						:	state;
 SIGNAL reg_idx, next_reg_idx	   	:	natural;
 SIGNAL s_bclk						:	std_logic;
+SIGNAL s_init : std_logic := '1'; -----------------!!!!!!!!!!!!!!!!!!!!!!check volume
 
 -- Begin Architecture
 -------------------------------------------
@@ -48,7 +49,7 @@ BEGIN
 
 --Erzeugung eines Clockhalbierers
 --das Signal s_bclk soll mit der Hälfte der 12 MHz Frequenz laufen
-halffreq: PROCESS (clk, reset_n, init_n)
+halffreq: PROCESS (clk, reset_n)
 BEGIN
 	
 	IF reset_n = '0'THEN
@@ -77,12 +78,11 @@ END PROCESS;
 
 --Zähler Einangslogik
 
-log: PROCESS (reg_idx, s_bclk, init_n)
+log: PROCESS (reg_idx, s_bclk) ----------------check if init = '0' or '1'
 
 BEGIN
-	IF init_n= '0' THEN
-		next_reg_idx <= 382;
-	ELSIF s_bclk = '1' THEN
+	
+	IF s_bclk = '1' THEN
 		IF reg_idx =383 THEN
 			next_reg_idx <= 0;
 		ELSE next_reg_idx <= reg_idx+1;
@@ -105,13 +105,13 @@ BEGIN
 	END IF;
 END PROCESS; 
 
-ws_logik: PROCESS (init_n, s_bclk, s_WS, reg_idx)
+ws_logik: PROCESS (s_bclk, s_WS, reg_idx)
 BEGIN
-	IF reg_idx = 382 AND s_bclk ='1' AND init_n= '1' THEN
+	IF reg_idx = 382 AND s_bclk ='1' THEN
 			next_s_WS <= NOT s_WS;
-	ELSIF init_n= '0' THEN
-			next_s_WS <= '1';
-	ELSE next_s_WS <= s_WS;
+	
+	ELSE 
+	    next_s_WS <= s_WS;
 	END IF;
 END PROCESS;
 
@@ -133,7 +133,7 @@ END PROCESS;
   
   --------------------------------------------------
   --Input logic state_machine
-  logic: PROCESS ( zustand, reg_idx, s_WS, s_bclk, init_n)
+  logic: PROCESS ( zustand, reg_idx, s_WS, s_bclk)
   BEGIN
  folge_zustand <= zustand; 
  
@@ -149,9 +149,8 @@ END PROCESS;
 	
 	--load_dac Zustand
 	WHEN load_dac =>
-		IF init_n = '0' THEN
-			folge_zustand <= hold_R;
-		ELSIF s_bclk = '1' THEN
+		
+		IF s_bclk = '1' THEN
 			folge_zustand <= shift_adc_L;
 		ELSE 
 			folge_zustand <= load_dac;
@@ -159,27 +158,21 @@ END PROCESS;
 			
 	-- shift_adc_L Zustand
 	WHEN shift_adc_L =>
-		IF init_n = '0' THEN
-			folge_zustand <= hold_R;
-		ELSIF reg_idx = 15 AND s_bclk = '1' THEN
+		IF reg_idx = 15 AND s_bclk = '1' THEN
 			folge_zustand <= hold_L;
 		ELSE folge_zustand <= shift_adc_L;
 		END IF;
 	
 	--hold_L Zustand
 	WHEN hold_L =>
-		IF init_n = '0' THEN
-			folge_zustand <= hold_R;
-		ELSIF reg_idx = 383 AND s_bclk = '1' AND s_WS='1' THEN
+		IF reg_idx = 383 AND s_bclk = '1' AND s_WS='1' THEN
 			folge_zustand <= shift_adc_R;
 		ELSE folge_zustand <= hold_L;
 		END IF ;
 	
 	--shift_adc_R Zustand
 	WHEN shift_adc_R =>
-		IF init_n = '0' THEN
-			folge_zustand <= hold_R;
-		ELSIF reg_idx = 15 AND s_bclk = '1' THEN
+		IF reg_idx = 15 AND s_bclk = '1' THEN
 			folge_zustand <= hold_R;
 		ELSE folge_zustand <= shift_adc_R;
 		END IF;
