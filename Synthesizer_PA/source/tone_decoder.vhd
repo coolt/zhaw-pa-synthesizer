@@ -64,7 +64,7 @@ IF note_on ='1' THEN
 							
 	END CASE;
 ELSE 
-   N_CUM_keyboard <=to_integer(unsigned(M_DO_C4));   -- to del !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+   N_CUM_keyboard <=to_integer(unsigned(M_DO_C5));   -- to del !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 END IF;
 
 END PROCESS;
