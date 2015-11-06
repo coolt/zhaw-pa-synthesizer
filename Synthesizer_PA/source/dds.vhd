@@ -1,11 +1,14 @@
---dds
---copyright by bleispiu
---version 0.1
---19.04.2013 19:00 Uhr
-
--- Funktion: Der DDS beinhaltet einen Zähler der je nach Eingang in gewünschten
--- Abständen auf 2048 hochzählt. Aus einer Tabelle werden Werte geholt und 
--- an den Ausgang ausgegeben.
+-------------------------------------------
+-- dds
+-------------------------------------------
+-- copyright: bleispiu (1. version)
+-- commented: baek (2. version)
+--
+-- function:
+-- A dds bases on a counter witch steps can be changed. 
+-- count max is 2048. 
+-- the steps gives the indexes in the LUT of notes. 
+-- The notes are set to the output
 ------------------------------------------------ 
 
 LIBRARY ieee;
@@ -15,8 +18,7 @@ USE ieee.numeric_std.all;
 LIBRARY work;
 USE work.tone_gen_pkg.all;
 
---Entity Declaration
-------------------------------------------------
+
 ENTITY dds IS
 	PORT(	clk_12M			: IN	std_logic;
 			reset_n			: IN	std_logic;
@@ -28,12 +30,9 @@ ENTITY dds IS
 			);
 	END dds;
 	
-	
---Architecture Declaration
-------------------------------------------------
+
 ARCHITECTURE rtl OF dds IS
---Signal & Constants Declaration
-------------------------------------------------
+
 SIGNAL 		addr 			:		integer range 0 to L-1;
 SIGNAL 		count			:  		unsigned(N_CUM - 1 downto 0); --15 downto 0		N_CUM --> grösse 16
 SIGNAL 		count_folge		:      	unsigned(N_CUM - 1 downto 0);
@@ -44,43 +43,39 @@ CONSTANT	N_LUT			:		natural:=6;
 
 
 BEGIN
--- PROCESS for FLIPFLOPS
-------------------------------------------------
+
 flipflop :	PROCESS	(clk_12M, reset_n)
 BEGIN
-IF 		(reset_n = '0')						THEN
+    IF 		(reset_n = '0')						THEN
 		count <= (OTHERS => '0');
 		
-ELSIF 	(clk_12M'EVENT AND clk_12M = '1')	THEN
+    ELSIF 	(clk_12M'EVENT AND clk_12M = '1')	THEN
 		count	<=	count_folge;
-END IF;
-
+    END IF;
 END PROCESS;
 
 	
 -- PROCESS for LOGIC
--- Dieser Process beschreibt die Logic vor den Flipflops der Folgezustand ist der Ist-Zustand plus die
--- Schrittweite phi_incr_i ist ein Vektor von 15 downto 0. maximale grösse 2 hoch 16!!
+-- next is current + phi_incr_i 
+-- phi_incr_i is a vekcor(15 downto 0) with a max = 2^16
 ------------------------------------------------
 logic	:	PROCESS (strobe_i, count, tone_on_i, bclk, phi_incr_i)
 BEGIN
-
-IF 		(tone_on_i = '1') THEN
+    IF 		(tone_on_i = '1') THEN
 		IF		(strobe_i = '1'  AND bclk='0') THEN
 				count_folge <=	count + phi_incr_i;
-		ELSE 	count_folge <= count;
+		ELSE 	
+                count_folge <= count;
 		END IF;
-ELSE count_folge<= (OTHERS => '0');
-END IF;
-
+    ELSE 
+        count_folge<= (OTHERS => '0');
+    END IF;
 END PROCESS;
---OUTPUT
+
+-- assign values 
 ------------------------------------------------
 addr 		<=	 to_integer(count(N_CUM-1  downto  N_CUM - N_LUT));
-dacdat_g_o	<=	 std_logic_vector(to_signed (LUT(addr) , N_AUDIO ));	--10000
+dacdat_g_o	<=	 std_logic_vector(to_signed (LUT(addr) , N_AUDIO ));	
 
-
---End Architecture
-------------------------------------------------	
 END rtl;	
 	

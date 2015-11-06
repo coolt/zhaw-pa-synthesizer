@@ -1,9 +1,11 @@
-----------------------------------------------------------------------
--- Filename: UART_Top.vhd
--- Projektgruppe Weiss
--- Letzte Aenderung: 12.04.11
--- Funktionsbeschrieb:
--- - Dieser Block wandelt die seriellen Daten paralle Daten um
+-------------------------------------------
+-- uart top
+-------------------------------------------
+-- copyright: weii (1. version)
+-- commented: baek (2. version)
+--
+-- function:
+-- changes serial midibit to parallel data
 ----------------------------------------------------------------------
 
 LIBRARY		ieee;

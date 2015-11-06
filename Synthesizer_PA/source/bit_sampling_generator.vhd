@@ -1,7 +1,7 @@
 ------------------------------------------
--- Bit sampling generator:
--- Commented version of:
--- Armin Weiss, 2011, Tick_generator.vhd
+-- bit sampling generator:
+-- copyright: weii (1. version): Tick_generator.vhd
+-- commented: baek (2. version)
 ------------------------------------------
 -- baud = 31.25  kHz => bit sampling rate 
 --
@@ -12,7 +12,6 @@
 -- FSM Generating bit period: 
 -- 1 Bit is 1.5 time midi-period
 -- other bits each midi period 
-
 ------------------------------------------
 
 LIBRARY		ieee;

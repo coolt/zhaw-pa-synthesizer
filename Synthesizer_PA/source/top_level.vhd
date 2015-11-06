@@ -1,15 +1,11 @@
---top_level
---copyright by bruelcor
---version 0.1
---15.03.2013 18.22
-
---version 0.2
---22.03.2013 15.54
-
---version 0.3
---05.06.2013 20:43 edited by herscmic
-
---Funktion: Top Level Block, Analog Loop und Digital Loop integriert
+-------------------------------------------
+-- top level synthesizer
+-------------------------------------------
+-- copyright: bruelcor (1. version)
+-- commented: baek (2. version)
+--
+-- function:
+-- midi interface connected to analog/digital infrastructure
 
 -- Bedienung: SW(17) 	= Codeccontroll ein/aus
 --			  SW(16) 	= Analog Loop / Digital Loop : Settings fuer den Codeccontroller
@@ -24,7 +20,7 @@
 --			  KEY(1) 	= FM-Ratio aendern
 --			  KEY(2) 	= FM-Depth aendern
 --			  KEY(3) 	= Melodie abspielen
-
+-------------------------------------------
 
 
 
@@ -33,8 +29,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.numeric_std.all;
 
--- Entity Declaration 
--------------------------------------------
+
 ENTITY top_level IS
 	PORT (	CLOCK_50				:IN			std_logic;
 			KEY						:IN			std_logic_vector(3 DOWNTO 0);		--Taster
@@ -54,11 +49,9 @@ ENTITY top_level IS
 		  );
 END top_level;
 
--- Architecture Declaration
--------------------------------------------
+
 ARCHITECTURE rtl OF top_level IS
--- Signals & Constants Declaration
--------------------------------------------
+
 SIGNAL		tl_write_done:			std_logic;										--Sendebestätigung vom I2C Master
 SIGNAL		tl_ack_error:			std_logic;										--Senden fehlgeschlagen von I2C Master
 SIGNAL		tl_write:		  		std_logic;
@@ -86,6 +79,7 @@ SIGNAL		tl_rx_data:				std_logic_vector(7 downto 0);
 SIGNAL		tl_note_value:			natural range 0 to 128;
 SIGNAL		tl_note_on:				std_logic;							
 SIGNAL		tl_polyhonie_status:	std_logic;	
+
 
 --Components Declaration
 ------------------------------------------
@@ -203,12 +197,12 @@ PORT (		fm_clk_12M					:IN				std_logic;
 			data_o							:OUT			   std_logic_vector(15 downto 0)
 		  );
 END COMPONENT;
--- Begin Architecture
--------------------------------------------
-BEGIN
 
--- Port Maps
--------------------------------------------
+
+
+BEGIN
+-- Component instantiation
+
 inst_1: UART_Top 
 	PORT MAP(	serial_in      => GPIO_10,
 			clk_12M5 				=> tl_clk_12M5,    
@@ -291,7 +285,7 @@ inst_7 : audio_control
 inst_8	: tone_decoder
 	PORT MAP(	clk_12M5					=>		tl_clk_12M5,
 				reset_n				=>		KEY(0),
-				note_on        => tl_note_on,--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!¨¨
+				note_on          => tl_note_on,--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!¨¨
 				note_midi		=>		tl_note_value, -- !!!!!!!!!!!!!!!!!!!!!!!!
 				tone_on			=>		tl_tone_on,
 				N_CUM				=>		tl_n_cum
@@ -325,13 +319,12 @@ inst_10: fm_synth
 		  );
 
 
---Ausgangs/Eingangsignal--TL-Signalverbindung	
+-- signal assignment
 AUD_ADCLRCK <= 	tl_WS;
 AUD_DACLRCK	<= 	tl_WS;
 AUD_XCK		<=	tl_clk_12M5;
 AUD_BCLK	<=	tl_bclk;
 
 	
--- End Architecture
------------------------------------------			  
+			  
 END ARCHITECTURE rtl;

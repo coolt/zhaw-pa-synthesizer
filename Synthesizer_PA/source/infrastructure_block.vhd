@@ -1,19 +1,19 @@
---infrastructure_block
---copyright by herscmic
---version 0.1
---08.03.2013 17.31
-
---Funktion: Dieser Baustein soll den pll und den sync_block
---verbinden. Am Schluss erstellt dieser Block einen 12MHz Signal und
---synchronisiert alle Eingangsignale
-
+-------------------------------------------
+-- infrastructure block
+-------------------------------------------
+-- copyright: herscmic (1. version)
+-- commented: baek (2. version)
+--
+-- function:
+-- connect pll und sync_block
+-- the 12M5 clock from the pll is the system block
+-------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.numeric_std.all;
 
 
--- Entity Declaration 
--------------------------------------------
+
 ENTITY infrastructure_block IS
   PORT(   	s_reset_n					:IN    	std_logic;
 			clk_50M          			:IN    	std_logic;
@@ -26,18 +26,15 @@ ENTITY infrastructure_block IS
 END infrastructure_block;
 
 
--- Architecture Declaration
--------------------------------------------
+
 ARCHITECTURE rtl OF infrastructure_block IS
--- Signals & Constants Declaration
--------------------------------------------
+
 SIGNAL 	s_clk_12M		: 		std_logic;
 SIGNAL  s_reset			:  		std_logic; 
 
+
 --Components Declaration
-
-
-
+------------------------------------------
 COMPONENT modulo_divider
 GENERIC (width		: positive  := 5 );
   PORT( clk	: IN    std_logic;
@@ -52,17 +49,11 @@ PORT ( 	async_i		: IN std_logic;
 		syncd_o		: OUT std_logic);
 END COMPONENT;		
 
-		
 
-
--- Begin Architecture
--------------------------------------------
 BEGIN
 
- -- PORT MAPS
- ------------------------------------------
   
- divider_inst : modulo_divider
+inst_1 : modulo_divider
 Generic MAP (width =>	4)
 PORT MAP (  clk 			=> 		clk_50M,
 			clk_div	 		=>	 	s_clk_12M);
@@ -193,13 +184,12 @@ sync_inst20: sync_block
 			reset_n		=> 		s_reset_n,
         	clk   		=> 		s_clk_12M,
 			syncd_o		=> 		key_sync(2));
-  
+ 
+ 
   -- Permanent connections
   -----------------------------------------
   
   clk_12M <= s_clk_12M; 
   s_reset <= NOT s_reset_n;
   
- -- End Architecture 
-------------------------------------------- 
 END rtl;

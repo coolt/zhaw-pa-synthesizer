@@ -1,9 +1,12 @@
---tone_decoder
-
-
---Funktion: 
---			- er dekodiert Midisignal. Das heisst, er wandelt die jeweiligen
---			  Eingangssignale der Schalter in Tonhöhen um. 
+-------------------------------------------
+-- tone decoder
+-------------------------------------------
+-- copyright: herscmic (1. version)
+-- commented: baek (2. version)
+--
+-- function:
+-- Midi-Number is decoded for LUT (see tone package) 
+-------------------------------------------
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
@@ -15,12 +18,12 @@ USE work.tone_gen_pkg.all;
 
 
 ENTITY tone_decoder IS
-	PORT (	clk_12M5						:IN			std_logic;	
-			reset_n					:IN			std_logic;
+	PORT (	clk_12M5			:IN			std_logic;	
+			reset_n				:IN			std_logic;
 			note_on             : IN        std_logic := '0';
-			note_midi				:IN			natural range 0 to 128;
+			note_midi			:IN			natural range 0 to 128;
 			tone_on				:OUT		std_logic;			
-			N_CUM					:OUT 		natural range 0 to 65000
+			N_CUM				:OUT 		natural range 0 to 65000
 		  );
 END tone_decoder;
 
@@ -81,7 +84,6 @@ END PROCESS;
 
 
 -- Signal assignment
-
 N_CUM <= N_CUM_keyboard;
 
 END ARCHITECTURE rtl;

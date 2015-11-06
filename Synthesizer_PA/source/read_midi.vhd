@@ -1,8 +1,11 @@
-----------------------------------------------------------------------
--- Commented version of
--- Armin Weiss, 2011, Abtaster.vhd
+-------------------------------------------
+-- read midi
+-------------------------------------------
+-- copyright: weii (1. version): Abtaster.vhd
+-- commented: baek (2. version)
 --
--- Stores the 8 databits in a vecotr
+-- function:
+-- Stores 8 serial databits in a vector
 -- Data_valid is set with the last bit of the vector
 -- This block is controlled by the bit sampling generators signals
 ----------------------------------------------------------------------
@@ -69,7 +72,6 @@ shift:	PROCESS(clk_12M5, reset_n, sig_shiftdata, sig_next_data_valid)
 			sig_rx_data_valid <= sig_next_data_valid;
 		END IF;
 END PROCESS;
-
 
 
 END rtl;

@@ -1,20 +1,20 @@
---S2P
---copyright by herscmic
---version 1.0
---02.04.2013 18.15
+-------------------------------------------
+-- serial to parallel converter
+-------------------------------------------
+-- copyright: herscmic (1. version)
+-- commented: baek (2. version)
+--
+-- function:
+-- Serial bits stored in 16 bit vector		
+-- bits shifted by rising edge of BCLK abgetastet
+-------------------------------------------
 
---Funktion: Serie zu Parallel Wandler
---			Eingegangene digitale Signale sollen in einen 16-bit Vektor umgewandelt
---			Signale werden mit dem steigenden BCLK abgetastet/geschoben werden
-
---Libarys
+-- Libarys
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.numeric_std.all;
 
 
--- Entity Declaration 
--------------------------------------------
 ENTITY S2P IS
 	PORT (		clk					:IN			std_logic;	--clk_12M
 				reset_n				:IN			std_logic;
@@ -23,16 +23,13 @@ ENTITY S2P IS
 				ADCR_shift			:IN			std_logic;	--rechts schieben
 				ADCDAT_s_i			:IN			std_logic;	--serieller Eingang
 				ADCDAT_pl_o			:OUT		std_logic_vector(15 downto 0);	--Ausgang links parallel
-				ADCDAT_pr_o			:OUT		std_logic_vector(15 downto 0)	--Ausgang rechts parallel
-				
+				ADCDAT_pr_o			:OUT		std_logic_vector(15 downto 0)	--Ausgang rechts parallel				
 		  );
 END S2P;
 
--- Architecture Declaration
--------------------------------------------
+
 ARCHITECTURE rtl OF S2P IS
--- Signals & Constants Declaration
--------------------------------------------
+
 SIGNAL 			l_zustand:	 		std_logic_vector (15 DOWNTO 0);
 SIGNAL 			l_folgezustand:		std_logic_vector (15 DOWNTO 0);
 SIGNAL			r_zustand:			std_logic_vector (15 DOWNTO 0);
@@ -93,7 +90,6 @@ BEGIN
 	ELSE ADCDAT_pr_o <= (OTHERS => '0');
 	END IF;
 END PROCESS ausganglog_rl;
---Components Declaration
-------------------------------------------
+
 
 END ARCHITECTURE rtl;

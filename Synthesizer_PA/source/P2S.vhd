@@ -1,20 +1,19 @@
---P2S
---copyright by herscmic
---version 1.0
---02.04.2013 18.15
-
-
---Funktion: Parallel zu Seriell-Wandler.
---			mit eingebautem Multiplexer, 
---			schiebt mit fallenden BCLK , Flipflops laufen aber mit clk_12M!
-
+-------------------------------------------
+-- parallel to serial converter
+-------------------------------------------
+-- copyright: herscmic (1. version)
+-- commented: baek (2. version)
+--
+-- function:
+-- shift by falling edge of BCLK, 
+-- flip flops run by clk_12M!
+-------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.numeric_std.all;
 
 
--- Entity Declaration 
--------------------------------------------
+
 ENTITY P2S IS
 	PORT (		clk						:IN			std_logic;	--clk_12M
 				reset_n					:IN			std_logic;
@@ -27,11 +26,9 @@ ENTITY P2S IS
 		  );
 END P2S;
 
--- Architecture Declaration
--------------------------------------------
+
 ARCHITECTURE rtl OF P2S IS
--- Signals & Constants Declaration
--------------------------------------------
+
 SIGNAL 			l_zustand:	 		std_logic_vector (15 DOWNTO 0);
 SIGNAL 			l_folgezustand:		std_logic_vector (15 DOWNTO 0);
 SIGNAL			r_zustand:			std_logic_vector (15 DOWNTO 0);
@@ -39,8 +36,7 @@ SIGNAL 			r_folgezustand:		std_logic_vector (15 DOWNTO 0);
 
 BEGIN
 
------------------------Kanal links-------------------------------
-
+----------------------- left chanel -------------------------------
 --Flipflop Kanal links
 flip_flops_l : PROCESS (clk, reset_n, l_zustand, l_folgezustand)
 BEGIN
@@ -66,8 +62,7 @@ BEGIN
 END PROCESS einganglog_l;
 
 
----------------------------Kanal rechts---------------------------------------
-
+---------------------------right chanel -----------------------------
 --Flipflop Kanal rechts
 flip_flops_r : PROCESS (clk, reset_n, r_folgezustand)
 BEGIN

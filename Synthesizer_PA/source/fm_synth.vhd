@@ -1,14 +1,16 @@
---dds
---copyright by bleispiu
---version 0.1
---10.05.2013 19:00 Uhr
+-------------------------------------------
+-- fm_synth
+-------------------------------------------
+-- copyright: bleispiu (1. version)
+-- commented: baek (2. version)
+--
+-------------------------------------------
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.numeric_std.all;
 
--- Entity Declaration 
--------------------------------------------
+
 ENTITY fm_synth IS
 	PORT (	fm_clk_12M		: IN	std_logic;
 			fm_reset_n		: IN	std_logic;
@@ -22,11 +24,9 @@ ENTITY fm_synth IS
 		  );
 END fm_synth;
 
--- Architecture Declaration
--------------------------------------------
+
 ARCHITECTURE rtl OF fm_synth IS
--- Signals & Constants Declaration
--------------------------------------------
+
 SIGNAL	fm_mod_dat			:	std_logic_vector (15 downto 0);
 SIGNAL	fm_mod_on			:	std_logic;
 SIGNAL	fm_mod_M			:	natural range 0 to 65000;
@@ -37,7 +37,6 @@ SIGNAL	fm_data_o			:	std_logic_vector (15 downto 0);
 
 --Components Declaration
 ------------------------------------------
-
 COMPONENT dds
 	PORT(	clk_12M			: IN	std_logic;
 			reset_n			: IN	std_logic;
@@ -60,18 +59,15 @@ COMPONENT fm_sel
 			mod_M						:OUT	natural range 0 to 65000;
 			car_on						:OUT	std_logic;
 			car_M						:OUT	natural range 0 to 65000;
-			clk						:IN std_logic
+			clk				    		:IN std_logic
 			);
 END COMPONENT;
 	
 
 
--- Begin Architecture
--------------------------------------------
+
 BEGIN
 
--- Port Maps
--------------------------------------------
 DDS_Modulator : dds
 	PORT MAP ( 	tone_on_i				=>		fm_mod_on,
 				strobe_i				=>		strobe,
@@ -103,13 +99,10 @@ FM_SEL_INST : fm_sel
 				mod_M					=>	fm_mod_m,
 				car_on					=>	fm_car_on,
 				car_m					=>	fm_car_m,
-				clk					=> fm_clk_12M
+				clk			    		=> fm_clk_12M
 				);
 			  
 -- ständige Verbindung
-data_o<=fm_data_o;
-
-	
--- End Architecture
------------------------------------------			  
+data_o <= fm_data_o;
+		  
 END ARCHITECTURE rtl;

@@ -1,23 +1,17 @@
--------------------------------------------------------------------------------
--- Project     : fm_sel
--- Description : 
+-------------------------------------------
+-- fm_sel
+-------------------------------------------
+-- copyright: bruelcor (1. version)
+-- commented: baek (2. version)
 --
---
--------------------------------------------------------------------------------
---
--- Change History
--- Date     |Name      |Modification
-------------|----------|-------------------------------------------------------
--- 12.04.13 | bruelcor | erstellt
--------------------------------------------------------------------------------
-
+-- function:
+-------------------------------------------
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.numeric_std.all;
 
--- Entity Declaration 
--------------------------------------------
+
 ENTITY fm_sel IS
 	PORT ( 	reset_n						:IN		std_logic;
 			clk							:IN		std_logic;
@@ -33,46 +27,43 @@ ENTITY fm_sel IS
 			);
 END fm_sel;
 
--- Architecture Declaration
--------------------------------------------
+
 ARCHITECTURE rtl OF fm_sel IS
--- Signals & Constants Declaration
--------------------------------------------
+
 SIGNAL fgain:								natural range 0 to 65000;
 SIGNAL reg_mod_M, next_reg_mod_M:			std_logic_vector(15 downto 0);
 SIGNAL vec_M_fsig:							std_logic_vector(15 downto 0);
--- Begin Architecture
--------------------------------------------
+
+
 BEGIN
 
-	gain : PROCESS(mod_dat, fm_depth)						-- Implementierung der FM-Depth
+gain : PROCESS(mod_dat, fm_depth)						-- Implementierung der FM-Depth
 	BEGIN
 		fgain <= to_integer(signed(mod_dat))*fm_depth;
-	END PROCESS;
+END PROCESS;
 	
-	addierer : PROCESS(M_fsig, fgain)						-- Addition der Signale für den M Wert des Carriers
-	BEGIN
+addierer : PROCESS(M_fsig, fgain)						-- Addition der Signale für den M Wert des Carriers
+BEGIN
 		IF M_fsig =0 THEN
 		car_M <=0;
 		ELSE
 		car_M <= M_fsig+fgain;
 		END IF;
-	END PROCESS;
+END PROCESS;
 	
 	
-	flipflop: PROCESS (next_reg_mod_M, clk, reset_n)		
-	BEGIN
+flipflop: PROCESS (next_reg_mod_M, clk, reset_n)		
+BEGIN
 			IF		reset_n = '0' 	THEN
 			reg_mod_M <= (OTHERS => '0');
 	ELSIF 	clk'EVENT AND clk = '1' THEN
 			reg_mod_M <= next_reg_mod_M;
 	END IF;
-	END PROCESS;
+END PROCESS;
 	
 	
-	logic_mod : PROCESS(vec_M_fsig, fm_ratio) 							-- Schieberegister für FM-Ration Einstellungen
-	BEGIN
-		
+logic_mod : PROCESS(vec_M_fsig, fm_ratio) 							-- Schieberegister für FM-Ration Einstellungen
+BEGIN		
 			CASE fm_ratio IS
 				WHEN 1 => 	next_reg_mod_M <= 	vec_M_fsig;								-- 1:1
 									
@@ -84,15 +75,13 @@ BEGIN
 				
 				WHEN OTHERS => next_reg_mod_M	<=		vec_M_fsig(13 downto 0) & "00";		--1:4
 			END CASE;	
-	END PROCESS;
+END PROCESS;
 	
-		
-	mod_on <= tone_on;												-- Signalzuweisungen
+	
+    -- signal assignment
+	mod_on <= tone_on;												
 	car_on <= tone_on;
 	vec_M_fsig <= std_logic_vector(to_signed(M_fsig, 16));
 	mod_M <= to_integer(signed(reg_mod_M));
-	
-	 -- End Architecture 
-------------------------------------------- 
 END rtl;
 	

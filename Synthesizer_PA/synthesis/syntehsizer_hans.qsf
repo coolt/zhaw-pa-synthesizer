@@ -577,22 +577,18 @@ set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_global_assignment -name VHDL_FILE ../source/audio_control.vhd
-set_global_assignment -name VHDL_FILE ../source/top_level.vhd
-set_global_assignment -name VHDL_FILE ../source/codeccontroller.vhd
-set_global_assignment -name VHDL_FILE ../source/read_midi.vhd
-set_global_assignment -name VHDL_FILE ../source/bit_sampling_generator.vhd
-set_global_assignment -name VHDL_FILE ../source/midi_control.vhd
 set_global_assignment -name VHDL_FILE ../source/UART_Top.vhd
-set_global_assignment -name VHDL_FILE ../source/Flanken_Det.vhd
+set_global_assignment -name VHDL_FILE ../source/top_level.vhd
 set_global_assignment -name VHDL_FILE ../source/tone_gen_pkg.vhd
 set_global_assignment -name VHDL_FILE ../source/tone_decoder.vhd
 set_global_assignment -name VHDL_FILE ../source/sync_block.vhd
+set_global_assignment -name VHDL_FILE ../source/std_logic_textio.vhd
 set_global_assignment -name VHDL_FILE ../source/S2P.vhd
 set_global_assignment -name VHDL_FILE ../source/reg_table_pkg.vhd
-set_global_assignment -name VHDL_FILE ../source/pll.vhd
+set_global_assignment -name VHDL_FILE ../source/read_midi.vhd
 set_global_assignment -name VHDL_FILE ../source/P2S.vhd
 set_global_assignment -name VHDL_FILE ../source/modulo_divider.vhd
+set_global_assignment -name VHDL_FILE ../source/midi_control.vhd
 set_global_assignment -name VHDL_FILE ../source/infrastructure_block.vhd
 set_global_assignment -name VHDL_FILE ../source/i2s_master.vhd
 set_global_assignment -name VHDL_FILE ../source/i2c_master.vhd
@@ -600,5 +596,10 @@ set_global_assignment -name VHDL_FILE ../source/FSM_BCLK_COUNT.vhd
 set_global_assignment -name VHDL_FILE ../source/fm_synth.vhd
 set_global_assignment -name VHDL_FILE ../source/fm_sel.vhd
 set_global_assignment -name VHDL_FILE ../source/fm_coder_7segment.vhd
+set_global_assignment -name VHDL_FILE ../source/Flanken_Det.vhd
 set_global_assignment -name VHDL_FILE ../source/dds.vhd
+set_global_assignment -name VHDL_FILE ../source/codeccontroller.vhd
+set_global_assignment -name VHDL_FILE ../source/codec_control.vhd
+set_global_assignment -name VHDL_FILE ../source/bit_sampling_generator.vhd
+set_global_assignment -name VHDL_FILE ../source/audio_control.vhd
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
