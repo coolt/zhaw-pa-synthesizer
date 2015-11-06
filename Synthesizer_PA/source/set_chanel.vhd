@@ -1,7 +1,7 @@
 -------------------------------------------
--- audio_control
+-- set_channel
 -------------------------------------------
--- copyright: herscmic (1. version)
+-- copyright: herscmic (1. version): audio_control
 -- commented: baek (2. version)
 --
 -- function:
@@ -14,7 +14,7 @@ USE ieee.numeric_std.all;
 
 
 
-ENTITY audio_control IS
+ENTITY set_chanel IS
  PORT (  ADCDAT_pl_i   :IN  std_logic_vector (15 DOWNTO 0);
    ADCDAT_pr_i   :IN  std_logic_vector (15 DOWNTO 0);
    DACDAT_pl_o   :OUT std_logic_vector (15 DOWNTO 0);
@@ -22,10 +22,10 @@ ENTITY audio_control IS
    AUDIO_MODE   :IN  std_logic;
    dds_DATA_I   :IN  std_logic_vector (15 DOWNTO 0)  
     );
-END audio_control;
+END set_chanel;
 
 
-ARCHITECTURE rtl OF audio_control IS
+ARCHITECTURE rtl OF set_chanel IS
 
 
 BEGIN

@@ -15,7 +15,7 @@ USE ieee.std_logic_1164.all;
 USE ieee.numeric_std.all;
 
 
-ENTITY S2P IS
+ENTITY seriel2paralel IS
 	PORT (		clk					:IN			std_logic;	--clk_12M
 				reset_n				:IN			std_logic;
 				BCLK				:IN			std_logic;
@@ -25,10 +25,10 @@ ENTITY S2P IS
 				ADCDAT_pl_o			:OUT		std_logic_vector(15 downto 0);	--Ausgang links parallel
 				ADCDAT_pr_o			:OUT		std_logic_vector(15 downto 0)	--Ausgang rechts parallel				
 		  );
-END S2P;
+END seriel2paralel;
 
 
-ARCHITECTURE rtl OF S2P IS
+ARCHITECTURE rtl OF seriel2paralel IS
 
 SIGNAL 			l_zustand:	 		std_logic_vector (15 DOWNTO 0);
 SIGNAL 			l_folgezustand:		std_logic_vector (15 DOWNTO 0);

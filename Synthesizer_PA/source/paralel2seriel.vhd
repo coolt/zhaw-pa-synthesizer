@@ -14,7 +14,7 @@ USE ieee.numeric_std.all;
 
 
 
-ENTITY P2S IS
+ENTITY paralel2seriel IS
 	PORT (		clk						:IN			std_logic;	--clk_12M
 				reset_n					:IN			std_logic;
 				BCLK					:IN			std_logic;
@@ -24,10 +24,10 @@ ENTITY P2S IS
 				DACDAT_pr_i				:IN			std_logic_vector(15 downto 0);
 				DACDAT_s_o				:OUT		std_logic
 		  );
-END P2S;
+END paralel2seriel;
 
 
-ARCHITECTURE rtl OF P2S IS
+ARCHITECTURE rtl OF paralel2seriel IS
 
 SIGNAL 			l_zustand:	 		std_logic_vector (15 DOWNTO 0);
 SIGNAL 			l_folgezustand:		std_logic_vector (15 DOWNTO 0);

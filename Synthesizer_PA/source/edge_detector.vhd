@@ -1,7 +1,7 @@
 -------------------------------------------
--- Detektor for falling edge
+-- Detektor falling edge
 -------------------------------------------
--- copyright: wii (1. version)
+-- copyright: wii (1. version): Flanken_Detektor
 -- commented: baek (2. version)
 --
 -- function:
@@ -15,18 +15,18 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 
 
-ENTITY Flanken_Det IS
+ENTITY edge_detector IS
   PORT(
     	clk_12M5  : IN    std_logic;
         serial_in : IN    std_logic;
         reset_n   : IN    std_logic;
     	edge      : OUT   std_logic
     	);
-END Flanken_Det;
+END edge_detector;
 
 
 
-ARCHITECTURE rtl OF Flanken_Det IS
+ARCHITECTURE rtl OF edge_detector IS
 
 	SIGNAL q1 : std_logic  := '0';
 	SIGNAL q2 : std_logic  := '0';

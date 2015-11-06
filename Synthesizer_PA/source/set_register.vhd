@@ -1,17 +1,11 @@
 -------------------------------------------
--- audio_control
+-- set register
 -------------------------------------------
--- copyright: herscmic (1. version)
+-- copyright: herscmic (1. version): code control
 -- commented: baek (2. version)
 --
 -- function:
-
--
--------------------------------------------------
--- configure register
--- 
--- function: 
--- set settings for audio codec register
+-- set the registers for the audio codec
 --------------------------------------------------
 
 LIBRARY ieee;
@@ -24,15 +18,15 @@ USE work.reg_table_pkg.all;
 
 
 ENTITY set_register IS
-  PORT( clk								:IN     	std_logic;
+  PORT( clk							:IN     	std_logic;
 		reset_n							:IN     	std_logic;
-		write_done_i 			    	:IN     	std_logic;
-		ack_error_i				     	:IN     	std_logic;
-		write_o     				    :OUT    	std_logic;
-		write_data_o  					:OUT		std_logic_vector (15 downto 0);
-		event_ctrl_i			 		:IN     	std_logic;
-		audio_mode_i					:IN			std_logic;	-- Umschalter für digital oder analog Loop
-		LED_out							:OUT 		std_logic
+		write_done_i 			  :IN     	std_logic;
+		ack_error_i				  :IN     	std_logic;
+		write_o     			  :OUT    	std_logic;
+		write_data_o      	:OUT		  std_logic_vector (15 downto 0);
+		event_ctrl_i			  :IN     	std_logic;
+		audio_mode_i				:IN			  std_logic;	-- Umschalter für digital oder analog Loop
+		LED_out							:OUT 	  	std_logic
 		);
 END set_register;										
 
@@ -42,7 +36,7 @@ ARCHITECTURE rtl OF set_register IS
 
 TYPE state IS (idle, start_write, send);
 
-SIGNAL folge_zustand			: 		state;
+SIGNAL folge_zustand		: 		state;
 SIGNAL zustand					:		state;
 SIGNAL last_reg					: 		std_logic;
 SIGNAL reg_idx, next_reg_idx	:		natural;
@@ -50,43 +44,38 @@ SIGNAL reg_idx, next_reg_idx	:		natural;
 
 
 BEGIN
-
-	--Statemachine
-	--Die States des Automaten sind:
-	--idle: Automat in Ruhe
-	--start_write: Automat gibt Sendestartsignal
-	--send: Sendevorgang
-	flip_flops : PROCESS(clk, reset_n)
-	BEGIN	
+--------------------------
+-- i2c fsm
+-- states: idle, start write, send
+-- comands (registers) are send to audio codec
+--------------------------
+flip_flops_fsm : PROCESS(clk, reset_n)
+BEGIN	
 		IF 		reset_n = '0' THEN
 				zustand<=  idle;
 		ELSIF	clk'EVENT AND clk = '1' THEN
 				zustand <=folge_zustand;
 		END IF;
-	 
-	END PROCESS;	 
+END PROCESS;	 
   
-  ------------------------------------------------
-  --Input logic state_machine
-logic: PROCESS (write_done_i, ack_error_i, event_ctrl_i, zustand, last_reg)
-	BEGIN
+
+input_fsm_logic: PROCESS (write_done_i, ack_error_i, event_ctrl_i, zustand, last_reg)
+BEGIN
 	folge_zustand <= zustand; 
 	CASE zustand IS
   
-		--idle Zustand
 		WHEN idle =>
-			IF 		event_ctrl_i ='1' THEN
+			IF 	event_ctrl_i ='1' THEN
 					folge_zustand <= start_write;
-			ELSE	folge_zustand <=idle;
-		
+			ELSE	
+          folge_zustand <=idle;		
 			END IF;
 	
-		-- start_write Zustand
-		WHEN	start_write =>	folge_zustand <= send;
+		WHEN	start_write =>	
+          folge_zustand <= send;
 			
-		-- send Zustand
 		WHEN send =>
-			IF 		write_done_i ='1' AND last_reg='0' THEN
+			IF 	write_done_i ='1' AND last_reg='0' THEN
 					folge_zustand <= start_write;
 			ELSIF 	ack_error_i='1' THEN
 					folge_zustand <= idle;
@@ -95,79 +84,81 @@ logic: PROCESS (write_done_i, ack_error_i, event_ctrl_i, zustand, last_reg)
 			ELSIF 	write_done_i='0' THEN 
 					folge_zustand<= send;
 			END IF;
+      
 		WHEN OTHERS =>
-		folge_zustand <= idle;
+		     folge_zustand <= idle;
 	END CASE; 
-	END PROCESS logic;
-	
--- Ausgangslogik state_machine
-ausg: PROCESS (zustand)
-	BEGIN
-		CASE zustand IS
-		WHEN start_write	=>	write_o	<='1';
-		WHEN OTHERS			=>	write_o	<='0';
-		END CASE;
 END PROCESS;
 	
---Zähler
---der Zähler soll von 0 bis 9 Zählen( mit jedem Signal vom I2S(write_done)
---bei 9 wird last_reg ein Signal(high) gegeben und der Zähler beginnt wieder bei 0
---FLIP FLOP PROCESS
+ausg_fsm: PROCESS (zustand)
+BEGIN
+		CASE zustand IS
+		  WHEN start_write	
+              =>	write_o	<='1';
+		  WHEN OTHERS			
+              =>	write_o	<='0';
+		END CASE;
+END PROCESS;
 
-flipflop: PROCESS (clk, reset_n)
-	BEGIN 
-
-		IF		reset_n='0' THEN 
-				reg_idx<=0;
+--------------------------------------
+-- counter for set registers
+-- each "write done" (= register set) counts counter up.
+-- count max is 9.
+-- is max achieved, last_reg recievs a '1', and counter is set to '0'. 
+--------------------------------------
+ff_cnt: PROCESS (clk, reset_n)
+BEGIN 
+		IF	reset_n='0' THEN 
+				reg_idx <= 0;
 		ELSIF	clk'EVENT AND clk='1' THEN
-				reg_idx<=next_reg_idx;
+				reg_idx <= next_reg_idx;
 		END IF;
 END PROCESS;
 
-	--Zähler Logik
-log: PROCESS (reg_idx, write_done_i)
-	BEGIN
 
-		IF write_done_i='1' THEN 
-			IF	reg_idx=9 THEN 
-				next_reg_idx<=0;
-				last_reg<='1';
+in_logic_cnt: PROCESS (reg_idx, write_done_i)
+BEGIN
+	IF write_done_i='1' THEN 
+			IF	reg_idx = 9 THEN 
+				next_reg_idx <= 0;
+				last_reg <= '1';
 			ELSE
 				next_reg_idx <= reg_idx +1;
 				last_reg <= '0';	
 			END IF;
-		ELSE 
+	ELSE 
 			next_reg_idx <= reg_idx;
 			last_reg <= '0';
-		END IF;
+	END IF;
 END PROCESS;
 
-	--Process für ack_error Anzeige mit Flipflop
+
 ack: PROCESS(ack_error_i, reset_n, clk)
-	BEGIN
-		IF		reset_n = '0' THEN
+BEGIN
+		IF reset_n = '0' THEN
 				LED_out <='0';
-		ELSIF 	clk'EVENT AND clk = '1' THEN
+		ELSIF clk'EVENT AND clk = '1' THEN
 				IF	ack_error_i ='1' THEN
-					LED_out <= '1';
-	
+					  LED_out <= '1';	
 				END IF;
 		END IF;
 END PROCESS;		
 
 
-	--Ausgangslogik für write_data_o 
-output: PROCESS(reg_idx, audio_mode_i)
-	BEGIN
+
+out_logic: PROCESS(reg_idx, audio_mode_i)
+BEGIN
 	--Adresse für I2C
 	write_data_o(15 downto 9) <= std_logic_vector(to_unsigned(reg_idx,7));
-		IF 		audio_mode_i ='1' THEN
-		--Einstellungen für Digitalloop
-				write_data_o(8 downto 0)<=C_W8731_ADC_DAC_0DB_8K(reg_idx);
-		-- Einstellungen für Analogloop
-		ELSE 	write_data_o(8 downto 0)<= C_W8731_ANALOG_BYPASS(reg_idx);
-		END IF;
-END PROCESS;
 	
+  IF 	audio_mode_i ='1' THEN
+		  --Einstellungen für Digitalloop
+			write_data_o(8 downto 0)<= C_W8731_ADC_DAC_0DB_8K(reg_idx);
+		
+  -- Einstellungen für Analogloop
+	ELSE 	
+      write_data_o(8 downto 0)<= C_W8731_ANALOG_BYPASS(reg_idx);
+	END IF;
+END PROCESS;
 
 END rtl;

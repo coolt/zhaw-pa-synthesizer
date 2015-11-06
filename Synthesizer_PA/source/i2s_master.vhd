@@ -48,7 +48,7 @@ SIGNAL		s_real_strobe:	std_logic;
 
 --Components Declaration
 ------------------------------------------
-COMPONENT FSM_BCLK_COUNT
+COMPONENT fsm_i2s
 	PORT(   clk,reset_n						:IN      std_logic;
 			init_n     						:IN      std_logic;
 			WS, WS_dly			    		:OUT     std_logic;
@@ -58,7 +58,7 @@ COMPONENT FSM_BCLK_COUNT
 		);
 END COMPONENT;
 
-COMPONENT P2S IS
+COMPONENT paralel2seriel IS
 	PORT( 	clk					:IN			std_logic;	--clk_12M
 			reset_n				:IN			std_logic;
 			BCLK				:IN			std_logic;
@@ -70,7 +70,7 @@ COMPONENT P2S IS
 		 );
 END COMPONENT;
 
-COMPONENT S2P IS
+COMPONENT seriel2paralel IS
 	PORT (	clk					:IN			std_logic;	--clk_12M
 			reset_n				:IN			std_logic;
 			BCLK				:IN			std_logic;
@@ -87,7 +87,7 @@ END COMPONENT;
 BEGIN
 
  
-FSM_BCLK_COUNT_INST: FSM_BCLK_COUNT
+inst_1: fsm_i2s
 	PORT MAP (	clk			=>		clk_12M,
 				reset_n		=>		i2s_reset_n,
 				WS			=>		WS_o,
@@ -100,7 +100,7 @@ FSM_BCLK_COUNT_INST: FSM_BCLK_COUNT
 				real_strobe =>		s_real_strobe
 			 );
 
-P2S_INST : P2S
+inst_2 : paralel2seriel
 	PORT MAP (  clk			=>		clk_12M,
 				reset_n		=>		i2s_reset_n,
 				BCLK		=>		s_BCLK,
@@ -111,7 +111,7 @@ P2S_INST : P2S
 				DACDAT_s_o		=>		s_DACDAT_s_o
 			  );
 
-S2P_INST : S2P
+inst_3: seriel2paralel
 	PORT MAP (	clk			=>		clk_12M,
 				reset_n		=>		i2s_reset_n,
 				BCLK		=>		s_BCLK,

@@ -7,19 +7,17 @@
 -- function:
 -- midi interface connected to analog/digital infrastructure
 
--- Bedienung: SW(17) 	= Codeccontroll ein/aus
---			  SW(16) 	= Analog Loop / Digital Loop : Settings fuer den Codeccontroller
---			  SW(15) 	= I2S ein/aus
---			  SW(14) 	= Mode audio_controll ( '0': Signale von Synthesizer,  '1': Digitalloop)
---			  SW(13) 	= '0': Töne per Tastatur, '1': Melodie
---			  SW(12) 	= Melodie: Mozart, kleine Nachtmusik
---			  SW(11) 	= Melodie: Tschaikovsky, Overture 1812
---			  SW(10) 	= Melodie: Beethoven, Für Elise
---			  SW(0-12)	= Töne per Tastatur (eine Oktave) wenn SW(13)='0'
+-- Bedienung: 
+--         SW(17) 	= Codec Control ein/aus 
+--			  SW(16) 	= Analog/Digital Loop 
+--			  SW(15) 	= I2S ein/aus  
+--			  SW(14) 	= Mode Audio Control ('0': Signale von Synthesizer,  
+--                                         '1': Digitalloop )
+
 --			  KEY(0) 	= Reset
 --			  KEY(1) 	= FM-Ratio aendern
 --			  KEY(2) 	= FM-Depth aendern
---			  KEY(3) 	= Melodie abspielen
+
 -------------------------------------------
 
 
@@ -43,9 +41,7 @@ ENTITY top_level IS
 			AUD_ADCLRCK				:OUT		std_logic;							--WS zum Codec bei AD Wandlung
 			I2C_SCLK				:OUT		std_logic;
 			I2C_SDAT				:INOUT		std_logic;
-			LEDG					:OUT 		std_logic_vector(7 DOWNTO 0);		--Led-Leuchten grün
-			HEX0, HEX3, HEX2		:OUT 		std_logic_vector (6 DOWNTO 0);		--Siebensegmentanzeigen
-			HEX4, HEX5, HEX1		:OUT 		std_logic_vector (6 DOWNTO 0)		--Siebensegmentanzeigen
+			LEDG					:OUT 		std_logic_vector(7 DOWNTO 0)	--Led-Leuchten grün
 		  );
 END top_level;
 
@@ -102,7 +98,7 @@ COMPONENT midi_control
 		  );
 END COMPONENT;
 
-COMPONENT codeccontroller
+COMPONENT set_register
 	PORT (	clk,reset_n	 			 		:IN      		std_logic;
 			write_done_i, ack_error_i   	:IN      		std_logic;
 			write_o     					:OUT   			std_logic;
@@ -148,12 +144,11 @@ COMPONENT i2s_master
 			DACDAT_s						:OUT			std_logic;
 			ADCDAT_pl						:OUT			std_logic_vector(15 downto 0);
 			ADCDAT_pr						:OUT			std_logic_vector(15 downto 0);
-			WS								:OUT			std_logic
-			
+			WS								:OUT			std_logic			
 		 );					
 END COMPONENT;
 
-COMPONENT audio_control
+COMPONENT set_chanel
 	PORT (	ADCDAT_pl_i				   :IN 			std_logic_vector (15 DOWNTO 0);
 			ADCDAT_pr_i						:IN 			std_logic_vector (15 DOWNTO 0);
 			DACDAT_pl_o						:OUT			std_logic_vector (15 DOWNTO 0);
@@ -175,15 +170,7 @@ END COMPONENT;
 
 
 		
-COMPONENT fm_coder_7segment		
-PORT(   	clk,reset_n						:IN 	     	std_logic;
-			count_i     					:IN 	     	std_logic_vector(1 DOWNTO 0);
-			fm_ratio						   :OUT	     	natural range 0 to 1000;
-			fm_depth		 	 			   :OUT	     	natural range 0 to 10;
-			hex_1, hex_2, hex_3			:OUT			std_logic_vector(6 DOWNTO 0);			
-			hex_4, hex_0, hex_m			:OUT 			std_logic_vector(6 DOWNTO 0)
-		);
-END COMPONENT;
+
 
 COMPONENT fm_synth
 PORT (		fm_clk_12M					:IN				std_logic;
@@ -201,7 +188,16 @@ END COMPONENT;
 
 
 BEGIN
--- Component instantiation
+
+inst_5 : infrastructure_block						
+	PORT MAP ( 	s_reset_n			=> 		KEY(0),
+				clk_50M				=>		CLOCK_50,
+				button				=>		SW,
+				key_in				=>		KEY(3 DOWNTO 1),
+				clk_12M				=>		tl_clk_12M5,
+				button_sync			=>		tl_sw_button,
+				key_sync			=>		tl_key
+				);
 
 inst_1: UART_Top 
 	PORT MAP(	serial_in      => GPIO_10,
@@ -224,7 +220,7 @@ inst_2: midi_control
 		  
 		  
 
-inst_3 : codeccontroller
+inst_3 : set_register
 	PORT MAP ( 	write_done_i    	=> 		tl_write_done,						
 				ack_error_i 	   	=> 		tl_ack_error,
 				write_o				=>		tl_write,
@@ -247,15 +243,7 @@ inst_4 : i2c_master
 				reset_n				=>		KEY(0)
 			   );
 			  
-inst_5 : infrastructure_block						
-	PORT MAP ( 	s_reset_n			=> 		KEY(0),
-				clk_50M				=>		CLOCK_50,
-				button				=>		SW,
-				key_in				=>		KEY(3 DOWNTO 1),
-				clk_12M				=>		tl_clk_12M5,
-				button_sync			=>		tl_sw_button,
-				key_sync			=>		tl_key
-				);
+
 
 inst_6 : i2s_master
 	PORT MAP (	clk_12M				=>		tl_clk_12M5,
@@ -272,7 +260,7 @@ inst_6 : i2s_master
 				WS					=>		tl_WS
 				);
 				
-inst_7 : audio_control
+inst_7 : set_chanel
 	PORT MAP (	ADCDAT_pl_i			=>		tl_ADCDAT_pl,
 				ADCDAT_pr_i			=>		tl_ADCDAT_pr,
 				DACDAT_pl_o			=>		tl_DACDAT_pl,
@@ -292,19 +280,7 @@ inst_8	: tone_decoder
 		);
 
 
-inst_9: fm_coder_7segment
-	PORT MAP (  clk					=> 		tl_clk_12M5,
-				reset_n				=> 		KEY(0),					
-				count_i  			=> 		tl_key (1 DOWNTO 0),				
-				fm_ratio			=> 		tl_fm_ratio,				
-				fm_depth			=> 		tl_fm_depth, 	 				
-				hex_1				=> 		HEX3,
-				hex_2				=> 		HEX2,
-				hex_3				=> 		HEX5, 
-				hex_4				=> 		HEX4, 
-				hex_0				=> 		HEX0,
-				hex_m				=>		HEX1
-		);	
+
 	
 inst_10: fm_synth
 	PORT MAP(	fm_clk_12M	 		=> 		tl_clk_12M5,	

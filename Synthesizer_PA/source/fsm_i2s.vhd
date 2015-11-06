@@ -1,7 +1,7 @@
 -------------------------------------------
--- fsm bclk count
+-- fsm i2s
 -------------------------------------------
--- copyright: herscmic (1. version)
+-- copyright: herscmic (1. version): BCLK_COUNT
 -- commented: baek (2. version)
 --
 -- function:
@@ -16,9 +16,8 @@ USE ieee.numeric_std.all;
 
 
 
--- Entity Declaration 
--------------------------------------------
-ENTITY FSM_BCLK_COUNT IS
+
+ENTITY fsm_i2s IS
   PORT(   clk,reset_n				:	IN      std_logic;
 		  init_n     						:	IN      std_logic;
 		  WS, WS_dly			    	:	OUT     std_logic;
@@ -26,11 +25,11 @@ ENTITY FSM_BCLK_COUNT IS
 		  ADCL_shift, ADCR_shift:	OUT 	std_logic;
 		  real_strobe						:	OUT		std_logic
 		);
-END FSM_BCLK_COUNT;										
+END fsm_i2s;										
 
 
 
-ARCHITECTURE rtl OF FSM_BCLK_COUNT IS
+ARCHITECTURE rtl OF fsm_i2s IS
 
 
 TYPE state IS (hold_R, load_dac, shift_adc_L, hold_L, shift_adc_R);
