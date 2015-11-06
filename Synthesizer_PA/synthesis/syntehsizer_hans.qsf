@@ -590,9 +590,7 @@ set_global_assignment -name VHDL_FILE ../source/S2P.vhd
 set_global_assignment -name VHDL_FILE ../source/reg_table_pkg.vhd
 set_global_assignment -name VHDL_FILE ../source/pll.vhd
 set_global_assignment -name VHDL_FILE ../source/P2S.vhd
-set_global_assignment -name VHDL_FILE ../source/music_list.vhd
 set_global_assignment -name VHDL_FILE ../source/modulo_divider.vhd
-set_global_assignment -name VHDL_FILE ../source/lied_fsm.vhd
 set_global_assignment -name VHDL_FILE ../source/infrastructure_block.vhd
 set_global_assignment -name VHDL_FILE ../source/i2s_master.vhd
 set_global_assignment -name VHDL_FILE ../source/i2c_master.vhd

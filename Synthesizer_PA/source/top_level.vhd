@@ -83,9 +83,8 @@ SIGNAL		tl_fm_depth:			natural range 0 to 10;							--Synthesizer Tiefe
 
 SIGNAL		tl_rx_data_valid:		std_logic;
 SIGNAL		tl_rx_data:				std_logic_vector(7 downto 0);
-SIGNAL		tl_note_value:			natural range 0 to 300;
-SIGNAL		tl_note_on:				std_logic;				
-SIGNAL		tl_note_off:			std_logic;				
+SIGNAL		tl_note_value:			natural range 0 to 128;
+SIGNAL		tl_note_on:				std_logic;							
 SIGNAL		tl_polyhonie_status:	std_logic;	
 
 --Components Declaration
@@ -103,12 +102,12 @@ COMPONENT midi_control
 			reset_n					:IN			std_logic;
 			rx_data_valid			:IN			std_logic;
 			rx_data 				:IN  		std_logic_vector(7 downto 0);   
-			note_an					:OUT		std_logic;
-			note_aus				:OUT		std_logic;
+			note_on					:OUT		std_logic;
 			polyphonie_status		:OUT 		std_logic;
-			note_value				:OUT 		natural range 0 to 300
+			note_value				:OUT 		natural range 0 to 128
 		  );
 END COMPONENT;
+
 COMPONENT codeccontroller
 	PORT (	clk,reset_n	 			 		:IN      		std_logic;
 			write_done_i, ack_error_i   	:IN      		std_logic;
@@ -161,7 +160,7 @@ COMPONENT i2s_master
 END COMPONENT;
 
 COMPONENT audio_control
-	PORT (	ADCDAT_pl_i						:IN 			std_logic_vector (15 DOWNTO 0);
+	PORT (	ADCDAT_pl_i				   :IN 			std_logic_vector (15 DOWNTO 0);
 			ADCDAT_pr_i						:IN 			std_logic_vector (15 DOWNTO 0);
 			DACDAT_pl_o						:OUT			std_logic_vector (15 DOWNTO 0);
 			DACDAT_pr_o						:OUT			std_logic_vector (15 DOWNTO 0);
@@ -171,12 +170,12 @@ COMPONENT audio_control
 END COMPONENT;
 
 COMPONENT tone_decoder
-	PORT (	clk								:IN				std_logic;	--clk_12M
+	PORT (	clk_12M5							:IN				std_logic;	
 			reset_n							:IN				std_logic;
-			tone_cmd						:IN				std_logic_vector(13 DOWNTO 0);
-			tone_on_o						:OUT			std_logic;
-			musik_start						:IN				std_logic;
-			N_CUM							:OUT 			natural range 0 to 65000
+			note_on					   	:IN				std_logic;
+			note_midi      :IN natural range 0 to 128;
+			tone_on						:OUT			std_logic;
+			N_CUM							   :OUT 			natural range 0 to 65000
 		);
 END COMPONENT;
 
@@ -185,23 +184,23 @@ END COMPONENT;
 COMPONENT fm_coder_7segment		
 PORT(   	clk,reset_n						:IN 	     	std_logic;
 			count_i     					:IN 	     	std_logic_vector(1 DOWNTO 0);
-			fm_ratio						:OUT	     	natural range 0 to 1000;
-			fm_depth		 	 			:OUT	     	natural range 0 to 10;
-			hex_1, hex_2, hex_3				:OUT			std_logic_vector(6 DOWNTO 0);			
-			hex_4, hex_0, hex_m				:OUT 			std_logic_vector(6 DOWNTO 0)
+			fm_ratio						   :OUT	     	natural range 0 to 1000;
+			fm_depth		 	 			   :OUT	     	natural range 0 to 10;
+			hex_1, hex_2, hex_3			:OUT			std_logic_vector(6 DOWNTO 0);			
+			hex_4, hex_0, hex_m			:OUT 			std_logic_vector(6 DOWNTO 0)
 		);
 END COMPONENT;
 
 COMPONENT fm_synth
-PORT (		fm_clk_12M						:IN				std_logic;
+PORT (		fm_clk_12M					:IN				std_logic;
 			fm_reset_n						:IN				std_logic;
 			fm_bclk							:IN				std_logic;
 			strobe							:IN				std_logic;
 			tone_on_i						:IN				std_logic;
-			N_CUM							:IN				natural range 0 to 65000;
+			N_CUM								:IN				natural range 0 to 65000;
 			synth_ratio						:IN				natural range 0 to 1000;
 			synth_depth						:IN				natural range 0 to 10;
-			data_o							:OUT			std_logic_vector(15 downto 0)
+			data_o							:OUT			   std_logic_vector(15 downto 0)
 		  );
 END COMPONENT;
 -- Begin Architecture
@@ -211,26 +210,27 @@ BEGIN
 -- Port Maps
 -------------------------------------------
 inst_1: UART_Top 
-	PORT MAP(	serial_in      		=> GPIO_10,
-			clk_12M5 					=> tl_clk_12M5,    
+	PORT MAP(	serial_in      => GPIO_10,
+			clk_12M5 				=> tl_clk_12M5,    
 			reset_n					=> KEY(0),
 			rx_data					=> tl_rx_data,
 			rx_data_valid			=> tl_rx_data_valid
 			);
 
 
-inst_10: midi_control 
-	PORT MAP(	clk_12M5					=> tl_clk_12M5,   
+inst_2: midi_control 
+	PORT MAP(	clk_12M5			=> tl_clk_12M5,   
 			reset_n					=> KEY(0),
 			rx_data_valid			=> tl_rx_data_valid,
 			rx_data					=> tl_rx_data, 
-			note_aus				=> tl_note_off, 
+			note_on					=> tl_note_on, 
 			polyphonie_status		=> tl_polyhonie_status,
 			note_value				=> tl_note_value
-		  );
+		  ); 
+		  
+		  
 
-
-CODECCONTROLLER_INST : codeccontroller
+inst_3 : codeccontroller
 	PORT MAP ( 	write_done_i    	=> 		tl_write_done,						
 				ack_error_i 	   	=> 		tl_ack_error,
 				write_o				=>		tl_write,
@@ -242,7 +242,7 @@ CODECCONTROLLER_INST : codeccontroller
 				audio_mode_i		=>		tl_sw_button(16)
 			  );
 			  
-I2C_MASTER_INST : i2c_master
+inst_4 : i2c_master
 	PORT MAP ( 	write_i				=>		tl_write,							
 				write_data_i		=>		tl_write_data,
 				sda_io				=>		I2C_SDAT,
@@ -253,7 +253,7 @@ I2C_MASTER_INST : i2c_master
 				reset_n				=>		KEY(0)
 			   );
 			  
-INFRASTRUCTURE_BLOCK_INST : infrastructure_block						
+inst_5 : infrastructure_block						
 	PORT MAP ( 	s_reset_n			=> 		KEY(0),
 				clk_50M				=>		CLOCK_50,
 				button				=>		SW,
@@ -263,7 +263,7 @@ INFRASTRUCTURE_BLOCK_INST : infrastructure_block
 				key_sync			=>		tl_key
 				);
 
-I2S_MASTER_INST : i2s_master
+inst_6 : i2s_master
 	PORT MAP (	clk_12M				=>		tl_clk_12M5,
 				i2s_reset_n			=>		KEY(0),
 				INIT_N_i			=>		tl_sw_button(15),
@@ -278,7 +278,7 @@ I2S_MASTER_INST : i2s_master
 				WS					=>		tl_WS
 				);
 				
-AUDIO_CONTROL_INST : audio_control
+inst_7 : audio_control
 	PORT MAP (	ADCDAT_pl_i			=>		tl_ADCDAT_pl,
 				ADCDAT_pr_i			=>		tl_ADCDAT_pr,
 				DACDAT_pl_o			=>		tl_DACDAT_pl,
@@ -287,19 +287,18 @@ AUDIO_CONTROL_INST : audio_control
 				dds_DATA_I			=>		tl_dacdat_g_o
 				
 				);
-
-TONE_DECODER_INST	: tone_decoder
-	PORT MAP(	clk					=>		tl_clk_12M5,
+				
+inst_8	: tone_decoder
+	PORT MAP(	clk_12M5					=>		tl_clk_12M5,
 				reset_n				=>		KEY(0),
-				tone_cmd			=>		tl_sw_button(13 DOWNTO 0),
-				tone_on_o			=>		tl_tone_on,
-				musik_start			=>		tl_key(2),
+				note_on        => tl_note_on,--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!¨¨
+				note_midi		=>		tl_note_value, -- !!!!!!!!!!!!!!!!!!!!!!!!
+				tone_on			=>		tl_tone_on,
 				N_CUM				=>		tl_n_cum
 		);
 
 
-
-FM_CODER_7SEGMENT_INST: fm_coder_7segment
+inst_9: fm_coder_7segment
 	PORT MAP (  clk					=> 		tl_clk_12M5,
 				reset_n				=> 		KEY(0),					
 				count_i  			=> 		tl_key (1 DOWNTO 0),				
@@ -313,7 +312,7 @@ FM_CODER_7SEGMENT_INST: fm_coder_7segment
 				hex_m				=>		HEX1
 		);	
 	
-FM_SYNTH_INST: fm_synth
+inst_10: fm_synth
 	PORT MAP(	fm_clk_12M	 		=> 		tl_clk_12M5,	
 				fm_reset_n			=> 		KEY(0),		
 				fm_bclk				=> 		tl_bclk,
