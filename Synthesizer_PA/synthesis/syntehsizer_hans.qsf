@@ -574,10 +574,13 @@ set_location_assignment PIN_D13 -to ENET1_LINK100
 set_location_assignment PIN_A14 -to ENETCLK_25
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name VHDL_FILE ../source/read_midi.vhd
+set_global_assignment -name VHDL_FILE ../source/bit_sampling_generator.vhd
 set_global_assignment -name VHDL_FILE ../source/midi_control.vhd
-set_global_assignment -name VHDL_FILE ../source/Tick_Generator.vhd
 set_global_assignment -name VHDL_FILE ../source/UART_Top.vhd
-set_global_assignment -name VHDL_FILE ../source/Abtaster.vhd
 set_global_assignment -name VHDL_FILE ../source/Flanken_Det.vhd
 set_global_assignment -name VHDL_FILE ../source/top_level.vhd
 set_global_assignment -name VHDL_FILE ../source/tone_gen_pkg.vhd
@@ -602,7 +605,4 @@ set_global_assignment -name VHDL_FILE ../source/codeccontroller.vhd
 set_global_assignment -name VHDL_FILE ../source/audio_control.vhd
 set_global_assignment -name CDF_FILE output_files/Chain1.cdf
 set_global_assignment -name CDF_FILE ../source/Chain2.cdf
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

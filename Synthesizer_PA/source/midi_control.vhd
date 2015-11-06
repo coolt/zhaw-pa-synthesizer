@@ -14,7 +14,7 @@ USE ieee.numeric_std.all;
 
 
 ENTITY midi_control IS
-	PORT (	clk						:IN			std_logic;	--clk_12M
+	PORT (	clk_12M5						:IN			std_logic;	
 			reset_n					:IN			std_logic;
 			rx_data_valid			:IN			std_logic;
 			rx_data 				:IN  		std_logic_vector(7 downto 0);   

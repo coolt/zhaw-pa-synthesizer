@@ -63,7 +63,7 @@ SIGNAL		tl_write_done:			std_logic;										--Sendebestätigung vom I2C Master
 SIGNAL		tl_ack_error:			std_logic;										--Senden fehlgeschlagen von I2C Master
 SIGNAL		tl_write:		  		std_logic;
 SIGNAL		tl_write_data:			std_logic_vector (15 downto 0);					--I2C Sendedaten
-SIGNAL		tl_clk_12M:				std_logic;										--Masterclock 12MHz
+SIGNAL		tl_clk_12M5:				std_logic;										--Masterclock 12MHz
 SIGNAL		tl_sw_button:			std_logic_vector (17 downto 0);					--synchronisierte Schalter
 SIGNAL		tl_key:					std_logic_vector (2 downto 0);					--synchronisierte Taster
 SIGNAL		tl_DACDAT_pl:			std_logic_vector (15 downto 0);					
@@ -91,7 +91,7 @@ SIGNAL		tl_polyhonie_status:	std_logic;
 --Components Declaration
 ------------------------------------------
 COMPONENT UART_Top 
-	PORT(	serial_in, clk, reset_n		: IN 		std_logic;
+	PORT(	serial_in, clk_12M5, reset_n		: IN 		std_logic;
 			rx_data						: OUT 		std_logic_vector(7 DOWNTO 0);
 			rx_data_valid				: OUT 		std_logic
 			);
@@ -99,7 +99,7 @@ END COMPONENT;
 
 
 COMPONENT midi_control
-	PORT (	clk						:IN			std_logic;	--clk_12M
+	PORT (	clk_12M5						:IN			std_logic;	
 			reset_n					:IN			std_logic;
 			rx_data_valid			:IN			std_logic;
 			rx_data 				:IN  		std_logic_vector(7 downto 0);   
@@ -212,7 +212,7 @@ BEGIN
 -------------------------------------------
 inst_1: UART_Top 
 	PORT MAP(	serial_in      		=> GPIO_10,
-			clk 					=> tl_clk_12M,    ---??????????????????????????????????????????????????????
+			clk_12M5 					=> tl_clk_12M5,    
 			reset_n					=> KEY(0),
 			rx_data					=> tl_rx_data,
 			rx_data_valid			=> tl_rx_data_valid
@@ -220,7 +220,7 @@ inst_1: UART_Top
 
 
 inst_10: midi_control 
-	PORT MAP(	clk					=> tl_clk_12M,    ---??????????????????????????????????????????????????????
+	PORT MAP(	clk_12M5					=> tl_clk_12M5,   
 			reset_n					=> KEY(0),
 			rx_data_valid			=> tl_rx_data_valid,
 			rx_data					=> tl_rx_data, 
@@ -236,7 +236,7 @@ CODECCONTROLLER_INST : codeccontroller
 				write_o				=>		tl_write,
 				write_data_o	  	=>		tl_write_data,
 				event_ctrl_i		=>		tl_sw_button(17),
-				clk					=>		tl_clk_12M,
+				clk					=>		tl_clk_12M5,
 				reset_n				=>		KEY(0),
 				LED_out				=>		LEDG(0),
 				audio_mode_i		=>		tl_sw_button(16)
@@ -249,7 +249,7 @@ I2C_MASTER_INST : i2c_master
 				scl_o			    =>		I2C_SCLK,
 				write_done_o		=>		tl_write_done,
 				ack_error_o			=>		tl_ack_error,
-				clk					=>		tl_clk_12M,
+				clk					=>		tl_clk_12M5,
 				reset_n				=>		KEY(0)
 			   );
 			  
@@ -258,13 +258,13 @@ INFRASTRUCTURE_BLOCK_INST : infrastructure_block
 				clk_50M				=>		CLOCK_50,
 				button				=>		SW,
 				key_in				=>		KEY(3 DOWNTO 1),
-				clk_12M				=>		tl_clk_12M,
+				clk_12M				=>		tl_clk_12M5,
 				button_sync			=>		tl_sw_button,
 				key_sync			=>		tl_key
 				);
 
 I2S_MASTER_INST : i2s_master
-	PORT MAP (	clk_12M				=>		tl_clk_12M,
+	PORT MAP (	clk_12M				=>		tl_clk_12M5,
 				i2s_reset_n			=>		KEY(0),
 				INIT_N_i			=>		tl_sw_button(15),
 				ADCDAT_s			=>		AUD_ADCDAT,
@@ -289,7 +289,7 @@ AUDIO_CONTROL_INST : audio_control
 				);
 
 TONE_DECODER_INST	: tone_decoder
-	PORT MAP(	clk					=>		tl_clk_12M,
+	PORT MAP(	clk					=>		tl_clk_12M5,
 				reset_n				=>		KEY(0),
 				tone_cmd			=>		tl_sw_button(13 DOWNTO 0),
 				tone_on_o			=>		tl_tone_on,
@@ -300,7 +300,7 @@ TONE_DECODER_INST	: tone_decoder
 
 
 FM_CODER_7SEGMENT_INST: fm_coder_7segment
-	PORT MAP (  clk					=> 		tl_clk_12M,
+	PORT MAP (  clk					=> 		tl_clk_12M5,
 				reset_n				=> 		KEY(0),					
 				count_i  			=> 		tl_key (1 DOWNTO 0),				
 				fm_ratio			=> 		tl_fm_ratio,				
@@ -314,7 +314,7 @@ FM_CODER_7SEGMENT_INST: fm_coder_7segment
 		);	
 	
 FM_SYNTH_INST: fm_synth
-	PORT MAP(	fm_clk_12M	 		=> 		tl_clk_12M,	
+	PORT MAP(	fm_clk_12M	 		=> 		tl_clk_12M5,	
 				fm_reset_n			=> 		KEY(0),		
 				fm_bclk				=> 		tl_bclk,
 				strobe				=> 		tl_strobe, 
@@ -329,7 +329,7 @@ FM_SYNTH_INST: fm_synth
 --Ausgangs/Eingangsignal--TL-Signalverbindung	
 AUD_ADCLRCK <= 	tl_WS;
 AUD_DACLRCK	<= 	tl_WS;
-AUD_XCK		<=	tl_clk_12M;
+AUD_XCK		<=	tl_clk_12M5;
 AUD_BCLK	<=	tl_bclk;
 
 	
