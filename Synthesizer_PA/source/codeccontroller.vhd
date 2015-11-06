@@ -23,10 +23,10 @@ ENTITY codeccontroller IS
 		write_done_i 			    	:IN     	std_logic;
 		ack_error_i				     	:IN     	std_logic;
 		write_o     				    :OUT    	std_logic;
-		write_data_o  					:OUT		std_logic_vector (15 downto 0)
-		--event_ctrl_i			 		:IN     	std_logic
-		--audio_mode_i					:IN			std_logic;	-- Umschalter für digital oder analog Loop
-		--LED_out							:OUT 		std_logic
+		write_data_o  					:OUT		std_logic_vector (15 downto 0);
+		event_ctrl_i			 		:IN     	std_logic;
+		audio_mode_i					:IN			std_logic;	-- Umschalter für digital oder analog Loop
+		LED_out							:OUT 		std_logic
 		);
 END codeccontroller;										
 
@@ -42,12 +42,6 @@ SIGNAL folge_zustand			: 		state;
 SIGNAL zustand					:		state;
 SIGNAL last_reg					: 		std_logic;
 SIGNAL reg_idx, next_reg_idx	:		natural;
- ------------------- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  -- default from (deletet switch)
-signal s_event:  std_logic := '1';
-
-
-
 
 
 -- Begin Architecture
@@ -69,17 +63,16 @@ BEGIN
 	 
 	END PROCESS;	 
   
- 
   ------------------------------------------------
   --Input logic state_machine
-	logic: PROCESS (write_done_i, ack_error_i, zustand, last_reg)
+	logic: PROCESS (write_done_i, ack_error_i, event_ctrl_i, zustand, last_reg)
 	BEGIN
 	folge_zustand <= zustand; 
 	CASE zustand IS
   
 		--idle Zustand
 		WHEN idle =>
-			IF 		s_event ='1' THEN
+			IF 		event_ctrl_i ='1' THEN
 					folge_zustand <= start_write;
 			ELSE	folge_zustand <=idle;
 		
@@ -150,10 +143,10 @@ BEGIN
 	ack: PROCESS(ack_error_i, reset_n, clk)
 	BEGIN
 		IF		reset_n = '0' THEN
-				--LED_out <='0';
+				LED_out <='0';
 		ELSIF 	clk'EVENT AND clk = '1' THEN
 				IF	ack_error_i ='1' THEN
-					--LED_out <= '1';
+					LED_out <= '1';
 	
 				END IF;
 		END IF;
@@ -161,14 +154,16 @@ BEGIN
 
 
 	--Ausgangslogik für write_data_o 
-	output: PROCESS(reg_idx)
+	output: PROCESS(reg_idx, audio_mode_i)
 	BEGIN
 	--Adresse für I2C
 	write_data_o(15 downto 9) <= std_logic_vector(to_unsigned(reg_idx,7));
-		
+		IF 		audio_mode_i ='1' THEN
 		--Einstellungen für Digitalloop
 				write_data_o(8 downto 0)<=C_W8731_ADC_DAC_0DB_8K(reg_idx);
-		
+		-- Einstellungen für Analogloop
+		ELSE 	write_data_o(8 downto 0)<= C_W8731_ANALOG_BYPASS(reg_idx);
+		END IF;
 	END PROCESS;
 	
 	

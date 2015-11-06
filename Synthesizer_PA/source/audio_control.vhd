@@ -3,7 +3,7 @@
 --version 0.1
 --05.04.2013
 
---Funktion: Verbindet der Links und rechts Vektoren von audio
+--Funktion: Verbindet momentan nur die Links und rechts Vektoren wenn AUDIO_MODE=1
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
@@ -17,7 +17,7 @@ ENTITY audio_control IS
 			ADCDAT_pr_i			:IN 	std_logic_vector (15 DOWNTO 0);
 			DACDAT_pl_o			:OUT	std_logic_vector (15 DOWNTO 0);
 			DACDAT_pr_o			:OUT	std_logic_vector (15 DOWNTO 0);
-			--AUDIO_MODE			:IN		std_logic;
+			AUDIO_MODE			:IN		std_logic;
 			dds_DATA_I			:IN		std_logic_vector (15 DOWNTO 0)
 			
 		  );
@@ -30,13 +30,16 @@ ARCHITECTURE rtl OF audio_control IS
 -------------------------------------------
 
 BEGIN
-verbindung: PROCESS( ADCDAT_pl_i, ADCDAT_pr_i, dds_DATA_I)
+verbindung: PROCESS( ADCDAT_pl_i, ADCDAT_pr_i, AUDIO_MODE, dds_DATA_I)
 
 BEGIN 
-	
+	IF AUDIO_MODE='1' THEN
 		DACDAT_pl_o <= ADCDAT_pl_i;
 		DACDAT_pr_o <= ADCDAT_pr_i;
-	
+	ELSE 
+		DACDAT_pl_o <= dds_DATA_I;
+		DACDAT_pr_o <= dds_DATA_I;
+	END IF;
 END PROCESS verbindung;	
 		
 
