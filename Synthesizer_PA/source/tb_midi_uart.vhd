@@ -45,10 +45,8 @@ END COMPONENT;
   CONSTANT MIDI_CLK_PERIOD	  : time := 32 us;  
   CONSTANT MIDI_CLK_HALFPERIOD: time := 16 us;
   
-  -- LSB first:  start bit is SEND_TEST(0), stop bit is SAND_TEST(9)
-  CONSTANT SEND_TEST:     STD_LOGIC_VECTOR (9 DOWNTO 0) := "1010101010";
-  CONSTANT DATA_TEST:     STD_LOGIC_VECTOR (7 DOWNTO 0) := "01010101";
-  
+  -- LSB first:  start bit is SEND(0), stop bit is SEND(9)
+ 
   CONSTANT SEND_0:        STD_LOGIC_VECTOR (9 DOWNTO 0) := "1000000000";
   CONSTANT DATA_0:        STD_LOGIC_VECTOR (7 DOWNTO 0) := "00000000";
   
@@ -97,47 +95,7 @@ begin
 		ASSERT (s_rx_data = "00000001" ) REPORT "Reset falsch bei data" SEVERITY NOTE;
 			
 		
-		-------------------------------------
-		-- Test 10101010
-		-------------------------------------
-		
-		-- Simulate line in idle state (4 bit)
-		s_serial_in <= s_idle ;
-        WAIT FOR 4 * MIDI_CLK_PERIOD; 
-        
-		-- Simulate midi send 10 bits    
-		s_temp_data <= SEND_TEST;				
-			s_serial_in <= s_temp_data(0); 				
-			WAIT FOR MIDI_CLK_PERIOD; 
-			s_serial_in <= s_temp_data(1); 				
-			WAIT FOR MIDI_CLK_PERIOD; 
-			s_serial_in <= s_temp_data(2); 				
-			WAIT FOR MIDI_CLK_PERIOD; 
-			s_serial_in <= s_temp_data(3); 				
-			WAIT FOR MIDI_CLK_PERIOD; 
-			s_serial_in <= s_temp_data(4); 				
-			WAIT FOR MIDI_CLK_PERIOD; 
-			s_serial_in <= s_temp_data(5); 				
-			WAIT FOR MIDI_CLK_PERIOD; 
-			s_serial_in <= s_temp_data(6); 				
-			WAIT FOR MIDI_CLK_PERIOD; 
-			s_serial_in <= s_temp_data(7); 				
-			WAIT FOR MIDI_CLK_PERIOD; 
-			s_serial_in <= s_temp_data(8); 				
-			WAIT FOR MIDI_CLK_PERIOD; 
-			s_serial_in <= s_temp_data(9); 				
-			WAIT FOR MIDI_CLK_PERIOD; 
-			
-	    -- Simulate line in idle state (4 bit)							
-	    s_serial_in <= s_idle;
-        WAIT FOR 4 * MIDI_CLK_PERIOD; 
-		    	
-	    
-	    -- Test result			
-	    ASSERT (s_rx_data = DATA_TEST) REPORT "Extraktion TEST 10101010 falsch" SEVERITY NOTE;
-	    ASSERT (s_rx_data_valid  = '1' ) REPORT "data valid bei TEST 10101010 falsch" SEVERITY NOTE;		
-	    
-	    
+		    
 	    -------------------------------------
 		-- Test 00000000
 		-------------------------------------
