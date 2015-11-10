@@ -75,7 +75,7 @@ END PROCESS;
 -- assign values 
 ------------------------------------------------
 addr 		<=	 to_integer(count(N_CUM-1  downto  N_CUM - N_LUT));
-dacdat_g_o	<=	 std_logic_vector(to_signed (LUT(addr) , N_AUDIO ));	
+dacdat_g_o	<=	 std_logic_vector(to_signed (LUT(addr) , N_AUDIO ));	  ---??? what ist LUT here
 
 END rtl;	
 	
