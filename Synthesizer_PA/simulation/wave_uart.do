@@ -1,11 +1,11 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
-add wave -noupdate /tb_uart/s_clk_12M5
-add wave -noupdate /tb_uart/s_reset_n
-add wave -noupdate /tb_uart/s_serial_in
-add wave -noupdate /tb_uart/s_rx_data
-add wave -noupdate /tb_uart/s_rx_data_valid
-add wave -noupdate /tb_uart/inst_1/baude_tick
+add wave -noupdate /tb_midi_uart/s_serial_in
+add wave -noupdate /tb_midi_uart/s_clk_12M5
+add wave -noupdate /tb_midi_uart/s_reset_n
+add wave -noupdate /tb_midi_uart/s_rx_data
+add wave -noupdate /tb_midi_uart/s_rx_data_valid
+add wave -noupdate /tb_midi_uart/inst_1/baude_tick
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1999999770 ps} 0}
 quietly wave cursor active 1
