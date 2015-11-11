@@ -13,6 +13,10 @@
 --
 ----------------------------------------------------------------------
 
+
+-- TO DO:
+-- check if signal note_vector is used
+
 LIBRARY		ieee;
 USE			ieee.std_logic_1164.all;
 USE			ieee.numeric_std.all;
@@ -52,7 +56,7 @@ PORT (clk_12M5:       	IN	std_logic;
 		rx_data_valid_i:  IN	std_logic;
 		rx_data_i:        IN  std_logic_vector(7 downto 0);
       note_valid_o:     OUT std_logic;  
-		note_value_o:     OUT std_logic_vector(8 downto 0)
+		note_out_o:     	OUT std_logic_vector(8 downto 0)
 		);
 END Component;
 	
@@ -60,7 +64,7 @@ COMPONENT polyphone_out IS
 PORT (	clk_12M5:  		IN  std_logic;	
         reset_n:	  		IN	 std_logic;
 		  note_valid_i: 	IN  std_logic;
-		  note_value_i:	IN  std_logic_vector(7 downto 0;)
+		  note_value_i:	IN  std_logic_vector(8 downto 0);
         note_1:     		OUT std_logic_vector(8 downto 0); 
 		  note_2:     		OUT std_logic_vector(8 downto 0); 
 		  note_3:     		OUT std_logic_vector(8 downto 0); 
@@ -73,6 +77,9 @@ PORT (	clk_12M5:  		IN  std_logic;
 		  note_10:    		OUT std_logic_vector(8 downto 0) 
       );
 END Component;
+
+-- split note vecotr
+SIGNAL s_note_vector: 	std_logic_vector(8 downto 0);
 
 -- connect uart top with midi control
 SIGNAL s_data_valid:		std_logic;
@@ -96,18 +103,18 @@ PORT MAP(serial_in      => serial_i,
 i_2: midi_control 
 PORT MAP(clk_12M5	      => clk_12M5_i, 
         reset_n	      => reset_n_i,	
-        rx_data_valid   => s_data_valid 
-		  rx_data         => s_midi_byte,	
-        note_valid      => s_note_valid,
-		  note_out        => s_note_out
+        rx_data_valid_i => s_data_valid, 
+		  rx_data_i       => s_midi_byte,	
+        note_valid_o    => s_note_valid,
+		  note_out_o      => s_note_byte
         );
        
 	
-i_3: polyphone_out IS
-PORT (	clk_12M5		=> clk_12M5_i,
+i_3: polyphone_out
+PORT MAP(clk_12M5		=> clk_12M5_i,
         reset_n		=> reset_n_i,	
-		  note_valid_i	=> s_note_valid
-		  note_value_i	=> s_note_byte
+		  note_valid_i	=> s_note_valid,
+		  note_value_i	=> s_note_byte,
         note_1			=> note_1_o,
 		  note_2			=> note_2_o,
 		  note_3			=> note_3_o,

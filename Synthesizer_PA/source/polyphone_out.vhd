@@ -22,7 +22,7 @@ ENTITY polyphone_out IS
 	PORT (		clk_12M5:  		IN  std_logic;	
         reset_n:	  		IN	 std_logic;
 		  note_valid_i: 	IN  std_logic;
-		  note_value_i:	IN  std_logic_vector(7 downto 0;)
+		  note_value_i:	IN  std_logic_vector(8 downto 0);
         note_1:     		OUT std_logic_vector(8 downto 0); 
 		  note_2:     		OUT std_logic_vector(8 downto 0); 
 		  note_3:     		OUT std_logic_vector(8 downto 0); 
@@ -39,9 +39,9 @@ END polyphone_out;
 
 ARCHITECTURE rtl OF polyphone_out IS
 
-SIGNAL	s_note_1:         std_logic_vector( 7 DOWNTO 0 ) := "00000000";;
-SIGNAL	s_next_note_1:    std_logic_vector( 7 DOWNTO 0 );
-SIGNAL  s_note_on:          std_logic := '0';
+SIGNAL s_note_1:         std_logic_vector(8 DOWNTO 0 ) := "000000000";
+SIGNAL s_next_note_1:    std_logic_vector(8 DOWNTO 0 );
+SIGNAL s_note_on:        std_logic := '0';
 
 BEGIN
 
