@@ -49,39 +49,43 @@ END top_level;
 ARCHITECTURE rtl OF top_level IS
 
 -- infrastucture
-SIGNAL		tl_clk_12M5:				std_logic;										
-SIGNAL		tl_sw_button:			std_logic_vector (17 downto 0);					
-SIGNAL		tl_key:					std_logic_vector (2 downto 0);					
+SIGNAL		tl_clk_12M5:			std_logic;										
+SIGNAL		tl_sw_sync:			std_logic_vector (17 downto 0);					
+SIGNAL		tl_key_sync:					std_logic_vector (2 downto 0);					
 
--- midi interface
-SIGNAL		tl_rx_data_valid:		std_logic;
-SIGNAL		tl_rx_data:				std_logic_vector(7 downto 0);
-SIGNAL		tl_note_out:			std_logic_vector(24 downto 0); --- connect to tone_generator in
-	
+-- midi interface - tone generator
+SIGNAL		tl_note_1:				std_logic_vector(8 downto 0);
+SIGNAL		tl_note_2:				std_logic_vector(8 downto 0);
+SIGNAL		tl_note_3:				std_logic_vector(8 downto 0);
+SIGNAL		tl_note_4:				std_logic_vector(8 downto 0);
+SIGNAL		tl_note_5:				std_logic_vector(8 downto 0);
+SIGNAL		tl_note_6:				std_logic_vector(8 downto 0);
+SIGNAL		tl_note_7:				std_logic_vector(8 downto 0);
+SIGNAL		tl_note_8:				std_logic_vector(8 downto 0);
+SIGNAL		tl_note_9:				std_logic_vector(8 downto 0);
+SIGNAL		tl_note_10:				std_logic_vector(8 downto 0);	
 			
 
--- tone generator
-SIGNAL		tl_tone_on:				std_logic; 										--fuer fm_synth 
-SIGNAL		tl_n_cum:				natural range 0 to 65000;						--Tonhöhe 
-SIGNAL		tl_strobe:				std_logic;
-SIGNAL		tl_dacdat_g_o:			std_logic_vector(15 downto 0);
-SIGNAL		tl_fm_ratio:			natural range 0 to 10;							--Synthesizer Verhältnis						
-SIGNAL		tl_fm_depth:			natural range 0 to 10;							--Synthesizer Tiefe
+-- tone generator -- audio interface
+SIGNAL		tl_DACDAT_pl:			std_logic_vector (15 downto 0);					
+SIGNAL		tl_DACDAT_pr:			std_logic_vector (15 downto 0);	
 
--- audio interface
-SIGNAL 		tl_bclk:				std_logic;										--halbierter 12MHz Takt
+
+-- audio interface intern
 SIGNAL		tl_write_done:			std_logic;										--Sendebestätigung vom I2C Master
 SIGNAL		tl_ack_error:			std_logic;										--Senden fehlgeschlagen von I2C Master
 SIGNAL		tl_write:		  		std_logic;
 SIGNAL		tl_write_data:			std_logic_vector (15 downto 0);					--I2C Sendedaten
-SIGNAL		tl_DACDAT_pl:			std_logic_vector (15 downto 0);					
-SIGNAL		tl_DACDAT_pr:			std_logic_vector (15 downto 0);				
-SIGNAL		tl_ADCDAT_pl:			std_logic_vector (15 downto 0);
-SIGNAL		tl_ADCDAT_pr:			std_logic_vector (15 downto 0);
-SIGNAL		tl_WS:					std_logic;
+
+-- audio interface -- infrastructure
 SIGNAL 		tl_digiloop:			std_logic;										--Audioschleife über Digitalloop
 SIGNAL		t_audio_mode_i:			std_logic;
-										
+
+-- audio interface -- codec [!!!!!! kein signal!!!!]										
+SIGNAL 		tl_bclk:				std_logic;										--halbierter 12MHz Takt
+SIGNAL		tl_WS:					std_logic;
+SIGNAL		tl_ADCDAT_pl:			std_logic_vector (15 downto 0);
+SIGNAL		tl_ADCDAT_pr:			std_logic_vector (15 downto 0);
 
 
 --Components Declaration
@@ -100,11 +104,40 @@ END COMPONENT;
 
 
 COMPONENT midi_interface
-PORT(   clk_12M5:   IN std_logic; 
-        reset_n:    IN std_logic;
-        midi_in:    IN std_logic; 
-        note_out:   OUT std_logic_vector(24 downto 0); 
-        led_out_of_range: OUT std_logic
+PORT(   clk_12M5_i:   IN std_logic; 
+        reset_n_i:    IN std_logic;
+        serial_i:     IN std_logic; 
+        note_1_o:     OUT std_logic_vector(8 downto 0); 
+		  note_2_o:     OUT std_logic_vector(8 downto 0); 
+		  note_3_o:     OUT std_logic_vector(8 downto 0); 
+		  note_4_o:     OUT std_logic_vector(8 downto 0); 
+		  note_5_o:     OUT std_logic_vector(8 downto 0); 
+		  note_6_o:     OUT std_logic_vector(8 downto 0); 
+		  note_7_o:     OUT std_logic_vector(8 downto 0); 
+		  note_8_o:     OUT std_logic_vector(8 downto 0); 
+		  note_9_o:     OUT std_logic_vector(8 downto 0); 
+		  note_10_o:    OUT std_logic_vector(8 downto 0) 
+		  );
+END COMPONENT;
+
+
+COMPONENT tone_generator
+PORT(clk_12M5_i:   IN std_logic; 
+        reset_n_i:    IN std_logic;
+        serial_i:     IN std_logic; 
+        note_1_o:     IN std_logic_vector(8 downto 0); 
+		  note_2_o:     IN std_logic_vector(8 downto 0); 
+		  note_3_o:     IN std_logic_vector(8 downto 0); 
+		  note_4_o:     IN std_logic_vector(8 downto 0); 
+		  note_5_o:     IN std_logic_vector(8 downto 0); 
+		  note_6_o:     IN std_logic_vector(8 downto 0); 
+		  note_7_o:     IN std_logic_vector(8 downto 0); 
+		  note_8_o:     IN std_logic_vector(8 downto 0); 
+		  note_9_o:     IN std_logic_vector(8 downto 0); 
+		  note_10_o:    IN std_logic_vector(8 downto 0);
+		  dacdat_l_o:   OUT std_logic_vector(15 downto 0);
+		  dacdat_r_o:   OUT std_logic_vector(15 downto 0)   
+        );
 END COMPONENT;
 
 -- blocks audio interface
@@ -154,75 +187,72 @@ COMPONENT set_chanel
 		 );
 END COMPONENT;
 
--- blocks tone generator
-COMPONENT tone_decoder
-	PORT (	clk_12M5					:IN				std_logic;	
-			reset_n						:IN				std_logic;
-			note_on					   	:IN				std_logic;
-			note_midi                   :IN             natural range 0 to 128;
-			tone_on						:OUT			std_logic;
-			N_CUM					    :OUT 			natural range 0 to 65000
-		);
-END COMPONENT;
-COMPONENT fm_synth
-PORT (		fm_clk_12M					    :IN				std_logic;
-			fm_reset_n						:IN				std_logic;
-			fm_bclk							:IN				std_logic;
-			strobe							:IN				std_logic;
-			tone_on_i						:IN				std_logic;
-			N_CUM						    :IN				natural range 0 to 65000;
-			synth_ratio						:IN				natural range 0 to 1000;
-			synth_depth						:IN				natural range 0 to 10;
-			data_o							:OUT			 std_logic_vector(15 downto 0)
-		  );
-END COMPONENT;
 
 
 
 BEGIN
 
-inst_5 : infrastructure_block						
+inst_1 : infrastructure_block						
 	PORT MAP ( 	s_reset_n			=> 		KEY(0),
 				clk_50M				=>		CLOCK_50,
 				button				=>		SW,
 				key_in				=>		KEY(3 DOWNTO 1),
 				clk_12M				=>		tl_clk_12M5,
-				button_sync			=>		tl_sw_button,
-				key_sync			=>		tl_key
+				button_sync			=>		tl_sw_sync,
+				key_sync			=>		tl_key_sync
 				);
-
-inst_1: uart_top 
-	PORT MAP(	serial_in           => 
-			clk_12M5 				=> tl_clk_12M5,    
-			reset_n					=> KEY(0),
-			rx_data					=> tl_rx_data,
-			rx_data_valid			=> tl_rx_data_valid
-			);
 
 
 inst_2: midi_interface
-PORT MAP(	clk_12M5	            => tl_clk_12M5,
-			reset_n					=> KEY(0),
-			midi_in                 => GPIO_10,
-            note_out                =>  OUT std_logic_vector(24 downto 0); 
-            led_out_of_range        => LEDG(1)
+PORT MAP(clk_12M5_i     =>  tl_clk_12M5,
+        reset_n_i       =>  tl_key_sync(0),
+        serial_i        =>  GPIO_10, 
+        note_1_o        =>  tl_note_1,
+		  note_2_o      =>  tl_note_2,
+		  note_3_o      =>  tl_note_3,
+		  note_4_o      =>  tl_note_4,
+		  note_5_o      =>  tl_note_5, 
+		  note_6_o      =>  tl_note_6,
+		  note_7_o      =>  tl_note_7,
+		  note_8_o      =>  tl_note_8,
+		  note_9_o      =>  tl_note_9, 
+		  note_10_o     =>  tl_note_10
 		  ); 
 		  
-	  
 
-inst_3 : set_register
+inst_3: tone_generator
+PORT MAP(clk_12M5_i      =>  tl_clk_12M5,
+        reset_n_i       =>  tl_key_sync(0),
+        note_1_o        =>  tl_note_1,
+		  note_2_o      =>  tl_note_2,
+		  note_3_o      =>  tl_note_3,
+		  note_4_o      =>  tl_note_4, 
+		  note_5_o      =>  tl_note_5,
+		  note_6_o      =>  tl_note_6,
+		  note_7_o      =>  tl_note_7,
+		  note_8_o      =>  tl_note_8, 
+		  note_9_o      =>  tl_note_9,
+		  note_10_o     =>  tl_note_10,
+		  dacdat_l_o    =>  tl_DACDAT_pl,
+		  dacdat_r_o    =>  tl_DACDAT_pr
+		  );              
+
+
+	  
+-- blocks audio interface
+inst_4 : set_register
 	PORT MAP ( 	write_done_i    	=> 		tl_write_done,						
 				ack_error_i 	   	=> 		tl_ack_error,
 				write_o				=>		tl_write,
 				write_data_o	  	=>		tl_write_data,
-				event_ctrl_i		=>		tl_sw_button(17),
+				event_ctrl_i		=>		tl_sw_sync(17),
 				clk					=>		tl_clk_12M5,
-				reset_n				=>		KEY(0),
+				reset_n				=>		tl_key_sync(0),
 				LED_out				=>		LEDG(0),
-				audio_mode_i		=>		tl_sw_button(16)
+				audio_mode_i		=>		tl_sw_sync(16)
 			  );
 			  
-inst_4 : i2c_master
+inst_5 : i2c_master
 	PORT MAP ( 	write_i				=>		tl_write,							
 				write_data_i		=>		tl_write_data,
 				sda_io				=>		I2C_SDAT,
@@ -230,15 +260,13 @@ inst_4 : i2c_master
 				write_done_o		=>		tl_write_done,
 				ack_error_o			=>		tl_ack_error,
 				clk					=>		tl_clk_12M5,
-				reset_n				=>		KEY(0)
+				reset_n				=>		tl_key_sync(0)
 			   );
 			  
-
-
 inst_6 : i2s_master
 	PORT MAP (	clk_12M				=>		tl_clk_12M5,
-				i2s_reset_n			=>		KEY(0),
-				INIT_N_i			=>		tl_sw_button(15),
+				i2s_reset_n			=>		tl_key_sync(0),,
+				INIT_N_i			=>		tl_sw_sync(15),
 				ADCDAT_s			=>		AUD_ADCDAT,
 				DACDAT_pl			=>		tl_DACDAT_pl,
 				DACDAT_pr			=>		tl_DACDAT_pr,
@@ -255,34 +283,11 @@ inst_7 : set_chanel
 				ADCDAT_pr_i			=>		tl_ADCDAT_pr,
 				DACDAT_pl_o			=>		tl_DACDAT_pl,
 				DACDAT_pr_o			=>		tl_DACDAT_pr,
-				AUDIO_MODE			=>		tl_sw_button(14),
+				AUDIO_MODE			=>		tl_sw_sync(14),
 				dds_DATA_I			=>		tl_dacdat_g_o
 				
 				);
 				
-inst_8	: tone_decoder
-	PORT MAP(	clk_12M5					=>		tl_clk_12M5,
-				reset_n				=>		KEY(0),
-				note_on          => tl_note_on,--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!¨¨
-				note_midi		=>		tl_note_value, -- !!!!!!!!!!!!!!!!!!!!!!!!
-				tone_on			=>		tl_tone_on,
-				N_CUM				=>		tl_n_cum
-		);
-
-
-
-	
-inst_10: fm_synth
-	PORT MAP(	fm_clk_12M	 		=> 		tl_clk_12M5,	
-				fm_reset_n			=> 		KEY(0),		
-				fm_bclk				=> 		tl_bclk,
-				strobe				=> 		tl_strobe, 
-				tone_on_i			=> 		tl_tone_on,
-				N_CUM				=> 		tl_n_cum,
-				synth_ratio			=> 		tl_fm_ratio,
-				synth_depth			=> 		tl_fm_depth,
-				data_o				=> 		tl_dacdat_g_o
-		  );
 
 
 -- signal assignment

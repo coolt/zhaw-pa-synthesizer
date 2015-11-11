@@ -78,8 +78,8 @@ inst_1: UART_Top
 	VARIABLE valid_ti: std_logic_vector(3 downto 0);
 		
 	begin
-	FILE_OPEN(cmdfile,"../simulation/script/test_midi.txt", READ_MODE);
-	FILE_OPEN(outfile,"../simulation/script/result_test_midi.txt",WRITE_MODE);
+	FILE_OPEN(cmdfile,"../simulation/script/input_midi.txt", READ_MODE);
+	FILE_OPEN(outfile,"../simulation/script/result_midi.txt",WRITE_MODE);
 	
 	-------------------------------------
 	-- Initial value 
@@ -147,25 +147,25 @@ inst_1: UART_Top
 		if (cmd_ti = string'("10_bit")) THEN		
 			
 			-- Simulate midi send 10 bits
-			s_serial_in <= midi_send_ti(9); 				
+			s_serial_in <= s_temp_data(0); 				
 			WAIT FOR MIDI_CLK_PERIOD; 
-			s_serial_in <= midi_send_ti(8); 				
+			s_serial_in <= s_temp_data(1); 				
 			WAIT FOR MIDI_CLK_PERIOD; 
-			s_serial_in <= midi_send_ti(7); 				
+			s_serial_in <= s_temp_data(2); 				
 			WAIT FOR MIDI_CLK_PERIOD; 
-			s_serial_in <= midi_send_ti(6); 				
+			s_serial_in <= s_temp_data(3); 				
 			WAIT FOR MIDI_CLK_PERIOD; 
-			s_serial_in <= midi_send_ti(5); 				
+			s_serial_in <= s_temp_data(4); 				
 			WAIT FOR MIDI_CLK_PERIOD; 
-			s_serial_in <= midi_send_ti(4); 				
+			s_serial_in <= s_temp_data(5); 				
 			WAIT FOR MIDI_CLK_PERIOD; 
-			s_serial_in <= midi_send_ti(3); 				
+			s_serial_in <= s_temp_data(6); 				
 			WAIT FOR MIDI_CLK_PERIOD; 
-			s_serial_in <= midi_send_ti(2); 				
+			s_serial_in <= s_temp_data(7); 				
 			WAIT FOR MIDI_CLK_PERIOD; 
-			s_serial_in <= midi_send_ti(1); 				
+			s_serial_in <= s_temp_data(8); 				
 			WAIT FOR MIDI_CLK_PERIOD; 
-			s_serial_in <= midi_send_ti(0); 				
+			s_serial_in <= s_temp_data(9); 				
 			WAIT FOR MIDI_CLK_PERIOD; 	
 			
 						
