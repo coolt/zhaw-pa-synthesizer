@@ -92,7 +92,7 @@ SIGNAL s_note_byte:	   std_logic_vector(8 downto 0);
 
 BEGIN
 
-i_1: uart_top
+i_uart_top: uart_top
 PORT MAP(serial_in      => serial_i,
         clk_12M5        => clk_12M5_i, 
         reset_n	      => reset_n_i,	
@@ -100,7 +100,7 @@ PORT MAP(serial_in      => serial_i,
         rx_data_valid   => s_data_valid 
         );
 	
-i_2: midi_control 
+i_midi_control: midi_control 
 PORT MAP(clk_12M5	      => clk_12M5_i, 
         reset_n	      => reset_n_i,	
         rx_data_valid_i => s_data_valid, 
@@ -110,7 +110,7 @@ PORT MAP(clk_12M5	      => clk_12M5_i,
         );
        
 	
-i_3: polyphone_out
+i_polyphone_out: polyphone_out
 PORT MAP(clk_12M5		=> clk_12M5_i,
         reset_n		=> reset_n_i,	
 		  note_valid_i	=> s_note_valid,

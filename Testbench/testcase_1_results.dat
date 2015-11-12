@@ -1,0 +1,79 @@
+*** I2S Master Testresultate ***
+--------------------------------------------
+DAC links  ok  :Input: 0000 Output: 0000
+DAC rechts ok  :Input: 0000 Output: 0000
+ADC links  ok  :Input: 0000 Output: 0000
+ADC rechts ok  :Input: 0000 Output: 0000
+--------------------------------------------
+DAC links  ok  :Input: 0000 Output: 0000
+DAC rechts ok  :Input: 0000 Output: 0000
+ADC links  ok  :Input: 0000 Output: 0000
+ADC rechts ok  :Input: 0000 Output: 0000
+--------------------------------------------
+DAC links  ok  :Input: FFFF Output: FFFF
+DAC rechts ok  :Input: FFFF Output: FFFF
+ADC links  ok  :Input: FFFF Output: FFFF
+ADC rechts ok  :Input: FFFF Output: FFFF
+--------------------------------------------
+DAC links  ok  :Input: 0000 Output: 0000
+DAC rechts ok  :Input: 0000 Output: 0000
+ADC links  ok  :Input: FFFF Output: FFFF
+ADC rechts ok  :Input: FFFF Output: FFFF
+--------------------------------------------
+DAC links  ok  :Input: FFFF Output: FFFF
+DAC rechts ok  :Input: 0000 Output: 0000
+ADC links  ok  :Input: 0000 Output: 0000
+ADC rechts ok  :Input: 0000 Output: 0000
+--------------------------------------------
+DAC links  ok  :Input: 0000 Output: 0000
+DAC rechts ok  :Input: FFFF Output: FFFF
+ADC links  ok  :Input: AAAA Output: AAAA
+ADC rechts ok  :Input: CCCC Output: CCCC
+--------------------------------------------
+DAC links  ok  :Input: AAAA Output: AAAA
+DAC rechts ok  :Input: CCCC Output: CCCC
+ADC links  ok  :Input: CCCC Output: CCCC
+ADC rechts ok  :Input: AAAA Output: AAAA
+--------------------------------------------
+DAC links  ok  :Input: CCCC Output: CCCC
+DAC rechts ok  :Input: AAAA Output: AAAA
+ADC links  ok  :Input: 0000 Output: 0000
+ADC rechts ok  :Input: FFFF Output: FFFF
+--------------------------------------------
+DAC links  ok  :Input: 5555 Output: 5555
+DAC rechts ok  :Input: 8001 Output: 8001
+ADC links  ok  :Input: FFFF Output: FFFF
+ADC rechts ok  :Input: 0000 Output: 0000
+--------------------------------------------
+DAC links  ok  :Input: 8001 Output: 8001
+DAC rechts ok  :Input: 3333 Output: 3333
+ADC links  ok  :Input: 3333 Output: 3333
+ADC rechts ok  :Input: 7FFE Output: 7FFE
+--------------------------------------------
+DAC links  ok  :Input: 3333 Output: 3333
+DAC rechts ok  :Input: 7FFE Output: 7FFE
+ADC links  ok  :Input: 7FFE Output: 7FFE
+ADC rechts ok  :Input: 5555 Output: 5555
+--------------------------------------------
+DAC links  ok  :Input: 7FFE Output: 7FFE
+DAC rechts ok  :Input: 5555 Output: 5555
+ADC links  ok  :Input: 5555 Output: 5555
+ADC rechts ok  :Input: 8001 Output: 8001
+--------------------------------------------
+DAC links  ok  :Input: FF00 Output: FF00
+DAC rechts ok  :Input: 000F Output: 000F
+ADC links  ok  :Input: 8001 Output: 8001
+ADC rechts ok  :Input: 3333 Output: 3333
+--------------------------------------------
+DAC links  ok  :Input: 00FF Output: 00FF
+DAC rechts ok  :Input: FF00 Output: FF00
+ADC links  ok  :Input: F000 Output: F000
+ADC rechts ok  :Input: 00FF Output: 00FF
+--------------------------------------------
+DAC links  ok  :Input: 0000 Output: 0000
+DAC rechts ok  :Input: 0000 Output: 0000
+ADC links  ok  :Input: 000F Output: 000F
+ADC rechts ok  :Input: F000 Output: F000
+--------------------------------------------
+Simulationsdauer:310200 ns
+Test erfolgreich

@@ -200,7 +200,7 @@ END COMPONENT;
 
 BEGIN
 
-inst_1: infrastructure_block						
+infrastruct: infrastructure_block						
 PORT MAP ( 
 		s_reset_n	=> KEY(0),
 		clk_50M		=>	CLOCK_50,
@@ -211,7 +211,7 @@ PORT MAP (
 		key_sync		=>	tl_key_sync
 		);
 
-inst_2: midi_interface
+i_midi_interface: midi_interface
 PORT MAP(
 		clk_12M5_i   => tl_clk_12M5,
 		reset_n_i    => tl_key_sync(0),
@@ -228,7 +228,7 @@ PORT MAP(
 		note_10_o    => tl_note_10
 		); 
 	  
-inst_3: tone_generator
+i_tone_generator: tone_generator
 PORT MAP(
 		clk_12M5_i    => tl_clk_12M5,
 		reset_n_i     => tl_key_sync(0),
@@ -248,7 +248,7 @@ PORT MAP(
 
 	  
 -- blocks audio interface
-inst_4: set_register
+codec_control: set_register
 PORT MAP ( 	
 		write_done_i   => tl_write_done,						
 		ack_error_i 	=> tl_ack_error,
@@ -260,8 +260,8 @@ PORT MAP (
 		LED_out			=>	LEDG(0),
 		audio_mode_i	=>	tl_sw_sync(16)
 	  );
-			  
-inst_5: i2c_master
+
+i_i2c_master: i2c_master
 PORT MAP ( 	
 		write_i			=>	tl_write,							
 		write_data_i	=>	tl_write_data,
@@ -273,7 +273,7 @@ PORT MAP (
 		reset_n			=>	tl_key_sync(0)
 		);
 		  
-inst_6: i2s_master
+i_i2s_master: i2s_master
 PORT MAP (	
 		clk_12M			=>	tl_clk_12M5,
 		i2s_reset_n		=>	tl_key_sync(0),
@@ -289,7 +289,7 @@ PORT MAP (
 		WS					=>	tl_WS
 		);
 				
-inst_7_audio_ctr: set_chanel
+audio_control: set_chanel
 PORT MAP (	
 		ADCDAT_pl_i		=>	tl_ADCDAT_pl,
 		ADCDAT_pr_i		=>	tl_ADCDAT_pr,
@@ -303,7 +303,6 @@ PORT MAP (
 
 
 -- signal assignment
-
 AUD_ADCLRCK <= tl_WS;
 AUD_DACLRCK	<= tl_WS;
 AUD_XCK		<=	tl_clk_12M5;
