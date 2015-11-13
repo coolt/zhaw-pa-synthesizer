@@ -8,14 +8,14 @@ Z0 d/home/katrin/Documents/a_PA_synthesizer
 !i10e 25
 !i10f 100
 T_opt
-V3ANd`B:^F<P8eQF2[RM@M2
+VYzYWWnXDNHUkU@G7h_kok2
 04 17 6 work tb_midi_interface struct 1
-=1-f0def100a798-5644a033-58ef7-17aa
+=1-f0def100a798-5645c6d7-2dea4-1488
 o-quiet -auto_acc_if_foreign -work work
 n@_opt
 OE;O;10.2a;57
 Z1 d/home/katrin/Documents/a_PA_synthesizer
-!s110 1447338035
+!s110 1447413463
 Ebit_sampling_generator
 Z2 w1446828357
 Z3 DPx4 ieee 11 numeric_std 0 22 WES[o8HS0jHV[MIXQk2Ha1
@@ -29,8 +29,8 @@ L22
 VeN:RggS2;dOF?^F?;d25i1
 Z9 OE;C;10.2a;57
 33
-Z10 !s110 1447338071
-Z11 !s108 1447338071.111167
+Z10 !s110 1447423041
+Z11 !s108 1447423041.315880
 Z12 !s90 -reportprogress|300|-2008|-explicit|-work|work|../source/bit_sampling_generator.vhd|
 Z13 !s107 ../source/bit_sampling_generator.vhd|
 Z14 o-2008 -explicit -work work
@@ -68,7 +68,7 @@ VR[=l7TNn>6ikfTLoVBA:o2
 R9
 33
 R10
-Z19 !s108 1447338071.049985
+Z19 !s108 1447423041.262931
 Z20 !s90 -reportprogress|300|-2008|-explicit|-work|work|../source/edge_detector.vhd|
 Z21 !s107 ../source/edge_detector.vhd|
 R14
@@ -106,7 +106,7 @@ VGza34AF2YiGWB8J]igN340
 R9
 33
 R10
-Z25 !s108 1447338071.294450
+Z25 !s108 1447423041.489944
 Z26 !s90 -reportprogress|300|-2008|-explicit|-work|work|../source/midi_control.vhd|
 Z27 !s107 ../source/midi_control.vhd|
 R14
@@ -145,7 +145,7 @@ V626FTjGNBcli<n2_8_HS[2
 R9
 33
 R10
-Z31 !s108 1447338071.406196
+Z31 !s108 1447423041.606146
 Z32 !s90 -reportprogress|300|-2008|-explicit|-work|work|../source/midi_interface.vhd|
 Z33 !s107 ../source/midi_interface.vhd|
 R14
@@ -184,7 +184,7 @@ V^LB77i;hVF@aDdSm;bHNG2
 R9
 33
 R10
-Z37 !s108 1447338071.350645
+Z37 !s108 1447423041.552444
 Z38 !s90 -reportprogress|300|-2008|-explicit|-work|work|../source/polyphone_out.vhd|
 Z39 !s107 ../source/polyphone_out.vhd|
 R14
@@ -223,7 +223,7 @@ Vl31zlUKDIlY=EU^P;e?D_3
 R9
 33
 R10
-Z43 !s108 1447338071.190893
+Z43 !s108 1447423041.370790
 Z44 !s90 -reportprogress|300|-2008|-explicit|-work|work|../source/read_midi.vhd|
 Z45 !s107 ../source/read_midi.vhd|
 R14
@@ -261,16 +261,16 @@ VmNDgh<Ki<cPA4W[N5EdW63
 R9
 32
 b1
-Z49 !s110 1447338070
-Z50 !s108 1447338070.966872
-Z51 !s90 -reportprogress|300|-2002|-explicit|-work|work|../source/std_logic_textio.vhd|
-Z52 !s107 ../source/std_logic_textio.vhd|
-Z53 o-2002 -explicit -work work
+R10
+Z49 !s108 1447423041.203823
+Z50 !s90 -reportprogress|300|-2002|-explicit|-work|work|../source/std_logic_textio.vhd|
+Z51 !s107 ../source/std_logic_textio.vhd|
+Z52 o-2002 -explicit -work work
 R15
 !s100 Ba7RP2Sb=T8ikR3@K[M>z0
 !i10b 1
 Bbody
-Z54 DPx4 work 16 std_logic_textio 0 22 mNDgh<Ki<cPA4W[N5EdW63
+Z53 DPx4 work 16 std_logic_textio 0 22 mNDgh<Ki<cPA4W[N5EdW63
 R5
 R4
 l0
@@ -278,24 +278,24 @@ L70
 V=KT;_m]HoU^N^56R8zmeW1
 R9
 32
+R10
 R49
 R50
 R51
 R52
-R53
 R15
 nbody
 !s100 <4z[ziRo;<6MTPTdaR?6P1
 !i10b 1
 Etb_midi_interface
-Z55 w1447338061
-R54
+Z54 w1447423038
+R53
 R3
 R4
 R5
 R6
-Z56 8../source/tb_midi_interface.vhd
-Z57 F../source/tb_midi_interface.vhd
+Z55 8../source/tb_midi_interface.vhd
+Z56 F../source/tb_midi_interface.vhd
 l0
 L24
 VfkjdCHel1CW`UL?]hM[_Q1
@@ -304,54 +304,54 @@ R9
 33
 R10
 !i10b 1
-!s108 1447338071.459289
-Z58 !s90 -reportprogress|300|-2008|-explicit|-work|work|../source/tb_midi_interface.vhd|
+!s108 1447423041.662726
+Z57 !s90 -reportprogress|300|-2008|-explicit|-work|work|../source/tb_midi_interface.vhd|
 !s107 ../source/tb_midi_interface.vhd|
 R14
 R15
 Astruct
-R54
+R53
 R3
 R4
 R5
 DEx4 work 17 tb_midi_interface 0 22 fkjdCHel1CW`UL?]hM[_Q1
-l85
+l90
 L27
-VGMAMhSbS4BjY;m?NelX_Q3
+VWLSb77[TSIUb^2oNFcnba1
 R9
 33
-!s110 1447338034
-!s108 1447338034.375459
-R58
-!s107 ../source/tb_midi_interface.vhd|
+R57
 R14
 R15
-!s100 dnNa`Lnn?hF_XSG4bPki?3
+!s107 ../source/tb_midi_interface.vhd|
+!s110 1447413462
+!s108 1447413462.382666
+!s100 dP1VanW<0DGF0lHl[57=42
 !i10b 1
 Etb_midi_uart
-Z59 w1447146234
-R54
+Z58 w1447146234
+R53
 R3
 R4
 R5
 R6
-Z60 8../source/tb_midi_uart.vhd
-Z61 F../source/tb_midi_uart.vhd
+Z59 8../source/tb_midi_uart.vhd
+Z60 F../source/tb_midi_uart.vhd
 l0
 L19
 ViL71IAQ4dbMhmg<8YI]lK0
 R9
 33
-Z62 !s110 1447312462
-Z63 !s108 1447312462.694867
-Z64 !s90 -reportprogress|300|-2008|-explicit|-work|work|../source/tb_midi_uart.vhd|
-Z65 !s107 ../source/tb_midi_uart.vhd|
+Z61 !s110 1447312462
+Z62 !s108 1447312462.694867
+Z63 !s90 -reportprogress|300|-2008|-explicit|-work|work|../source/tb_midi_uart.vhd|
+Z64 !s107 ../source/tb_midi_uart.vhd|
 R14
 R15
 !s100 kJXDbUckJzZfOW:ga5Qf=0
 !i10b 1
 Astruct
-R54
+R53
 R3
 R4
 R5
@@ -361,31 +361,31 @@ L22
 VKiIheHGXl>;[=OX;UTQ2>0
 R9
 33
+R61
 R62
 R63
 R64
-R65
 R14
 R15
 !s100 CakUWiaC6GGg76@GjUAI21
 !i10b 1
 Euart_top
-Z66 w1446838883
+Z65 w1446838883
 R3
 R4
 R5
 R6
-Z67 8../source/uart_top.vhd
-Z68 F../source/uart_top.vhd
+Z66 8../source/uart_top.vhd
+Z67 F../source/uart_top.vhd
 l0
 L15
 V4K30YzIH88aK^9WJ0Vd083
 R9
 33
 R10
-Z69 !s108 1447338071.240971
-Z70 !s90 -reportprogress|300|-2008|-explicit|-work|work|../source/uart_top.vhd|
-Z71 !s107 ../source/uart_top.vhd|
+Z68 !s108 1447423041.429893
+Z69 !s90 -reportprogress|300|-2008|-explicit|-work|work|../source/uart_top.vhd|
+Z70 !s107 ../source/uart_top.vhd|
 R14
 R15
 !s100 jS>]XVY0:RgQ5Ym[bh7k@0
@@ -401,9 +401,9 @@ V4eg4MBCoEBNn[=Z_cOFN53
 R9
 33
 R10
+R68
 R69
 R70
-R71
 R14
 R15
 !s100 ?nm2=iO=3086FiFcGGmVD1
