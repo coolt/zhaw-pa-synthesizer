@@ -1,20 +1,20 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
 
-add wave -noupdate /tb_midi_interface/s_clk
-add wave -noupdate /tb_midi_interface/s_reset_n
-add wave -noupdate /tb_midi_interface/s_serial_in
+add wave -noupdate /tb_midi_interface/tb_clk
+add wave -noupdate /tb_midi_interface/tb_reset_n
+add wave -noupdate /tb_midi_interface/tb_serial_in
 
-add wave -noupdate /tb_midi_interface/s_note_1
-# add wave -noupdate /tb_midi_interface/s_note_2
-# add wave -noupdate /tb_midi_interface/s_note_3
-# add wave -noupdate /tb_midi_interface/s_note_4
-# add wave -noupdate /tb_midi_interface/s_note_5
-# add wave -noupdate /tb_midi_interface/s_note_6
-# add wave -noupdate /tb_midi_interface/s_note_7
-# add wave -noupdate /tb_midi_interface/s_note_8
-# add wave -noupdate /tb_midi_interface/s_note_9
-# add wave -noupdate /tb_midi_interface/s_note_10
+add wave -noupdate /tb_midi_interface/tb_note_1
+# add wave -noupdate /tb_midi_interface/tb_note_2
+# add wave -noupdate /tb_midi_interface/tb_note_3
+# add wave -noupdate /tb_midi_interface/tb_note_4
+# add wave -noupdate /tb_midi_interface/tb_note_5
+# add wave -noupdate /tb_midi_interface/tb_note_6
+# add wave -noupdate /tb_midi_interface/tb_note_7
+# add wave -noupdate /tb_midi_interface/tb_note_8
+# add wave -noupdate /tb_midi_interface/tb_note_9
+# add wave -noupdate /tb_midi_interface/tb_note_10
 
 
 TreeUpdate [SetDefaultTree]
