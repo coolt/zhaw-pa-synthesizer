@@ -168,102 +168,108 @@ read_file: process
 	FILE_OPEN(output_file,"../simulation/script/result_midi.txt", WRITE_MODE);	
 	wait for 4 * SYS_CLK_HALFPERIOD;   
 
---	loop
+	loop
       ---------------------------------
 		-- Check end of file
 		--------------------------------
---		if endfile(input_file) then
---
---			-- output console read line numbers      
---			write(line_out, string'("Number of read lines from file:"));
---			writeline(OUTPUT,line_out);
---			write(line_out, line_cnt);
---			writeline(OUTPUT,line_out);
---			
---			-- output end
---			write(line_out, string'("End of File"));
---			writeline(OUTPUT,line_out);
---			
---			-- set flag to pass to other process
---			s_read_input_finished <= '1';
-----			exit;
---			
---		end if;
-			
-		-----------------------------------
-		-- read all token in array
-		------------------------------------		
-		readline(input_file, line_in);     
-		line_cnt := line_cnt + 1;  
-		
-		-- Skip empty lines
---		next when line_in'length = 0; 
+		if endfile(input_file) then
 
-		-- read linewise all tokens in array	
---		for line_nr in 0 to 1 loop		  ------------- Es geht bis 5  ?????? (also 6 Zeilen)
-		
-			-- read command
-			read(line_in, token_cmd, good);
-			token_array(line_nr).token_cmd <= token_cmd;                
-				if (not good) then
-					write(line_out, string'("Error reading token 'type'."));
-					writeline(OUTPUT,line_out);				
-		      else 
-					write(line_out, token_cmd);
-					writeline(OUTPUT,line_out);
-				end if;			
-				
- 		-- read 4 times note and velocity	
-		for i in 0 to 3 loop
-				hread(line_in, token_note, good); 
-				token_array(line_nr).token_midi_data(0).note <= token_note;  ----------------------------  i
-				if (not good) then
-					write(line_out, string'("Error reading note. Value is"));
-					writeline(OUTPUT,line_out);	
-					write(line_out, std_logic_vector(token_note));
-					writeline(OUTPUT,line_out);
-				else 
-					write(line_out, string'("Read note:"));
-					writeline(OUTPUT,line_out);	
-					write(line_out, std_logic_vector(token_note));
-					writeline(OUTPUT,line_out);
-				end if;
-				hread(line_in, token_velocity, good);
-				token_array(line_nr).token_midi_data(0).velocity <= token_velocity; ------------------------ i
-				if (not good) then
-					write(line_out, string'("Error reading velocity. Value is"));
-					writeline(OUTPUT,line_out);	
-					write(line_out, std_logic_vector(token_note));
-					writeline(OUTPUT,line_out);
-				else 
-					write(line_out, string'("Read velocity:"));
-					writeline(OUTPUT,line_out);	
-					write(line_out, std_logic_vector(token_note));
-					writeline(OUTPUT,line_out);
-				end if;	
-		end loop;	
+			-- output console read line numbers      
+			write(line_out, string'("Number of read lines from file:"));
+			writeline(OUTPUT,line_out);
+			write(line_out, line_cnt);
+			writeline(OUTPUT,line_out);
 			
-			-- read number of notes
-			hread(line_in, token_number, good);
-			token_array(line_nr).token_number <= token_number;	
-			if (not good) then
-					write(line_out, string'("Error note number. Value is"));
-					writeline(OUTPUT,line_out);	
-					write(line_out, std_logic_vector(token_note));
-					writeline(OUTPUT,line_out);
-				else 
-					write(line_out, string'("Read note number:"));
-					writeline(OUTPUT,line_out);	
-					write(line_out, std_logic_vector(token_note));
-					writeline(OUTPUT,line_out);
-				end if;	
-	-- end loop;
+			-- output end
+			write(line_out, string'("End of File"));
+			writeline(OUTPUT,line_out);
+			
+			-- set flag to pass to other process
+			s_read_input_finished <= '1';
+			exit;
+			
+		end if;
+
 		
-		-- debugging	
-		-- write(line_out, string'("All token in current line read in."));
-		-- writeline(OUTPUT, line_out);   	
+		
+		-----------------------------------
+		-- read linewise all tokens in array	
+		------------------------------------	
+		
+		-- loop for all lines
+		for line_nr in 0 to (NUMBR_INPUTLINES-1) loop		 
+			readline(input_file, line_in);     
+			line_cnt := line_cnt + 1;  
+			
+			-- Skip empty lines
+			next when line_in'length = 0; 
 	
---   end loop;
+	
+				-- read all tokens
+				--------------------------------
+				-- read command
+				read(line_in, token_cmd, good);
+				token_array(line_nr).token_cmd <= token_cmd;                
+					if (not good) then
+						write(line_out, string'("Error reading token 'type'."));
+						writeline(OUTPUT,line_out);				
+					else 
+						write(line_out, token_cmd);
+						writeline(OUTPUT,line_out);
+					end if;			
+					
+				-- read 4 times note and velocity	
+				for i in 0 to 3 loop
+					hread(line_in, token_note, good); 
+					token_array(line_nr).token_midi_data(i).note <= token_note;  
+					if (not good) then
+						write(line_out, string'("Error reading note. Value is"));
+						writeline(OUTPUT,line_out);	
+						write(line_out, std_logic_vector(token_note));
+						writeline(OUTPUT,line_out);
+					else 
+						write(line_out, string'("Read note:"));
+						writeline(OUTPUT,line_out);	
+						write(line_out, std_logic_vector(token_note));
+						writeline(OUTPUT,line_out);
+					end if; -------------------FEHLER: VELICITY hat gleicher WERT wie NOTE !!!!!!!!!!!!¨
+					hread(line_in, token_velocity, good);
+					token_array(line_nr).token_midi_data(i).velocity <= token_velocity; 
+					if (not good) then
+						write(line_out, string'("Error reading velocity. Value is"));
+						writeline(OUTPUT,line_out);	
+						write(line_out, std_logic_vector(token_note));
+						writeline(OUTPUT,line_out);
+					else 
+						write(line_out, string'("Read velocity:"));
+						writeline(OUTPUT,line_out);	
+						write(line_out, std_logic_vector(token_note));
+						writeline(OUTPUT,line_out);
+					end if;	
+				end loop; -- 4 times struct midi_data
+				
+				-- read number of notes
+				hread(line_in, token_number, good);
+				token_array(line_nr).token_number <= token_number;	 ----------------FEHLER: FALSCHER WERT
+				if (not good) then
+						write(line_out, string'("Error note number. Value is"));
+						writeline(OUTPUT,line_out);	
+						write(line_out, std_logic_vector(token_note));
+						writeline(OUTPUT,line_out);
+				else 
+						write(line_out, string'("Read note number:"));
+						writeline(OUTPUT,line_out);	
+						write(line_out, std_logic_vector(token_note));
+						writeline(OUTPUT,line_out);
+				end if;	
+				
+				-- read all token (= 1 line)	
+				
+		end loop; -- -- read all lines (= 1 array)	
+		
+end loop; -- searching end of line		
+		
+		
 	wait;
 end process;
 
