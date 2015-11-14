@@ -149,6 +149,7 @@ PORT MAP(clk_12M5_i   => tb_clk,
 read_file: process
 
 	variable line_in,line_out: Line; 
+	variable line_nr: natural range 0 to (NUMBR_INPUTLINES-1) :=0;
 	variable good: boolean := true;  
 	variable line_cnt: natural range 0 to 2000 := 0;	 
 	
@@ -167,27 +168,27 @@ read_file: process
 	FILE_OPEN(output_file,"../simulation/script/result_midi.txt", WRITE_MODE);	
 	wait for 4 * SYS_CLK_HALFPERIOD;   
 
-	loop
+--	loop
       ---------------------------------
 		-- Check end of file
 		--------------------------------
-		if endfile(input_file) then
-
-			-- output console read line numbers      
-			write(line_out, string'("Number of read lines from file:"));
-			writeline(OUTPUT,line_out);
-			write(line_out, line_cnt);
-			writeline(OUTPUT,line_out);
-			
-			-- output end
-			write(line_out, string'("End of File"));
-			writeline(OUTPUT,line_out);
-			
-			-- set flag to pass to other process
-			s_read_input_finished <= '1';
-			exit;
-			
-		end if;
+--		if endfile(input_file) then
+--
+--			-- output console read line numbers      
+--			write(line_out, string'("Number of read lines from file:"));
+--			writeline(OUTPUT,line_out);
+--			write(line_out, line_cnt);
+--			writeline(OUTPUT,line_out);
+--			
+--			-- output end
+--			write(line_out, string'("End of File"));
+--			writeline(OUTPUT,line_out);
+--			
+--			-- set flag to pass to other process
+--			s_read_input_finished <= '1';
+----			exit;
+--			
+--		end if;
 			
 		-----------------------------------
 		-- read all token in array
@@ -196,49 +197,73 @@ read_file: process
 		line_cnt := line_cnt + 1;  
 		
 		-- Skip empty lines
-		next when line_in'length = 0; 
+--		next when line_in'length = 0; 
 
-		-- read linewise all tokens in array
-		for line_nr in 1 to NUMBR_INPUTLINES loop		
+		-- read linewise all tokens in array	
+--		for line_nr in 0 to 1 loop		  ------------- Es geht bis 5  ?????? (also 6 Zeilen)
 		
 			-- read command
 			read(line_in, token_cmd, good);
-			token_array(line_nr).token_cmd <= token_cmd;  ------------------FATAL ERROR
+			token_array(line_nr).token_cmd <= token_cmd;                
 				if (not good) then
 					write(line_out, string'("Error reading token 'type'."));
+					writeline(OUTPUT,line_out);				
+		      else 
+					write(line_out, token_cmd);
 					writeline(OUTPUT,line_out);
 				end if;			
 				
-			-- read 4 times note and velocity	
-			for i in 0 to 3 loop
+ 		-- read 4 times note and velocity	
+		for i in 0 to 3 loop
 				hread(line_in, token_note, good); 
-				token_array(line_nr).token_midi_data(i).note <= token_note;
+				token_array(line_nr).token_midi_data(0).note <= token_note;  ----------------------------  i
 				if (not good) then
-					write(line_out, string'("Error reading token 'note'."));
+					write(line_out, string'("Error reading note. Value is"));
+					writeline(OUTPUT,line_out);	
+					write(line_out, std_logic_vector(token_note));
+					writeline(OUTPUT,line_out);
+				else 
+					write(line_out, string'("Read note:"));
+					writeline(OUTPUT,line_out);	
+					write(line_out, std_logic_vector(token_note));
 					writeline(OUTPUT,line_out);
 				end if;
 				hread(line_in, token_velocity, good);
-				token_array(line_nr).token_midi_data(i).velocity <= token_velocity;
-					if (not good) then
-						write(line_out, string'("Error reading token 'velocity'."));
-						writeline(OUTPUT,line_out);
-					end if;		
-			end loop;	
+				token_array(line_nr).token_midi_data(0).velocity <= token_velocity; ------------------------ i
+				if (not good) then
+					write(line_out, string'("Error reading velocity. Value is"));
+					writeline(OUTPUT,line_out);	
+					write(line_out, std_logic_vector(token_note));
+					writeline(OUTPUT,line_out);
+				else 
+					write(line_out, string'("Read velocity:"));
+					writeline(OUTPUT,line_out);	
+					write(line_out, std_logic_vector(token_note));
+					writeline(OUTPUT,line_out);
+				end if;	
+		end loop;	
 			
 			-- read number of notes
 			hread(line_in, token_number, good);
 			token_array(line_nr).token_number <= token_number;	
 			if (not good) then
-				write(line_out, string'("Error reading token 'number_notes_out'."));
-				writeline(OUTPUT,line_out);
-			end if;
-		end loop;
+					write(line_out, string'("Error note number. Value is"));
+					writeline(OUTPUT,line_out);	
+					write(line_out, std_logic_vector(token_note));
+					writeline(OUTPUT,line_out);
+				else 
+					write(line_out, string'("Read note number:"));
+					writeline(OUTPUT,line_out);	
+					write(line_out, std_logic_vector(token_note));
+					writeline(OUTPUT,line_out);
+				end if;	
+	-- end loop;
 		
 		-- debugging	
 		-- write(line_out, string'("All token in current line read in."));
 		-- writeline(OUTPUT, line_out);   	
 	
-   end loop;
+--   end loop;
 	wait;
 end process;
 
@@ -291,27 +316,20 @@ execute_file: process
 			wait for 10 * SYS_CLK_PERIOD; 
 		   tb_reset_n <= '1';
 			wait for 30 * SYS_CLK_PERIOD;   		
-					
-		
-			-- check result
-			-- wait until (token_line.command = string'("check"))	    
-
-				-- load expected value
-				 ---------------ev. gleich in der if abfrage  (note_1_o = s_note_1)
-				
-				-- compare  
-				if ((tb_note_1(7 downto 0) = token_line.token_midi_data(1).note) ) then    ---!!!!!!!!!!!!falsche länge: links 9, rechts 8 !!!!!
-					write(line_out, string'("Reset note 1 good."));
-					writeline(OUTPUT,line_out);
-				else
-					write(line_out, string'("Reset failure note 1"));
-					writeline(OUTPUT,line_out);
-				end if;
-				
-				-- output result
-				write(line_out, string'("Result reset \n"));
-				writeline(output_file,line_out);
-				writeline(output_file,line_out);
+									
+			-- compare  
+			if ((tb_note_1(7 downto 0) = token_line.token_midi_data(1).note) ) then    ---!!!!!!!!!!!!falsche länge: links 9, rechts 8 !!!!!
+				write(line_out, string'("Reset note 1 good."));
+				writeline(OUTPUT,line_out);
+			else
+				write(line_out, string'("Reset failure note 1"));
+				writeline(OUTPUT,line_out);
+			end if;
+			
+			-- output result
+			write(line_out, string'("Result reset \n"));
+			writeline(output_file,line_out);
+			writeline(output_file,line_out);
 						
 		end if;
 		
