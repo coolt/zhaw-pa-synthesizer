@@ -1,22 +1,10 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
-
 add wave -noupdate /tb_midi_interface/tb_clk
 add wave -noupdate /tb_midi_interface/tb_reset_n
 add wave -noupdate /tb_midi_interface/tb_serial_in
-
 add wave -noupdate /tb_midi_interface/tb_note_1
-# add wave -noupdate /tb_midi_interface/tb_note_2
-# add wave -noupdate /tb_midi_interface/tb_note_3
-# add wave -noupdate /tb_midi_interface/tb_note_4
-# add wave -noupdate /tb_midi_interface/tb_note_5
-# add wave -noupdate /tb_midi_interface/tb_note_6
-# add wave -noupdate /tb_midi_interface/tb_note_7
-# add wave -noupdate /tb_midi_interface/tb_note_8
-# add wave -noupdate /tb_midi_interface/tb_note_9
-# add wave -noupdate /tb_midi_interface/tb_note_10
-
-
+add wave -noupdate /tb_midi_interface/i_midi_interface/i_uart_top/baude_tick
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {0 ps} 0}
 quietly wave cursor active 0
@@ -34,4 +22,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {582383 ps} {583383 ps}
+WaveRestoreZoom {1199999050 ps} {1200000050 ps}

@@ -27,7 +27,7 @@ ENTITY polyphone_out IS
 PORT (clk_12M5:  		IN  std_logic;	
 	  reset_n:	  		IN	 std_logic;
 	  note_valid_i: 	IN  std_logic;
-	  note_value_i:	IN  std_logic_vector(8 downto 0);
+	  note_value_i:	    IN  std_logic_vector(8 downto 0);
 	  note_1:     		OUT std_logic_vector(8 downto 0); 
 	  note_2:     		OUT std_logic_vector(8 downto 0); 
 	  note_3:     		OUT std_logic_vector(8 downto 0); 
@@ -84,7 +84,7 @@ END PROCESS;
 
 logic_new_note: PROCESS(ALL)
 BEGIN
-
+    s_note_1 <=  note_value_i;
 
 END PROCESS;
 
@@ -108,5 +108,14 @@ END PROCESS;
 
 -- signal assignment
 note_1 <= s_note_1;
+note_2 <= s_note_1;
+note_3 <= s_note_1;
+note_4 <= s_note_1;
+note_5 <= s_note_1;
+note_6 <= s_note_1;
+note_7 <= s_note_1;
+note_8 <= s_note_1;
+note_9 <= s_note_1;
+note_10 <= s_note_1;
 
 END ARCHITECTURE rtl;
