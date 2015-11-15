@@ -94,15 +94,15 @@ END COMPONENT;
 	
 		-- define midi_data
 		type t_midi_data is record 
-			note : std_logic_vector(7 downto 0);                        --!!!!!!!!!!!!!!!!!!!!!!!only 8 bit
-			velocity : std_logic_vector(7 downto 0);
+			token_note : std_logic_vector(7 downto 0);                        --!!!!!!!!!!!!!!!!!!!!!!!only 8 bit
+			token_velocity : std_logic_vector(7 downto 0);
 		end record;
 		type t_midi_data_array is array (3 downto 0) of t_midi_data;
 	
 		-- define token structure
 		type t_token_line is record
 			token_cmd : string(1 to 5);
-			token_midi_data : t_midi_data_array;
+			t_midi_data : t_midi_data_array;
 			token_number : std_logic_vector(3 downto 0);
 		end record;
 
@@ -156,8 +156,8 @@ read_file: process
 	-- input token type
 	variable token_cmd: string(1 to 5);
 	variable token_note : std_logic_vector(7 downto 0);
-	variable	token_velocity : std_logic_vector(7 downto 0);
-	variable	token_number : std_logic_vector(3 downto 0);		
+	variable token_velocity : std_logic_vector(7 downto 0);
+	variable token_number : std_logic_vector(3 downto 0);		
 	
 	
 	
@@ -168,12 +168,17 @@ read_file: process
 	FILE_OPEN(output_file,"../simulation/script/result_midi.txt", WRITE_MODE);	
 	wait for 4 * SYS_CLK_HALFPERIOD;   
 
+    ---------------------------------
+	-- check end of file
+	--------------------------------
 	loop
-      ---------------------------------
-		-- Check end of file
-		--------------------------------
+        
 		if endfile(input_file) then
-
+        
+            -- include space bevor result read in
+            write(line_out, string'(""));
+            writeline(OUTPUT,line_out);	
+            
 			-- output console read line numbers      
 			write(line_out, string'("Number of read lines from file:"));
 			writeline(OUTPUT,line_out);
@@ -181,11 +186,18 @@ read_file: process
 			writeline(OUTPUT,line_out);
 			
 			-- output end
-			write(line_out, string'("End of File"));
+			write(line_out, string'("Finished read hole file"));
 			writeline(OUTPUT,line_out);
 			
 			-- set flag to pass to other process
 			s_read_input_finished <= '1';
+            
+            -- include space after read feedback
+            write(line_out, string'(""));
+            writeline(OUTPUT,line_out);	
+            write(line_out, string'(""));
+            writeline(OUTPUT,line_out);	
+            
 			exit;
 			
 		end if;
@@ -221,7 +233,7 @@ read_file: process
 				-- read 4 times note and velocity	
 				for i in 0 to 3 loop
 					hread(line_in, token_note, good); 
-					token_array(line_nr).token_midi_data(i).note <= token_note;  
+					token_array(line_nr).t_midi_data(i).token_note <= token_note;  
 					if (not good) then
 						write(line_out, string'("Error reading note. Value is"));
 						writeline(OUTPUT,line_out);	
@@ -232,34 +244,34 @@ read_file: process
 						writeline(OUTPUT,line_out);	
 						write(line_out, std_logic_vector(token_note));
 						writeline(OUTPUT,line_out);
-					end if; -------------------FEHLER: VELICITY hat gleicher WERT wie NOTE !!!!!!!!!!!!¨
+					end if; 
 					hread(line_in, token_velocity, good);
-					token_array(line_nr).token_midi_data(i).velocity <= token_velocity; 
+					token_array(line_nr).t_midi_data(i).token_velocity <= token_velocity; 
 					if (not good) then
 						write(line_out, string'("Error reading velocity. Value is"));
 						writeline(OUTPUT,line_out);	
-						write(line_out, std_logic_vector(token_note));
+						write(line_out, std_logic_vector(token_velocity));
 						writeline(OUTPUT,line_out);
 					else 
 						write(line_out, string'("Read velocity:"));
 						writeline(OUTPUT,line_out);	
-						write(line_out, std_logic_vector(token_note));
+						write(line_out, std_logic_vector(token_velocity));
 						writeline(OUTPUT,line_out);
 					end if;	
 				end loop; -- 4 times struct midi_data
 				
 				-- read number of notes
 				hread(line_in, token_number, good);
-				token_array(line_nr).token_number <= token_number;	 ----------------FEHLER: FALSCHER WERT
+				token_array(line_nr).token_number <= token_number;	
 				if (not good) then
 						write(line_out, string'("Error note number. Value is"));
 						writeline(OUTPUT,line_out);	
-						write(line_out, std_logic_vector(token_note));
+						write(line_out, std_logic_vector(token_number));
 						writeline(OUTPUT,line_out);
 				else 
 						write(line_out, string'("Read note number:"));
 						writeline(OUTPUT,line_out);	
-						write(line_out, std_logic_vector(token_note));
+						write(line_out, std_logic_vector(token_number));
 						writeline(OUTPUT,line_out);
 				end if;	
 				
@@ -267,9 +279,8 @@ read_file: process
 				
 		end loop; -- -- read all lines (= 1 array)	
 		
-end loop; -- searching end of line		
-		
-		
+    end loop; -- searching end of line		
+	
 	wait;
 end process;
 
@@ -280,8 +291,7 @@ execute_file: process
 	variable idle_bit: std_logic := '1';
 	variable start_bit: std_logic := '0';
 	variable stop_bit: std_logic := '1';
-	
-	
+		
 	variable line_in,line_out: Line; 
 	variable token_line: t_token_line;
 	variable line_nmbr: natural range 0 to (NUMBR_INPUTLINES-1) := 0;
@@ -289,7 +299,7 @@ execute_file: process
 	
 	begin
 		
-		-- process coodrdination
+		-- process coordination
 		wait until (s_read_input_finished <= '1');
 
 		-- initialisation DUT
@@ -300,20 +310,18 @@ execute_file: process
 		-- Execute commands from file
 		-------------------------------------
 		
-		------------------------Now: Line = 0 ------------------------------LOOP for ALL token_lines, for line_nmbr  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		write(line_out, string'("Loop missing: only first line is executed"));
+		writeline(OUTPUT,line_out);	
 
 		-- reset 
 		------------------------------------
-					
-		
+							
 --		type t_token_line is record
 --			token_cmd : string(1 to 5);
---			token_midi_data : t_midi_data_array;
+--			t_data : t_midi_data_array;
 --			token_number : std_logic_vector(3 downto 0);
 --		end record;
---		
 		
-
 		token_line := token_array(line_nmbr);
 		if (token_line.token_cmd = string'("reset")) then
 			
@@ -324,7 +332,7 @@ execute_file: process
 			wait for 30 * SYS_CLK_PERIOD;   		
 									
 			-- compare  
-			if ((tb_note_1(7 downto 0) = token_line.token_midi_data(1).note) ) then    ---!!!!!!!!!!!!falsche länge: links 9, rechts 8 !!!!!
+			if ((tb_note_1(7 downto 0) = token_line.t_midi_data(1).token_note) ) then    ---!!!!!!!!!!!!falsche länge: links 9, rechts 8 !!!!!
 				write(line_out, string'("Reset note 1 good."));
 				writeline(OUTPUT,line_out);
 			else
