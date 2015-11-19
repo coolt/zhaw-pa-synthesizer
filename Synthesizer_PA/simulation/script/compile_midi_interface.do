@@ -23,7 +23,9 @@ vcom -2008 -explicit -work work ../source/tb_midi_interface.vhd
 #-------------------------------------
 
 # run simulation
-vsim -t 1ps -lib work work.tb_midi_interface
+vsim -t 1ns -lib work work.tb_midi_interface
 do wave_midi_interface.do
-run 1.2 ms 
+# 1 note: 1.5 us. 
+# 1 Linie: ca. 4 us
+run 10 ms 
 

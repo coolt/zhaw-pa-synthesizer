@@ -84,7 +84,7 @@ END PROCESS;
 
 logic_new_note: PROCESS(ALL)
 BEGIN
-    s_note_1 <=  note_value_i;
+    s_next_note_1 <=  note_value_i;
 
 END PROCESS;
 

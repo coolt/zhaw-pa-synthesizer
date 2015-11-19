@@ -8,8 +8,6 @@
 # //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
 # //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
 # //
-# Project file /home/katrin/Documents/a_PA_synthesizer/Synthesizer_PA/simulation/synthesizer.mpf was not found.
-# Unable to open project.
 # Loading project synthesizer_pa
 do ./script/compile_midi_interface.do
 # ** Warning: (vlib-34) Library already exists at "work".
@@ -18,32 +16,8 @@ do ./script/compile_midi_interface.do
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Compiling package STD_LOGIC_TEXTIO
-# ** Error: ../source/std_logic_textio.vhd(35): (vcom-1295) Procedure "READ" has already been defined in this region.
-# ** =====> Prior declaration of "READ" is at ../source/std_logic_textio.vhd(27).
-# ** Error: ../source/std_logic_textio.vhd(36): (vcom-1295) Procedure "READ" has already been defined in this region.
-# ** =====> Prior declaration of "READ" is at ../source/std_logic_textio.vhd(28).
-# ** Error: ../source/std_logic_textio.vhd(38): (vcom-1295) Procedure "WRITE" has already been defined in this region.
-# ** =====> Prior declaration of "WRITE" is at ../source/std_logic_textio.vhd(31).
-# ** Error: ../source/std_logic_textio.vhd(51): (vcom-1295) Procedure "HREAD" has already been defined in this region.
-# ** =====> Prior declaration of "HREAD" is at ../source/std_logic_textio.vhd(47).
-# ** Error: ../source/std_logic_textio.vhd(52): (vcom-1295) Procedure "HREAD" has already been defined in this region.
-# ** =====> Prior declaration of "HREAD" is at ../source/std_logic_textio.vhd(48).
-# ** Error: ../source/std_logic_textio.vhd(54): (vcom-1295) Procedure "HWRITE" has already been defined in this region.
-# ** =====> Prior declaration of "HWRITE" is at ../source/std_logic_textio.vhd(49).
-# ** Error: ../source/std_logic_textio.vhd(61): (vcom-1295) Procedure "OREAD" has already been defined in this region.
-# ** =====> Prior declaration of "OREAD" is at ../source/std_logic_textio.vhd(57).
-# ** Error: ../source/std_logic_textio.vhd(62): (vcom-1295) Procedure "OREAD" has already been defined in this region.
-# ** =====> Prior declaration of "OREAD" is at ../source/std_logic_textio.vhd(58).
-# ** Error: ../source/std_logic_textio.vhd(64): (vcom-1295) Procedure "OWRITE" has already been defined in this region.
-# ** =====> Prior declaration of "OWRITE" is at ../source/std_logic_textio.vhd(59).
-# ** Error: ../source/std_logic_textio.vhd(68): VHDL Compiler exiting
-# ** Error: /opt/questasim/questasim/linux/vcom failed.
-# Error in macro ././script/compile_midi_interface.do line 9
-# /opt/questasim/questasim/linux/vcom failed.
-#     while executing
-# "vcom -2008 -explicit -work work ../source/std_logic_textio.vhd"
-do ./script/compile_midi_interface.do
-# ** Warning: (vlib-34) Library already exists at "work".
+# -- Compiling package body STD_LOGIC_TEXTIO
+# -- Loading package STD_LOGIC_TEXTIO
 # QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -97,17 +71,211 @@ do ./script/compile_midi_interface.do
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
-# ** Error: (vcom-11) Could not find work.std_logic_textio.
-# ** Error: ../source/tb_midi_uart.vhd(15): (vcom-1195) Cannot find expanded name "work.std_logic_textio".
-# ** Error: ../source/tb_midi_uart.vhd(15): Unknown expanded name.
-# ** Error: ../source/tb_midi_uart.vhd(19): VHDL Compiler exiting
-# ** Error: /opt/questasim/questasim/linux/vcom failed.
-# Error in macro ././script/compile_midi_interface.do line 19
-# /opt/questasim/questasim/linux/vcom failed.
-#     while executing
-# "vcom -2008 -explicit -work work ../source/tb_midi_uart.vhd"
+# -- Loading package STD_LOGIC_TEXTIO
+# -- Compiling entity tb_midi_interface
+# -- Compiling architecture struct of tb_midi_interface
+# vsim -lib work -t 1ps work.tb_midi_interface 
+# ** Note: (vsim-3812) Design is being optimized...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.std_logic_textio(body)
+# Loading work.tb_midi_interface(struct)#1
+# reset
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10010000
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10000000
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# polyp
+# Read note:
+# 00000001
+# Read attribut:
+# 01010101
+# Read note:
+# 00000010
+# Read attribut:
+# 01010101
+# Read note:
+# 00000011
+# Read attribut:
+# 01010101
+# Read note:
+# 00000001
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000010
+# Read attribut:
+# 00000000
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# 
+# Number of read lines from file:
+# 8
+# Finished read whole file
+# -----------------------------
+# 
+# 
+# 0
+# reset
+# Reset failure note 1
+# UUUUUUUU
+# 00000000
+# 
+# 1
+# check
+# 
+# 2
+# singl
+# note on/off
+# 10010000
+# note value
+# 00000011
+# 
+# note on/off
+# 00000000
 do ./script/compile_midi_interface.do
 # ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package STD_LOGIC_TEXTIO
+# -- Compiling package body STD_LOGIC_TEXTIO
+# -- Loading package STD_LOGIC_TEXTIO
 # QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -161,12 +329,3954 @@ do ./script/compile_midi_interface.do
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
-# ** Error: (vcom-11) Could not find work.std_logic_textio.
-# ** Error: ../source/tb_midi_uart.vhd(15): (vcom-1195) Cannot find expanded name "work.std_logic_textio".
-# ** Error: ../source/tb_midi_uart.vhd(15): Unknown expanded name.
-# ** Error: ../source/tb_midi_uart.vhd(19): VHDL Compiler exiting
+# -- Loading package STD_LOGIC_TEXTIO
+# -- Compiling entity tb_midi_interface
+# -- Compiling architecture struct of tb_midi_interface
+# vsim -lib work -t 1ps work.tb_midi_interface 
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.std_logic_textio(body)
+# Loading work.tb_midi_interface(struct)#1
+# reset
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10010000
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10000000
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# polyp
+# Read note:
+# 00000001
+# Read attribut:
+# 01010101
+# Read note:
+# 00000010
+# Read attribut:
+# 01010101
+# Read note:
+# 00000011
+# Read attribut:
+# 01010101
+# Read note:
+# 00000001
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000010
+# Read attribut:
+# 00000000
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# 
+# Number of read lines from file:
+# 8
+# Finished read whole file
+# -----------------------------
+# 
+# 
+# 0
+# reset
+# Reset note 1 good.
+# 
+# 1
+# check
+# 
+# 2
+# singl
+# note on/off
+# 10010000
+# note value
+# 00000011
+# 
+# note on/off
+# 00000000
+do ./script/compile_midi_interface.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package STD_LOGIC_TEXTIO
+# -- Compiling package body STD_LOGIC_TEXTIO
+# -- Loading package STD_LOGIC_TEXTIO
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity edge_detector
+# -- Compiling architecture rtl of edge_detector
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity bit_sampling_generator
+# -- Compiling architecture rtl of bit_sampling_generator
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity read_midi
+# -- Compiling architecture rtl of read_midi
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity uart_top
+# -- Compiling architecture behav of uart_top
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_control
+# -- Compiling architecture rtl of midi_control
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity polyphone_out
+# -- Compiling architecture rtl of polyphone_out
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_interface
+# -- Compiling architecture rtl of midi_interface
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package STD_LOGIC_TEXTIO
+# -- Compiling entity tb_midi_interface
+# -- Compiling architecture struct of tb_midi_interface
+# vsim -lib work -t 1ps work.tb_midi_interface 
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.std_logic_textio(body)
+# Loading work.tb_midi_interface(struct)#1
+# reset
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10010000
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10000000
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# polyp
+# Read note:
+# 00000001
+# Read attribut:
+# 01010101
+# Read note:
+# 00000010
+# Read attribut:
+# 01010101
+# Read note:
+# 00000011
+# Read attribut:
+# 01010101
+# Read note:
+# 00000001
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000010
+# Read attribut:
+# 00000000
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# 
+# Number of read lines from file:
+# 8
+# Finished read whole file
+# -----------------------------
+# 
+# 
+# 0
+# reset
+# Reset note 1 good.
+# 
+# 1
+# check
+# 
+# 2
+# singl
+# note on/off
+# 10010000
+# note value
+# 00000011
+# 
+# note on/off
+# 00000000
+# note value
+# 00000000
+# 
+# note on/off
+# 00000000
+# note value
+# 00000000
+# 
+# 3
+# check
+# 
+# 4
+# singl
+# note on/off
+# 10000000
+# note value
+# 00000011
+# 
+# note on/off
+# 00000000
+# note value
+# 00000000
+# 
+# note on/off
+# 00000000
+# note value
+# 00000000
+# 
+# 5
+# check
+# 
+do ./script/compile_midi_interface.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package STD_LOGIC_TEXTIO
+# -- Compiling package body STD_LOGIC_TEXTIO
+# -- Loading package STD_LOGIC_TEXTIO
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity edge_detector
+# -- Compiling architecture rtl of edge_detector
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity bit_sampling_generator
+# -- Compiling architecture rtl of bit_sampling_generator
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity read_midi
+# -- Compiling architecture rtl of read_midi
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity uart_top
+# -- Compiling architecture behav of uart_top
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_control
+# -- Compiling architecture rtl of midi_control
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity polyphone_out
+# -- Compiling architecture rtl of polyphone_out
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_interface
+# -- Compiling architecture rtl of midi_interface
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package STD_LOGIC_TEXTIO
+# -- Compiling entity tb_midi_interface
+# -- Compiling architecture struct of tb_midi_interface
+# vsim -lib work -t 1ps work.tb_midi_interface 
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.std_logic_textio(body)
+# Loading work.tb_midi_interface(struct)#1
+# reset
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10010000
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10000000
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# polyp
+# Read note:
+# 00000001
+# Read attribut:
+# 01010101
+# Read note:
+# 00000010
+# Read attribut:
+# 01010101
+# Read note:
+# 00000011
+# Read attribut:
+# 01010101
+# Read note:
+# 00000001
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000010
+# Read attribut:
+# 00000000
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# 
+# Number of read lines from file:
+# 8
+# Finished read whole file
+# -----------------------------
+# 
+# 
+# 0
+# reset
+# Reset note 1 good.
+# 
+# 1
+# check
+# 
+# 2
+# singl
+# note on/off
+# 10010000
+# note value
+# 00000011
+# 
+# note on/off
+# 00000000
+# note value
+# 00000000
+# 
+# note on/off
+# 00000000
+# note value
+# 00000000
+# 
+# 3
+# check
+# 
+# 4
+# singl
+# note on/off
+# 10000000
+# note value
+# 00000011
+# 
+# note on/off
+# 00000000
+# note value
+# 00000000
+# 
+# note on/off
+# 00000000
+# note value
+# 00000000
+# 
+# 5
+# check
+# 
+# 6
+# polyp
+# 
+# 7
+# check
+# 
+do ./script/compile_midi_interface.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package STD_LOGIC_TEXTIO
+# -- Compiling package body STD_LOGIC_TEXTIO
+# -- Loading package STD_LOGIC_TEXTIO
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity edge_detector
+# -- Compiling architecture rtl of edge_detector
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity bit_sampling_generator
+# -- Compiling architecture rtl of bit_sampling_generator
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity read_midi
+# -- Compiling architecture rtl of read_midi
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity uart_top
+# -- Compiling architecture behav of uart_top
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_control
+# -- Compiling architecture rtl of midi_control
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity polyphone_out
+# -- Compiling architecture rtl of polyphone_out
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_interface
+# -- Compiling architecture rtl of midi_interface
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package STD_LOGIC_TEXTIO
+# -- Compiling entity tb_midi_interface
+# -- Compiling architecture struct of tb_midi_interface
+# vsim -lib work -t 1ps work.tb_midi_interface 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.std_logic_textio(body)
+# Loading work.tb_midi_interface(struct)#1
+# reset
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10010000
+# Read note:
+# 00000011
+# Read attribut:
+# 10000000
+# Read note:
+# 00000011
+# Read attribut:
+# 10010000
+# Read note:
+# 00000101
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000101
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10000000
+# Read note:
+# 00000011
+# Read attribut:
+# 10000000
+# Read note:
+# 00000110
+# Read attribut:
+# 00000000
+# Read note:
+# 10000000
+# Read attribut:
+# 00000111
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000101
+# Read attribut:
+# 00000011
+# Read note:
+# 00000110
+# Read attribut:
+# 00000111
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# polyp
+# Read note:
+# 00000001
+# Read attribut:
+# 01010101
+# Read note:
+# 00000010
+# Read attribut:
+# 01010101
+# Read note:
+# 00000011
+# Read attribut:
+# 01010101
+# Read note:
+# 00000001
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000010
+# Read attribut:
+# 00000000
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# 
+# Number of read lines from file:
+# 8
+# Finished read whole file
+# -----------------------------
+# 
+# 
+# 0
+# reset
+# Reset note 1 good.
+# 
+# 1
+# check
+# 
+# 2
+# singl
+# note on/off
+# 10010000
+# note value
+# 00000011
+# 
+# note on/off
+# 10000000
+# note value
+# 00000011
+# 
+# note on/off
+# 10010000
+# note value
+# 00000101
+# 
+# 3
+# check
+# 
+# 4
+# singl
+# note on/off
+# 10000000
+# note value
+# 00000011
+# 
+# note on/off
+# 10000000
+# note value
+# 00000110
+# 
+# note on/off
+# 00000000
+# note value
+# 10000000
+# 
+# 5
+# check
+# 
+# 6
+# polyp
+# 
+# 7
+# check
+# 
+do ./script/compile_midi_interface.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package STD_LOGIC_TEXTIO
+# -- Compiling package body STD_LOGIC_TEXTIO
+# -- Loading package STD_LOGIC_TEXTIO
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity edge_detector
+# -- Compiling architecture rtl of edge_detector
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity bit_sampling_generator
+# -- Compiling architecture rtl of bit_sampling_generator
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity read_midi
+# -- Compiling architecture rtl of read_midi
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity uart_top
+# -- Compiling architecture behav of uart_top
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_control
+# -- Compiling architecture rtl of midi_control
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity polyphone_out
+# -- Compiling architecture rtl of polyphone_out
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_interface
+# -- Compiling architecture rtl of midi_interface
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package STD_LOGIC_TEXTIO
+# -- Compiling entity tb_midi_interface
+# -- Compiling architecture struct of tb_midi_interface
+# ** Warning: [14] ../source/tb_midi_interface.vhd(414): (vcom-1272) Length of expected is 8; length of actual is 4.
+# vsim -lib work -t 1ps work.tb_midi_interface 
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.std_logic_textio(body)
+# Loading work.tb_midi_interface(struct)#1
+# reset
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10010000
+# Read note:
+# 00000011
+# Read attribut:
+# 10000000
+# Read note:
+# 00000011
+# Read attribut:
+# 10010000
+# Read note:
+# 00000101
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000101
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10000000
+# Read note:
+# 00000011
+# Read attribut:
+# 10000000
+# Read note:
+# 00000110
+# Read attribut:
+# 00000000
+# Read note:
+# 10000000
+# Read attribut:
+# 00000111
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000101
+# Read attribut:
+# 00000011
+# Read note:
+# 00000110
+# Read attribut:
+# 00000111
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# polyp
+# Read note:
+# 00000001
+# Read attribut:
+# 01010101
+# Read note:
+# 00000010
+# Read attribut:
+# 01010101
+# Read note:
+# 00000011
+# Read attribut:
+# 01010101
+# Read note:
+# 00000001
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000010
+# Read attribut:
+# 00000000
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# 
+# Number of read lines from file:
+# 8
+# Finished read whole file
+# -----------------------------
+# 
+# 
+# 0
+# reset
+# Reset note 1 good.
+# 
+# 1
+# check
+# 
+# 2
+# singl
+# note on/off
+# 10010000
+# note value
+# 00000011
+# ** Fatal: (vsim-3420) Array lengths do not match. Left is 8 (7 downto 0). Right is 4 (3 downto 0).
+#    Time: 899499988 ps  Iteration: 0  Process: /tb_midi_interface/execute_file File: ../source/tb_midi_interface.vhd
+# Fatal error in ForLoop loop at ../source/tb_midi_interface.vhd line 414
+# 
+# HDL call sequence:
+# Stopped at ../source/tb_midi_interface.vhd 414 ForLoop loop
+# 
+do ./script/compile_midi_interface.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package STD_LOGIC_TEXTIO
+# -- Compiling package body STD_LOGIC_TEXTIO
+# -- Loading package STD_LOGIC_TEXTIO
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity edge_detector
+# -- Compiling architecture rtl of edge_detector
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity bit_sampling_generator
+# -- Compiling architecture rtl of bit_sampling_generator
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity read_midi
+# -- Compiling architecture rtl of read_midi
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity uart_top
+# -- Compiling architecture behav of uart_top
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_control
+# -- Compiling architecture rtl of midi_control
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity polyphone_out
+# -- Compiling architecture rtl of polyphone_out
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_interface
+# -- Compiling architecture rtl of midi_interface
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package STD_LOGIC_TEXTIO
+# -- Compiling entity tb_midi_interface
+# -- Compiling architecture struct of tb_midi_interface
+# ** Warning: [14] ../source/tb_midi_interface.vhd(414): (vcom-1272) Length of expected is 8; length of actual is 4.
+# vsim -lib work -t 1ps work.tb_midi_interface 
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.std_logic_textio(body)
+# Loading work.tb_midi_interface(struct)#1
+# reset
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10010000
+# Read note:
+# 00000011
+# Read attribut:
+# 10000000
+# Read note:
+# 00000011
+# Read attribut:
+# 10010000
+# Read note:
+# 00000101
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000101
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10000000
+# Read note:
+# 00000011
+# Read attribut:
+# 10000000
+# Read note:
+# 00000110
+# Read attribut:
+# 00000000
+# Read note:
+# 10000000
+# Read attribut:
+# 00000111
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000101
+# Read attribut:
+# 00000011
+# Read note:
+# 00000110
+# Read attribut:
+# 00000111
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# polyp
+# Read note:
+# 00000001
+# Read attribut:
+# 01010101
+# Read note:
+# 00000010
+# Read attribut:
+# 01010101
+# Read note:
+# 00000011
+# Read attribut:
+# 01010101
+# Read note:
+# 00000001
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000010
+# Read attribut:
+# 00000000
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# 
+# Number of read lines from file:
+# 8
+# Finished read whole file
+# -----------------------------
+# 
+# 
+# 0
+# reset
+# Reset note 1 good.
+# 
+# 1
+# check
+# 
+# 2
+# singl
+# note on/off
+# 10010000
+# note value
+# 00000011
+# ** Fatal: (vsim-3420) Array lengths do not match. Left is 8 (7 downto 0). Right is 4 (1 to 4).
+#    Time: 899499988 ps  Iteration: 0  Process: /tb_midi_interface/execute_file File: ../source/tb_midi_interface.vhd
+# Fatal error in ForLoop loop at ../source/tb_midi_interface.vhd line 414
+# 
+# HDL call sequence:
+# Stopped at ../source/tb_midi_interface.vhd 414 ForLoop loop
+# 
+do ./script/compile_midi_interface.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package STD_LOGIC_TEXTIO
+# -- Compiling package body STD_LOGIC_TEXTIO
+# -- Loading package STD_LOGIC_TEXTIO
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity edge_detector
+# -- Compiling architecture rtl of edge_detector
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity bit_sampling_generator
+# -- Compiling architecture rtl of bit_sampling_generator
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity read_midi
+# -- Compiling architecture rtl of read_midi
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity uart_top
+# -- Compiling architecture behav of uart_top
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_control
+# -- Compiling architecture rtl of midi_control
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity polyphone_out
+# -- Compiling architecture rtl of polyphone_out
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_interface
+# -- Compiling architecture rtl of midi_interface
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package STD_LOGIC_TEXTIO
+# -- Compiling entity tb_midi_interface
+# -- Compiling architecture struct of tb_midi_interface
+# vsim -lib work -t 1ps work.tb_midi_interface 
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.std_logic_textio(body)
+# Loading work.tb_midi_interface(struct)#1
+# reset
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10010000
+# Read note:
+# 00000011
+# Read attribut:
+# 10000000
+# Read note:
+# 00000011
+# Read attribut:
+# 10010000
+# Read note:
+# 00000101
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000101
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10000000
+# Read note:
+# 00000011
+# Read attribut:
+# 10000000
+# Read note:
+# 00000110
+# Read attribut:
+# 00000000
+# Read note:
+# 10000000
+# Read attribut:
+# 00000111
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000101
+# Read attribut:
+# 00000011
+# Read note:
+# 00000110
+# Read attribut:
+# 00000111
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# polyp
+# Read note:
+# 00000001
+# Read attribut:
+# 01010101
+# Read note:
+# 00000010
+# Read attribut:
+# 01010101
+# Read note:
+# 00000011
+# Read attribut:
+# 01010101
+# Read note:
+# 00000001
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000010
+# Read attribut:
+# 00000000
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# 
+# Number of read lines from file:
+# 8
+# Finished read whole file
+# -----------------------------
+# 
+# 
+# 0
+# reset
+# Reset note 1 good.
+# 
+# 1
+# check
+# 
+# 2
+# singl
+# note on/off
+# 10010000
+# note value
+# 00000011
+# Number of acitve notes
+# 00000000
+# 
+# note on/off
+# 10000000
+# note value
+# 00000011
+# Number of acitve notes
+# 00000000
+# 
+# note on/off
+# 10010000
+# note value
+# 00000101
+# Number of acitve notes
+# 00000000
+# 
+# 3
+# check
+# 
+# 4
+# singl
+# note on/off
+# 10000000
+# note value
+# 00000011
+# Number of acitve notes
+# 00000000
+# 
+# note on/off
+# 10000000
+# note value
+# 00000110
+# Number of acitve notes
+# 00000000
+# 
+# note on/off
+# 00000000
+# note value
+# 10000000
+# Number of acitve notes
+# 00000000
+# 
+# 5
+# check
+# 
+# 6
+# polyp
+# 
+# 7
+# check
+# 
+do ./script/compile_midi_interface.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package STD_LOGIC_TEXTIO
+# -- Compiling package body STD_LOGIC_TEXTIO
+# -- Loading package STD_LOGIC_TEXTIO
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity edge_detector
+# -- Compiling architecture rtl of edge_detector
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity bit_sampling_generator
+# -- Compiling architecture rtl of bit_sampling_generator
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity read_midi
+# -- Compiling architecture rtl of read_midi
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity uart_top
+# -- Compiling architecture behav of uart_top
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_control
+# -- Compiling architecture rtl of midi_control
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity polyphone_out
+# -- Compiling architecture rtl of polyphone_out
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_interface
+# -- Compiling architecture rtl of midi_interface
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package STD_LOGIC_TEXTIO
+# -- Compiling entity tb_midi_interface
+# -- Compiling architecture struct of tb_midi_interface
+# vsim -lib work -t 1ps work.tb_midi_interface 
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.std_logic_textio(body)
+# Loading work.tb_midi_interface(struct)#1
+# reset
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10010000
+# Read note:
+# 00000011
+# Read attribut:
+# 10000000
+# Read note:
+# 00000011
+# Read attribut:
+# 10010000
+# Read note:
+# 00000101
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000101
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10000000
+# Read note:
+# 00000011
+# Read attribut:
+# 10000000
+# Read note:
+# 00000110
+# Read attribut:
+# 00000000
+# Read note:
+# 10000000
+# Read attribut:
+# 00000111
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000101
+# Read attribut:
+# 00000011
+# Read note:
+# 00000110
+# Read attribut:
+# 00000111
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# polyp
+# Read note:
+# 00000001
+# Read attribut:
+# 01010101
+# Read note:
+# 00000010
+# Read attribut:
+# 01010101
+# Read note:
+# 00000011
+# Read attribut:
+# 01010101
+# Read note:
+# 00000001
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000010
+# Read attribut:
+# 00000000
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# 
+# Number of read lines from file:
+# 8
+# Finished read whole file
+# -----------------------------
+# 
+# 
+# 0
+# reset
+# Reset note 1 good.
+# 
+# 1
+# check
+# 
+# 2
+# singl
+# note on/off
+# 10010000
+# note value
+# 00000011
+# note on/off
+# 10000000
+# note value
+# 00000011
+# note on/off
+# 10010000
+# note value
+# 00000101
+# Number of acitve notes
+# 00000000
+# 
+# 3
+# check
+# 
+# 4
+# singl
+# note on/off
+# 10000000
+# note value
+# 00000011
+# note on/off
+# 10000000
+# note value
+# 00000110
+# note on/off
+# 00000000
+# note value
+# 10000000
+# Number of acitve notes
+# 00000000
+# 
+# 5
+# check
+# 
+# 6
+# polyp
+# 
+# 7
+# check
+# 
+do ./script/compile_midi_interface.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package STD_LOGIC_TEXTIO
+# -- Compiling package body STD_LOGIC_TEXTIO
+# -- Loading package STD_LOGIC_TEXTIO
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity edge_detector
+# -- Compiling architecture rtl of edge_detector
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity bit_sampling_generator
+# -- Compiling architecture rtl of bit_sampling_generator
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity read_midi
+# -- Compiling architecture rtl of read_midi
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity uart_top
+# -- Compiling architecture behav of uart_top
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_control
+# -- Compiling architecture rtl of midi_control
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity polyphone_out
+# -- Compiling architecture rtl of polyphone_out
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_interface
+# -- Compiling architecture rtl of midi_interface
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package STD_LOGIC_TEXTIO
+# -- Compiling entity tb_midi_interface
+# -- Compiling architecture struct of tb_midi_interface
+# ** Warning: [14] ../source/tb_midi_interface.vhd(416): (vcom-1272) Length of expected is 8; length of actual is 4.
+# vsim -lib work -t 1ps work.tb_midi_interface 
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.std_logic_textio(body)
+# Loading work.tb_midi_interface(struct)#1
+# reset
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10010000
+# Read note:
+# 00000011
+# Read attribut:
+# 10000000
+# Read note:
+# 00000011
+# Read attribut:
+# 10010000
+# Read note:
+# 00000101
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000101
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10000000
+# Read note:
+# 00000011
+# Read attribut:
+# 10000000
+# Read note:
+# 00000110
+# Read attribut:
+# 00000000
+# Read note:
+# 10000000
+# Read attribut:
+# 00000111
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000101
+# Read attribut:
+# 00000011
+# Read note:
+# 00000110
+# Read attribut:
+# 00000111
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# polyp
+# Read note:
+# 00000001
+# Read attribut:
+# 01010101
+# Read note:
+# 00000010
+# Read attribut:
+# 01010101
+# Read note:
+# 00000011
+# Read attribut:
+# 01010101
+# Read note:
+# 00000001
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000010
+# Read attribut:
+# 00000000
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# 
+# Number of read lines from file:
+# 8
+# Finished read whole file
+# -----------------------------
+# 
+# 
+# 0
+# reset
+# Reset note 1 good.
+# 
+# 1
+# check
+# 
+# 2
+# singl
+# note on/off
+# 10010000
+# note value
+# 00000011
+# note on/off
+# 10000000
+# note value
+# 00000011
+# note on/off
+# 10010000
+# note value
+# 00000101
+# ** Fatal: (vsim-3420) Array lengths do not match. Left is 8 (7 downto 0). Right is 4 (3 downto 0).
+#    Time: 2691499988 ps  Iteration: 0  Process: /tb_midi_interface/execute_file File: ../source/tb_midi_interface.vhd
+# Fatal error in ForLoop loop at ../source/tb_midi_interface.vhd line 416
+# 
+# HDL call sequence:
+# Stopped at ../source/tb_midi_interface.vhd 416 ForLoop loop
+# 
+do ./script/compile_midi_interface.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package STD_LOGIC_TEXTIO
+# -- Compiling package body STD_LOGIC_TEXTIO
+# -- Loading package STD_LOGIC_TEXTIO
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity edge_detector
+# -- Compiling architecture rtl of edge_detector
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity bit_sampling_generator
+# -- Compiling architecture rtl of bit_sampling_generator
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity read_midi
+# -- Compiling architecture rtl of read_midi
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity uart_top
+# -- Compiling architecture behav of uart_top
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_control
+# -- Compiling architecture rtl of midi_control
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity polyphone_out
+# -- Compiling architecture rtl of polyphone_out
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_interface
+# -- Compiling architecture rtl of midi_interface
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package STD_LOGIC_TEXTIO
+# -- Compiling entity tb_midi_interface
+# -- Compiling architecture struct of tb_midi_interface
+# vsim -lib work -t 1ps work.tb_midi_interface 
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.std_logic_textio(body)
+# Loading work.tb_midi_interface(struct)#1
+# reset
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10010000
+# Read note:
+# 00000011
+# Read attribut:
+# 10000000
+# Read note:
+# 00000011
+# Read attribut:
+# 10010000
+# Read note:
+# 00000101
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000101
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10000000
+# Read note:
+# 00000011
+# Read attribut:
+# 10000000
+# Read note:
+# 00000110
+# Read attribut:
+# 00000000
+# Read note:
+# 10000000
+# Read attribut:
+# 00000111
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000101
+# Read attribut:
+# 00000011
+# Read note:
+# 00000110
+# Read attribut:
+# 00000111
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# polyp
+# Read note:
+# 00000001
+# Read attribut:
+# 01010101
+# Read note:
+# 00000010
+# Read attribut:
+# 01010101
+# Read note:
+# 00000011
+# Read attribut:
+# 01010101
+# Read note:
+# 00000001
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000010
+# Read attribut:
+# 00000000
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# 
+# Number of read lines from file:
+# 8
+# Finished read whole file
+# -----------------------------
+# 
+# 
+# 0
+# reset
+# Reset note 1 good.
+# 
+# 1
+# check
+# 
+# 2
+# singl
+# note on/off
+# 10010000
+# note value
+# 00000011
+# note on/off
+# 10000000
+# note value
+# 00000011
+# note on/off
+# 10010000
+# note value
+# 00000101
+# Number of acitve notes
+# 00000000
+# 
+# 3
+# check
+# 
+# 4
+# singl
+# note on/off
+# 10000000
+# note value
+# 00000011
+# note on/off
+# 10000000
+# note value
+# 00000110
+# note on/off
+# 00000000
+# note value
+# 10000000
+# Number of acitve notes
+# 10000000
+# 
+# 5
+# check
+# 
+# 6
+# polyp
+# 
+# 7
+# check
+# 
+do ./script/compile_midi_interface.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package STD_LOGIC_TEXTIO
+# -- Compiling package body STD_LOGIC_TEXTIO
+# -- Loading package STD_LOGIC_TEXTIO
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity edge_detector
+# -- Compiling architecture rtl of edge_detector
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity bit_sampling_generator
+# -- Compiling architecture rtl of bit_sampling_generator
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity read_midi
+# -- Compiling architecture rtl of read_midi
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity uart_top
+# -- Compiling architecture behav of uart_top
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_control
+# -- Compiling architecture rtl of midi_control
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity polyphone_out
+# -- Compiling architecture rtl of polyphone_out
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_interface
+# -- Compiling architecture rtl of midi_interface
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package STD_LOGIC_TEXTIO
+# -- Compiling entity tb_midi_interface
+# -- Compiling architecture struct of tb_midi_interface
+# vsim -lib work -t 1ps work.tb_midi_interface 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.std_logic_textio(body)
+# Loading work.tb_midi_interface(struct)#1
+# reset
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10010000
+# Read note:
+# 00000011
+# Read attribut:
+# 10000000
+# Read note:
+# 00000011
+# Read attribut:
+# 10010000
+# Read note:
+# 00000101
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000101
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10000000
+# Read note:
+# 00000011
+# Read attribut:
+# 10000000
+# Read note:
+# 00000110
+# Read attribut:
+# 00000000
+# Read note:
+# 10000000
+# Read attribut:
+# 00000111
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000101
+# Read attribut:
+# 00000011
+# Read note:
+# 00000110
+# Read attribut:
+# 00000111
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# polyp
+# Read note:
+# 00000001
+# Read attribut:
+# 01010101
+# Read note:
+# 00000010
+# Read attribut:
+# 01010101
+# Read note:
+# 00000011
+# Read attribut:
+# 01010101
+# Read note:
+# 00000001
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# check
+# Read note:
+# 00000010
+# Read attribut:
+# 00000000
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 0000
+# 
+# 
+# Number of read lines from file:
+# 8
+# Finished read whole file
+# -----------------------------
+# 
+# 
+# 0
+# reset
+# Reset note 1 good.
+# 
+# 1
+# check
+# 
+# 2
+# singl
+# note on/off
+# 10010000
+# note value
+# 00000011
+# note on/off
+# 10000000
+# note value
+# 00000011
+# note on/off
+# 10010000
+# note value
+# 00000101
+# Number of acitve notes
+# 00000000
+# 
+# 3
+# check
+# 
+# 4
+# singl
+# note on/off
+# 10000000
+# note value
+# 00000011
+# note on/off
+# 10000000
+# note value
+# 00000110
+# note on/off
+# 00000000
+# note value
+# 10000000
+# Number of acitve notes
+# 10000000
+# 
+# 5
+# check
+# 
+# 6
+# polyp
+# 
+# 7
+# check
+# 
+do ./script/compile_midi_interface.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package STD_LOGIC_TEXTIO
+# -- Compiling package body STD_LOGIC_TEXTIO
+# -- Loading package STD_LOGIC_TEXTIO
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity edge_detector
+# -- Compiling architecture rtl of edge_detector
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity bit_sampling_generator
+# -- Compiling architecture rtl of bit_sampling_generator
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity read_midi
+# -- Compiling architecture rtl of read_midi
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity uart_top
+# -- Compiling architecture behav of uart_top
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_control
+# -- Compiling architecture rtl of midi_control
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity polyphone_out
+# -- Compiling architecture rtl of polyphone_out
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_interface
+# -- Compiling architecture rtl of midi_interface
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package STD_LOGIC_TEXTIO
+# -- Compiling entity tb_midi_interface
+# -- Compiling architecture struct of tb_midi_interface
+# vsim -lib work -t 1ps work.tb_midi_interface 
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.std_logic_textio(body)
+# Loading work.tb_midi_interface(struct)#1
+# reset
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 00000000
+# 
+# check
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 00000000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10010000
+# Read note:
+# 00000011
+# Read attribut:
+# 10000000
+# Read note:
+# 00000011
+# Read attribut:
+# 10010000
+# Read note:
+# 00000101
+# Read attribut:
+# 00000000
+# Read note number:
+# 00000001
+# 
+# check
+# Read note:
+# 00000101
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 00000001
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10000000
+# Read note:
+# 00000011
+# Read attribut:
+# 10000000
+# Read note:
+# 00000110
+# Read attribut:
+# 00000000
+# Read note:
+# 10000000
+# Read attribut:
+# 00000111
+# Read note number:
+# 00000000
+# 
+# check
+# Read note:
+# 00000101
+# Read attribut:
+# 00000011
+# Read note:
+# 00000110
+# Read attribut:
+# 00000111
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 00000100
+# 
+# polyp
+# Read note:
+# 00000001
+# Read attribut:
+# 01010101
+# Read note:
+# 00000010
+# Read attribut:
+# 01010101
+# Read note:
+# 00000011
+# Read attribut:
+# 01010101
+# Read note:
+# 00000001
+# Read attribut:
+# 00000000
+# Read note number:
+# 00000010
+# 
+# check
+# Read note:
+# 00000010
+# Read attribut:
+# 00000000
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 00000010
+# 
+# 
+# Number of read lines from file:
+# 8
+# Finished read whole file
+# -----------------------------
+# 
+# 
+# 0
+# reset
+# Reset note 1 good.
+# 
+# 1
+# check
+# 
+# 2
+# singl
+# note on/off
+# 10010000
+# note value
+# 00000011
+# note on/off
+# 10000000
+# note value
+# 00000011
+# note on/off
+# 10010000
+# note value
+# 00000101
+# Number of acitve notes
+# 00000001
+# 
+# 3
+# check
+# 
+# 4
+# singl
+# note on/off
+# 10000000
+# note value
+# 00000011
+# note on/off
+# 10000000
+# note value
+# 00000110
+# note on/off
+# 00000000
+# note value
+# 10000000
+# Number of acitve notes
+# 00000000
+# 
+# 5
+# check
+# 
+# 6
+# polyp
+# 
+# 7
+# check
+# 
+do ./script/compile_midi_interface.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package STD_LOGIC_TEXTIO
+# -- Compiling package body STD_LOGIC_TEXTIO
+# -- Loading package STD_LOGIC_TEXTIO
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity edge_detector
+# -- Compiling architecture rtl of edge_detector
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity bit_sampling_generator
+# -- Compiling architecture rtl of bit_sampling_generator
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity read_midi
+# -- Compiling architecture rtl of read_midi
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity uart_top
+# -- Compiling architecture behav of uart_top
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_control
+# -- Compiling architecture rtl of midi_control
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity polyphone_out
+# -- Compiling architecture rtl of polyphone_out
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_interface
+# -- Compiling architecture rtl of midi_interface
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package STD_LOGIC_TEXTIO
+# -- Compiling entity tb_midi_interface
+# -- Compiling architecture struct of tb_midi_interface
+# ** Error: ../source/tb_midi_interface.vhd(447): (vcom-1136) Unknown identifier "result_note_4".
+# ** Error: ../source/tb_midi_interface.vhd(447): Target type (error) in variable assignment is different from expression type ieee.std_logic_1164.STD_ULOGIC_VECTOR.
+# ** Error: ../source/tb_midi_interface.vhd(447): (vcom-1136) Unknown identifier "result_note_4".
+# ** Error: ../source/tb_midi_interface.vhd(448): (vcom-1136) Unknown identifier "result_note_5".
+# ** Error: ../source/tb_midi_interface.vhd(448): Target type (error) in variable assignment is different from expression type ieee.std_logic_1164.STD_ULOGIC_VECTOR.
+# ** Error: ../source/tb_midi_interface.vhd(448): (vcom-1136) Unknown identifier "result_note_5".
+# ** Error: ../source/tb_midi_interface.vhd(449): (vcom-1136) Unknown identifier "result_note_6".
+# ** Error: ../source/tb_midi_interface.vhd(449): Target type (error) in variable assignment is different from expression type ieee.std_logic_1164.STD_ULOGIC_VECTOR.
+# ** Error: ../source/tb_midi_interface.vhd(449): (vcom-1136) Unknown identifier "result_note_6".
+# ** Error: ../source/tb_midi_interface.vhd(450): (vcom-1136) Unknown identifier "result_note_7".
+# ** Error: ../source/tb_midi_interface.vhd(450): Target type (error) in variable assignment is different from expression type ieee.std_logic_1164.STD_ULOGIC_VECTOR.
+# ** Error: ../source/tb_midi_interface.vhd(450): (vcom-1136) Unknown identifier "result_note_7".
+# ** Error: ../source/tb_midi_interface.vhd(451): (vcom-1136) Unknown identifier "result_note_8".
+# ** Error: ../source/tb_midi_interface.vhd(451): Target type (error) in variable assignment is different from expression type ieee.std_logic_1164.STD_ULOGIC_VECTOR.
+# ** Error: ../source/tb_midi_interface.vhd(451): (vcom-1136) Unknown identifier "result_note_8".
+# ** Error: ../source/tb_midi_interface.vhd(453): Symbol "result_number_of_notes" has already been declared in this region.
+# ** Error: ../source/tb_midi_interface.vhd(453): near "=": syntax error
+# ** Error: ../source/tb_midi_interface.vhd(458): Cannot resolve expression type of label "result_number_of_notes".
+# ** Error: ../source/tb_midi_interface.vhd(458): Illegal type conversion to ieee.std_logic_1164.STD_LOGIC_VECTOR (operand type is not known).
+# ** Error: ../source/tb_midi_interface.vhd(461): No feasible entries for infix operator ">".
+# ** Error: ../source/tb_midi_interface.vhd(461): Type error resolving infix expression ">" as type std.STANDARD.BOOLEAN.
+# ** Error: ../source/tb_midi_interface.vhd(504): VHDL Compiler exiting
 # ** Error: /opt/questasim/questasim/linux/vcom failed.
-# Error in macro ././script/compile_midi_interface.do line 19
+# Error in macro ././script/compile_midi_interface.do line 20
 # /opt/questasim/questasim/linux/vcom failed.
 #     while executing
-# "vcom -2008 -explicit -work work ../source/tb_midi_uart.vhd"
+# "vcom -2008 -explicit -work work ../source/tb_midi_interface.vhd"
+do ./script/compile_midi_interface.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package STD_LOGIC_TEXTIO
+# -- Compiling package body STD_LOGIC_TEXTIO
+# -- Loading package STD_LOGIC_TEXTIO
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity edge_detector
+# -- Compiling architecture rtl of edge_detector
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity bit_sampling_generator
+# -- Compiling architecture rtl of bit_sampling_generator
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity read_midi
+# -- Compiling architecture rtl of read_midi
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity uart_top
+# -- Compiling architecture behav of uart_top
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_control
+# -- Compiling architecture rtl of midi_control
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity polyphone_out
+# -- Compiling architecture rtl of polyphone_out
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_interface
+# -- Compiling architecture rtl of midi_interface
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package STD_LOGIC_TEXTIO
+# -- Compiling entity tb_midi_interface
+# -- Compiling architecture struct of tb_midi_interface
+# ** Error: ../source/tb_midi_interface.vhd(458): Symbol "result_number_of_notes" has already been declared in this region.
+# ** Error: ../source/tb_midi_interface.vhd(458): near "=": syntax error
+# ** Error: ../source/tb_midi_interface.vhd(463): Cannot resolve expression type of label "result_number_of_notes".
+# ** Error: ../source/tb_midi_interface.vhd(463): Illegal type conversion to ieee.std_logic_1164.STD_LOGIC_VECTOR (operand type is not known).
+# ** Error: ../source/tb_midi_interface.vhd(466): No feasible entries for infix operator ">".
+# ** Error: ../source/tb_midi_interface.vhd(466): Type error resolving infix expression ">" as type std.STANDARD.BOOLEAN.
+# ** Error: ../source/tb_midi_interface.vhd(509): VHDL Compiler exiting
+# ** Error: /opt/questasim/questasim/linux/vcom failed.
+# Error in macro ././script/compile_midi_interface.do line 20
+# /opt/questasim/questasim/linux/vcom failed.
+#     while executing
+# "vcom -2008 -explicit -work work ../source/tb_midi_interface.vhd"
+do ./script/compile_midi_interface.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package STD_LOGIC_TEXTIO
+# -- Compiling package body STD_LOGIC_TEXTIO
+# -- Loading package STD_LOGIC_TEXTIO
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity edge_detector
+# -- Compiling architecture rtl of edge_detector
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity bit_sampling_generator
+# -- Compiling architecture rtl of bit_sampling_generator
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity read_midi
+# -- Compiling architecture rtl of read_midi
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity uart_top
+# -- Compiling architecture behav of uart_top
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_control
+# -- Compiling architecture rtl of midi_control
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity polyphone_out
+# -- Compiling architecture rtl of polyphone_out
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_interface
+# -- Compiling architecture rtl of midi_interface
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package STD_LOGIC_TEXTIO
+# -- Compiling entity tb_midi_interface
+# -- Compiling architecture struct of tb_midi_interface
+# ** Error: ../source/tb_midi_interface.vhd(466): No feasible entries for infix operator ">".
+# ** Error: ../source/tb_midi_interface.vhd(466): Type error resolving infix expression ">" as type std.STANDARD.BOOLEAN.
+# ** Error: ../source/tb_midi_interface.vhd(509): VHDL Compiler exiting
+# ** Error: /opt/questasim/questasim/linux/vcom failed.
+# Error in macro ././script/compile_midi_interface.do line 20
+# /opt/questasim/questasim/linux/vcom failed.
+#     while executing
+# "vcom -2008 -explicit -work work ../source/tb_midi_interface.vhd"
+do ./script/compile_midi_interface.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package STD_LOGIC_TEXTIO
+# -- Compiling package body STD_LOGIC_TEXTIO
+# -- Loading package STD_LOGIC_TEXTIO
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity edge_detector
+# -- Compiling architecture rtl of edge_detector
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity bit_sampling_generator
+# -- Compiling architecture rtl of bit_sampling_generator
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity read_midi
+# -- Compiling architecture rtl of read_midi
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity uart_top
+# -- Compiling architecture behav of uart_top
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_control
+# -- Compiling architecture rtl of midi_control
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity polyphone_out
+# -- Compiling architecture rtl of polyphone_out
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_interface
+# -- Compiling architecture rtl of midi_interface
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package STD_LOGIC_TEXTIO
+# -- Compiling entity tb_midi_interface
+# -- Compiling architecture struct of tb_midi_interface
+# ** Error: ../source/tb_midi_interface.vhd(466): near "not": expecting ')'
+# ** Error: ../source/tb_midi_interface.vhd(473): near "if": expecting LOOP
+# ** Error: ../source/tb_midi_interface.vhd(490): near "loop": expecting PROCESS
+# ** Error: ../source/tb_midi_interface.vhd(492): near "process": expecting ';'
+# ** Error: /opt/questasim/questasim/linux/vcom failed.
+# Error in macro ././script/compile_midi_interface.do line 20
+# /opt/questasim/questasim/linux/vcom failed.
+#     while executing
+# "vcom -2008 -explicit -work work ../source/tb_midi_interface.vhd"
+do ./script/compile_midi_interface.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package STD_LOGIC_TEXTIO
+# -- Compiling package body STD_LOGIC_TEXTIO
+# -- Loading package STD_LOGIC_TEXTIO
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity edge_detector
+# -- Compiling architecture rtl of edge_detector
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity bit_sampling_generator
+# -- Compiling architecture rtl of bit_sampling_generator
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity read_midi
+# -- Compiling architecture rtl of read_midi
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity uart_top
+# -- Compiling architecture behav of uart_top
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_control
+# -- Compiling architecture rtl of midi_control
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity polyphone_out
+# -- Compiling architecture rtl of polyphone_out
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity midi_interface
+# -- Compiling architecture rtl of midi_interface
+# QuestaSim vcom 10.2a Compiler 2013.03 Mar 15 2013
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package STD_LOGIC_TEXTIO
+# -- Compiling entity tb_midi_interface
+# -- Compiling architecture struct of tb_midi_interface
+# vsim -lib work -t 1ps work.tb_midi_interface 
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.std_logic_textio(body)
+# Loading work.tb_midi_interface(struct)#1
+# reset
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 00000000
+# 
+# check
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 00000000
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10010000
+# Read note:
+# 00000011
+# Read attribut:
+# 10000000
+# Read note:
+# 00000011
+# Read attribut:
+# 10010000
+# Read note:
+# 00000101
+# Read attribut:
+# 00000000
+# Read note number:
+# 00000001
+# 
+# check
+# Read note:
+# 00000101
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 00000001
+# 
+# singl
+# Read note:
+# 01010101
+# Read attribut:
+# 10000000
+# Read note:
+# 00000011
+# Read attribut:
+# 10000000
+# Read note:
+# 00000110
+# Read attribut:
+# 00000000
+# Read note:
+# 10000000
+# Read attribut:
+# 00000111
+# Read note number:
+# 00000000
+# 
+# check
+# Read note:
+# 00000101
+# Read attribut:
+# 00000011
+# Read note:
+# 00000110
+# Read attribut:
+# 00000111
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 00000100
+# 
+# polyp
+# Read note:
+# 00000001
+# Read attribut:
+# 01010101
+# Read note:
+# 00000010
+# Read attribut:
+# 01010101
+# Read note:
+# 00000011
+# Read attribut:
+# 01010101
+# Read note:
+# 00000001
+# Read attribut:
+# 00000000
+# Read note number:
+# 00000010
+# 
+# check
+# Read note:
+# 00000010
+# Read attribut:
+# 00000000
+# Read note:
+# 00000011
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note:
+# 00000000
+# Read attribut:
+# 00000000
+# Read note number:
+# 00000010
+# 
+# 
+# Number of read lines from file:
+# 8
+# Finished read whole file
+# -----------------------------
+# 
+# 
+# 0
+# reset
+# Reset note 1 good.
+# 
+# 1
+# check
+# Number of notes on
+# 00000000
+# 
+# 2
+# singl
+# note on/off
+# 10010000
+# note value
+# 00000011
+# note on/off
+# 10000000
+# note value
+# 00000011
+# note on/off
+# 10010000
+# note value
+# 00000101
+# Number of acitve notes
+# 00000001
+# 
+# 3
+# check
+# Number of notes on
+# 00000001
+# 
+# 4
+# singl
+# note on/off
+# 10000000
+# note value
+# 00000011
+# note on/off
+# 10000000
+# note value
+# 00000110
+# note on/off
+# 00000000
+# note value
+# 10000000
+# Number of acitve notes
+# 00000000
+# 
+# 5
+# check
+# Number of notes on
+# 00000100
+# 
+# 6
+# polyp
+# 
+# 7
+# check
+# Number of notes on
+# 00000010
+# 
+quit
