@@ -60,6 +60,7 @@ END COMPONENT;
   -- midi signals
   CONSTANT NOTE_ON:  std_logic_vector(7 downto 0) := "10010000";
   CONSTANT NOTE_OFF: std_logic_vector(7 downto 0) := "10000000";
+  CONSTANT POLYPHONIE: std_logic_vector(7 downto 0) := "10100000";
   
  -- signals testbench DUT
   SIGNAL tb_clk			 : STD_LOGIC := '0';
@@ -99,8 +100,8 @@ END COMPONENT;
 		end record;
 
 	-- hole array of input values
-	CONSTANT NUMBR_INPUTLINES: natural := 8;
-	CONSTANT NUMBR_TESTS: natural := 4;
+	CONSTANT NUMBR_INPUTLINES: natural := 12;
+	CONSTANT NUMBR_TESTS: natural := 6;
 	type t_token_array is array( 0 to (NUMBR_INPUTLINES-1))  of t_token_line;
 	signal token_array : t_token_array;
 	
@@ -340,7 +341,7 @@ execute_file: process
 				 
 				 -- execute 
 				 tb_reset_n <= '0';
-				 wait for 10 * SYS_CLK_PERIOD; 
+				 wait for MIDI_CLK_PERIOD; 
 				 tb_reset_n <= '1';
 				 wait for 30 * SYS_CLK_PERIOD;   		
 												 
@@ -375,7 +376,7 @@ execute_file: process
 			end if; -- line "reset"
 			
 					  
-			-- set single notes: test note on/off
+			-- single notes
 			--------------------------------------	
 			if (test_value.token_cmd = string'("singl")) then	
 				 write(line_out_d, string'("singl"));
@@ -453,50 +454,49 @@ execute_file: process
 					  
 					  tb_serial_in <= idle_bit ;
 					  WAIT FOR 2 * MIDI_CLK_PERIOD; 
+				
+						-- check: single note	
+						--------------------------------------	  
+						 if ((tb_note_1(7 downto 0) = check_value.t_midi_data(i+1).token_note) ) then    
+							  write(line_out, string'("Single note  good."));
+							  writeline(OUTPUT,line_out);
+							  
+							  write(line_out_d, std_logic_vector(tb_note_1(7 downto 0)));
+							  writeline(OUTPUT,line_out_d);                   
+							  write(line_out_d, std_logic_vector(check_value.t_midi_data(i+1).token_note));
+							  writeline(OUTPUT,line_out_d);
+						 else                
+							  write(line_out, string'("Failure single"));
+							  writeline(OUTPUT,line_out);   
 					  
-				-- compare output DUT with expected output from file	
-				 if ((tb_note_1(7 downto 0) = check_value.t_midi_data(i+1).token_note) ) then    
-					  write(line_out, string'("Single note  good."));
-					  writeline(OUTPUT,line_out);
-					  
-					  write(line_out_d, std_logic_vector(tb_note_1(7 downto 0)));
-					  writeline(OUTPUT,line_out_d);                   
-					  write(line_out_d, std_logic_vector(check_value.t_midi_data(i+1).token_note));
-					  writeline(OUTPUT,line_out_d);
-				 else                
-					  write(line_out, string'("Failure single"));
-					  writeline(OUTPUT,line_out);   
-			  
-					  write(line_out_d, std_logic_vector(tb_note_1(7 downto 0)));
-					  writeline(OUTPUT,line_out_d);                   
-					  write(line_out_d, std_logic_vector(check_value.t_midi_data(i+1).token_note));
-					  writeline(OUTPUT,line_out_d);
-					  
-				 end if;
-				 							 
-				 -- output result in file
-				 write(line_out_t, string'("Single note\n"));
-				 writeline(output_file,line_out_t);
-				 writeline(output_file,line_out);
-	
-				 write(line_out, string'(""));
-				 writeline(OUTPUT,line_out);
-	
-	
-				 -- ignore last token (velocity; "on/off") for equilibrum
-		
+							  write(line_out_d, std_logic_vector(tb_note_1(7 downto 0)));
+							  writeline(OUTPUT,line_out_d);                   
+							  write(line_out_d, std_logic_vector(check_value.t_midi_data(i+1).token_note));
+							  writeline(OUTPUT,line_out_d);
+							  
+						 end if;
+													 
+						 -- output result in file
+						 write(line_out_t, string'("Single note\n"));
+						 writeline(output_file,line_out_t);
+						 writeline(output_file,line_out);
+			
+						 write(line_out, string'(""));
+						 writeline(OUTPUT,line_out);
+			
+					-- ignore last token (velocity; "on/off") for equilibrum		
+					
 				 end loop;  -- 4 times midi_token
 				 
-				 -- read out numbers of notes
-				  token_temp(7 downto 0) := test_value.token_number;
-				  write(line_out_d, string'("Number of acitve notes"));
-				  writeline(OUTPUT,line_out_d);
-				  write(line_out_d, std_logic_vector(token_temp));
-				  writeline(OUTPUT,line_out_d);
-									
-				  -- end 1 midi-struct
-				  write(line_out, string'(""));
-				  writeline(OUTPUT,line_out);
+				 -- reset circuit
+				 tb_reset_n <= '0';
+				 wait for 1 * MIDI_CLK_PERIOD; 
+				 tb_reset_n <= '1';
+				 wait for 30 * SYS_CLK_PERIOD; 
+				 write(line_out, string'("Reset circuit single"));
+				 writeline(OUTPUT,line_out);
+				 write(line_out, string'(""));
+				 writeline(OUTPUT,line_out);
 					  
 			end if;	-- line "single"	
 			
@@ -506,13 +506,72 @@ execute_file: process
 				 write(line_out_d, string'("polyp"));
 				 writeline(OUTPUT,line_out_d);
 				 
-				 -- asign required token
 				 
-				 -- execute
+				-- send polyphonie status bite
+				token_temp := POLYPHONIE;
+				tb_serial_in <= idle_bit ;
+				WAIT FOR 2 * MIDI_CLK_PERIOD;
+				tb_serial_in <= start_bit;
+				WAIT FOR 1 * MIDI_CLK_PERIOD; 
+				for j in 0 to 7 loop            
+					tb_serial_in <= token_temp(j);
+					WAIT FOR MIDI_CLK_PERIOD;            
+				end loop;
+				tb_serial_in <= stop_bit;
+				WAIT FOR 1 * MIDI_CLK_PERIOD; 
+				tb_serial_in <= idle_bit ;
+				WAIT FOR 2 * MIDI_CLK_PERIOD; 
 				 
+				-- loop (note/velocity) 4 times
+				for i in 0 to 3 loop 
+				
+					-- send note i
+					token_temp := test_value.t_midi_data(i).token_note;
+					tb_serial_in <= idle_bit ;
+					WAIT FOR 2 * MIDI_CLK_PERIOD;
+					tb_serial_in <= start_bit;
+					WAIT FOR 1 * MIDI_CLK_PERIOD; 
+					for j in 0 to 7 loop            
+						tb_serial_in <= token_temp(j);
+						WAIT FOR MIDI_CLK_PERIOD;            
+					end loop;
+					tb_serial_in <= stop_bit;
+					WAIT FOR 1 * MIDI_CLK_PERIOD; 
+					tb_serial_in <= idle_bit ;
+					WAIT FOR 2 * MIDI_CLK_PERIOD;
+					
+					-- send velocity i
+					token_temp := test_value.t_midi_data(i).token_attribut;
+					tb_serial_in <= idle_bit ;
+					WAIT FOR 2 * MIDI_CLK_PERIOD;
+					tb_serial_in <= start_bit;
+					WAIT FOR 1 * MIDI_CLK_PERIOD; 
+					for j in 0 to 7 loop            
+						tb_serial_in <= token_temp(j);
+						WAIT FOR MIDI_CLK_PERIOD;            
+					end loop;
+					tb_serial_in <= stop_bit;
+					WAIT FOR 1 * MIDI_CLK_PERIOD; 
+					tb_serial_in <= idle_bit ;
+					WAIT FOR 2 * MIDI_CLK_PERIOD;
+				
+				end loop;  -- 4 times (note/velocity)
 				 
+				 -- check output				 
+					 -- read out numbers of notes
+					  token_temp(7 downto 0) := test_value.token_number;
+					  write(line_out_d, string'("Number of acitve notes"));
+					  writeline(OUTPUT,line_out_d);
+					  write(line_out_d, std_logic_vector(token_temp));
+					  writeline(OUTPUT,line_out_d);
+				
+				
+				 -- not reset circuit
+				 
+				 write(line_out, string'("Circuit NOT reset"));
+				 writeline(OUTPUT,line_out);				 
 				 write(line_out, string'(""));
-			writeline(OUTPUT,line_out);                
+				 writeline(OUTPUT,line_out);                
 			end if; -- end line "polyp"
 	  
 	  end loop; -- check all lines	

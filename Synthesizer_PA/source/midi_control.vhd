@@ -16,7 +16,7 @@ USE ieee.numeric_std.all;
 
 
 ENTITY midi_control IS
-PORT (clk_12M5:       IN	std_logic;	
+PORT (clk_12M5:       IN	std_logic;
 		reset_n:        IN	std_logic;
 		rx_data_valid_i:IN	std_logic;
 		rx_data_i:      IN  std_logic_vector(7 downto 0);
@@ -40,7 +40,7 @@ SIGNAL s_current_note:	std_logic_vector(7 downto 0);
 SIGNAL s_next_note:	   std_logic_vector(7 downto 0);	
 
 -- note on/off
-SIGNAL enable_note_off:  std_logic := '0';
+SIGNAL enable_note_on:  std_logic := '0';
 SIGNAL s_note_on:       std_logic := '0';
 SIGNAL s_next_note_on:  std_logic := '0';
 
@@ -100,10 +100,12 @@ end process;
 
 
 
-register_logic: process(all) --- and note enable 
+register_logic: process(all) 
 begin
-    if ( rx_data_valid_i = '1' and state = status and enable_note_off = '0') then --or (rx_data_valid_i = '1' and state = idle and rx_data_i(7) = '0') then
+    if ( rx_data_valid_i = '1' and state = status and enable_note_on = '1') then 
        enable_note_register <= '1';
+	 elsif (rx_data_valid_i = '1' and state = idle and rx_data_i(7) = '0') then
+		 enable_note_register <= '1';
     elsif (state = note) then
        enable_note_register <= '0';  
     end if;     
@@ -111,9 +113,9 @@ end process;
 
 register_ff: process(all)
 begin
-    if (enable_note_register = '1' and rx_data_valid_i = '1' and enable_note_off = '0') then
-		  s_next_note <= rx_data_i;
-	 elsif (enable_note_off = '1')then
+    if (enable_note_register = '1' and rx_data_valid_i = '1' and enable_note_on = '1') then
+		  s_next_note <= rx_data_i; 
+	 elsif (enable_note_on = '0')then
 		  s_next_note <= "00000000";
     else
         s_next_note <= s_current_note;
@@ -126,17 +128,17 @@ off_logic: process(all)
 begin
     -- set note on/off 
     if (rx_data_valid_i = '1') and (state = idle)  and (rx_data_i(7 downto 5) = "100")  then
-        enable_note_off <= rx_data_i(4);
+        enable_note_on <= not rx_data_i(4);
         
     -- set note off by polyphonie
     elsif (state = note) and (rx_data_i = "00000000") then
-        enable_note_off <= '1';       
+        enable_note_on <= '0';       
     end if;
 end process;
 
 on_off_ff: process(all)
 begin
-    if (enable_note_off = '1') then
+    if (enable_note_on = '0') then
         s_next_note_on <= rx_data_i(4);
     else
         s_next_note_on <= s_next_note_on;

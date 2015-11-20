@@ -27,5 +27,5 @@ vsim -t 1ns -lib work work.tb_midi_interface
 do wave_midi_interface.do
 # 1 note: 1.5 us. 
 # 1 Linie: ca. 4 us
-run 10 ms 
+run 22 ms 
 
