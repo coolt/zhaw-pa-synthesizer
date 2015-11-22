@@ -6,13 +6,14 @@ add wave -noupdate -color {Cornflower Blue} -itemcolor {Cornflower Blue} -label 
 add wave -noupdate -color {Dark Orchid} -itemcolor {Dark Orchid} -label {byte in (serial)} /tb_midi_interface/tb_serial_in
 add wave -noupdate -color {Dark Orchid} -itemcolor {Dark Orchid} -label {rx_data (8 bit)} -radix hexadecimal /tb_midi_interface/i_midi_interface/i_midi_control/rx_data_i
 add wave -noupdate -color {Dark Orchid} -itemcolor {Dark Orchid} -label rx_data_valid /tb_midi_interface/i_midi_interface/s_data_valid
-add wave -noupdate -color Magenta -itemcolor Magenta -label state /tb_midi_interface/i_midi_interface/i_midi_control/state
-add wave -noupdate -color Magenta -itemcolor Magenta -label en_register /tb_midi_interface/i_midi_interface/i_midi_control/enable_note_register
+add wave -noupdate -color {Dark Orchid} -itemcolor {Dark Orchid} -label state /tb_midi_interface/i_midi_interface/i_midi_control/state
+add wave -noupdate -color {Dark Orchid} -itemcolor {Dark Orchid} -label en_note_register /tb_midi_interface/i_midi_interface/i_midi_control/enable_note_register
 add wave -noupdate -color {Dark Orchid} -itemcolor {Dark Orchid} -label s_note_valid /tb_midi_interface/i_midi_interface/i_midi_control/s_note_valid
+add wave -noupdate -label s_current_note -radix hexadecimal /tb_midi_interface/i_midi_interface/i_midi_control/s_current_note
+add wave -noupdate -label s_next_note -radix hexadecimal /tb_midi_interface/i_midi_interface/i_midi_control/s_next_note
 add wave -noupdate -color Magenta -itemcolor {Dark Orchid} -label note_out_interface -radix hexadecimal /tb_midi_interface/i_midi_interface/i_midi_control/note_out_o
 add wave -noupdate -color Green -itemcolor Green -label state_polyphonie /tb_midi_interface/i_midi_interface/i_polyphone_out/state
 add wave -noupdate -color {Lime Green} -itemcolor {Lime Green} -label note_valid_i /tb_midi_interface/i_midi_interface/i_polyphone_out/note_valid_i
-#add wave -noupdate -label s_note_valid /tb_midi_interface/i_midi_interface/i_polyphone_out/s_note_valid
 add wave -noupdate -color {Lime Green} -itemcolor {Lime Green} -label temp_on /tb_midi_interface/i_midi_interface/i_polyphone_out/s_temp_on
 add wave -noupdate -color {Lime Green} -itemcolor {Lime Green} -label temp_note_vector -radix hexadecimal /tb_midi_interface/i_midi_interface/i_polyphone_out/s_temp_noteVector
 add wave -noupdate -color {Lime Green} -itemcolor {Lime Green} -label temp_note -radix hexadecimal /tb_midi_interface/i_midi_interface/i_polyphone_out/s_temp_note
@@ -38,4 +39,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits us
 update
-WaveRestoreZoom {5268136 ns} {22880625 ns}
+WaveRestoreZoom {0 ns} {4568595 ns}
