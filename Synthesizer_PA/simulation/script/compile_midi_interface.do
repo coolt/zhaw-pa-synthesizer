@@ -23,7 +23,7 @@ vcom -2008 -explicit -work work ../source/tb_midi_interface.vhd
 #-------------------------------------
 
 # run simulation
-vsim -t 1ns -lib work work.tb_midi_interface
+vsim -novopt -t 1ns -lib work work.tb_midi_interface
 do wave_midi_interface.do
 # 1 note: 1.5 us. 
 # 1 Linie: ca. 4 us

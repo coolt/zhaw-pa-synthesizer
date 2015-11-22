@@ -36,16 +36,27 @@ END polyphone_out;
 
 ARCHITECTURE rtl OF polyphone_out IS
 
+SIGNAL note_valid: std_logic := '0';
+--SIGNAL s_next_note_valid: std_logic := '0';
+SIGNAL s_toggel: std_logic := '0';
+
 -- fsm
 TYPE state_fsm IS ( idle, note_exist, note_new);
 SIGNAL state: state_fsm;
 SIGNAL next_state: state_fsm;
 
--- array of notes                
+-- array of notes            
 type t_noteVector_array is array (1 to 10) of std_logic_vector(8 downto 0) ; 
-
-SIGNAL s_noteVector_array: t_noteVector_array;
-SIGNAL s_next_noteVector_array: t_noteVector_array;
+SIGNAL s_noteVector_array: t_noteVector_array := (  (others => '0'), (others => '0'),
+                                                    (others => '0'), (others => '0'),
+                                                    (others => '0'), (others => '0'),
+                                                    (others => '0'), (others => '0'),
+                                                    (others => '0'), (others => '0'));
+SIGNAL s_next_noteVector_array: t_noteVector_array:=((others => '0'), (others => '0'),
+                                                    (others => '0'), (others => '0'),
+                                                    (others => '0'), (others => '0'),
+                                                    (others => '0'), (others => '0'),
+                                                    (others => '0'), (others => '0'));
 
 SIGNAL s_index:		natural range 1 to 10;
 SIGNAL s_next_index: natural range 1 to 10;
@@ -61,46 +72,56 @@ SIGNAL s_temp_on: std_logic := '0';
 
 
 -- note register
-SIGNAL s_note_1:     std_logic_vector(8 DOWNTO 0 ) := "000000000";
-SIGNAL s_next_note_1:std_logic_vector(8 DOWNTO 0 ):= "000000000";
+SIGNAL s_note_1:     std_logic_vector(8 DOWNTO 0 ):= (others => '0');
+SIGNAL s_next_note_1:std_logic_vector(8 DOWNTO 0 ):= (others => '0');
 SIGNAL s_note_1_on:  std_logic := '0';
+SIGNAL s_next_note_1_on:  std_logic := '0';
 
-SIGNAL s_note_2:     std_logic_vector(8 DOWNTO 0 ) := "000000000";
-SIGNAL s_next_note_2:std_logic_vector(8 DOWNTO 0 ):= "000000000";
+SIGNAL s_note_2:     std_logic_vector(8 DOWNTO 0 ):= (others => '0');
+SIGNAL s_next_note_2:std_logic_vector(8 DOWNTO 0 ):= (others => '0');
 SIGNAL s_note_2_on:  std_logic := '0';
+SIGNAL s_next_note_2_on:  std_logic := '0';
 
-SIGNAL s_note_3:     std_logic_vector(8 DOWNTO 0 ) := "000000000";
-SIGNAL s_next_note_3:std_logic_vector(8 DOWNTO 0 ):= "000000000";
+SIGNAL s_note_3:     std_logic_vector(8 DOWNTO 0 ):= (others => '0');
+SIGNAL s_next_note_3:std_logic_vector(8 DOWNTO 0 ):= (others => '0');
 SIGNAL s_note_3_on:  std_logic := '0';
+SIGNAL s_next_note_3_on:  std_logic := '0';
 
 
-SIGNAL s_note_4:     std_logic_vector(8 DOWNTO 0 ) := "000000000";
-SIGNAL s_next_note_4:std_logic_vector(8 DOWNTO 0 ):= "000000000";
+SIGNAL s_note_4:     std_logic_vector(8 DOWNTO 0 ):= (others => '0');
+SIGNAL s_next_note_4:std_logic_vector(8 DOWNTO 0 ):= (others => '0');
 SIGNAL s_note_4_on:  std_logic := '0';
+SIGNAL s_next_note_4_on:  std_logic := '0';
 
-SIGNAL s_note_5:     std_logic_vector(8 DOWNTO 0 ) := "000000000";
-SIGNAL s_next_note_5:std_logic_vector(8 DOWNTO 0 ):= "000000000";
+SIGNAL s_note_5:     std_logic_vector(8 DOWNTO 0 ):= (others => '0');
+SIGNAL s_next_note_5:std_logic_vector(8 DOWNTO 0 ):= (others => '0');
 SIGNAL s_note_5_on:  std_logic := '0';
+SIGNAL s_next_note_5_on:  std_logic := '0';
 
-SIGNAL s_note_6:     std_logic_vector(8 DOWNTO 0 ) := "000000000";
-SIGNAL s_next_note_6:std_logic_vector(8 DOWNTO 0 ):= "000000000";
+SIGNAL s_note_6:     std_logic_vector(8 DOWNTO 0 ):= (others => '0');
+SIGNAL s_next_note_6:std_logic_vector(8 DOWNTO 0 ):= (others => '0');
 SIGNAL s_note_6_on:  std_logic := '0';
+SIGNAL s_next_note_6_on:  std_logic := '0';
 
-SIGNAL s_note_7:     std_logic_vector(8 DOWNTO 0 ) := "000000000";
-SIGNAL s_next_note_7:std_logic_vector(8 DOWNTO 0 ):= "000000000";
+SIGNAL s_note_7:     std_logic_vector(8 DOWNTO 0 ):= (others => '0');
+SIGNAL s_next_note_7:std_logic_vector(8 DOWNTO 0 ):= (others => '0');
 SIGNAL s_note_7_on:  std_logic := '0';
+SIGNAL s_next_note_7_on:  std_logic := '0';
 
-SIGNAL s_note_8:     std_logic_vector(8 DOWNTO 0 ) := "000000000";
-SIGNAL s_next_note_8:std_logic_vector(8 DOWNTO 0 ):= "000000000";
+SIGNAL s_note_8:     std_logic_vector(8 DOWNTO 0 ):= (others => '0');
+SIGNAL s_next_note_8:std_logic_vector(8 DOWNTO 0 ):= (others => '0');
 SIGNAL s_note_8_on:  std_logic := '0';
+SIGNAL s_next_note_8_on:  std_logic := '0';
 
-SIGNAL s_note_9:     std_logic_vector(8 DOWNTO 0 ) := "000000000";
-SIGNAL s_next_note_9:std_logic_vector(8 DOWNTO 0 ):= "000000000";
+SIGNAL s_note_9:     std_logic_vector(8 DOWNTO 0 ):= (others => '0');
+SIGNAL s_next_note_9:std_logic_vector(8 DOWNTO 0 ):= (others => '0');
 SIGNAL s_note_9_on:  std_logic := '0';
+SIGNAL s_next_note_9_on:  std_logic := '0';
 
-SIGNAL s_note_10:     std_logic_vector(8 DOWNTO 0 ) := "000000000";
-SIGNAL s_next_note_10:std_logic_vector(8 DOWNTO 0 ):= "000000000";
+SIGNAL s_note_10:     std_logic_vector(8 DOWNTO 0 ):= (others => '0');
+SIGNAL s_next_note_10:std_logic_vector(8 DOWNTO 0 ):= (others => '0');
 SIGNAL s_note_10_on:  std_logic := '0';
+SIGNAL s_next_note_10_on:  std_logic := '0';
 
 
 
@@ -130,39 +151,37 @@ fsm_ff: PROCESS(ALL)
 BEGIN
     if (reset_n = '0') then
         state <= idle;
-        --s_current_note <= (others => '0');  -------------IM NOTE FF
-		  --s_current_note_Vector <= (others => '0');
      elsif (clk_12M5'event) and (clk_12M5 = '1') then
         state <= next_state;  
-        --s_current_note <= s_next_note;  
-		  -- ???? next Vector
      end if;
-
 END PROCESS;
 
 
 note_fsm: PROCESS(ALL)
 BEGIN
 
+if ( note_valid = '1') then -------------- NEW !!!!!!!!!!!!!!!!!!
 -- get new note
 s_current_noteVector <=  note_value_i;
-s_current_note <= s_temp_noteVector(7 downto 0);
-s_current_on <= s_temp_noteVector(8);
+s_current_note <= s_current_noteVector(7 downto 0);
+s_current_on <= s_current_noteVector(8);
 
 -- get registerd notes
-for line in 1 to 10 loop
+for index in 1 to 10 loop
 
-	s_temp_noteVector <= s_noteVector_array(line);
+	s_temp_noteVector <= s_noteVector_array(index);
 	s_temp_note <= s_temp_noteVector(7 downto 0);
 	s_temp_on <= s_temp_noteVector(8);
 	
 	case state is
 	  when idle =>
 			-- check if note still exist
-			if(s_temp_note = s_current_note) then
-				next_state <= note_exist;
-			else
-				next_state <= note_new;
+			if(note_valid_i = '1' and s_temp_note = s_current_note) then  ---------------
+				next_state <= note_exist;  
+            elsif(note_valid_i = '1'and s_temp_note /= s_current_note) then ------------ 
+				next_state <= note_new;    
+            else
+               next_state <= idle;
 			end if;
 			  
 	  when note_exist =>
@@ -170,28 +189,32 @@ for line in 1 to 10 loop
 				next_state <= idle;
 			else
 			   -- change note on/off
-			   s_noteVector_array(line) <= note_value_i;
+			   s_noteVector_array(index) <= note_value_i;
 				next_state <= idle;
 			end if;
 			
 	  when note_new =>
 			if(s_current_on = '1') then
+            
 				-- finde free place in array
 				for line in 1 to 10 loop
 					-- check if note is off
 					if (s_temp_on = '0') then
-						s_noteVector_array(line) <= s_current_noteVector; -- note_value_i;
+						s_noteVector_array(index) <= s_current_noteVector; -- note_value_i;
 						exit;
 					end if;
-				end loop;
-			
+				end loop;	
+                
 				next_state <= idle;
+            else
+                next_state <= idle;
 			end if;
 			
 	  when others =>
 			next_state <= idle;
 	end case;	
-end loop; -- check set notes in array
+    end loop;
+end if;
 	
 END PROCESS;
 
@@ -243,7 +266,27 @@ BEGIN
 	END IF;
 END PROCESS;
 
+valid_logic: process(note_valid_i)
+begin   
+    if (note_valid_i = '1' and s_toggel = '0') then
+        note_valid <= '1';
+        s_toggel <= '1';
+    elsif (note_valid_i = '1' and s_toggel = '1') then
+        note_valid <= '0';
+        s_toggel <= '0';
+    else 
+        note_valid <= '0';
+    end if;
+end process;
 
+--valid_ff: process(all)
+--begin
+--    --if (reset_n = '0') then
+--    --    s_note_valid <= '0';
+--   --elsif (clk_12M5'event) and (clk_12M5 = '1') then
+--       -- s_note_valid <= s_next_note_valid;
+--   --end if;
+--end process;
 
 
 
