@@ -110,8 +110,8 @@ end process;
 register_mux: process(all)           
 begin
     if (enable_note_register = '1') then
-         s_next_note <= rx_data_i; 
-    else
+        s_next_note <= rx_data_i; 
+    elsif (state = idle) then  
         s_next_note <= (others => '0');
     end if;
 end process;
@@ -134,47 +134,6 @@ begin
         s_current_note <= s_next_note;
     end if;
 end process;
-
-
-
-
-
-
---register_mux: process(all)           
---begin
---    if (enable_note_register = '1') then
---         s_next_note <= rx_data_i; 
---    else
---        s_next_note <= (others => '0');
---    end if;
---end process;
---
---register_ff1: process(all)
---begin
---    if (reset_n = '0')then
---        enable_note_register <= '0';
---    elsif (clk_12M5'event) and (clk_12M5 = '1') then         
---        enable_note_register <= next_enable_note_register;
---    end if;
---end process;
---
---
---register_ff2: process(all)
---begin
---    if (reset_n = '0')then
---        s_current_note <= (others => '0');	
---    elsif (clk_12M5'event) and (clk_12M5 = '1') then         
---        s_current_note <= s_next_note;
---    end if;
---end process;
-
-
-
-
-
-
-
-
 
 
 off_logic: process(all)
@@ -219,9 +178,9 @@ end process;
 
 note_out_ff: process(all)
 begin
-    if reset_n = '0' then
+    if reset_n = '0' then   ----and (rx_data_valid_i = '1')
         s_note_out <= (others => '0');
-    elsif (clk_12M5'event) and (clk_12M5 = '1')and (rx_data_valid_i = '1') then  --- synchronisierrt mit input
+    elsif (clk_12M5'event) and (clk_12M5 = '1') then  --- synchronisierrt mit input
         s_note_out <= (s_note_on & s_current_note);
     end if;
 end process;
