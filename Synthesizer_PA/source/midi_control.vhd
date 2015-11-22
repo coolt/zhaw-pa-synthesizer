@@ -12,7 +12,8 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.numeric_std.all;
-
+library work;
+use work.note_type_pkg.all;
 
 
 ENTITY midi_control IS

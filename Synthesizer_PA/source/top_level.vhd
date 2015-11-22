@@ -26,6 +26,8 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.numeric_std.all;
+library work;
+use work.note_type_pkg.all;
 
 
 ENTITY top_level IS
@@ -112,16 +114,8 @@ COMPONENT midi_interface
 PORT(	clk_12M5_i:	  IN std_logic; 
 		reset_n_i:    IN std_logic;
 		serial_i:     IN std_logic; 
-		note_1_o:     OUT std_logic_vector(8 downto 0); 
-		note_2_o:     OUT std_logic_vector(8 downto 0); 
-		note_3_o:     OUT std_logic_vector(8 downto 0); 
-		note_4_o:     OUT std_logic_vector(8 downto 0); 
-		note_5_o:     OUT std_logic_vector(8 downto 0); 
-		note_6_o:     OUT std_logic_vector(8 downto 0); 
-		note_7_o:     OUT std_logic_vector(8 downto 0); 
-		note_8_o:     OUT std_logic_vector(8 downto 0); 
-		note_9_o:     OUT std_logic_vector(8 downto 0); 
-		note_10_o:    OUT std_logic_vector(8 downto 0) 
+		note_o:     OUT t_note_array
+		
 	  );
 END COMPONENT;
 
@@ -129,16 +123,7 @@ END COMPONENT;
 COMPONENT tone_generator
 PORT(	clk_12M5_i:   IN std_logic; 
 		reset_n_i:    IN std_logic;
-		note_1_o:     IN std_logic_vector(8 downto 0); 
-		note_2_o:     IN std_logic_vector(8 downto 0); 
-		note_3_o:     IN std_logic_vector(8 downto 0); 
-		note_4_o:     IN std_logic_vector(8 downto 0); 
-		note_5_o:     IN std_logic_vector(8 downto 0); 
-		note_6_o:     IN std_logic_vector(8 downto 0); 
-		note_7_o:     IN std_logic_vector(8 downto 0); 
-		note_8_o:     IN std_logic_vector(8 downto 0); 
-		note_9_o:     IN std_logic_vector(8 downto 0); 
-		note_10_o:    IN std_logic_vector(8 downto 0);
+		note_i:    IN t_note_array;
 		dacdat_l_o:   OUT std_logic_vector(15 downto 0);
 		dacdat_r_o:   OUT std_logic_vector(15 downto 0)   
 	  );
@@ -216,32 +201,32 @@ PORT MAP(
 		clk_12M5_i   => tl_clk_12M5,
 		reset_n_i    => tl_key_sync(0),
 		serial_i     => GPIO_10, 
-		note_1_o     => tl_note_1,
-		note_2_o     => tl_note_2,
-		note_3_o     => tl_note_3,
-		note_4_o     => tl_note_4,
-		note_5_o     => tl_note_5, 
-		note_6_o     => tl_note_6,
-		note_7_o     => tl_note_7,
-		note_8_o     => tl_note_8,
-		note_9_o     => tl_note_9, 
-		note_10_o    => tl_note_10
+		note_o(0)     => tl_note_1,
+		note_o(1)    => tl_note_2,
+		note_o(2)     => tl_note_3,
+		note_o(3)     => tl_note_4,
+		note_o(4)     => tl_note_5, 
+		note_o(5)     => tl_note_6,
+		note_o(6)     => tl_note_7,
+		note_o(7)     => tl_note_8,
+		note_o(8)     => tl_note_9, 
+		note_o(9)    => tl_note_10
 		); 
 	  
 i_tone_generator: tone_generator
 PORT MAP(
 		clk_12M5_i    => tl_clk_12M5,
 		reset_n_i     => tl_key_sync(0),
-		note_1_o      => tl_note_1,
-		note_2_o      => tl_note_2,
-		note_3_o      => tl_note_3,
-		note_4_o      => tl_note_4, 
-		note_5_o      => tl_note_5,
-		note_6_o      => tl_note_6,
-		note_7_o      => tl_note_7,
-		note_8_o      => tl_note_8, 
-		note_9_o      => tl_note_9,
-		note_10_o     => tl_note_10,
+		note_i(0)     => tl_note_1,
+		note_i(1)      => tl_note_2,
+		note_i(2)     => tl_note_3,
+		note_i(3)      => tl_note_4, 
+		note_i(4)      => tl_note_5,
+		note_i(5)      => tl_note_6,
+		note_i(6)      => tl_note_7,
+		note_i(7)      => tl_note_8, 
+		note_i(8)      => tl_note_9,
+		note_i(9)     => tl_note_10,
 		dacdat_l_o    => tl_dacdat_gl,
 		dacdat_r_o    => tl_dacdat_gr
 		);              

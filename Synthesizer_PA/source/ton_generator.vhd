@@ -19,20 +19,14 @@
 LIBRARY		ieee;
 USE			ieee.std_logic_1164.all;
 USE			ieee.numeric_std.all;
+library work;
+use work.note_type_pkg.all;
+
 
 ENTITY tone_generator IS
 PORT(clk_12M5_i:   IN std_logic; 
 	  reset_n_i:    IN std_logic;        
-	  note_1_o:     IN std_logic_vector(8 downto 0); 
-	  note_2_o:     IN std_logic_vector(8 downto 0); 
-	  note_3_o:     IN std_logic_vector(8 downto 0); 
-	  note_4_o:     IN std_logic_vector(8 downto 0); 
-	  note_5_o:     IN std_logic_vector(8 downto 0); 
-	  note_6_o:     IN std_logic_vector(8 downto 0); 
-	  note_7_o:     IN std_logic_vector(8 downto 0); 
-	  note_8_o:     IN std_logic_vector(8 downto 0); 
-	  note_9_o:     IN std_logic_vector(8 downto 0); 
-	  note_10_o:    IN std_logic_vector(8 downto 0);
+	  note_i:     IN t_note_array;
 	  dacdat_l_o:   OUT std_logic_vector(15 downto 0);
 	  dacdat_r_o:   OUT std_logic_vector(15 downto 0)
 	  );
@@ -76,7 +70,7 @@ i_1th_decoder: tone_decoder
 PORT MAP(
 		clk_12M5		=>	clk_12M5_i,
 		reset_n		=>	reset_n_i,
-		note_i		=>	note_1_o,   -- first note
+		note_i		=>	note_i(0),   -- first note
 		tone_on_o	=>	s_tone_on,
 		N_CUM_o		=>	s_n_cum
 		);

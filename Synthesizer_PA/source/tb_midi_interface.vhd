@@ -13,9 +13,11 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+library work;
 use work.all;
 use std.textio.all;
 use work.std_logic_textio.all; 
+use work.note_type_pkg.all;
 
 
 entity tb_midi_interface is
@@ -29,17 +31,8 @@ end;
 COMPONENT midi_interface IS
 PORT(clk_12M5_i:   IN std_logic; 
 	  reset_n_i:    IN std_logic;
-	  serial_i:     IN std_logic;   
-	  note_1_o:     OUT std_logic_vector(8 downto 0); 
-	  note_2_o:     OUT std_logic_vector(8 downto 0); 
-	  note_3_o:     OUT std_logic_vector(8 downto 0); 
-	  note_4_o:     OUT std_logic_vector(8 downto 0); 
-	  note_5_o:     OUT std_logic_vector(8 downto 0); 
-	  note_6_o:     OUT std_logic_vector(8 downto 0); 
-	  note_7_o:     OUT std_logic_vector(8 downto 0); 
-	  note_8_o:     OUT std_logic_vector(8 downto 0); 
-	  note_9_o:     OUT std_logic_vector(8 downto 0); 
-	  note_10_o:    OUT std_logic_vector(8 downto 0)
+	  serial_i:     IN std_logic;  
+	note_o: out t_note_array	  
 	  ); 
 END COMPONENT;
 
@@ -57,10 +50,7 @@ END COMPONENT;
   CONSTANT MIDI_CLK_PERIOD: time   := 32 us;  
   CONSTANT MIDI_CLK_HALFPERIOD: time:= 16 us;
   
-  -- midi signals
-  CONSTANT NOTE_ON:  std_logic_vector(7 downto 0) := "10010000";
-  CONSTANT NOTE_OFF: std_logic_vector(7 downto 0) := "10000000";
-  CONSTANT POLYPHONIE: std_logic_vector(7 downto 0) := "10100000";
+  
   
  -- signals testbench DUT
   SIGNAL tb_clk			 : STD_LOGIC := '0';
@@ -80,35 +70,17 @@ END COMPONENT;
 
 	-- file handling
 	----------------------------------------------------------------
-	
-	-- array of input from file
-	-- token structure: 
-	-- | command | 4 x midi_data (note + attribut) |  numbers_of_notes_out |
-	
-		-- define midi_data
-		type t_midi_data is record                      -- note_5  = "0000 1001"  = 0x05
-			token_note : std_logic_vector(7 downto 0);  -- note on = "1001 0000"  = 0x90                   
-			token_attribut : std_logic_vector(7 downto 0);
-		end record;
-		type t_midi_data_array is array (0 to 3) of t_midi_data;
-	
-		-- define token structure
-		type t_token_line is record
-			token_cmd : string(1 to 5);
-			t_midi_data : t_midi_data_array;
-			token_number : std_logic_vector(7 downto 0);
-		end record;
 
-	-- hole array of input values
+	-- array of input values
 	CONSTANT NUMBR_INPUTLINES: natural := 12;
 	CONSTANT NUMBR_TESTS: natural := 6;
-	type t_token_array is array( 0 to (NUMBR_INPUTLINES-1))  of t_token_line;
-	signal token_array : t_token_array;
+    
+	type t_input_array is array( 0 to (NUMBR_INPUTLINES-1))  of t_token_line;
+	signal token_array : t_input_array;
 	
 	
-  -- array of (expected) output values 
-  type t_note_out_array is array (0 to 9) of STD_LOGIC_VECTOR (8 DOWNTO 0);  
-  signal s_note_out_array: t_note_out_array;
+  -- array of (expected) output values   
+  signal s_note_out_array: t_note_array;
   
   	 
   file input_file: TEXT;       
@@ -125,16 +97,16 @@ i_midi_interface: midi_interface
 PORT MAP(clk_12M5_i   => tb_clk,
 	  reset_n_i   => tb_reset_n,
 	  serial_i   => tb_serial_in,
-	  note_1_o   => tb_note_1,
-	  note_2_o   => tb_note_1,
-	  note_3_o   => tb_note_1,
-	  note_4_o   => tb_note_1,
-	  note_5_o   => tb_note_1,
-	  note_6_o   => tb_note_1,
-	  note_7_o   => tb_note_1,
-	  note_8_o   => tb_note_1,
-	  note_9_o   => tb_note_1,
-	  note_10_o  => tb_note_1
+	  note_o(0)   => tb_note_1,
+	  note_o(1)    => tb_note_1,
+	  note_o(2)    => tb_note_1,
+	  note_o(3)    => tb_note_1,
+	  note_o(4)    => tb_note_1,
+	  note_o(5)    => tb_note_1,
+	  note_o(6)    => tb_note_1,
+	  note_o(7)    => tb_note_1,
+	  note_o(8)    => tb_note_1,
+	  note_o(9)   => tb_note_1
 	  );
 	  
 --------------------------------------------------------------------

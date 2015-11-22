@@ -14,27 +14,18 @@
 ----------------------------------------------------------------------
 
 
--- TO DO:
--- check if signal note_vector is used
+LIBRARY	ieee;
+USE	ieee.std_logic_1164.all;
+USE	ieee.numeric_std.all;
+library work;
+use work.note_type_pkg.all;
 
-LIBRARY		ieee;
-USE			ieee.std_logic_1164.all;
-USE			ieee.numeric_std.all;
 
 ENTITY midi_interface IS
 PORT(   clk_12M5_i:   IN std_logic; 
         reset_n_i:    IN std_logic;
         serial_i:     IN std_logic; 
-        note_1_o:     OUT std_logic_vector(8 downto 0); 
-		note_2_o:     OUT std_logic_vector(8 downto 0); 
-		note_3_o:     OUT std_logic_vector(8 downto 0); 
-		note_4_o:     OUT std_logic_vector(8 downto 0); 
-		note_5_o:     OUT std_logic_vector(8 downto 0); 
-		note_6_o:     OUT std_logic_vector(8 downto 0); 
-		note_7_o:     OUT std_logic_vector(8 downto 0); 
-		note_8_o:     OUT std_logic_vector(8 downto 0); 
-		note_9_o:     OUT std_logic_vector(8 downto 0); 
-		note_10_o:    OUT std_logic_vector(8 downto 0) 
+        note_o: out t_note_array
         );
 END midi_interface;
 
@@ -65,16 +56,7 @@ PORT (	clk_12M5:  		IN  std_logic;
         reset_n:	  	IN	 std_logic;
 		note_valid_i: 	IN  std_logic;
 		note_value_i:	IN  std_logic_vector(8 downto 0);
-        note_1:     	OUT std_logic_vector(8 downto 0); 
-		note_2:     	OUT std_logic_vector(8 downto 0); 
-		note_3:     	OUT std_logic_vector(8 downto 0); 
-		note_4:     	OUT std_logic_vector(8 downto 0); 
-		note_5:     	OUT std_logic_vector(8 downto 0); 
-		note_6:     	OUT std_logic_vector(8 downto 0); 
-		note_7:     	OUT std_logic_vector(8 downto 0); 
-		note_8:     	OUT std_logic_vector(8 downto 0); 
-		note_9:     	OUT std_logic_vector(8 downto 0); 
-		note_10:    	OUT std_logic_vector(8 downto 0) 
+        note_o: out t_note_array
       );
 END Component;
 
@@ -115,16 +97,7 @@ PORT MAP(clk_12M5		=> clk_12M5_i,
         reset_n		    => reset_n_i,	
 		note_valid_i	=> s_note_valid,
 		note_value_i	=> s_note_byte,
-        note_1			=> note_1_o,
-		note_2			=> note_2_o,
-		note_3			=> note_3_o,
-		note_4			=> note_4_o,
-		note_5			=> note_5_o,
-		note_6			=> note_6_o,
-		note_7			=> note_7_o,
-		note_8			=> note_8_o,
-		note_9			=> note_9_o,
-		note_10		    => note_10_o
+        note_o	=> note_o
       );
         
  END rtl;

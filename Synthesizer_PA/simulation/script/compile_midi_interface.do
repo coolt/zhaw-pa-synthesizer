@@ -6,7 +6,7 @@ vlib work
 
 # textbased testbench
 vcom -2002 -explicit -work work ../source/std_logic_textio.vhd
-
+vcom -2008 -explicit -work work ../source/note_type_pkg.vhd
 
 # Midi-Interface
 vcom -2008 -explicit -work work ../source/edge_detector.vhd
