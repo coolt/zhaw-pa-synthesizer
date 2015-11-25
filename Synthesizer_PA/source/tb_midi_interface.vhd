@@ -9,6 +9,7 @@
 -- To Do:
 -- make procedure for: check result, send midi data !!
 -- implement polyphonie
+-- is reset necessary ?
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -409,7 +410,7 @@ execute_file: process
 					  WAIT FOR 2 * MIDI_CLK_PERIOD; 
 					  
 					  -- send dummy velociy
-					  token_temp := "11111111";
+					  token_temp := DUMMY_VELOCITY;
 					  tb_serial_in <= idle_bit ;
 					  WAIT FOR 2 * MIDI_CLK_PERIOD;
 					  
@@ -461,14 +462,14 @@ execute_file: process
 				 end loop;  -- 4 times midi_token
 				 
 				 -- reset circuit
-				 tb_reset_n <= '0';
-				 wait for 1 * MIDI_CLK_PERIOD; 
-				 tb_reset_n <= '1';
-				 wait for 30 * SYS_CLK_PERIOD; 
-				 write(line_out, string'("Reset circuit single"));
-				 writeline(OUTPUT,line_out);
-				 write(line_out, string'(""));
-				 writeline(OUTPUT,line_out);
+--				 tb_reset_n <= '0';
+--				 wait for 1 * MIDI_CLK_PERIOD; 
+--				 tb_reset_n <= '1';
+--				 wait for 30 * SYS_CLK_PERIOD; 
+--				 write(line_out, string'("Reset circuit single"));
+--				 writeline(OUTPUT,line_out);
+--				 write(line_out, string'(""));
+--				 writeline(OUTPUT,line_out);
 					  
 			end if;	-- line "single"	
 			
@@ -538,12 +539,11 @@ execute_file: process
 					  writeline(OUTPUT,line_out_d);
 				
 				
-				 -- not reset circuit
-				 
-				 write(line_out, string'("Circuit NOT reset"));
-				 writeline(OUTPUT,line_out);				 
-				 write(line_out, string'(""));
-				 writeline(OUTPUT,line_out);                
+				 -- not reset circuit				 
+--				 write(line_out, string'("Circuit NOT reset"));
+--				 writeline(OUTPUT,line_out);				 
+--				 write(line_out, string'(""));
+--				 writeline(OUTPUT,line_out);                
 			end if; -- end line "polyp"
 	  
 	  end loop; -- check all lines	

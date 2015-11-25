@@ -12,6 +12,7 @@ package note_type_pkg is
   CONSTANT NOTE_ON:  std_logic_vector(7 downto 0) := "10010000";
   CONSTANT NOTE_OFF: std_logic_vector(7 downto 0) := "10000000";
   CONSTANT POLYPHONIE: std_logic_vector(7 downto 0) := "10100000";
+  CONSTANT DUMMY_VELOCITY: std_logic_vector(7 downto 0) := "01010101";
 
   
 -- array with token structure  (input file)	

@@ -24,7 +24,7 @@ PORT (clk_12M5:  		IN  std_logic;
 	  reset_n:	  		IN	 std_logic;
 	  note_valid_i: 	IN  std_logic;
 	  note_value_i:	IN  std_logic_vector(8 downto 0);
-      note_o: out t_note_array 
+     note_o: out t_note_array 
 	  );
 END polyphone_out;
 
@@ -153,7 +153,7 @@ END PROCESS;
 note_fsm: PROCESS(ALL)
 BEGIN
 
-if ( S_note_valid = '1') then
+--if ( s_note_valid = '1') then
     -- get new note
     s_current_noteVector <=  note_value_i;
     s_current_note <= s_current_noteVector(7 downto 0);
@@ -207,7 +207,7 @@ if ( S_note_valid = '1') then
                 next_state <= idle;
         end case;	
     end loop;
-end if;
+--end if;  -- note valid
 	
 END PROCESS;
 
