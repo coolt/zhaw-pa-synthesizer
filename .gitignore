@@ -38,7 +38,7 @@ DTP_2_Synthesizer
 FPGA/simulation/**/*
 
 # !FPGA/simulation/script/*.do
-
+**/**/work/*
 
 # Debug files
 *.dSYM/
