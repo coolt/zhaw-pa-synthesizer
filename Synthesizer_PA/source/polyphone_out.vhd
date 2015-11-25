@@ -31,7 +31,7 @@ END polyphone_out;
 
 ARCHITECTURE rtl OF polyphone_out IS
 
-SIGNAL S_note_valid: std_logic := '0';
+SIGNAL s_note_valid: std_logic := '0';
 SIGNAL s_next_note_valid: std_logic := '0';
 
 -- fsm
