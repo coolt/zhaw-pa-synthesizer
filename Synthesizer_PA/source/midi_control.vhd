@@ -188,23 +188,23 @@ begin
 end process;
 
 
---note_out_logic: process(all)
---begin	
---   if (s_note_valid = '1')  then   
---      s_next_note_out <= (s_note_on & s_current_note);
---	else
---		s_next_note_out <= s_note_out;	
---   end if;
---end process;
---
---note_out_ff: process(all)
---begin
---   if reset_n = '0' then   
---      s_note_out <= (others => '0');
---   elsif (clk_12M5'event) and (clk_12M5 = '1') then 
---      s_note_out <= s_next_note_out;			
---   end if;
---end process;
+note_out_logic: process(all)
+begin	
+   if (s_note_valid = '1')  then   
+      s_next_note_out <= (s_note_on & s_current_note);
+	else
+		s_next_note_out <= s_note_out;	
+   end if;
+end process;
+
+note_out_ff: process(all)
+begin
+   if reset_n = '0' then   
+      s_note_out <= (others => '0');
+   elsif (clk_12M5'event) and (clk_12M5 = '1') then 
+      s_note_out <= s_next_note_out;			
+   end if;
+end process;
 
 --------------------------
 -- signal assignment
