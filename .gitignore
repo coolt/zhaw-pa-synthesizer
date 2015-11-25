@@ -42,3 +42,10 @@ FPGA/simulation/**/*
 
 # Debug files
 *.dSYM/
+
+Synthesizer_PA/simulation/vsim.wlf
+Synthesizer_PA/simulation/work/_info
+Synthesizer_PA/simulation/work/_lib.qdb
+Synthesizer_PA/simulation/work/_lib1_38.qdb
+Synthesizer_PA/simulation/work/_lib1_38.qpg
+
