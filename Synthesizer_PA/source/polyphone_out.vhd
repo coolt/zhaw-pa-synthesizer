@@ -87,8 +87,8 @@ BEGIN
     
 	 -- get registerd notes
 	 for index in 0 to 9 loop
-		  s_current_noteVector <= s_dds_note_register(index); -- to debug  ??????????
-		  s_temp_noteVector <= s_dds_note_register(0);  -- index replaced!!!!!!!!!!!!!!¨¨
+		  --s_current_noteVector <= s_dds_note_register(index); -- to debug  ??????????
+		  s_temp_noteVector <= s_dds_note_register(index);  -- index replaced!!!!!!!!!!!!!!¨¨
 		  s_temp_note <= s_temp_noteVector(7 downto 0);
 		  s_temp_on <= s_temp_noteVector(8);
 		  
@@ -110,7 +110,7 @@ BEGIN
 						  next_state <= idle;
 					 -- change note on/off
 					 else						 
-						 s_dds_note_register(index) <= note_value_i;
+						 s_next_dds_note_register(index) <= note_value_i;
 						  next_state <= idle;
 					 end if;
 					 
@@ -122,7 +122,7 @@ BEGIN
 						  for line in 0 to 9 loop
 								-- look for note which is off
 								if (s_temp_on = '0') then
-									 s_dds_note_register(index) <= s_current_noteVector;
+									 s_next_dds_note_register(index) <= s_current_noteVector;
 									 exit;          -------------------------? exit from loop ?
 								end if;
 						  end loop;							  
@@ -155,11 +155,7 @@ END PROCESS;
 note_array_ff : PROCESS(all) 
 BEGIN
 	IF reset_n = '0' THEN
-      s_dds_note_register <=  ((others => '0'), (others => '0'),
-                                                    (others => '0'), (others => '0'),
-                                                    (others => '0'), (others => '0'),
-                                                    (others => '0'), (others => '0'),
-                                                    (others => '0'), (others => '0'));
+      s_dds_note_register <=  ((others => (others => '0')));
 	ELSIF (clk_12M5'EVENT) AND (clk_12M5 = '1') THEN
 		 s_dds_note_register <= s_next_dds_note_register;
 	END IF;
