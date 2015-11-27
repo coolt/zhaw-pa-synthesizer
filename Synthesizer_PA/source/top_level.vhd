@@ -43,7 +43,7 @@ PORT (CLOCK_50:		IN	std_logic;
 		AUD_ADCLRCK:	OUT std_logic;							--WS zum Codec bei AD Wandlung
 		I2C_SCLK:		OUT std_logic;
 		I2C_SDAT:		INOUT	std_logic;
-		LEDG:				OUT std_logic_vector(7 DOWNTO 0)	
+		LEDG:				OUT std_logic_vector(1 downto 0)	
 	  );
 END;
 
@@ -90,7 +90,7 @@ SIGNAL tl_ADCDAT_pl:	std_logic_vector (15 downto 0);
 SIGNAL tl_ADCDAT_pr:	std_logic_vector (15 downto 0);
 
 -- connect audio_ctr (set_chanel) -- i2s_master
-SIGNAL tl_strobe:  std_logic;
+-- SIGNAL tl_strobe:  std_logic;
 SIGNAL tl_DACDAT_pl:	std_logic_vector (15 downto 0);					
 SIGNAL tl_DACDAT_pr:	std_logic_vector (15 downto 0);	
 -- missing: init_n
@@ -266,7 +266,7 @@ PORT MAP (
 		ADCDAT_s			=>	AUD_ADCDAT,
 		DACDAT_pl		=>	tl_DACDAT_pl,
 		DACDAT_pr		=>	tl_DACDAT_pr,
-		STROBE_O			=> tl_strobe,
+		STROBE_O			=> open, --tl_strobe,
 		BCLK				=>	tl_bclk,
 		DACDAT_s			=>	AUD_DACDAT,
 		ADCDAT_pl		=>	tl_ADCDAT_pl,

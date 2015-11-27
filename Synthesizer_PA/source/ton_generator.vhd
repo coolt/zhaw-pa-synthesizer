@@ -30,7 +30,7 @@ PORT(clk_12M5_i:   IN std_logic;
 	  dacdat_l_o:   OUT std_logic_vector(15 downto 0);
 	  dacdat_r_o:   OUT std_logic_vector(15 downto 0)
 	  );
-END;
+END tone_generator;
 
 
 ARCHITECTURE rtl OF tone_generator IS

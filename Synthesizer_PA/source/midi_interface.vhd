@@ -60,8 +60,6 @@ PORT (	clk_12M5:  		IN  std_logic;
       );
 END Component;
 
--- split note vecotr
-SIGNAL s_note_vector:std_logic_vector(8 downto 0);
 
 -- connect uart top with midi control
 SIGNAL s_data_valid:std_logic;
@@ -77,7 +75,7 @@ BEGIN
 i_uart_top: uart_top
 PORT MAP(serial_in      => serial_i,
         clk_12M5        => clk_12M5_i, 
-        reset_n	        => reset_n_i,	
+        reset_n	       => reset_n_i,	
         rx_data         => s_midi_byte,							
         rx_data_valid   => s_data_valid 
         );
