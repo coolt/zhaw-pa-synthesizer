@@ -54,17 +54,6 @@ SIGNAL s_next_note_out: std_logic_vector(8 downto 0);
 
 BEGIN
 
-fsm_ff: process(all)
-begin
-   if (reset_n = '0') then
-      state <= idle;       
-   elsif (clk_12M5'event) and (clk_12M5 = '1') then
-      state <= next_state;
-	else
-		state <= state;
-   end if;
-end process;
-
 fsm_logic: process(all)
 begin    
     case state is            
@@ -99,7 +88,6 @@ begin
 end process;
 
 
-
 register_logic: process(all)   
 begin  
     if ( rx_data_valid_i = '1' and state = status and s_note_on = '1') or (rx_data_valid_i = '1' and state = idle and rx_data_i(7) = '0')then 
@@ -109,14 +97,22 @@ begin
     end if;     
 end process;
 
-register_ff: process(all)
+
+ff: process(all)
 begin
-   if (reset_n = '0')then
-      enable_note_register <= '0';
-   elsif (clk_12M5'event) and (clk_12M5 = '1') then         
-      enable_note_register <= next_enable_note_register;
+   if (reset_n = '0') then
+      state <= idle;       
+		enable_note_register <= '0';
+		s_current_note <= (others => '0');
+		s_note_valid <= '0';  
+   elsif (clk_12M5'event) and (clk_12M5 = '1') then
+      state <= next_state;
+		enable_note_register <= next_enable_note_register;
+		s_current_note <= s_next_note;
+		s_note_valid <= s_next_note_valid;
    end if;
 end process;
+
 
 note_logic: process(all)           
 begin
@@ -125,17 +121,6 @@ begin
 	else
 		s_next_note <= s_current_note;
     end if;
-end process;
-
-note_ff: process(all)
-begin
-   if (reset_n = '0')then
-      s_current_note <= (others => '0');	
-   elsif (clk_12M5'event) and (clk_12M5 = '1') then         
-      s_current_note <= s_next_note;
-	else
-		s_current_note <= s_current_note;
-   end if;
 end process;
 
 
@@ -155,14 +140,13 @@ begin
    end if;
 end process;
 
+
 on_off_ff: process(all)
 begin
    if (reset_n = '0') then
       s_note_on <= '0';
-   elsif (clk_12M5'event) and (clk_12M5 = '1') then
+   elsif (clk_12M5'event) and (clk_12M5 = '1') then 
       s_note_on <= s_next_note_on;
-	else
-		s_note_on <= s_note_on;
    end if;
 end process;
 
@@ -176,41 +160,11 @@ begin
 end process;
 
 
-valid_ff: process(all)
-begin
-   if (reset_n = '0') then
-      s_note_valid <= '0';  
-   elsif (clk_12M5'event) and (clk_12M5 = '1') then
-      s_note_valid <= s_next_note_valid;
-	else
-		s_note_valid <= s_note_valid;
-   end if;
-end process;
-
-
-note_out_logic: process(all)
-begin	
-   if (s_note_valid = '1')  then   
-      s_next_note_out <= (s_note_on & s_current_note);
-	else
-		s_next_note_out <= s_note_out;	
-   end if;
-end process;
-
-note_out_ff: process(all)
-begin
-   if reset_n = '0' then   
-      s_note_out <= (others => '0');
-   elsif (clk_12M5'event) and (clk_12M5 = '1') then 
-      s_note_out <= s_next_note_out;			
-   end if;
-end process;
-
 --------------------------
 -- signal assignment
 --------------------------
 note_valid_o <= s_note_valid; 
-note_out_o <= s_note_out;  
+note_out_o <= s_note_on & s_current_note; 
 
 
 END ARCHITECTURE rtl;
