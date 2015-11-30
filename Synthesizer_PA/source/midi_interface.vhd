@@ -56,7 +56,16 @@ PORT (	clk_12M5:  		IN  std_logic;
         reset_n:	  	IN	 std_logic;
 		note_valid_i: 	IN  std_logic;
 		note_value_i:	IN  std_logic_vector(8 downto 0);
-        note_o: out t_note_array
+		note_0:     		OUT std_logic_vector(8 downto 0); 
+     note_1:     		OUT std_logic_vector(8 downto 0); 
+ 	  note_2:     		OUT std_logic_vector(8 downto 0); 
+ 	  note_3:     		OUT std_logic_vector(8 downto 0); 
+	  note_4:     		OUT std_logic_vector(8 downto 0); 
+ 	  note_5:     		OUT std_logic_vector(8 downto 0); 
+ 	  note_6:     		OUT std_logic_vector(8 downto 0); 
+	  note_7:     		OUT std_logic_vector(8 downto 0); 
+ 	  note_8:     		OUT std_logic_vector(8 downto 0); 
+ 	  note_9:         OUT std_logic_vector(8 downto 0) 
       );
 END Component;
 
@@ -95,7 +104,16 @@ PORT MAP(clk_12M5		=> clk_12M5_i,
         reset_n		    => reset_n_i,	
 		note_valid_i	=> s_note_valid,
 		note_value_i	=> s_note_byte,
-        note_o	=> note_o
+      note_0=> note_o(0), 
+     note_1=> note_o(1), 
+ 	  note_2=> note_o(2),
+ 	  note_3=> note_o(3),
+	  note_4=> note_o(4),
+ 	  note_5=> note_o(5),
+ 	  note_6=> note_o(6),
+	  note_7=> note_o(7),
+ 	  note_8=> note_o(8),
+ 	  note_9=> note_o(9)
       );
         
  END rtl;

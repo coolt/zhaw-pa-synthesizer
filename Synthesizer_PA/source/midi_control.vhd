@@ -104,14 +104,17 @@ begin
       state <= idle;       
 		enable_note_register <= '0';
 		s_current_note <= (others => '0');
+		s_note_on <= '0';
 		s_note_valid <= '0';  
    elsif (clk_12M5'event) and (clk_12M5 = '1') then
       state <= next_state;
 		enable_note_register <= next_enable_note_register;
 		s_current_note <= s_next_note;
+		s_note_on <= s_next_note_on;
 		s_note_valid <= s_next_note_valid;
    end if;
 end process;
+
 
 
 note_logic: process(all)           
@@ -126,29 +129,28 @@ end process;
 
 on_off_logic: process(all)
 begin
-   -- set note on/off 
-   if (rx_data_valid_i = '1') and (state = idle)  and (rx_data_i(7 downto 5) = "100")  then
-        s_next_note_on <= rx_data_i(4);        
-   -- set note off by polyphonie
-   elsif (state = note) and (rx_data_i = "00000000") then
-        s_next_note_on <= '0';
-	-- set not on by polyphonie
-	elsif (state = note) and (rx_data_i /=  "00000000") then
-        s_next_note_on <= '1';
+	if (rx_data_valid_i = '1') then
+	
+		-- on/off for single note
+		if (state = idle)  and (rx_data_i(7 downto 5) = "100")  then
+			  s_next_note_on <= rx_data_i(4); 
+			  
+		-- on/off for polyphonie
+		elsif  (state = note) then
+			IF(rx_data_i /= "00000000") then
+			  s_next_note_on <= '1';
+			ELSE
+				s_next_note_on <= '0';
+			END IF;
+		else
+				s_next_note_on <= s_note_on;  
+		end if;
 	else
-			s_next_note_on <= s_note_on;  
-   end if;
+		s_next_note_on <= s_note_on;  
+	end if; 
 end process;
 
 
-on_off_ff: process(all)
-begin
-   if (reset_n = '0') then
-      s_note_on <= '0';
-   elsif (clk_12M5'event) and (clk_12M5 = '1') then 
-      s_note_on <= s_next_note_on;
-   end if;
-end process;
 
 valid_logic: process(all)
 begin    
