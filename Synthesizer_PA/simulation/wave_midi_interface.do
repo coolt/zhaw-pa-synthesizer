@@ -4,13 +4,14 @@ add wave -noupdate -color {Cornflower Blue} -itemcolor {Cornflower Blue} -label 
 add wave -noupdate -color {Cornflower Blue} -itemcolor {Cornflower Blue} -label reset_n /tb_midi_interface/tb_reset_n
 add wave -noupdate -color {Cornflower Blue} -itemcolor {Cornflower Blue} -label baud_tick /tb_midi_interface/i_midi_interface/i_uart_top/baude_tick
 add wave -noupdate -color {Dark Orchid} -itemcolor {Dark Orchid} -label {byte in (serial)} /tb_midi_interface/tb_serial_in
-add wave -noupdate -color {Dark Orchid} -itemcolor {Dark Orchid} -label {rx_data (8 bit)} -radix hexadecimal /tb_midi_interface/i_midi_interface/i_midi_control/rx_data_i
+add wave -noupdate -color {Spring Green} -itemcolor {Dark Orchid} -label {rx_data (8 bit)} -radix hexadecimal /tb_midi_interface/i_midi_interface/i_midi_control/rx_data_i
 add wave -noupdate -color {Dark Orchid} -itemcolor {Dark Orchid} -label rx_data_valid /tb_midi_interface/i_midi_interface/s_data_valid
+add wave -noupdate -color {Lime Green} -label s_current_note /tb_midi_interface/i_midi_interface/i_midi_control/s_current_note
 add wave -noupdate -color {Dark Orchid} -itemcolor {Dark Orchid} -label state /tb_midi_interface/i_midi_interface/i_midi_control/state
 add wave -noupdate -color {Dark Orchid} -itemcolor {Dark Orchid} -label en_note_register /tb_midi_interface/i_midi_interface/i_midi_control/enable_note_register
 add wave -noupdate -color {Dark Orchid} -itemcolor {Dark Orchid} -label s_note_valid /tb_midi_interface/i_midi_interface/i_midi_control/s_note_valid
 add wave -noupdate -color {Dark Orchid} -itemcolor {Dark Orchid} -label s_next_note_on /tb_midi_interface/i_midi_interface/i_midi_control/s_next_note_on
-add wave -noupdate -color {Dark Orchid} -itemcolor {Dark Orchid} -label s_note_on /tb_midi_interface/i_midi_interface/i_midi_control/s_note_on
+add wave -noupdate -color {Medium Spring Green} -itemcolor {Dark Orchid} -label s_note_on /tb_midi_interface/i_midi_interface/i_midi_control/s_note_on
 add wave -noupdate -color {Dark Orchid} -itemcolor {Dark Orchid} -label s_next_note -radix hexadecimal /tb_midi_interface/i_midi_interface/i_midi_control/s_next_note
 add wave -noupdate -color {Dark Orchid} -itemcolor {Dark Orchid} -label s_next_note_out -radix hexadecimal /tb_midi_interface/i_midi_interface/i_midi_control/s_next_note_out
 add wave -noupdate -color {Dark Orchid} -itemcolor {Dark Orchid} -label s_note_out -radix hexadecimal /tb_midi_interface/i_midi_interface/i_midi_control/s_note_out
@@ -29,8 +30,8 @@ add wave -noupdate -color {Slate Blue} -itemcolor {Slate Blue} -label s_note_7 -
 add wave -noupdate -color {Slate Blue} -itemcolor {Slate Blue} -label s_note_8 -radix hexadecimal /tb_midi_interface/i_midi_interface/i_polyphone_out/s_note_8
 add wave -noupdate -color {Slate Blue} -itemcolor {Slate Blue} -label s_note_9 -radix hexadecimal /tb_midi_interface/i_midi_interface/i_polyphone_out/s_note_9
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors
-quietly wave cursor active 0
+WaveRestoreCursors {{Cursor 1} {833238 ns} 0}
+quietly wave cursor active 1
 configure wave -namecolwidth 180
 configure wave -valuecolwidth 44
 configure wave -justifyvalue left
@@ -45,4 +46,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits us
 update
-WaveRestoreZoom {0 ns} {11550 us}
+WaveRestoreZoom {0 ns} {5775 us}
