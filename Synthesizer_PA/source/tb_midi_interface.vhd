@@ -6,6 +6,13 @@
 -- function:
 --------------------------------------------------------------------
 
+-- TO DO
+-- Tb signal muss ein ARRAy sein, damit Notenwerte mit Index angesprochen werden können
+-- TB auf alle Noten ausweiten
+-- Testbench für Polyphonie
+-- 
+-- Testbench in File
+-- Testbench dokumentieren
 
 
 library ieee;
@@ -48,7 +55,8 @@ END COMPONENT;
   CONSTANT MIDI_CLK_PERIOD: time   := 32 us;  
   CONSTANT MIDI_CLK_HALFPERIOD: time:= 16 us;
   
-  
+ -- type t_note_array is array (0 to 9) of std_logic_vector(8 downto 0);
+SIGNAL tb_note: t_note_array := ((others => (others => '0')));  
   
  -- signals testbench DUT
   SIGNAL tb_clk			 : STD_LOGIC := '0';
