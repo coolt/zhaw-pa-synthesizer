@@ -29,7 +29,7 @@ ENTITY tone_decoder IS
 			tone_on_o				:OUT		std_logic;
 		   musik_start				:IN			std_logic;  --> key(2) used as midi activ
 			N_CUM					:OUT 		natural range 0 to 65000;
-			notes_keyboard		:IN 		t_note_array
+			notes_keyboard		:IN 		std_logic_vector(8 downto 0)
 		  );
 END tone_decoder;
 
@@ -72,7 +72,9 @@ BEGIN
 
 N_CUM_taster 	<= 0;
 N_CUM_keyboard <= 0; 
+s_keyboard_note_value <= 0;
 s_stueck 		<= "000";
+tone_on_o 		<= '0'; 
 
 		--Tondekodierung der Schalter:
 		IF tone_cmd(13)='0' THEN 
@@ -98,6 +100,66 @@ s_stueck 		<= "000";
 									s_stueck 		<=	"000";
 				END CASE;
 				
+		
+		-- Dekodierung Note Keyboard
+		ELSIF (tone_cmd(13)='1') THEN 
+			tone_on_o 		<= '1';
+			s_keyboard_note_value	 <= to_integer(unsigned(notes_keyboard(7 downto 0)));  
+				
+			-- decoding the keys:		                 
+			CASE s_keyboard_note_value	 IS 		------ new: from 12 to 127 notes 
+				WHEN 0 | 24 | 48 | 72 | 96 |120 => 
+					N_CUM_keyboard <=to_integer(unsigned(M_DO_C4));
+				WHEN 1 | 25 | 49 | 73 | 97 |121=> 
+					N_CUM_keyboard <=to_integer(unsigned(M_DOS_C4S));
+				WHEN 2 | 26 | 50 | 74 | 98 |122=> 
+					N_CUM_keyboard <=to_integer(unsigned(M_RE_D4));
+				WHEN 3 | 27 | 51 | 75 | 99 |123=> 
+					N_CUM_keyboard <=to_integer(unsigned(M_RES_D4S));
+				WHEN 4 | 28 | 52 | 76 | 100 |124=> 
+					N_CUM_keyboard <=to_integer(unsigned(M_MI_E4));
+				WHEN 5 | 29 | 53 | 77 | 101 |125=> 
+					N_CUM_keyboard <=to_integer(unsigned(M_FA_F4));
+				WHEN 6 | 30 | 54 | 78 | 102 |126=> 
+					N_CUM_keyboard <=to_integer(unsigned(M_FAS_F4S));
+				WHEN 7 | 31 | 55 | 79 | 103 |127=> 
+					N_CUM_keyboard <=to_integer(unsigned(M_SOL_G4));
+				WHEN 8 | 32 | 56 | 80 | 104 => 
+					N_CUM_keyboard <=to_integer(unsigned(M_SOLS_G4S));
+				WHEN 9 | 33 | 57 | 81 | 105 => 
+					N_CUM_keyboard <=to_integer(unsigned(M_LA_A4));
+				WHEN 10 | 34 | 58 | 82 | 106 => 
+					N_CUM_keyboard <=to_integer(unsigned(M_LAS_A4S));
+				WHEN 11 | 35 | 59 | 83 | 107 => 
+					N_CUM_keyboard <=to_integer(unsigned(M_SI_B4));
+				WHEN 12 | 36 | 60 | 84 | 108 => 
+					N_CUM_keyboard <=to_integer(unsigned(H_DO_C5));
+				WHEN 13 | 37 | 61 | 85 | 109 => 
+					N_CUM_keyboard <=to_integer(unsigned(H_DOS_C5S));
+				WHEN 14 | 38 | 62 | 86 | 110 => 
+					N_CUM_keyboard <=to_integer(unsigned(H_RE_D5));
+				WHEN 15 | 39 | 63 | 87 | 111 => 
+					N_CUM_keyboard <=to_integer(unsigned(H_RES_D5S));
+				WHEN 16 | 40 | 64 | 88 | 112 => 
+					N_CUM_keyboard <=to_integer(unsigned(H_MI_E5));
+				WHEN 17 | 41 | 65 | 89 | 113 => 
+					N_CUM_keyboard <=to_integer(unsigned(H_FA_F5));
+				WHEN 18 | 42 | 66 | 90 | 114 => 
+					N_CUM_keyboard <=to_integer(unsigned(H_FAS_F5S));
+				WHEN 19 | 43 | 67 | 91 | 115 => 
+					N_CUM_keyboard <=to_integer(unsigned(H_SOL_G5));
+				WHEN 20 | 44 | 68 | 92 | 116 => 
+					N_CUM_keyboard <=to_integer(unsigned(H_SOLS_G5S));
+				WHEN 21 | 45 | 69 | 93 | 117 => 
+					N_CUM_keyboard <=to_integer(unsigned(H_LA_A5));
+				WHEN 22 | 46 | 70 | 94 | 118 => 
+					N_CUM_keyboard <=to_integer(unsigned(H_LAS_A5S));
+				WHEN 23 | 47 | 71 | 95 | 119 => 
+					N_CUM_keyboard <=to_integer(unsigned(H_SI_B5));			
+				WHEN OTHERS => 		
+					N_CUM_keyboard <= 0;					 		
+			END CASE;
+			
 		--Dekodierung für die Stückwahl bei der automatischen Liederabspielung
 		ELSE 
 				CASE tone_cmd IS
@@ -105,79 +167,25 @@ s_stueck 		<= "000";
 				WHEN "10100000000000" => s_stueck 	<= 	"010";
 				WHEN "10010000000000" => s_stueck 	<= 	"001";				
 				WHEN OTHERS => 		s_stueck 		<= 	"000";
-									tone_on_o 		<=	'0';
+									tone_on_o 		<='0';
 									N_CUM_taster 	<=	0;
+									N_CUM_keyboard <= 0; 
+									s_keyboard_note_value <= 0;
 				END CASE;
 		END IF;
 		
-		------------------------------------------------------------------------------- only for 1 note
-		-- Dekodierung Note 0 des Keyboards				                                
-		s_keyboard_note_value	 <= to_integer(unsigned(notes_keyboard(0)(7 downto 0)));  
-			
-		-- decoding the keys:		                 
-		CASE s_keyboard_note_value	 IS 		------ new: from 12 to 127 notes 
-			WHEN 0 | 24 | 48 | 72 | 96 |120 => 
-				N_CUM_keyboard <=to_integer(unsigned(M_DO_C4));
-			WHEN 1 | 25 | 49 | 73 | 97 |121=> 
-				N_CUM_keyboard <=to_integer(unsigned(M_DOS_C4S));
-			WHEN 2 | 26 | 50 | 74 | 98 |122=> 
-				N_CUM_keyboard <=to_integer(unsigned(M_RE_D4));
-			WHEN 3 | 27 | 51 | 75 | 99 |123=> 
-				N_CUM_keyboard <=to_integer(unsigned(M_RES_D4S));
-			WHEN 4 | 28 | 52 | 76 | 100 |124=> 
-				N_CUM_keyboard <=to_integer(unsigned(M_MI_E4));
-			WHEN 5 | 29 | 53 | 77 | 101 |125=> 
-				N_CUM_keyboard <=to_integer(unsigned(M_FA_F4));
-			WHEN 6 | 30 | 54 | 78 | 102 |126=> 
-				N_CUM_keyboard <=to_integer(unsigned(M_FAS_F4S));
-			WHEN 7 | 31 | 55 | 79 | 103 |127=> 
-				N_CUM_keyboard <=to_integer(unsigned(M_SOL_G4));
-			WHEN 8 | 32 | 56 | 80 | 104 => 
-				N_CUM_keyboard <=to_integer(unsigned(M_SOLS_G4S));
-			WHEN 9 | 33 | 57 | 81 | 105 => 
-				N_CUM_keyboard <=to_integer(unsigned(M_LA_A4));
-			WHEN 10 | 34 | 58 | 82 | 106 => 
-				N_CUM_keyboard <=to_integer(unsigned(M_LAS_A4S));
-			WHEN 11 | 35 | 59 | 83 | 107 => 
-				N_CUM_keyboard <=to_integer(unsigned(M_SI_B4));
-			WHEN 12 | 36 | 60 | 84 | 108 => 
-				N_CUM_keyboard <=to_integer(unsigned(H_DO_C5));
-			WHEN 13 | 37 | 61 | 85 | 109 => 
-				N_CUM_keyboard <=to_integer(unsigned(H_DOS_C5S));
-			WHEN 14 | 38 | 62 | 86 | 110 => 
-				N_CUM_keyboard <=to_integer(unsigned(H_RE_D5));
-			WHEN 15 | 39 | 63 | 87 | 111 => 
-				N_CUM_keyboard <=to_integer(unsigned(H_RES_D5S));
-			WHEN 16 | 40 | 64 | 88 | 112 => 
-				N_CUM_keyboard <=to_integer(unsigned(H_MI_E5));
-			WHEN 17 | 41 | 65 | 89 | 113 => 
-				N_CUM_keyboard <=to_integer(unsigned(H_FA_F5));
-			WHEN 18 | 42 | 66 | 90 | 114 => 
-				N_CUM_keyboard <=to_integer(unsigned(H_FAS_F5S));
-			WHEN 19 | 43 | 67 | 91 | 115 => 
-				N_CUM_keyboard <=to_integer(unsigned(H_SOL_G5));
-			WHEN 20 | 44 | 68 | 92 | 116 => 
-				N_CUM_keyboard <=to_integer(unsigned(H_SOLS_G5S));
-			WHEN 21 | 45 | 69 | 93 | 117 => 
-				N_CUM_keyboard <=to_integer(unsigned(H_LA_A5));
-			WHEN 22 | 46 | 70 | 94 | 118 => 
-				N_CUM_keyboard <=to_integer(unsigned(H_LAS_A5S));
-			WHEN 23 | 47 | 71 | 95 | 119 => 
-				N_CUM_keyboard <=to_integer(unsigned(H_SI_B5));			
-			WHEN OTHERS => 		
-				N_CUM_keyboard <= 0;					 		
-		END CASE;
 END PROCESS;
 
 --Multiplexer, der den Tonhöhenausgang zwischen Melodybox und Schalter umschaltet
-mux: PROCESS ( N_CUM_taster, N_CUM_fsm, tone_cmd(13))
+mux: PROCESS (all)
 	BEGIN
-		IF 		tone_cmd(13)='1' THEN
-				N_CUM <= N_CUM_fsm;
-		ELSIF  (musik_start = '1') THEN
+		IF 	tone_cmd(13)='0' THEN
+				N_CUM <= N_CUM_taster;
+				
+		ELSIF  tone_cmd(13)='1' THEN
 				N_CUM <= N_CUM_keyboard;
 		ELSE	
-				N_CUM <= N_CUM_taster;
+				N_CUM <= N_CUM_fsm;
 		END IF;
 END PROCESS;
 

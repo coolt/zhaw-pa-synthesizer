@@ -10,12 +10,12 @@ USE ieee.numeric_std.all;
 -- Entity Declaration 
 -------------------------------------------
 ENTITY fm_synth IS
-	PORT (	fm_clk_12M		: IN	std_logic;
+	PORT ( fm_clk_12M		: IN	std_logic;
 			fm_reset_n		: IN	std_logic;
 			fm_bclk			: IN	std_logic;
 			strobe			: IN	std_logic;
 			tone_on_i		: IN	std_logic;
-			N_CUM			: IN	natural range 0 to 65000;
+			N_CUM				: IN	natural range 0 to 65000;
 			synth_ratio		: IN	natural range 0 to 1000;
 			synth_depth		: IN	natural range 0 to 10;
 			data_o			: OUT	std_logic_vector(15 downto 0)
