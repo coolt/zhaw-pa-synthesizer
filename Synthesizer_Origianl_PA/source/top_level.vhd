@@ -170,8 +170,10 @@ COMPONENT tone_decoder
 			reset_n							:IN				std_logic;
 			tone_cmd						:IN				std_logic_vector(13 DOWNTO 0);
 			tone_on_o						:OUT			std_logic;
-			midi_active						:IN				std_logic;
-			N_CUM							:OUT 			natural range 0 to 65000
+			musik_start						:IN				std_logic;
+			--midi_active						:IN				std_logic;
+			N_CUM							:OUT 			natural range 0 to 65000;
+			notes_keyboard				:IN 			t_note_array
 		);
 END COMPONENT;
 
@@ -208,7 +210,7 @@ BEGIN
 i_midi_interface: midi_interface
 	PORT MAP(
 		clk_12M5_i   => tl_clk_12M,
-		reset_n_i    => KEY(0), -- as other komponents
+		reset_n_i    => KEY(0), -- analog to existing design 
 		serial_i     => GPIO_10, 
 		note_o(0)     => tl_note_1,
 		note_o(1)    => tl_note_2,
@@ -253,7 +255,7 @@ INFRASTRUCTURE_BLOCK_INST : infrastructure_block
 	PORT MAP ( 	s_reset_n			=> 		KEY(0),
 				clk_50M				=>		CLOCK_50,
 				button				=>		SW,
-				key_in				=>		KEY(3 DOWNTO 1),
+				key_in				=>		KEY(2 DOWNTO 0),
 				clk_12M				=>		tl_clk_12M,
 				button_sync			=>		tl_sw_button,
 				key_sync			=>		tl_key
@@ -280,8 +282,7 @@ AUDIO_CONTROL_INST : audio_control
 				DACDAT_pl_o			=>		tl_DACDAT_pl,
 				DACDAT_pr_o			=>		tl_DACDAT_pr,
 				AUDIO_MODE			=>		tl_sw_button(14),
-				dds_DATA_I			=>		tl_dacdat_g_o
-				
+				dds_DATA_I			=>		tl_dacdat_g_o		
 				);
 
 TONE_DECODER_INST	: tone_decoder
@@ -289,8 +290,19 @@ TONE_DECODER_INST	: tone_decoder
 				reset_n				=>		KEY(0),
 				tone_cmd			=>		tl_sw_button(13 DOWNTO 0),
 				tone_on_o			=>		tl_tone_on,
-				midi_active			=>		tl_key(2),
-				N_CUM				=>		tl_n_cum
+				musik_start		=>		tl_key(2),            -- from key(2) to key (1)
+				--midi_active			=>		tl_key(2),         -- new added
+				N_CUM				=>		tl_n_cum,				
+				notes_keyboard(0)     => tl_note_1,
+				notes_keyboard(1)    => tl_note_2,
+				notes_keyboard(2)     => tl_note_3,
+				notes_keyboard(3)     => tl_note_4,
+				notes_keyboard(4)     => tl_note_5, 
+				notes_keyboard(5)     => tl_note_6,
+				notes_keyboard(6)     => tl_note_7,
+				notes_keyboard(7)     => tl_note_8,
+				notes_keyboard(8)     => tl_note_9, 
+				notes_keyboard(9)    => tl_note_10			
 		);
 
 

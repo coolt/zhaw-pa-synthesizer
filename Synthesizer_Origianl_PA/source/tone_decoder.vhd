@@ -18,7 +18,7 @@ USE ieee.numeric_std.all;
 
 LIBRARY work;
 USE work.tone_gen_pkg.all;
-
+use work.note_type_pkg.all;
 
 -- Entity Declaration 
 -------------------------------------------
@@ -27,8 +27,9 @@ ENTITY tone_decoder IS
 			reset_n					:IN			std_logic;
 			tone_cmd				:IN			std_logic_vector(13 DOWNTO 0);
 			tone_on_o				:OUT		std_logic;
-			midi_active				:IN			std_logic;
-			N_CUM					:OUT 		natural range 0 to 65000
+		   musik_start				:IN			std_logic;
+			N_CUM					:OUT 		natural range 0 to 65000;
+			notes_keyboard		:IN 		t_note_array
 		  );
 END tone_decoder;
 
@@ -55,7 +56,7 @@ BEGIN
 inst_lied_fsm: lied_fsm
 PORT MAP( 	clk					=>  clk,
 			reset_n				=> 	reset_n,	
-			start				=>	midi_active,
+			start				=>	musik_start,
 			stueck				=> 	s_stueck,
 			phi_incr_lied		=> 	N_CUM_fsm			
 		);
@@ -100,6 +101,15 @@ ELSE CASE tone_cmd IS
 	END CASE;
 END IF;
 
+
+-- Tondekodierung der Noten des Keyboard
+--IF (midi_active = '1') THEN
+--	N_CUM_taster <=to_integer(unsigned(M_DO_C4));
+--ELSE 
+--	N_CUM_taster <=0;
+---------------------------------------------------------------------------------------------
+--END IF;
+--
 END PROCESS;
 
 --Multiplexer, der den Tonhöhenausgang zwischen Melodybox und Schalter umschaltet
