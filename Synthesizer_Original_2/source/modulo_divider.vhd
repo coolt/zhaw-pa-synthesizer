@@ -28,7 +28,7 @@ END modulo_divider;
 ARCHITECTURE rtl OF modulo_divider IS
 -- Signals & Constants Declaration?
 -------------------------------------------
-signal count, next_count: unsigned(width-1 downto 0);	 
+signal count, next_count: unsigned(width-1 downto 0) := to_unsigned(0,width);	 
 
 
 -- Begin Architecture

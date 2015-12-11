@@ -1,7 +1,6 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
 add wave -noupdate -color {Slate Blue} -itemcolor {Slate Blue} -label clk_50M -radix hexadecimal /tb_synthesizer/tb_clk_50M
-add wave -noupdate -color {Cornflower Blue} -itemcolor {Cornflower Blue} -label infrastructure -radix hexadecimal /tb_synthesizer/i_TOP_LEVEL/INFRASTRUCTURE_BLOCK_INST/key_in
 add wave -noupdate -color {Cornflower Blue} -itemcolor {Cornflower Blue} -label {infrastrucure: clk 12M5 out} -radix hexadecimal /tb_synthesizer/i_TOP_LEVEL/INFRASTRUCTURE_BLOCK_INST/clk_12M
 add wave -noupdate -color {Slate Blue} -itemcolor {Slate Blue} -label serial_in -radix hexadecimal /tb_synthesizer/i_TOP_LEVEL/i_MIDI_INTERFACE/serial_i
 add wave -noupdate -color {Slate Blue} -itemcolor {Slate Blue} -label {uart: data out} -radix hexadecimal /tb_synthesizer/i_TOP_LEVEL/i_MIDI_INTERFACE/i_uart_top/rx_data
@@ -40,9 +39,9 @@ add wave -noupdate -color {Dark Slate Gray} -itemcolor {Dark Slate Gray} -label 
 add wave -noupdate -color {Cadet Blue} -itemcolor {Cadet Blue} -label {fm_4: data_out} -radix hexadecimal /tb_synthesizer/i_TOP_LEVEL/FM_SYNTH_INST_5/data_o
 add wave -noupdate -color {Dark Slate Gray} -itemcolor {Dark Slate Gray} -label {fm_5: data out} -radix hexadecimal /tb_synthesizer/i_TOP_LEVEL/FM_SYNTH_INST_6/data_o
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {0 ns} 0}
+WaveRestoreCursors {{Cursor 1} {17393544 ns} 0}
 quietly wave cursor active 1
-configure wave -namecolwidth 162
+configure wave -namecolwidth 234
 configure wave -valuecolwidth 48
 configure wave -justifyvalue left
 configure wave -signalnamewidth 0
@@ -56,4 +55,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits us
 update
-WaveRestoreZoom {0 ns} {5775104 ns}
+WaveRestoreZoom {16933436 ns} {22266662 ns}
