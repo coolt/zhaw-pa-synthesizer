@@ -215,7 +215,7 @@
 	set_location_assignment PIN_AG25 -to GPIO[22]
 	set_location_assignment PIN_AD25 -to GPIO[23]
 	set_location_assignment PIN_AH25 -to GPIO[24]
-	set_location_assignment PIN_AE25 -to GPIO[25]
+	set_location_assignment PIN_AE25 -to GPIO_25
 	set_location_assignment PIN_AG22 -to GPIO[26]
 	set_location_assignment PIN_AE24 -to GPIO[27]
 	set_location_assignment PIN_AH22 -to GPIO[28]

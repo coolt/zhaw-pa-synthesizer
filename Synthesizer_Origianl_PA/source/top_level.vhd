@@ -50,7 +50,7 @@ ENTITY top_level IS
 			LEDG					:OUT 		std_logic_vector(7 DOWNTO 0);		--Led-Leuchten grün
 			HEX0, HEX3, HEX2		:OUT 		std_logic_vector (6 DOWNTO 0);		--Siebensegmentanzeigen
 			HEX4, HEX5, HEX1		:OUT 		std_logic_vector (6 DOWNTO 0);		--Siebensegmentanzeigen
-			GPIO_10:			IN	std_logic
+			GPIO_25:			IN	std_logic
 		  );
 END top_level;
 
@@ -211,7 +211,7 @@ i_midi_interface: midi_interface
 	PORT MAP(
 		clk_12M5_i   => tl_clk_12M,
 		reset_n_i    => KEY(0), -- analog to existing design 
-		serial_i     => GPIO_10, 
+		serial_i     => GPIO_25, 
 		note_o(0)     => tl_note_1,
 		note_o(1)    => tl_note_2,
 		note_o(2)     => tl_note_3,
