@@ -72,7 +72,13 @@ package tone_gen_pkg is
     constant H_SOLS_G5S: 	std_logic_vector(N_CUM-1 downto 0):= std_logic_vector(to_unsigned(3402*2,N_CUM)); -- SOLS_G5S tone ~2*415.30Hz
     constant H_LAS_A5S: 	std_logic_vector(N_CUM-1 downto 0):= std_logic_vector(to_unsigned(3819*2,N_CUM)); -- LAS_A5S  tone ~2*466.16Hz
     -------------------------------------------------------------------------------
-    -------------------------------------------------------------------------------
+    
+	 
+	 
+	 
+	 
+	 
+	 -------------------------------------------------------------------------------
      -- PLAIN TONES LOW-OCTAVE (C3 until C4)
 	constant L_DO_C3: 		std_logic_vector(N_CUM-1 downto 0):= std_logic_vector(to_unsigned(2144/2,N_CUM)); -- DO-C3  tone ~0,5*261.63Hz
     constant L_RE_D3: 		std_logic_vector(N_CUM-1 downto 0):= std_logic_vector(to_unsigned(2406/2,N_CUM)); -- RE_D3  tone ~0,5*293.66Hz

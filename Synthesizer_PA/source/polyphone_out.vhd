@@ -172,7 +172,7 @@ s_next_note_7 <= s_note_7;
 s_next_note_8 <= s_note_8;
 s_next_note_9 <= s_note_9;
 
-if (note_valid_i = '1') then  -- muss auf neuen index warten !! nimmt alten index
+if (note_valid_i = '1') then  
 
 	case s_next_index is 
 		when 0 =>

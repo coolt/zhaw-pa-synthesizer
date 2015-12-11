@@ -24,7 +24,7 @@ USE work.tone_gen_pkg.all;
 ENTITY dds IS
 PORT(	clk_12M: 	IN	std_logic;
 		reset_n: 	IN	std_logic;
-		tone_on_i: 	IN	std_logic;					
+		tone_on_i: 	IN	std_logic;		                        --- delet not connected signal strobe			
 		phi_incr_i: IN	natural range 0 to 65000;	
 		dacdat_l_o: OUT std_logic_vector (15 downto 0);
 		dacdat_r_o: OUT std_logic_vector (15 downto 0)
