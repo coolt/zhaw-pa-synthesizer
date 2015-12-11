@@ -52,25 +52,25 @@ BEGIN
 	
 	-- adds only notes which are on
 	if (note_0_on_i = '1') then
-		s_carry <= s_carry(15 downto 0) & data_0_i;
+		s_carry <= '0' & (s_carry(15 downto 0) and data_0_i);
 	elsif (note_1_on_i = '1') then
-		s_carry <= s_carry(15 downto 0) & data_1_i;
+		s_carry <= '0' & (s_carry(15 downto 0) and  data_1_i);
 	elsif (note_2_on_i = '1') then
-		s_carry <= s_carry(15 downto 0) & data_2_i;
+		s_carry <= '0' & (s_carry(15 downto 0) and  data_2_i);
 	elsif (note_3_on_i = '1') then
-		s_carry <= s_carry(15 downto 0) & data_3_i;	
+		s_carry <= '0' & (s_carry(15 downto 0) and  data_3_i);	
 	elsif (note_4_on_i = '1') then
-		s_carry <= s_carry(15 downto 0) & data_4_i;
+		s_carry <= '0' & (s_carry(15 downto 0) and data_4_i);
 	elsif (note_5_on_i = '1') then
-		s_carry <= s_carry(15 downto 0) & data_5_i;
+		s_carry <= '0' & (s_carry(15 downto 0) and  data_5_i);
 	elsif (note_6_on_i = '1') then
-		s_carry <= s_carry(15 downto 0) & data_6_i;
+		s_carry <= '0' & (s_carry(15 downto 0) and  data_6_i);
 	elsif (note_7_on_i = '1') then
-		s_carry <= s_carry(15 downto 0) & data_7_i;
+		s_carry <= '0' & (s_carry(15 downto 0) and  data_7_i);
 	elsif (note_8_on_i = '1') then
-		s_carry <= s_carry(15 downto 0) & data_8_i;	
+		s_carry <= '0' & (s_carry(15 downto 0) and  data_8_i);	
 	elsif (note_9_on_i = '1') then
-		s_carry <= s_carry(15 downto 0) & data_9_i;
+		s_carry <= '0' & (s_carry(15 downto 0) and  data_9_i);
 		
 	-- note is off
 	else
@@ -79,7 +79,7 @@ BEGIN
 	
 	-- check overflow (carry out)
 	if (s_carry(15) = '1') then
-		--???    dds_DATA_O <= ???
+		dds_DATA_O <= (others => '0'); -----------------???
 	else 
 		-- set added wave as output
 		dds_DATA_O <= s_carry(15 downto 0); 

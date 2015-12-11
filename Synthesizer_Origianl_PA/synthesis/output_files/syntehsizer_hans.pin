@@ -376,7 +376,7 @@ GND                          : C28       : gnd    :                   :         
 AUD_DACDAT                   : D1        : output : 2.5 V             :         : 1         : Y              
 AUD_ADCDAT                   : D2        : input  : 2.5 V             :         : 1         : Y              
 GND                          : D3        : gnd    :                   :         :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : D4        :        :                   :         : 8         :                
+GPIO_10                      : D4        : input  : 2.5 V             :         : 8         : N              
 RESERVED_INPUT_WITH_WEAK_PULLUP : D5        :        :                   :         : 8         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : D6        :        :                   :         : 8         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : D7        :        :                   :         : 8         :                
@@ -826,7 +826,7 @@ CLOCK_50                     : Y2        : input  : 2.5 V             :         
 RESERVED_INPUT_WITH_WEAK_PULLUP : Y3        :        :                   :         : 2         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : Y4        :        :                   :         : 2         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : Y5        :        :                   :         : 2         :                
-GPIO_10                      : Y6        : input  : 2.5 V             :         : 2         : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : Y6        :        :                   :         : 2         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : Y7        :        :                   :         : 2         :                
 VCCA1                        : Y8        : power  :                   : 2.5V    :           :                
 VCCD_PLL1                    : Y9        : power  :                   : 1.2V    :           :                
