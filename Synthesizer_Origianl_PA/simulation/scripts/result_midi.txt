@@ -1,14 +1,177 @@
-Result reset \n
+Automatically generated outputfile
+-----------------------------------
+-----------------------------------
 
-Single note\n
 
-Single note\n
+Read file with commands in
+-----------------------------------
 
-Single note\n
+reset
+Read note:00
+Read attribut: 00
+Read note:00
+Read attribut: 00
+Read note:00
+Read attribut: 00
+Read note:00
+Read attribut: 00
+Read note number: 00
 
-Single note\n
+check
+Read note:00
+Read attribut: 00
+Read note:00
+Read attribut: 00
+Read note:00
+Read attribut: 00
+Read note:00
+Read attribut: 00
+Read note number: 00
 
-Single note\n
+singl
+Read note:55
+Read attribut: 90
+Read note:27
+Read attribut: 80
+Read note:27
+Read attribut: 90
+Read note:05
+Read attribut: 00
+Read note number: 00
 
-Single note\n
+check
+Read note:00
+Read attribut: 00
+Read note:27
+Read attribut: 00
+Read note:00
+Read attribut: 00
+Read note:05
+Read attribut: 00
+Read note number: 00
 
+singl
+Read note:55
+Read attribut: 90
+Read note:73
+Read attribut: 80
+Read note:73
+Read attribut: 90
+Read note:16
+Read attribut: 00
+Read note number: 00
+
+check
+Read note:00
+Read attribut: 00
+Read note:00
+Read attribut: 00
+Read note:00
+Read attribut: 00
+Read note:16
+Read attribut: 00
+Read note number: 00
+
+polyp
+Read note:71
+Read attribut: 55
+Read note:02
+Read attribut: 55
+Read note:33
+Read attribut: 55
+Read note:08
+Read attribut: 00
+Read note number: 00
+
+check
+Read note:71
+Read attribut: 02
+Read note:33
+Read attribut: 00
+Read note:00
+Read attribut: 00
+Read note:00
+Read attribut: 00
+Read note number: 03
+
+polyp
+Read note:71
+Read attribut: 00
+Read note:16
+Read attribut: 55
+Read note:20
+Read attribut: 55
+Read note:33
+Read attribut: 00
+Read note number: 00
+
+check
+Read note:00
+Read attribut: 00
+Read note:16
+Read attribut: 00
+Read note:20
+Read attribut: 00
+Read note:00
+Read attribut: 00
+Read note number: 04
+
+polyp
+Read note:02
+Read attribut: 55
+Read note:03
+Read attribut: 00
+Read note:20
+Read attribut: 00
+Read note:40
+Read attribut: 55
+Read note number: 00
+
+check
+Read note:02
+Read attribut: 00
+Read note:16
+Read attribut: 00
+Read note:40
+Read attribut: 00
+Read note:00
+Read attribut: 00
+Read note number: 03
+
+Number of read lines from file: 12
+Finished read whole file
+-----------------------------------
+-----------------------------------
+
+
+Test row is 0: Mode reset.
+Reset good.
+ Test row is 2: Mode is singl.
+Note set on 90
+Note out 27. Expected 27Good.
+Single note
+
+Note set off 80
+Note out 27. Expected 00Failure.
+Single note
+
+Note set on 90
+Note out 27. Expected 05Failure.
+Single note
+
+ Test row is 4: Mode is singl.
+Note set on 90
+Note out 27. Expected 00Failure.
+Single note
+
+Note set off 80
+Note out 27. Expected 00Failure.
+Single note
+
+Note set on 90
+Note out 27. Expected 16Failure.
+Single note
+
+Test row is 6: Mode is polyphony.
+Test row is 8: Mode is polyphony.
+Test row is 10: Mode is polyphony.

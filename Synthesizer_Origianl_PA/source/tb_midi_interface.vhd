@@ -6,14 +6,6 @@
 -- function:
 --------------------------------------------------------------------
 
--- TO DO
--- Tb signal muss ein ARRAy sein, damit Notenwerte mit Index angesprochen werden können
--- TB auf alle Noten ausweiten
--- Testbench für Polyphonie
--- 
--- Testbench in File
--- Testbench dokumentieren
-
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -55,8 +47,8 @@ END COMPONENT;
   CONSTANT MIDI_CLK_PERIOD: time   := 32 us;  
   CONSTANT MIDI_CLK_HALFPERIOD: time:= 16 us;
   
- -- type t_note_array is array (0 to 9) of std_logic_vector(8 downto 0);
-SIGNAL tb_note: t_note_array := ((others => (others => '0')));  
+  -- type t_note_array is array (0 to 9) of std_logic_vector(8 downto 0);
+  SIGNAL tb_note: t_note_array := ((others => (others => '0')));  
   
  -- signals testbench DUT
   SIGNAL tb_clk			 : STD_LOGIC := '0';
@@ -122,7 +114,7 @@ PORT MAP(clk_12M5_i   => tb_clk,
 
 read_file: process
 
-	variable line_in,line_out: Line; 
+	variable line_in,line_out, line_out_title: Line; 
 	variable line_nr: natural range 0 to (NUMBR_INPUTLINES-1) :=0;
 	variable good: boolean := true;  
 	variable line_cnt: natural range 0 to 2000 := 0;	 
@@ -140,6 +132,18 @@ read_file: process
 	s_read_input_finished <= '0';
 	FILE_OPEN(input_file,"../simulation/scripts/input_midi.txt", READ_MODE);
 	FILE_OPEN(output_file,"../simulation/scripts/result_midi.txt", WRITE_MODE);	
+	
+	write(line_out_title, string'("Automatically generated outputfile"));
+	writeline(output_file,line_out_title);
+	write(line_out_title, string'("-----------------------------------"));
+	writeline(output_file,line_out_title);
+	write(line_out_title, string'("-----------------------------------"));
+	writeline(output_file,line_out_title);
+	write(line_out, string'(""));
+	writeline(output_file,line_out);
+	write(line_out, string'(""));
+	writeline(output_file,line_out);
+	
 	wait for 4 * SYS_CLK_HALFPERIOD;   
 
    ---------------------------------
@@ -149,19 +153,25 @@ read_file: process
         
 		if endfile(input_file) then
         
-			-- include space bevor result read in
+			-- include empty line bevor result given out
 			write(line_out, string'(""));
 			writeline(OUTPUT,line_out);	
             
 			-- output console read line numbers      
-			write(line_out, string'("Number of read lines from file:"));
-			writeline(OUTPUT,line_out);
+			write(line_out, string'("Number of read lines from file: "));
 			write(line_out, line_cnt);
 			writeline(OUTPUT,line_out);
+			write(line_out, string'("Number of read lines from file: "));
+			write(line_out, line_cnt);
+			writeline(output_file,line_out);
+			
+			
 			
 			-- output end
 			write(line_out, string'("Finished read whole file"));
 			writeline(OUTPUT,line_out);
+			write(line_out, string'("Finished read whole file"));
+			writeline(output_file,line_out);
 			
 			-- set flag to pass to other process
 			s_read_input_finished <= '1';
@@ -169,10 +179,18 @@ read_file: process
 			-- include space after read feedback
 			write(line_out, string'("-----------------------------"));
 			writeline(OUTPUT,line_out);
+			write(line_out_title, string'("-----------------------------------"));
+			writeline(output_file,line_out_title);
+			write(line_out_title, string'("-----------------------------------"));
+			writeline(output_file,line_out_title);
 			write(line_out, string'(""));
 			writeline(OUTPUT,line_out);	
 			write(line_out, string'(""));
+			writeline(output_file,line_out);	
+			write(line_out, string'(""));
 			writeline(OUTPUT,line_out);	
+			write(line_out, string'(""));
+			writeline(output_file,line_out);	
             
 			exit;
 			
@@ -183,7 +201,13 @@ read_file: process
 		-----------------------------------
 		-- read linewise all tokens in array	
 		------------------------------------	
-		
+		 write(line_out_title, string'("Read file with commands in"));
+	    writeline(output_file,line_out_title);
+	    write(line_out_title, string'("-----------------------------------"));
+	    writeline(output_file,line_out_title);
+	    write(line_out, string'(""));
+	    writeline(output_file,line_out);
+	    
 		-- loop for all lines
 		for line_nr in 0 to (NUMBR_INPUTLINES-1) loop		 
 			readline(input_file, line_in);     
@@ -198,60 +222,78 @@ read_file: process
 			-- read command
 			read(line_in, token_cmd, good);
 			token_array(line_nr).token_cmd <= token_cmd;                
---			if (not good) then
---				write(line_out, string'("Error reading token 'type'."));
---				writeline(OUTPUT,line_out);				
---			else 
---				write(line_out, token_cmd);
---				writeline(OUTPUT,line_out);
---			end if;	
+			if (not good) then
+				write(line_out, string'("Error reading token 'type'."));
+				writeline(OUTPUT,line_out);
+				write(line_out, string'("Error reading token 'type'."));
+				writeline(output_file,line_out);
+			else 
+				write(line_out, token_cmd);
+				writeline(OUTPUT,line_out);
+				write(line_out, token_cmd);
+				writeline(output_file,line_out);
+			end if;	
 			
 			-- read 4 times note and attribut	
 			for i in 0 to 3 loop
 				hread(line_in, token_note, good); 
 				token_array(line_nr).t_midi_data(i).token_note <= token_note;  
---				if (not good) then
---					write(line_out, string'("Error reading note. Value is"));
---					writeline(OUTPUT,line_out);	
---					write(line_out, std_logic_vector(token_note));
---					writeline(OUTPUT,line_out);
---				else 
---					write(line_out, string'("Read note:"));
---					writeline(OUTPUT,line_out);	
---					write(line_out, std_logic_vector(token_note));
---					writeline(OUTPUT,line_out);
---				end if; 
+				if (not good) then
+					write(line_out, string'("Error reading note. Value is "));
+					hwrite(line_out, std_logic_vector(token_note));					
+					writeline(OUTPUT,line_out);
+					write(line_out, string'("Error reading note. Value is "));
+					hwrite(line_out, std_logic_vector(token_note));		
+					writeline(output_file,line_out);
+				else 
+					write(line_out, string'("Read note:"));	
+					hwrite(line_out, std_logic_vector(token_note));
+					writeline(OUTPUT,line_out);
+					write(line_out, string'("Read note:"));	
+					hwrite(line_out, std_logic_vector(token_note));
+					writeline(output_file,line_out);
+				end if; 
 				hread(line_in, token_attribut, good);
 				token_array(line_nr).t_midi_data(i).token_attribut <= token_attribut; 
---				if (not good) then
---					write(line_out, string'("Error reading attribut. Value is"));
---					writeline(OUTPUT,line_out);	
---					write(line_out, std_logic_vector(token_attribut));
---					writeline(OUTPUT,line_out);
---				else 
---					write(line_out, string'("Read attribut:"));
---					writeline(OUTPUT,line_out);	
---					write(line_out, std_logic_vector(token_attribut));
---					writeline(OUTPUT,line_out);
---				end if;	
+				if (not good) then
+					write(line_out, string'("Error reading attribut. Value is "));	
+					hwrite(line_out, std_logic_vector(token_attribut));
+					writeline(OUTPUT,line_out);
+					write(line_out, string'("Error reading attribut. Value is "));	
+					hwrite(line_out, std_logic_vector(token_attribut));
+					writeline(output_file,line_out);
+				else 
+					write(line_out, string'("Read attribut: "));	
+					hwrite(line_out, std_logic_vector(token_attribut));
+					writeline(OUTPUT,line_out);
+					write(line_out, string'("Read attribut: "));	
+					hwrite(line_out, std_logic_vector(token_attribut));
+					writeline(output_file,line_out);
+				end if;	
 			end loop; -- 4 times struct midi_data
 			
 			-- read number of notes
 			hread(line_in, token_number, good);
 			token_array(line_nr).token_number <= token_number;	
---			if (not good) then
---				write(line_out, string'("Error note number. Value is"));
---				writeline(OUTPUT,line_out);	
---				write(line_out, std_logic_vector(token_number));
---				writeline(OUTPUT,line_out);
---			else 
---				write(line_out, string'("Read note number:"));
---				writeline(OUTPUT,line_out);	
---				write(line_out, std_logic_vector(token_number));
---				writeline(OUTPUT,line_out);
---			end if;	
---			write(line_out, string'(""));
---			writeline(OUTPUT,line_out);
+			if (not good) then
+				write(line_out, string'("Error note number. Value is "));	
+				hwrite(line_out, std_logic_vector(token_number));
+				writeline(OUTPUT,line_out);
+				write(line_out, string'("Error note number. Value is "));	
+				hwrite(line_out, std_logic_vector(token_number));
+				writeline(output_file,line_out);
+			else 
+				write(line_out, string'("Read note number: "));
+				hwrite(line_out, std_logic_vector(token_number));
+				writeline(OUTPUT,line_out);
+				write(line_out, string'("Read note number: "));
+				hwrite(line_out, std_logic_vector(token_number));
+				writeline(output_file,line_out);
+			end if;	
+			write(line_out, string'(""));
+			writeline(OUTPUT,line_out);
+			write(line_out, string'(""));
+			writeline(output_file,line_out);
 			-- read all token (= 1 line)	
 				
 		end loop; -- read all lines (= 1 array)	
@@ -307,16 +349,19 @@ execute_file: process
 			check_value := token_array(line_nmbr + 1); 
 			
 			-- debugging
-			write(line_out_d, string'("Test auf Zeile:"));
-			writeline(OUTPUT,line_out_d);
-			write(line_out_d, line_nmbr);
-			writeline(OUTPUT,line_out_d);
+			
 	
 			-- reset 
 			------------------------------------	    
 			if (test_value.token_cmd = string'("reset")) then
-				 write(line_out_d, string'("reset"));
+				 write(line_out_d, string'("Test row is "));
+				 write(line_out_d, line_nmbr);
+				 write(line_out_d, string'(": Mode reset."));
 				 writeline(OUTPUT,line_out_d);
+				 write(line_out_d, string'("Test row is "));
+				 write(line_out_d, line_nmbr);
+				 write(line_out_d, string'(": Mode reset."));
+				 writeline(output_file,line_out_d);
 				 
 				 -- execute 
 				 tb_reset_n <= '0';
@@ -326,39 +371,42 @@ execute_file: process
 												 
 				 -- compare output DUT with expected output from file
 				 if ((tb_note_1(7 downto 0) = check_value.t_midi_data(0).token_note) ) then    
-					  write(line_out, string'("Reset note 1 good."));
+					  write(line_out, string'("Reset good."));
+					  write(line_out, string'(""));
 					  writeline(OUTPUT,line_out);
+					  write(line_out, string'("Reset good."));
+					  write(line_out, string'(""));
+					  writeline(output_file,line_out);
 					  
-					  write(line_out_d, std_logic_vector(tb_note_1(7 downto 0)));
-					  writeline(OUTPUT,line_out_d);                   
-					  write(line_out_d, std_logic_vector(check_value.t_midi_data(0).token_note));
-					  writeline(OUTPUT,line_out_d);
+					  -- for debugging:
+--					  write(line_out_d, std_logic_vector(tb_note_1(7 downto 0)));
+--					  writeline(OUTPUT,line_out_d);                   
+--					  write(line_out_d, std_logic_vector(check_value.t_midi_data(0).token_note));
+--					  writeline(OUTPUT,line_out_d);
 				 else                
 					  write(line_out, string'("Reset failure note 1"));
+					  write(line_out, string'(""));
 					  writeline(OUTPUT,line_out);   
 			  
-					  write(line_out_d, std_logic_vector(tb_note_1(7 downto 0)));
-					  writeline(OUTPUT,line_out_d);                   
-					  write(line_out_d, std_logic_vector(check_value.t_midi_data(0).token_note));
-					  writeline(OUTPUT,line_out_d);
-					  
+					  -- for debugging
+--					  write(line_out_d, std_logic_vector(tb_note_1(7 downto 0)));
+--					  writeline(OUTPUT,line_out_d);                   
+--					  write(line_out_d, std_logic_vector(check_value.t_midi_data(0).token_note));
+--					  writeline(OUTPUT,line_out_d);					  
 				 end if;
-				 
-				 -- output result in file
-				 write(line_out_t, string'("Result reset \n"));
-				 writeline(output_file,line_out_t);
-				 writeline(output_file,line_out);
-	
-				 
-				 write(line_out, string'(""));
-				 writeline(OUTPUT,line_out);
 			end if; -- line "reset"
 			
 					  
 			-- single notes
 			if (test_value.token_cmd = string'("singl")) then	
-				 write(line_out_d, string'("Mode is singl"));
+				 write(line_out_d, string'("Test row is "));
+				 write(line_out_d, line_nmbr);
+				 write(line_out_d, string'(": Mode is singl."));
 				 writeline(OUTPUT,line_out_d);
+				 write(line_out_d, string'("Test row is "));
+				 write(line_out_d, line_nmbr);
+				 write(line_out_d, string'(": Mode is singl."));
+				 writeline(output_file,line_out_d);
 			
 				 -- execute (only) 3 times pair of midi-note (note /attribut)
 				 -- (because first token (note = 0x55) has to be ignored)
@@ -367,13 +415,21 @@ execute_file: process
 					  -- read note on/off
 					  token_temp := test_value.t_midi_data(i).token_attribut;
 					  if (token_temp(4) = '1') then 
-						  write(line_out_d, string'("note on :"));  ---------------neu
+						  write(line_out_d, string'("Note set on "));
+						  hwrite(line_out_d, std_logic_vector(token_temp)); 
+						  writeline(OUTPUT,line_out_d); 
+						  write(line_out_d, string'("Note set on "));
+						  hwrite(line_out_d, std_logic_vector(token_temp)); 
+						  writeline(output_file,line_out_d);
+
 					  else
-						  write(line_out_d, string'("note off: "));
+						  write(line_out_d, string'("Note set off "));
+						  hwrite(line_out_d, std_logic_vector(token_temp));
 						  writeline(OUTPUT,line_out_d);
-						  --write(line_out_d, std_logic_vector(token_temp)); ----------------------
-						  --writeline(OUTPUT,line_out_d); --------------------------------------
-					 end if;
+						  write(line_out_d, string'("Note set off "));
+						  hwrite(line_out_d, std_logic_vector(token_temp));
+						  writeline(output_file, line_out_d);
+					  end if;
 					  
 					  -- send note on/off
 					  tb_serial_in <= idle_bit ;
@@ -395,10 +451,6 @@ execute_file: process
 					  
 					  -- read note value
 					  token_temp := test_value.t_midi_data(i+1).token_note;
-					  --write(line_out_d, string'("note value")); --------------------------------
-					  --writeline(OUTPUT,line_out_d);       --------------------------------------
-					  write(line_out_d, std_logic_vector(token_temp));
-					  writeline(OUTPUT,line_out_d);
 				  
 					  -- send note
 					  tb_serial_in <= idle_bit ;
@@ -440,58 +492,64 @@ execute_file: process
 						-- check: single note	
 						--------------------------------------	
 						WAIT FOR 4 * MIDI_CLK_PERIOD;
-						write(line_out, string'("ERGEBNIS:"));
+						write(line_out, string'("Ergebnis"));
 						writeline(OUTPUT,line_out);
 							  
-						 if ((tb_note_0(7 downto 0) = check_value.t_midi_data(i+1).token_note) ) then    
-							  write(line_out, string'("Single note good."));
+						 if ((tb_note_0(7 downto 0) = check_value.t_midi_data(i+1).token_note) ) then 
+							  write(line_out, string'("Note out "));
+							  hwrite(line_out, std_logic_vector(tb_note_0(7 downto 0)));
+							  write(line_out, string'(". Expected "));
+							  hwrite(line_out, std_logic_vector(check_value.t_midi_data(i+1).token_note));
+							  write(line_out, string'("Good."));
 							  writeline(OUTPUT,line_out);
---------------------------------------	FFFFFFFFFFFFFFFFFFFFFFFEEEEEEEEEEEEEEEEEEEEEHLER							  -------!!!!!!!!!!!!!!!!!!!!!!!!!!WERT TB Out ist faslch
-							  write(line_out_d, std_logic_vector(tb_note_0(7 downto 0)));
-							  writeline(OUTPUT,line_out_d);                   
-							  write(line_out_d, std_logic_vector(check_value.t_midi_data(i+1).token_note));
-							  writeline(OUTPUT,line_out_d);
+							  write(line_out, string'("Note out "));
+							  hwrite(line_out, std_logic_vector(tb_note_0(7 downto 0)));
+							  write(line_out, string'(". Expected "));
+							  hwrite(line_out, std_logic_vector(check_value.t_midi_data(i+1).token_note));
+							  write(line_out, string'(". Good."));
+							  writeline(output_file,line_out);
 						 else                
-							  write(line_out, string'("Failure single"));
-							  writeline(OUTPUT,line_out);   
-					  
-							  write(line_out_d, std_logic_vector(tb_note_1(7 downto 0)));
-							  writeline(OUTPUT,line_out_d);                   
-							  write(line_out_d, std_logic_vector(check_value.t_midi_data(i+1).token_note));
-							  writeline(OUTPUT,line_out_d);
+							  write(line_out, string'("Note out "));
+							  hwrite(line_out, std_logic_vector(tb_note_0(7 downto 0)));
+							  write(line_out, string'(". Expected "));
+							  hwrite(line_out, std_logic_vector(check_value.t_midi_data(i+1).token_note));
+							  write(line_out, string'("Failure."));
+							  writeline(OUTPUT,line_out);
+							  write(line_out, string'("Note out "));
+							  hwrite(line_out, std_logic_vector(tb_note_0(7 downto 0)));
+							  write(line_out, string'(". Expected "));
+							  hwrite(line_out, std_logic_vector(check_value.t_midi_data(i+1).token_note));
+							  write(line_out, string'(". Failure."));
+							  writeline(output_file,line_out);
 							  
-						 end if;
-													 
-						 -- output result in file
-						 write(line_out_t, string'("Single note\n"));
-						 writeline(output_file,line_out_t);
-						 writeline(output_file,line_out);
-			
-						 write(line_out, string'(""));
-						 writeline(OUTPUT,line_out);
-			
+						 end if;			
 					-- ignore last token (velocity; "on/off") for equilibrum		
 					
 				 end loop;  -- 4 times midi_token
 				 
 				 -- reset circuit
---				 tb_reset_n <= '0';
---				 wait for 1 * MIDI_CLK_PERIOD; 
---				 tb_reset_n <= '1';
---				 wait for 30 * SYS_CLK_PERIOD; 
---				 write(line_out, string'("Reset circuit single"));
---				 writeline(OUTPUT,line_out);
---				 write(line_out, string'(""));
---				 writeline(OUTPUT,line_out);
+				 tb_reset_n <= '0';
+				 wait for 1 * MIDI_CLK_PERIOD; 
+				 tb_reset_n <= '1';
+				 wait for 30 * SYS_CLK_PERIOD; 
+				 write(line_out, string'("Reset circuit single"));
+				 writeline(OUTPUT,line_out);
+				 write(line_out, string'(""));
+				 writeline(OUTPUT,line_out);
 					  
 			end if;	-- line "single"	
 			
 			-- set polyphone notes
 			------------------------------------	
 			if (test_value.token_cmd = string'("polyp")) then
-				 write(line_out_d, string'("polyp"));
+				 write(line_out_d, string'("Test row is "));
+				 write(line_out_d, line_nmbr);
+				 write(line_out_d, string'(": Mode is polyphony."));
 				 writeline(OUTPUT,line_out_d);
-				 
+				 write(line_out_d, string'("Test row is "));
+				 write(line_out_d, line_nmbr);
+				 write(line_out_d, string'(": Mode is polyphony."));
+				 writeline(output_file,line_out_d);
 				 
 				-- send polyphonie status bite
 				token_temp := POLYPHONIE;
