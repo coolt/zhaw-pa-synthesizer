@@ -41,7 +41,11 @@ PORT(CLOCK_50				:IN			std_logic;
 	LEDG					:OUT 		std_logic_vector(7 DOWNTO 0);		--Led-Leuchten grün
 	HEX0, HEX3, HEX2		:OUT 		std_logic_vector (6 DOWNTO 0);		--Siebensegmentanzeigen
 	HEX4, HEX5, HEX1		:OUT 		std_logic_vector (6 DOWNTO 0);		--Siebensegmentanzeigen
+<<<<<<< HEAD
 	GPIO_10:			IN	std_logic
+=======
+	GPIO_25:			IN	std_logic
+>>>>>>> branch_is_working
 	  ); 
 END COMPONENT;
 
@@ -127,7 +131,11 @@ PORT MAP(CLOCK_50	        => tb_clk_50M,
 			HEX4            => tb_hex_4,
 			HEX5            => tb_hex_5, 
 			HEX1            => tb_hex_1,	
+<<<<<<< HEAD
 			GPIO_10			=> tb_serial_in
+=======
+			GPIO_25			=> tb_serial_in
+>>>>>>> branch_is_working
 		  );
 
 	  
@@ -272,7 +280,11 @@ read_file: process
 		end loop; -- read all lines (= 1 array)	
 		
     end loop; -- searching end of line		
+<<<<<<< HEAD
 	
+=======
+	end loop;
+>>>>>>> branch_is_working
 	wait;
 end process;
 
@@ -496,4 +508,8 @@ END PROCESS;
 
 
 
+<<<<<<< HEAD
 END struct; 
+=======
+END struct;
+>>>>>>> branch_is_working

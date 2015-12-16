@@ -9,12 +9,7 @@
 
 -------------------------------------------
 
--- Questions:
--- else: in loop: 
---
 
--- TODO:
--- Optimize loop:  -- Nicht NUR den Input auf "0000" prüfen, sonder, wenn In = '000', dann ob Flag ist off (= '0')
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;

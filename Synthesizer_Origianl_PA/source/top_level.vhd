@@ -50,7 +50,7 @@ ENTITY top_level IS
 			LEDG					:OUT 		std_logic_vector(7 DOWNTO 0);		--Led-Leuchten grün
 			HEX0, HEX3, HEX2		:OUT 		std_logic_vector (6 DOWNTO 0);		--Siebensegmentanzeigen
 			HEX4, HEX5, HEX1		:OUT 		std_logic_vector (6 DOWNTO 0);		--Siebensegmentanzeigen
-			GPIO_10:			IN	std_logic
+			GPIO_25:			IN	std_logic
 		  );
 END top_level;
 
@@ -271,6 +271,7 @@ BEGIN
 -------------------------------------------
 i_MIDI_INTERFACE: midi_interface
 	PORT MAP(
+<<<<<<< HEAD
 				clk_12M5_i   		=> tl_clk_12M,
 				reset_n_i    		=> KEY(0), -- analog to existing design 
 				serial_i     		=> GPIO_10, 
@@ -285,6 +286,26 @@ i_MIDI_INTERFACE: midi_interface
 				note_o(8)     		=> tl_note_8, 
 				note_o(9)    		=> tl_note_9
 				); 
+=======
+		clk_12M5_i   => tl_clk_12M,
+		reset_n_i    => KEY(0), -- analog to existing design 
+		serial_i     => GPIO_25, 
+		note_o(0)     => tl_note_1,
+		note_o(1)    => tl_note_2,
+		note_o(2)     => tl_note_3,
+		note_o(3)     => tl_note_4,
+		note_o(4)     => tl_note_5, 
+		note_o(5)     => tl_note_6,
+		note_o(6)     => tl_note_7,
+		note_o(7)     => tl_note_8,
+		note_o(8)     => tl_note_9, 
+		note_o(9)    => tl_note_10
+		); 
+
+
+
+
+>>>>>>> branch_is_working
 
 CODECCONTROLLER_INST : codeccontroller
 	PORT MAP ( write_done_i    => 	tl_write_done,						

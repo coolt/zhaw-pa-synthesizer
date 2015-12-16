@@ -22,9 +22,15 @@ VW7__=9YGN8QW>bCF7AVKd2
 !s100 zzJAo9da56R9ReTc8dNb]2
 Z9 OE;C;10.2a;57
 33
+<<<<<<< HEAD
 Z10 !s110 1449851715
 !i10b 1
 Z11 !s108 1449851714.573163
+=======
+Z10 !s110 1449866028
+!i10b 1
+Z11 !s108 1449866027.320802
+>>>>>>> branch_is_working
 Z12 !s90 -reportprogress|300|-2008|-explicit|-work|altera_mf|./altera_mf.vhd|
 Z13 !s107 ./altera_mf.vhd|
 Z14 o-2008 -explicit -work altera_mf
@@ -573,7 +579,11 @@ V@mWCF<@hK<]Y24ZKhZ<NH1
 !s100 ];P^U?Ok2OnY>@>`]cP6L3
 R9
 33
+<<<<<<< HEAD
 Z82 !s110 1449851714
+=======
+Z82 !s110 1449866027
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -612,7 +622,11 @@ V<YDD6O0U^@T0MNEMKne?42
 !s100 QRRS74@SUC1c8;<cIhIVJ2
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -630,7 +644,11 @@ Z91 VBo=WnZ4Al5:86<9iogn901
 Z92 !s100 ]hA=QV8aO9b`RJ<6U?2N:3
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -653,7 +671,11 @@ V`z[Y@3NlhcbSKMLVGa0?:0
 !s100 kmkMNEM00f?MRe_Alb5bg1
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -671,7 +693,11 @@ Z98 VCG@Yl8T6Hj]lfIDC>Cka_0
 Z99 !s100 UbATUKRA:QQK?7`7BJcbb0
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -692,7 +718,11 @@ VO@eAX]o54Nd5^NR=nLIJ@3
 !s100 Jf2H?BJBcH2<efzbe>cKU3
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -710,7 +740,11 @@ Z102 VLNN5V3_[2o]Xeca;L`d^@1
 Z103 !s100 f6c<4UhYM>o0H?0l7I@FJ0
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -731,7 +765,11 @@ VGPWGfQ8T9;7n]_L]@<TH[3
 !s100 dAzRccnla9mbA`1X?cBSS3
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -749,7 +787,11 @@ Z106 Vm7Jo4Z[L`0dOVeF6UkLn23
 Z107 !s100 KbO?Q@:zZIlRbU050T:522
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -896,7 +938,11 @@ R15
 !s100 L[=d<DoZcOm>P`OKNG<B=0
 R82
 !i10b 1
+<<<<<<< HEAD
 !s108 1449851714.417108
+=======
+!s108 1449866027.163085
+>>>>>>> branch_is_working
 !s90 -reportprogress|300|-2008|-explicit|-work|altera_mf|./altera_mf_components.vhd|
 !s107 ./altera_mf_components.vhd|
 Paltera_mf_hint_evaluation
@@ -1027,7 +1073,11 @@ VOLz?T9Zj9]T><?hQ9OaGk2
 !s100 @A@5aIT[UPESG]Wec6XPV0
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -1046,7 +1096,11 @@ Z132 VlK4oA_j_3M@lZRfV]eTTF2
 Z133 !s100 zlCNDz[a`e^0iBQC;lIXh0
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -1076,7 +1130,11 @@ V=o[91X5_gT[O8k@41W7AS3
 !s100 :GlcofFNg4:2lI:nLheB42
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -1190,7 +1248,11 @@ Z158 VK1Mc<@];I31nQaKK8N@jd3
 Z159 !s100 BWkCE]jacNe[^@NbmCQ;R0
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -1212,7 +1274,11 @@ VE?BHUP;=o1@LgTH37K1>;3
 !s100 QA:Wm_I5KDa`N<VdE580c0
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -1231,7 +1297,11 @@ Z163 VMel:b;VP;^U8KVW4eLCDz0
 Z164 !s100 f]b0mC6bIzKBI?[@o`Z7U0
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -1459,7 +1529,11 @@ V1i:Yb`SM@EdT_`[A6?FJM1
 !s100 BKmHAAnS6o_MG@LBi=4Wh0
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -1479,7 +1553,11 @@ Z197 V`AA1eTiE;YPL1[ZNJDLlz0
 Z198 !s100 :k[;@;0F02cNYSB<PRbch3
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -2123,7 +2201,11 @@ V6aj_:]T@Ez5c0fX02KP^:1
 !s100 TDVec@ZTThl^i@W0GY1WQ0
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -2141,7 +2223,11 @@ Z268 V1Qb8dAGn0BD9GQZ7[odKK3
 Z269 !s100 UXDhiFiC=4^dgC=[jT1G@2
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -3303,7 +3389,11 @@ V6>3mXJ6z773]Pf==I`kZE0
 !s100 X4lBl5P0kIT?<FhLZ7YhK2
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -3321,7 +3411,11 @@ Z380 V_4H]?J>=<>lP4gUnZUn7:1
 Z381 !s100 FNe3RQXg7b0z;WU2lSX[43
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -3382,7 +3476,11 @@ Vc01`lHhYj9:F=RkJOc4Go3
 !s100 gWm_OoI<VG^NIA0?Y8QHX1
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -3400,7 +3498,11 @@ Z389 VHYedQgmUzI?@W0FN^h;UL1
 Z390 !s100 0YNCI>ZLCB`0hCILn::<B3
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -3423,7 +3525,11 @@ VGdX:OQ>jL]NGAn59oEhQD1
 !s100 @N]o;TmYLRe>[YLOHRkA53
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -3441,7 +3547,11 @@ Z394 V02Fl00cJ4bQELSbLjAaG]0
 Z395 !s100 LQBi?z1WVPXF<_VI:0T@f1
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -3462,7 +3572,11 @@ V;Pn:V`iFzMTinn28B6R<l1
 !s100 2oU^?`S_bLakdzGX;Ba<a1
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -3480,7 +3594,11 @@ Z398 VIFQn6;WTQ6@<BDI:9J8EJ2
 Z399 !s100 lS5T^HXJ4F@m1mHjAo2YB2
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -3501,7 +3619,11 @@ V6>[]GYW_TEkInR0R?JYcW3
 !s100 UbQCddlX=AVF=2RR29TI`3
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
@@ -3519,7 +3641,11 @@ Z402 V2AdJAc>9mP067?TUK[MPG3
 Z403 !s100 JTVdQGKNhl<`]<ezPk0fg1
 R9
 33
+<<<<<<< HEAD
 R10
+=======
+R82
+>>>>>>> branch_is_working
 !i10b 1
 R11
 R12
